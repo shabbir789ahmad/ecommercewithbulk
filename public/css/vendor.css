@@ -1,0 +1,125 @@
+.imag
+{
+	background-image: url("/pic/evergreen.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width:100%; height:500px;
+	overflow: hidden;
+	
+}
+.ca
+{
+	position: absolute;
+	background-color: red;
+	bottom: 3%;
+	
+  width: 98%;
+	color: black;
+}
+.container-fluid
+{
+	
+	background-color:#FBFBFB;
+	margin: 0;
+	padding: 0;
+}
+
+ .containers {
+  display:inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.containers input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+.containers:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+
+.containers input:checked ~ .checkmark {
+  background-color: #2196F3;
+  border: 2px solid #41B3A3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.containers input:checked ~ .checkmark:after {
+  display: block;
+
+}
+
+
+.containers .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+
+.span {
+  display:inline-block;
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 12px;
+  cursor: pointer;
+
+  text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.span input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  border: 2px solid black;
+}
+
+
+.span:hover input ~ .checkmark {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+
+.span input:checked ~ .checkmark {
+   background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #41B3A3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.span input:checked ~ .checkmark:after {
+  display: block;
+
+}
+
+

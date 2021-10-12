@@ -1,0 +1,214 @@
+.navbar {
+    padding: 15px 10px;
+    background: white;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+
+
+.wrapper3 {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: white;
+    color: #fff;
+
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+#content 
+ {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+ }
+
+
+@media (max-width: 768px) {
+
+ #sidebar 
+  {
+   margin-left: -250px;
+   }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+
+.filter3
+ {
+   color: #292429;
+    font-size: 4vw; 
+    margin-top: 4%;
+ }
+
+.oproduct-name{
+
+  color: #292429;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 6vw !important; 
+    font-weight: 1200;
+}
+.inck{
+
+  
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 4vw !important; 
+    font-weight: 1200;
+    margin-top: 2%;
+}
+.o_pice{
+   color: #3DA58F;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 3.5vw !important; 
+    font-weight: bold;
+}
+
+
+.top_cat li a{
+  display: block;
+  color: #292429;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 3vw; 
+    margin-left: 1%;
+    margin-top: 4%;
+}
+.top_cat {
+  display: block;
+  color: #292429;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 3vw; 
+    margin-left: 1%;
+    margin-top: 4%;
+}
+}
+
+@media (min-width: 1025px) {
+ .filter3{
+   
+    color: #292429;
+    
+    font-size: 1vw; 
+    margin-top: 4%;
+}
+
+.top_cat li a{
+  display: block;
+  color: #292429;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: .8vw; 
+    margin-left: 1%;
+    margin-top: 4%;
+}
+.top_cat {
+  display: block;
+  color: #292429;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: .8vw; 
+    margin-left: 1%;
+    margin-top: 4%;
+}
+
+.oproduct-name{
+
+  color: #292429;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 1.4vw; 
+    font-weight: 1200;
+}
+.inck{
+
+  
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: .8vw; 
+    font-weight: 1200;
+}
+.o_pice{
+   color: #3DA58F;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 1vw; 
+    font-weight: bold;
+}
+}
+
+@media (max-width: 1024px) {
+ .filter3{
+   
+    color: #292429;
+    font-weight: 500;
+    font-size: 2vw; 
+    margin-top: 4%;
+}
+
+.top_cat li a{
+  display: block;
+  color: #292429;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 1.7vw; 
+    margin-left: 1%;
+    margin-top: 4%;
+}
+.top_cat {
+  display: block;
+  color: #292429;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: .8vw; 
+    margin-left: 1%;
+    margin-top: 4%;
+}
+
+.oproduct-name{
+
+  color: #292429;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 3vw; 
+    font-weight: 1200;
+}
+.inck{
+
+  
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 1.4vw; 
+    font-weight: 1200;
+}
+.o_pice{
+   color: #3DA58F;
+ font-family :Noto Sans JP,  sans-serif;
+    font-size: 1.6vw; 
+    font-weight: bold;
+}
+}
