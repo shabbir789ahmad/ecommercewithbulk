@@ -32,7 +32,7 @@
  </div>
 </div>
   
-  <div class="card mt-2 ">
+  <div class="card mt-2 " >
     <div class="card-body">
       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item ml-2">
@@ -154,47 +154,67 @@
 
 <div class="row mt-2">
   <?php $i=1;?>
-  @foreach($stock2 as $stock)
-  <div class="col-md-6">
+ 
+  <div class="col-md-12">
    <div class="card mt-2">
  <div class="card-body">
-   <h6 class="font-weight-bold">Stock {{$i++}}<span class="float-right"> <input type="checkbox" data-id="{{ $stock['id'] }}" name="stock_status " class="js-switch5 " 
-      {{ $stock->stock_status == 1 ? 'checked' : '' }} ></span></h6>
+   <h6 class="font-weight-bold">All Stocks </h6>
     <hr class="mt-2">
       <p  class="filter2 mt-3 d-block">
         <table class="table align-items-center table-flush" id="dataTable">
   <thead class="thead-light">
    <tr>
+      <th scope="col">No#</th>
       <th scope="col">Stock</th>
-      <th scope="col" class="col-2">Price</th>
+      <th scope="col">Supplier</th>
+      <th scope="col" >Price</th>
       <th scope="col">Selling Price</th>
       <th scope="col">Discount</th>
+      <th scope="col " class="text-center">Status</th>
+      <th scope="col " class="text-center">Date</th>
    
-      <th scope="col">Action</th>
+      <th scope="col" class="text-center">Action</th>
     </tr>
   </thead>
   <tbody>
+     @foreach($stock2 as $stock)
     <tr>
+      <td>{{$i++}}</td>
       <td>{{$stock['stock']}}</td>
+
+      @foreach($supply as $sup)
+       @if($stock['supply_id'] == $sup['id'])
+      <td>{{ucfirst($sup['supplier_name'])}}</td>
+      @endif
+      @endforeach
       <td class="a ">{{$stock['price']}}</td>
-      <td class="a col-4 border"><span class="bag ">  {{ucfirst($stock['sell_price'])}}</span>
+      <td class="  "><span class="bag ">  {{ucfirst($stock['sell_price'])}}</span>
      <i class="fas fa-tags discount border mt-3 p-2 sell" data-id="{{$stock['id']}}" data-price="{{$stock['sell_price']}}"></i>
     </td>
-    <td class="a "><span class="bag ">
+    <td  ><span class="bag ">
      @if($stock['discount'] > '1')
      {{$stock['discount']}}@else 0 @endif</span>
      <i class="fas fa-warehouse mt-3 discount border p-2 dis" data-id="{{$stock['id']}}"  data-price="{{$stock['discount']}}"></i>
     </td>
-    <td>
+    <td class="border"><input type="checkbox" data-id="{{ $stock['id'] }}" name="stock_status " class="js-switch5 " 
+      {{ $stock->stock_status == 1 ? 'checked' : '' }} >
+    </td>
+    <td ><span class="badge badge-success">{{date('d-m-Y', strtotime($stock['created_at']))}}</span>
+      
+    </td>
+   
+    <td class="border">
      <div class="b d-flex justify-content-center mt-1">
       
        <a class="border shadow  py-2 px-3 ml-1 stock" data-id="{{$stock['id']}}" data-price="{{$stock['price']}}" data-sell="{{$stock['sell_price']}}" data-stoc="{{$stock['stock']}}" data-ship="{{$stock['ship']}}" data-stid="{{$stock['stock_id']}}"><i class="fas fa-pen text-success"></i>
-        <a href="{{url('delete-stock/'.$stock['id']) }}" class="border shadow  py-2 px-3 ml-1" onclick="return confirm('Are you sure? This will delete the Stock')"><i class="fas fa-trash-alt  text-danger "></i>
+        
+        <a href="{{url('admin/delete-stock/'.$stock['id'])}}" class="border shadow  py-2 px-3 ml-1" onclick="return confirm('Are you sure? This will delete the Stock')"><i class="fas fa-trash-alt  text-danger "></i>
        </a>
 
        </div> 
     </td>
     </tr>
+      @endforeach
   </tbody>
  </table>
 </p>
@@ -202,7 +222,7 @@
  </div>
 </div>
   </div>
-   @endforeach
+ 
   <div class="col-md-6">
 
   </div>

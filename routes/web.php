@@ -30,7 +30,7 @@ Route::get('search',[SliderController::class,'search']);
 
 Route::get('master',[SubCategoryController::class,'subCategory']);
 
-Route::get('productpage/{id}',[ProductController::class,'productDetail'])->name('productpage/{id}');
+Route::get('productpage/{id}/{drop_id}',[ProductController::class,'productDetail'])->name('productpage/{id}/{drop_id}');
 
 
 Route::get('cart',[CartController::class,'cart']);
@@ -125,7 +125,7 @@ Route::post('new-stock',[StockController::class,'newStock'])->name('admin.new-st
 Route::post('bulk-stock',[StockController::class,'bulkStock'])->name('admin.bulk-stock');
 Route::post('upate-price',[StockController::class,'updateSell'])->name('admin.upate-price');
 Route::post('upate-discount',[StockController::class,'updateDiscount'])->name('admin.upate-discount');
-
+Route::post('upate-stock',[StockController::class,'updateStock'])->name('admin.upate-stock');
 Route::post('update-stock-detail',[StockController::class,'updateDetail'])->name('admin.update-stock-detail');
 Route::get('stock-show',[StockController::class,'getStock'])->name('admin.stock-show');
 Route::get('stock-detail/{id}',[StockController::class,'stockDetail'])->name('admin/stock-detail/{id}');
@@ -141,6 +141,7 @@ Route::post('discount-update',[ProductController::class,'discountUp'])->name('ad
 Route::get('stock-cat/{id}',[SubCategoryController::class,'subCategory2'])->name('admin/stock-cat/{id}');
 
 Route::get('stock-drop/{id}',[SubCategoryController::class,'stockDrop'])->name('admin/stock-drop/{id}');
+Route::get('search-product',[StockController::class,'searchStock'])->name('admin/search-product');
 
 
 
@@ -149,7 +150,7 @@ Route::view('test','Dashboard.test')->name('admin.test');
 Route::get('delete-product/{id}',[ProductController::class,'deleteProduct'])->name('admin.delete-product/{id}');
 
 
-
+Route::get('product-status',[ProductController::class,'productStatus'])->name('admin.product-status');
 Route::get('color-status',[ProductController::class,'colorStatus'])->name('admin.color-status');
 Route::get('size-status',[ProductController::class,'sizeStatus'])->name('admin.size-status');
 Route::get('brand-status',[ProductController::class,'brandStatus'])->name('admin.brand-status');
@@ -247,7 +248,7 @@ Route::post('update-logo2',[SliderController::class,'updateLogo2'])->name('admin
 
 
 //route for color upload
-Route::view('categories','Dashboard.home_page_heading')->name('admin.categories');
+Route::get('categories',[SocialController::class,'getCat'])->name('admin.categories');
 Route::post('front',[SocialController::class,'front'])->name('admin.front');
 Route::get('get-front',[SocialController::class,'showfront'])->name('admin.get-front');
 Route::get('delete-front/{id}',[SocialController::class,'deleteFront'])->name('admin.delete-front/{id}');

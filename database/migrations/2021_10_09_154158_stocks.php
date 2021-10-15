@@ -18,6 +18,7 @@ class Stocks extends Migration
             $table->string('product');
             $table->string('detail');
             $table->string('product_status');
+            $table->string('size_image');
             $table->bigInteger('drop_id')->unsigned();
             $table->foreign('drop_id')->references('id')->on('dropdowns')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

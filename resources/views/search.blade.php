@@ -1,5 +1,10 @@
 @extends('master.master')
 @section('content')
+<h3 class="page-title text-center"></h3>
+
+@if (session('error'))
+<div class="alert alert-danger">{{ session('error') }}</div>
+@endif
 
 @if($search2)
 <div class="row mr-2">

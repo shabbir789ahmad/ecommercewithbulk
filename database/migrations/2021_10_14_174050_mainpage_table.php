@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMainpagesTable extends Migration
+class MainpageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,12 @@ class CreateMainpagesTable extends Migration
             $table->string('c3');
             $table->string('c4');
             $table->string('c5');
-           
+            $table->bigInteger('tag3_id')->unsigned();
+            $table->foreign('tag3_id')->references('id')->on('dropdowns')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('tag4_id')->unsigned();
+            $table->foreign('tag4_id')->references('id')->on('dropdowns')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('tag5_id')->unsigned();
+            $table->foreign('tag5_id')->references('id')->on('dropdowns')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

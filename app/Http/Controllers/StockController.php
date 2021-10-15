@@ -76,10 +76,15 @@ class StockController extends Controller
         ]);
 
    DB::transaction(function() use($req){
-      
+        $file=$req->file('size_image');
+        $ext=$file->getClientOriginalExtension();
+          $filename= time().rand(1,100).'.'.$ext;
+          $file->move('uploads/img/',$filename);
+
        $stock= Stock::create([ 
            'product'=> $req->product,
            'detail'=>$req->detail,
+           'size_image'=>$filename,
            'product_status'=>'1',
            'drop_id'=>$req->drop_id,
         ]);
@@ -89,6 +94,7 @@ class StockController extends Controller
            'price'=>$req->price,
            'sell_price'=>$req->sell_price,
            'ship'=>$req->ship,
+           'stock_status'=>'1',
            'supply_id'=>$req->supply_id,
            'stock_id'=>$stock->id,
         ]);
@@ -102,14 +108,15 @@ class StockController extends Controller
             'filter_id' =>$stock->id,
              ]);
            }
-    
+           
+           
           $n2 = sizeof($req->size);
           for($i = 0;  $i < $n2; $i++)
-           {
-       
+           { 
+            
             $brand= Size::create([
            'size' =>$req->size[$i],
-            'size_status' =>'1',
+           'size_status' =>'1',
             'size_id' =>$stock->id,
             ]);
            }
@@ -125,13 +132,11 @@ class StockController extends Controller
            }
         foreach($req->file('rimage') as $file)
            {
-              
+              $ext=$file->getClientOriginalExtension();
+              $filename= time().rand(1,100).'.'.$ext;
+              $file->move('uploads/img/',$filename);
              Image::create([
-             $ext=$file->getClientOriginalExtension(),
-             $name=$file->getClientOriginalName(),
-             $filename=$name,
-             $file->move('uploads/img/', $filename),
-             'rimage'=>$filename,
+            'rimage'=>$filename,
              'image_id'=> $stock->id,
               ]);
       
@@ -139,54 +144,63 @@ class StockController extends Controller
 
        });
 
- return  redirect()->back()->with('success','New Stock Added');
+ return redirect()->back()->with('success','New Stock Added');
     }
 
-   function bulkStock(Request $req)
+ function bulkStock(Request $req)
    {
-     DB::transaction(function() use($req){
-        
-         $name=$req->product;
-         for ($i=0; $i <count($name) ; $i++) { 
-           $stock[]= Stock::create([ 
-           'product'=> $req->product[$i],
-           'detail'=>$req->detail[$i],
-           'product_status'=>'1',
-           'drop_id'=>$req->drop_id[$i],
-        ]);
-          
-     }
 
-     $items = array();
-     foreach($stock as $st) {
-       $items[] = $st;
-       
-     }
+     DB::transaction(function() use($req){
+           
+           foreach($req->file('size_image') as $file)
+           {
+            $ext=$file->getClientOriginalExtension();
+           $filename= time().rand(1,100).'.'.$ext;
+           $file->move('uploads/img/',$filename);
+           }
+           
+           $name=$req->product;
+          for ($i=0; $i <count($name) ; $i++) 
+          { 
+            $stock[]= Stock::create([ 
+            'product'=> $req->product[$i],
+            'detail'=>$req->detail[$i],
+            'size_image'=>$filename,
+            'product_status'=>'1',
+            'drop_id'=>$req->drop_id[$i],
+           ]);
+          }
+
+          $items = array();
+          foreach($stock as $st)
+          {
+           $items[] = $st;
+          }
           
-     $detail=$req->stock;
-     for ($i=0; $i <sizeof($detail) ; $i++) {
-       foreach($items as $st)
-         {  
+          $detail=$req->stock;
+          for ($i=0; $i <sizeof($detail) ; $i++) {
+          foreach($items as $st)
+           {  
            $is[]=$st['id'];
-         }
-           Stock2::create([ 
+           }
+          Stock2::create([ 
             'stock'=> $req->stock[$i],
             'price'=>$req->price[$i],
             'sell_price'=>$req->sell_price[$i],
-            
+            'stock_status'=>'1',
             'ship'=>$req->ship[$i],
             'supply_id'=>$req->supply_id[$i],
             'stock_id'=>$is[$i],
               
            ]);
          }
-       $color=$req->color;
-      for ($i=0; $i <sizeof($color) ; $i++) {
-        foreach($items as $st)
+         $color=$req->color;
+         for ($i=0; $i <sizeof($color) ; $i++) {
+         foreach($items as $st)
           {  
            $is[]=$st['id'];
           }
-           Color::create([ 
+         Color::create([ 
             'color'=> $req->color[$i],
             'color_status'=> '1',
             'filter_id'=>$is[$i],
@@ -194,13 +208,13 @@ class StockController extends Controller
            ]);
          }
      
-          $size=$req->size;
-      for ($i=0; $i <sizeof($size) ; $i++) {
-        foreach($items as $st)
+         $size=$req->size;
+         for ($i=0; $i <sizeof($size) ; $i++) {
+         foreach($items as $st)
           {  
            $is[]=$st['id'];
           }
-           Size::create([ 
+         Size::create([ 
             'size'=> $req->size[$i],
             'size_status'=> '1',
             'size_id'=>$is[$i],
@@ -208,48 +222,47 @@ class StockController extends Controller
            ]);
          }
 
-         $brand=$req->brand;
-      for ($i=0; $i <sizeof($brand) ; $i++) {
-        foreach($items as $st)
+       $brand=$req->brand;
+     // dd(sizeof($brand));
+         for ($j=0; $j <sizeof($brand) ; $j++) {
+     
+         foreach($items as $st)
           {  
            $is[]=$st['id'];
+            
           }
-           Store::create([ 
-            'brand'=> $req->brand[$i],
+          
+          Store::create([ 
+            'brand'=> $req->brand[$j],
             'brand_status'=> '1',
-            'brand_id'=>$is[$i],
+            'brand_id'=>$is[$j],
               
            ]);
-         }
-
-         
-         //dd(sizeof($items));
-      for ($i=0; $i <sizeof($items); $i++) {
+       
+        }
+        //dd($req->file('rimage'));
+        foreach($req->file('rimage') as $file)
+         {
+           $ext=$file->getClientOriginalExtension();
+           $filename= time().rand(1,100).'.'.$ext;
+           $file->move('uploads/img/',$filename);
+             foreach($items as $it)
+               {  
+                $is[]=$it['id'];
+                Image::create([
+            'rimage'=>$filename,
+            'image_id'=> $is[$i],
+            ]);
+               }
+          
             
-         foreach($items as $it)
-           {  
-              $is[]=$it['id'];
-           }
-         
-         foreach($req->file('rimage') as $file)
-           {
-             Image::create([
-             $name=$file->getClientOriginalName(),
-             $filename=$name,
-             $file->move('uploads/img/', $filename),
-             'rimage'=>$filename,
-             'image_id'=> $is[$i],
-              ]);
-            }
 
-         }
-
+          }
          
         
-          
 
-     });
-   }
+        });
+    }
 
 
     public function getStock(Request $req)
@@ -273,49 +286,56 @@ class StockController extends Controller
         $drop2=$req->get('drop_category');
      }
          //echo $stock2;
-        $query=Stock::
-         join('stock2s','stocks.id','=','stock2s.stock_id')
-         
-         ->select('stocks.product','stock2s.price','stock2s.sell_price','stock2s.stock','stock2s.discount','stocks.drop_id','stocks.id','stock2s.supply_id');
+       $query=Stock::
+        select('stocks.product','stocks.detail','stocks.drop_id','stocks.product_status','stocks.id');
+
          if($supply2)
          {
+          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
             $query=$query->where('stock2s.supply_id',$supply2);
          }
          if($drop2)
         {
          $query=$query->where('stocks.drop_id', $drop2);
         }
+
           if($stock2 == 10 )
          {
+            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
             $query=$query->where('stock2s.stock','<=',$stock2);
             
          }
           if($stock2 == 20 )
          {
+            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
             $query=$query->where('stock2s.stock','>=',10)
             ->where('stock2s.stock','<=',$stock2);
             
          }
           if($stock2 == 30 )
          {
+            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
             $query=$query->where('stock2s.stock','>=',20)
             ->where('stock2s.stock','<=',$stock2);
             
          }
           if($stock2 == 40 )
          {
+            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
             $query=$query->where('stock2s.stock','>=',30)
             ->where('stock2s.stock','<=',$stock2);
             
          }
          if($stock2 == 50 )
          {
+            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
             $query=$query->where('stock2s.stock','>=',40)
             ->where('stock2s.stock','<=',$stock2);
             
          }
           if($stock2 == 60 )
          {
+            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
             $query=$query->where('stock2s.stock','>=',50);
             
          }
@@ -325,7 +345,13 @@ class StockController extends Controller
         foreach($stock as $st)
         {
          $st->image=Image::where('image_id',$st->id)->take(1)->get();
-         $st->supply=Supply::where('id',$st->supply_id)->take(1)->get();
+         $st->stock2=Stock2::where('stock_id',$st->id)
+         ->where('stock_status','1')->take(1)->get();
+         $st->total=Stock2::where('stock_id',$st->id)
+         ->sum('stock');
+          $st->count=Stock2::where('stock_id',$st->id)
+         ->count();
+
         }
         
  
@@ -362,7 +388,27 @@ class StockController extends Controller
       return redirect()->back()->with('message',' Problem Updating price');
     }
     }
-   
+    function updateStock(Request $req)
+    {
+      $stock=new Stock2;
+     //dd($stock);
+      $stock->price=$req->price;
+      $stock->stock=$req->stock;
+      $stock->ship=$req->ship;
+      $stock->sell_price=$req->sell_price;
+      $stock->stock_id=$req->stock_id;
+      $stock->supply_id=$req->supply_id;
+
+     
+      if($stock->save())
+      {
+        return redirect()->back()->with('success',' Stock Update Successfuly');
+    }else
+    {
+
+      return redirect()->back()->with('message',' Problem Updating price');
+    }
+    }
 
     function stockDetail($id)
     {  
@@ -374,8 +420,10 @@ class StockController extends Controller
         $size=Size::where('size_id', $id)->get();
         $store=Store::where('brand_id', $id)->get();
         $stock2=Stock2::where('stock_id', $id)->get();
-        
-        
+       
+       
+         
+         
         return view('Dashboard.stock_detail',compact('stock','image','colors','size','store','stock2','supply'));
     }
     function updateDetail(Request $req)
@@ -386,5 +434,31 @@ class StockController extends Controller
       $stock->drop_id=$req->drop_id;
       $stock->save();
       return redirect()->back()->with('success',' Product Name And Detail Updated ');
+    }
+
+    function searchStock(Request $req)
+    {
+        $search=$req->search;
+ 
+        $query=Stock::
+        select('stocks.product','stocks.detail','stocks.drop_id','stocks.product_status','stocks.id')
+        ->where('product','LIKE','%'.$search.'%')->get();
+          $stock=$query;
+          foreach($stock as $st)
+        {
+         $st->image=Image::where('image_id',$st->id)->take(1)->get();
+         $st->stock2=Stock2::where('stock_id',$st->id)
+         ->where('stock_status','1')->take(1)->get();
+         $st->total=Stock2::where('stock_id',$st->id)
+         ->sum('stock');
+          $st->count=Stock2::where('stock_id',$st->id)
+         ->count();
+
+        }
+       
+        
+            return view('Dashboard.search',compact('stock'));
+         
+       
     }
 }

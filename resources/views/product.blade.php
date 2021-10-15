@@ -83,8 +83,8 @@
        <li>
       <a href="javascript:void(0)" onclick="price_filter()" class="filter2">
       <span class="label">
-     <input type="checkbox" name="filter_brand" id="price1" value="1000">
-       <label class="ml-2"> Under 1000Rs </label>
+     <input type="checkbox" name="filter_brand" id="price1" value="10">
+       <label class="ml-2"> Under $10 doller</label>
      </span>
      </a>
      </li>
@@ -92,24 +92,24 @@
            <li>
       <a href="javascript:void(0)" onclick="price_filter2()" class="filter2">
       <span class="label">
-     <input type="checkbox" name="filter_brand" id="price2" value="2000">
-       <label class="ml-2"> Under 2000Rs </label>
+     <input type="checkbox" name="filter_brand" id="price2" value="20">
+       <label class="ml-2"> Under $20  doller</label>
      </span>
      </a>
      </li>
           <li>
       <a href="javascript:void(0)" onclick="price_filter3()" class="filter2">
       <span class="label">
-     <input type="checkbox" name="filter_brand" id="price3" value="3000">
-       <label class="ml-2"> Under 3000Rs </label>
+     <input type="checkbox" name="filter_brand" id="price3" value="30">
+       <label class="ml-2"> Under $30 doller </label>
      </span>
      </a>
      </li>
         <li>
       <a href="javascript:void(0)" onclick="price_filter4()" class="filter2">
       <span class="label">
-     <input type="checkbox" name="filter_brand" id="price4" value="3100">
-       <label class="ml-2"> Under 3000Rs </label>
+     <input type="checkbox" name="filter_brand" id="price4" value="31">
+       <label class="ml-2"> Over $30 doller </label>
      </span>
      </a>
      </li>
@@ -177,11 +177,12 @@
     <img  src="{{asset('uploads/img/' .$img->rimage)}}" class="card-img-top2 img-fluid" alt="...">
     @endforeach
      <div class="card-body">
-       <p class="card-title oproduct-name">{{$pro->name}} <br>
-       <span class="text-secondary inck">{{$pro['detail']}}
+       <p class="card-title oproduct-name">{{ucfirst($pro->product)}} <br>
+       <span class="text-secondary inck">{{ucfirst($pro['detail'])}}
         </span><br>
-      <span class="o_pice">{{$pro->discount}}<del class="text-secondary">
-       <small class="text-danger">{{$pro->price}}</small></del></span> </p>
+        @foreach($pro->stock2 as $st)
+      <span class="o_pice">{{$st['sell_price'] - $st['discount'] }}<del class="text-secondary">
+       <small class="text-danger">{{$st->sell_price}}</small></del></span> @endforeach </p>
        
        </div>
     </div></a>

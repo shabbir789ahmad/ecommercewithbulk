@@ -55,6 +55,7 @@
             <span class="text-danger">@error ('post_code') {{$message}} @enderror</span>
 
           <input type="checkbox" name="payment" value="cash on delivery"  class="mt-3 mt-sm-3 mt-md-5 mb-5 mb-sm-5 mb-sm-0" required>
+
           <span>Payment On Delivery</span>
            <span class="text-danger">@error ('payment') {{$message}} @enderror</span>
        </div>
@@ -75,6 +76,8 @@
         @if(session('cart'))
             @foreach(session('cart') as $id => $details)
                 @php $total += $details['price'] * $details['quantity'] @endphp
+                @php  $sum[]=$details['ship'] @endphp
+               @php $sum2 = array_sum($sum) @endphp
       <div class="carousel-item @if($loop->first) active @endif">
         <div class="cart-img">
         <img class="d-block w-100 rounded" height="320rem" src="{{asset('uploads/img/' .$details['image'])}}" alt="First slide">
@@ -105,10 +108,10 @@
   </div>
                 
                  
-        <input type="hidden" name="total" value="{{$total}}">
+        <input type="hidden" name="total" value="{{$sum2 + $total}}">
        </div>
       
-        <h3 class="  mt-5 py-3 px-2">Total <span class="float-right text-light">Rs : {{$total}}</span></h3>
+        <h3 class="  mt-5 py-3 px-2">Total <span class="float-right text-light">Rs : {{$sum2 + $total}}</span></h3>
        
  	 </div>
       

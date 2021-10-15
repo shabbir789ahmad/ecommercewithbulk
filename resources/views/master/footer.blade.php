@@ -4,7 +4,7 @@
            <div class="col-xs-12 col-sm-12 col-md-3 text-center text-sm-center text-md-left footers-one">
                 <div class="footers-logo ml-0 ml-md-4">
                     @foreach($logo as $log)
-                    <img src="{{asset('uploads/img/' .$log['logo'])}}" alt="Logo" style="width:60%;" >
+                    <img src="{{asset('uploads/img/' .$log['logo'])}}" alt="websites Logo" style="width:60%; color:#ffffff;" >
                     @endforeach
                 </div>
                 <div class="footers-info mt-3 ml-0 ml-md-4">

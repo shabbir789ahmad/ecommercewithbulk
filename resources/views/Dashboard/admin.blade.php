@@ -156,25 +156,7 @@
         
       </li>
 
-<li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap14"
-          aria-expanded="true" aria-controls="collapseBootstrap">
-         <i class="fas fa-bold text-light"></i>
-          <span>Supplier</span>
-        </a>
-        <div id="collapseBootstrap14" class="collapse @if(request()->is('admin/show-supplier')) show
-         @elseif(request()->is('admin/add-supplier'))
-          show
-         @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class=" py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('admin/show-supplier')}}">All Supplier</a>
-         
-           <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/add-supplier')}}">Add Supplier</a>
-          
-          </div>
-        </div>
-      </li>
+   
 <li class="nav-item">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap13"
           aria-expanded="true" aria-controls="collapseBootstrap">
@@ -224,7 +206,25 @@
  </div>
 </li>
 
- 
+ <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap14"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+         <i class="fas fa-bold text-light"></i>
+          <span>Supplier</span>
+        </a>
+        <div id="collapseBootstrap14" class="collapse @if(request()->is('admin/show-supplier')) show
+         @elseif(request()->is('admin/add-supplier'))
+          show
+         @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class=" py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{url('admin/show-supplier')}}">All Supplier</a>
+         
+           <div class="dropdown-divider"></div>
+            <a class="collapse-item" href="{{url('admin/add-supplier')}}">Add Supplier</a>
+          
+          </div>
+        </div>
+      </li>
    
          <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap2"

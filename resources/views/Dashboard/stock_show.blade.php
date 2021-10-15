@@ -58,12 +58,12 @@
         <option value="60">Greater Than 60</option>
       </select>
      </div>
-     <div class="col-md-4">
-       <form class="d-flex">
-       <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+ <div class="col-md-4">
+  <form class="d-flex" action="{{url('admin/search-product')}}" method="GET">
+  <div class="input-group mb-3">
+  <input type="text" class="form-control" name="search" placeholder="Search"  aria-describedby="basic-addon2">
   <div class="input-group-append">
-    <button class="btn btn-color text-light mr-2" type="button">Search</button>
+    <button class="btn btn-color text-light mr-2" type="submit">Search</button>
   </div>
 </div>
 </form>
@@ -100,16 +100,18 @@
   <thead class="thead-light">
    <tr>
     <th>Image</th>
-    <th>Supplier</th>
     <th>Product</th>
+    <th > Status</th>
     <th>Price</th>
-    <th class="">Selling Price</th>
+    <th class="col-2">Sell Price</th>
     <th >Discount </th>
-    <th >Stock </th>
+    <th >Total Stock </th>
+    <th >Stocks </th>
     <th class="text-center">Actions</th>
    </tr>
   </thead>
   <tbody>
+
    @foreach($stock as $show)
    <tr>
     <td class="a col-1">
@@ -117,24 +119,22 @@
       <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
       @endforeach
     </td>
-    <td class="a">
-      @foreach($show->supply as $sup)
-        {{ucfirst($sup['supplier_name'])}}
-      @endforeach
-    </td>
-    <td class="a">{{ucfirst($show['product'])}}</td>
-    <td class="a">{{$show['price']}}</td>
-    <td class="a col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span>
-     <i class="fas fa-tags discount border p-2 sell" data-id="{{$show['id']}}" data-price="{{$show['sell_price']}}"></i>
+    <td class="a col-2">{{$show->product}}</td>
+    <td class="a " ><input type="checkbox" data-id="{{ $show['id'] }}" name="product_status" class="js-switch" 
+     {{ $show->product_status == 1 ? 'checked' : '' }} ></td>
+    
+    @foreach($show->stock2 as $st)
+    <td class="a">{{$st['price']}}</td>
+    <td class="a col-2"><span class="bag ">  {{ucfirst($st['sell_price'])}}</span>
+     
     </td>
     <td class="a col-2"><span class="bag ">
-    @if($show['discount'] > '1')
-  {{$show['discount']}}@else 0 @endif</span>
-    <i class="fas fa-warehouse discount border p-2 dis" data-id="{{$show['id']}}"  data-price="{{$show['discount']}}"></i>
+    @if($st['discount'] > '1')
+  {{$st['discount']}}@else 0 @endif</span>
     </td>
-    <td class="a col-2">{{$show['stock']}}
-    
-    </td>
+    @endforeach
+    <td class="a col-2">{{$show->total}}</td>
+    <td class="a col-2">{{$show->count}}</td>
     <td>
      <div class="b d-flex justify-content-center mt-1">
       

@@ -1,4 +1,4 @@
-@extends('Dashboard.admin')
+ @extends('Dashboard.admin')
 @section('content')
 
 <div class="b p-3 mt-0" style="background-color:#F0F0F0">
@@ -36,15 +36,15 @@
 </div>
  
  <div class="d-flex w-25 mt-3 ">
-  <a href="{{url('admin/single-product')}}" class="ml-auto">
-   <div class="card shadow border ml-auto text-light p-0 mr-2 btn-color @if(request()->is('admin/single-product')) act @else sing2 @endif">
+  <a href="{{url('admin/add-stock')}}" class="ml-auto">
+   <div class="card shadow border ml-auto text-light p-0 mr-2 btn-color @if(request()->is('admin/add-stock')) act @else sing2 @endif">
     <div class="card-body text-light">
    <i class="fas fa-pencil-alt text-light fa-lg"></i> Single
    </div>
  </div>
 </a> 
-    <a href="{{url('admin/product')}}" class="ml-auto">
-   <div class="card shadow border @if(request()->is('admin/product')) act @else act2 @endif ml-auto p-0 mr-2">
+    <a href="{{url('admin/add-stock-bulk')}}" class="ml-auto">
+   <div class="card shadow border @if(request()->is('admin/add-stock-bulk')) act @else act2 @endif ml-auto p-0 mr-2">
     <div class="card-body text-light">
    <i class="fas fa-pencil-alt text-light fa-lg"></i>Bulk Product
    </div>
@@ -103,23 +103,24 @@
  </div>
 </div>
 
-
+ <button class="btn float-right text-light btn-color genrate" >Genrate</button>
 </div>     
 </div>
 </div>
 
 
-<div class="card">
+<div class="card" id="bulk" >
  <div class="card-body">
+  
    <form action="{{url('admin/bulk-stock')}}" method="POST" enctype="multipart/form-data" class="mt-5">
   @csrf
-   <div id="example-6" class="content">
-  <div class="row group mt-5">
-      
-    <div class="col-md-5">
+   <div id="form-bulk" class="content">
+    <div class="row frm" >
+     <div class="col-md-5">
+      <input type="hidden" name="drop_id" class="drp">
       <div class="form-group">
      <span class="text-danger">@error('product') {{$message}} @enderror</span>
-<div class="form-group">
+  <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">   
      <input type="text" name="product[]" placeholder="Product Name" class="form-control "  value="{{old('product')}}" required=""><br>
               
@@ -144,7 +145,8 @@
                                
 <div class="form-group">
  <div class="input-group clockpicker" id="clockPicker1">
-    <select class="select2-multiple form-control" name="brand[]" multiple="multiple"  required="">
+    <select class=" form-control" name="brand[]" multiple="multiple"  >
+        <option disabled class="text-danger"  >Select Brand</option>
       @foreach($brand as $b)
       <option value="{{$b['bname']}}">{{$b['bname']}}</option>
        @endforeach
@@ -171,12 +173,10 @@
  </div>
      <span class="text-danger">@error('rimage') {{$message}} @enderror</span>
   <div class="custom-file mt-2">
-    <input type="file" name="rimage[]" class="custom-file-input" id="images" multiple="multiple" />
-     <label class="custom-file-label" for="images">Choose image</label>
+    <input type="file" name="rimage[]" class="form-control" id="images" multiple="multiple" />
+     
    </div> 
-   <div class="user-image mb-3 text-center" >
-       <div class="imgPreview" > </div>
-    </div>
+  
  
       </div>
     </div>
@@ -228,51 +228,60 @@
 
     
     
-     <div class="color mt-2" id="more">
+<div class="color mt-2" id="more">
 <div class="form-group" >
  <div class="input-group clockpicker" id="clockPicker1">
 
-    <input type="color" name="" placeholder="Product Color" class="form-control " id="color"  value="" required="">
+    <input type="color" name="color[]" placeholder="Product Color" class="form-control " id="color"  value="" required="">
    
     <div class="input-group-append">
-    <span class="input-group-text add" id="add"><i class="fas fa-plus"> Add</i></span>
+    <span class="input-group-text add" ><i class="fas fa-plus"> </i></span>
     </div>                      
     </div>
   </div>
 </div> 
-<div class="colors d-flex" id="box">
-
 <span class="text-danger">@error ('color') {{$message}} @enderror</span>
-</div>
+
        <div class="img" id="more">
  <div class="form-group" >
    <div class="input-group clockpicker" id="clockPicker1">
-       <input type="text" name="" placeholder="Product Size" class="form-control" multiple  id="sizes" required="">
+       <input type="text" name="size[]" placeholder="Product Size" class="form-control" multiple  id="sizes" required="">
+
        <div class="input-group-append">
-        <span class="input-group-text add" id="size"><i class="fas fa-plus">Add</i></span>
+        <span class="input-group-text add" id="size"><i class="fas fa-plus"></i></span>
        </div>                      
     </div>
   </div>
 </div>       
-<div class="size d-flex mb-5" id="box2">
-
 <span class="text-danger">@error ('size') {{$message}} @enderror</span>
+
+<div class="img" id="more">
+ <div class="form-group" >
+   <div class="input-group clockpicker" id="clockPicker1">
+       <input type="file" name="size_image[]" placeholder="" class="form-control"  required>
+       <div class="input-group-append">
+        <span class="input-group-text add" id="size"><i class="fas fa-plus"></i></span>
+       </div>                      
+    </div>
+    <label class="text-danger">Product Size table Image</label>
+  </div>
 </div>
       
     </div>
    <div class="col-md-2">
-      <button type="button" id="btnAdd-6" class="btn btn-primary"><i class="fas fa-plus"></i></button>
-      <button type="button" class="btn btn-danger btnRemove"><i class="fas fa-times"></i></button>
+      <button class="btn  text-light btn-color genrate" type="button" >Genrate</button>
+      <button type="button" class="btn btn-danger remove"><i class="fas fa-times"></i></button>
     </div>
-  
+    </div>
   </div>
-</div>
     <button  class="btn sb btn-block btn-color text-light mt-5"  disabled>Submit</button>
 </form>
  </div>
 </div>
 @endsection
 
+
+  
 
   
 

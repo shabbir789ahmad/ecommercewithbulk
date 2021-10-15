@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Social;
 use App\Models\Mainpage;
+use App\Models\Dropdown;
 class SocialController extends Controller
 {
     function uploadLink(Request $req)
@@ -67,7 +68,12 @@ class SocialController extends Controller
         $link->save();
         return redirect()->route('admin.show-link')->with('success','Social Links And Data updated');
     }
+   function getCat()
+   {
+     $dropdown=Dropdown::all();
+     return view('Dashboard.home_page_heading',compact('dropdown'));
 
+   }
 
     function front(Request $req)
     {
@@ -75,8 +81,11 @@ class SocialController extends Controller
          'c1'=>'required',
          'c2'=>'required',
          'c3'=>'required',
+         'tag3_id'=>'required',
          'c4'=>'required',
+         'tag4_id'=>'required',
          'c5'=>'required',
+         'tag5_id'=>'required',
          
 
         ]);
@@ -85,8 +94,11 @@ class SocialController extends Controller
         $link->c1=$req->c1;
         $link->c2=$req->c2;
         $link->c3=$req->c3;
+        $link->tag3_id=$req->tag3_id;
         $link->c4=$req->c4;
+        $link->tag4_id=$req->tag4_id;
         $link->c5=$req->c5;
+        $link->tag5_id=$req->tag5_id;
       
         $link->save();
         return redirect()->back()->with('success',' Data Uploaded Successfully');
@@ -94,7 +106,9 @@ class SocialController extends Controller
     function showfront()
     {
         $main=Mainpage::paginate(10);
-      return view('Dashboard.home_page_show',compact('main'));
+        $drop=Dropdown::All();
+        // dd($drop);
+      return view('Dashboard.home_page_show',compact('main','drop'));
     }
      function deleteFront($id)
     {
@@ -106,7 +120,8 @@ class SocialController extends Controller
      function updateFront($id)
     {
          $main=Mainpage::findorfail($id);
-      return view('Dashboard.home_page_update',compact('main'));
+         $drop=Dropdown::all();
+      return view('Dashboard.home_page_update',compact('drop','main'));
      
     }
     function updateFront2(Request $req)
@@ -116,8 +131,11 @@ class SocialController extends Controller
         $link->c1=$req->c1;
         $link->c2=$req->c2;
         $link->c3=$req->c3;
+        $link->tag3_id=$req->tag3_id;
         $link->c4=$req->c4;
+        $link->tag4_id=$req->tag4_id;
         $link->c5=$req->c5;
+        $link->tag5_id=$req->tag5_id;
       
         $link->save();
         return redirect()->route('admin.get-front')->with('success',' Data Updated Successfully');

@@ -50,8 +50,11 @@
     <th>Heading 1</th>
     <th>Heading 2</th>
     <th>Heading 3</th>
+    <th>Tag 3</th>
     <th >Heading 4</th>
+    <th >tag 4</th>
     <th >Heading 5</th>
+    <th >Tag 5</th>
     
     <th class="text-center">Operation</th>
     </tr>
@@ -59,13 +62,30 @@
                     
    <tbody>
    @foreach($main as $show)
+  
    
   <tr>
     <td class="a">{{ucfirst($show['c1'])}}</td>
     <td class="a">{{ucfirst($show['c2'])}}</td>
     <td class="a">{{ucfirst($show['c3'])}}</td>
+     @foreach($drop as $d)
+    @if($show['tag3_id']==$d['id'])
+    <td class="a">{{ucfirst($d['name'])}}</td>
+    @endif
+     @endforeach
     <td class="a">{{ucfirst($show['c4'])}}</td>
+     @foreach($drop as $d)
+    @if($show['tag4_id']==$d['id'])
+    <td class="a">{{ucfirst($d['name'])}}</td>
+    @endif
+     @endforeach
+   
     <td class="a">{{ucfirst($show['c5'])}}</td>
+    @foreach($drop as $d)
+    @if($show['tag5_id']==$d['id'])
+    <td class="a">{{ucfirst($d['name'])}}</td>
+    @endif
+     @endforeach
    
     <td>
      <div class="b d-flex justify-content-center mt-1">
@@ -77,6 +97,7 @@
       </td>
         </tr>
        
+        
          @endforeach
          </tbody>
          </table>

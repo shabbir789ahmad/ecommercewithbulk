@@ -1,17 +1,21 @@
 $(document).ready(function(){
-	
+	let i=1;
 	$('#drop').change(function(){
-		var drop=$('#drop').val()
-       $('#ds').val(drop)
-       
-        
-    $('#example-6').multifield({
-    section: '.group',
-    btnAdd:'#btnAdd-6',
-    btnRemove:'.btnRemove'
-  });
 
-$('.form').prop('disabled', true);
+		var drop=$(this).val()
+       $('.drp').val(drop)
+
+        $(".genrate").click(function(){
+
+        $(".frm").clone().appendTo("#form-bulk");
+          
+          });
+         $(".remove").click(function(){
+          $(".frm").remove();
+          });
+     
+
+        $('.form').prop('disabled', true);
        if($(this).val() != '') {
            $('.sb').prop('disabled', false);
         }
@@ -27,6 +31,9 @@ $('.form').prop('disabled', true);
 
  });
 
-
+$('.scroll-to-top').click(function(e){
+ e.preventDefault();
+ window.scrollTo(0,0);
+});
 });
 

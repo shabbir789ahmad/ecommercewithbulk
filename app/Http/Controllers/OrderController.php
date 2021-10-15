@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Detail;
 use App\Models\Dropdown;
+use App\Models\Stock;
 use App\Models\Category;
 use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Mail;
@@ -45,8 +46,7 @@ class OrderController extends Controller
         {
         DB::Transaction(function() use($req)
         {
-          $product=Product::where('id',$req->pid)->get();
-         dd($product);
+          
          $order=Order::create([
          'name' => $req->name,
          'email' =>  $req->email,

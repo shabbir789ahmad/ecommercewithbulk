@@ -110,7 +110,7 @@
 <span class="text-danger">@error('product') {{$message}} @enderror</span>
 <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">   
-     <input type="text" name="product" placeholder="Product Name" class="form-control "  value="{{old('product')}}" required=""><br>
+     <input type="text" name="product" placeholder="Product Name" class="form-control "  value="{{old('product')}}" required><br>
               
     <div class="input-group-append">
    <span class="input-group-text"><i class="fas fa-tag"></i></span>
@@ -145,7 +145,7 @@
   
 <span class="text-danger">@error('rimage') {{$message}} @enderror</span>
   <div class="custom-file mt-2">
-    <input type="file" name="rimage[]" class="custom-file-input" id="images" multiple="multiple" />
+    <input type="file" name="rimage[]" class="custom-file-input" id="images" multiple="multiple"  required accept="image/*" />
      <label class="custom-file-label" for="images">Choose image</label>
    </div> 
    <div class="user-image mb-3 text-center" >
@@ -164,7 +164,7 @@
                                
   <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">   
-     <select class="form-control" name="supply_id">
+     <select class="form-control" name="supply_id" required>
       <option disabled selected hidden="">Select Supplier</option>
        @foreach($supply as $sup)
        <option value="{{$sup['id']}}">{{ucfirst($sup['supplier_name'])}}</option>
@@ -242,18 +242,29 @@
  <div class="img" id="more">
  <div class="form-group" >
    <div class="input-group clockpicker" id="clockPicker1">
-       <input type="text" name="" placeholder="Product Size" class="form-control" multiple  id="sizes" required="">
+       <input type="text" name="" placeholder="Product Size" class="form-control" multiple  id="sizes" required>
        <div class="input-group-append">
         <span class="input-group-text add" id="size"><i class="fas fa-plus">Add</i></span>
        </div>                      
     </div>
   </div>
 </div>       
-<div class="size d-flex mb-5" id="box2">
+<div class="size d-flex " id="box2">
 
-<span class="text-danger">@error ('color') {{$message}} @enderror</span>
+<span class="text-danger">@error ('size') {{$message}} @enderror</span>
 </div>
-
+ 
+ <div class="img" id="more">
+ <div class="form-group" >
+   <div class="input-group clockpicker" id="clockPicker1">
+       <input type="file" name="size_image" placeholder="" class="form-control"  required>
+       <div class="input-group-append">
+        <span class="input-group-text add" id="size"><i class="fas fa-plus"></i></span>
+       </div>                      
+    </div>
+    <label class="text-danger">Product Size table Image</label>
+  </div>
+</div>
 
 </div>
 </div>

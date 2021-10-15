@@ -14,6 +14,7 @@ class Stock2 extends Model
     'sell_price',
     'ship',
     'discount',
+    'stock_status',
     'supply_id',
     'stock_id',
    ];

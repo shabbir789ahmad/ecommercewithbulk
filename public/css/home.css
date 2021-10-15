@@ -4,7 +4,6 @@ body{
 }
 .nav-item{
 	margin-left: 6%;
-	
 	font-size: 1.2vw;
 }
 
@@ -69,10 +68,8 @@ select{
  position: absolute;
  width: 15%;
  padding: 2%;
- bottom: 77%;
- right: 0%;
- opacity: 0%;
- transition: .5s ease;
+ bottom: 88%;
+ left: 3%;
  text-align: center;
  background:#166387 ;
 }
@@ -84,10 +81,7 @@ select{
   object-fit: cover;
 }
 
-.a:hover .overlay4 {
-  opacity: 1;
-  margin-right: 10%;
-}
+
 .a:hover .overlay3 {
   opacity: 1;
   margin-right: 10%;
@@ -110,6 +104,9 @@ color:#5E473E  ;
 }
 .keep{
   font-size: 2.3vw;
+}
+.keephome{
+  font-size: 2vw;
 }
 .footer-color{
   background-color: #41B3A3;

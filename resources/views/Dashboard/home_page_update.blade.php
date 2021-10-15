@@ -45,9 +45,9 @@
      @csrf
 
  <input type="hidden" name="id" value="{{$main['id']}}">
- 
-<span class="text-danger"></span>
-<div class="form-group">
+ <div class="row">
+  <div class="col-md-6">
+   <div class="form-group">
  <div class="input-group clockpicker" id="clockPicker1">   
     <input type="text" name="c1" placeholder="Category one" class="form-control "  value="{{$main['c1']}}"><br>
                
@@ -59,17 +59,6 @@
              
     
   <span class="text-danger">@error('c1') {{$message}} @enderror</span>
-<div class="form-group">
- <div class="input-group clockpicker" id="clockPicker1">
-        <input type="text" name="c2" placeholder="Category 2" class="form-control" value="{{$main['c2']}}">
-   
-    <div class="input-group-append">
-    <span class="input-group-text"><i class="fab fa-product-hunt"></i></span>
-    </div>                      
-    </div>
-  </div>
- <span class="text-danger">@error('c2') {{$message}} @enderror</span>
-                               
   <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">   
      <input type="text" name="c3" placeholder="Category 3" class="form-control "  value="{{$main['c3']}}"><br>
@@ -80,8 +69,7 @@
   </div>
  </div>
   <span class="text-danger">@error('c3') {{$message}} @enderror</span>
-          
-    <div class="form-group">
+   <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">
      <input type="text" name="c4" placeholder="Category 4 " class="form-control"  value="{{$main['c4']}}">
                  
@@ -103,7 +91,75 @@
    </div>                      
  </div>
   <span class="text-danger">@error('c5') {{$message}} @enderror</span> 
- </div>  
+ </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+ <div class="input-group clockpicker" id="clockPicker1">
+        <input type="text" name="c2" placeholder="Category 2" class="form-control" value="{{$main['c2']}}">
+   
+    <div class="input-group-append">
+    <span class="input-group-text"><i class="fab fa-product-hunt"></i></span>
+    </div>                      
+    </div>
+  </div>
+ <span class="text-danger">@error('c2') {{$message}} @enderror</span>
+
+ <div class="form-group">
+   <div class="input-group clockpicker" id="clockPicker1">
+     <select class="form-control" name="tag3_id">
+        <option selected hidden disabled> Select Search tag</option>
+           @foreach($drop as $dr)  
+         <option value="{{$dr['id']}}">{{$dr['name']}}</option>
+            @endforeach 
+     </select>
+     
+    <div class="input-group-append">
+   <span class="input-group-text"><i class="fas fa-tag"></i></span>
+   </div>                      
+  </div>
+ </div>
+  <span class="text-danger">@error('tag3_id') {{$message}} @enderror</span>
+ <div class="form-group">
+   <div class="input-group clockpicker" id="clockPicker1">
+     <select class="form-control" name="tag4_id">
+        <option selected hidden disabled> Select Search tag</option>
+           @foreach($drop as $dro)  
+         <option value="{{$dro['id']}}">{{$dro['name']}}</option>
+            @endforeach 
+     </select>
+     
+    <div class="input-group-append">
+   <span class="input-group-text"><i class="fas fa-tag"></i></span>
+   </div>                      
+  </div>
+ </div>
+  <span class="text-danger">@error('tag4_id') {{$message}} @enderror</span>
+<div class="form-group">
+   <div class="input-group clockpicker" id="clockPicker1">
+     <select class="form-control" name="tag5_id">
+        <option selected hidden disabled> Select Search tag</option>
+           @foreach($drop as $drop)  
+         <option value="{{$drop['id']}}">{{$drop['name']}}</option>
+            @endforeach 
+     </select>
+     
+    <div class="input-group-append">
+   <span class="input-group-text"><i class="fas fa-tag"></i></span>
+   </div>                      
+  </div>
+ </div>
+  <span class="text-danger">@error('tag5_id') {{$message}} @enderror</span>
+
+  </div>
+</div>
+
+
+
+                               
+  
+          
+      
         
            
 

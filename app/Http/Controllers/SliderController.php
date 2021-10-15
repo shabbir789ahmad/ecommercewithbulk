@@ -10,55 +10,63 @@ use App\Models\Category;
 use App\Models\Logo;
 use App\Models\Mainpage;
 use App\Models\Image;
-use Carbon\carbon;
+use Carbon\Carbon;
 class SliderController extends Controller
 {
   function  women()
   {
     $slider=Slider::latest()->take('3')->get();
-    
-    $product= Stock::
-     
-      join('reviews','stocks.id','=','reviews.review_id')
-     
+    $front=Mainpage::latest()->take(1)->get();
+     $query1= Stock::
+      leftjoin('reviews','stocks.id','=','reviews.review_id')
       ->select('review_id', \DB::raw('avg(rating) as rating')
       ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at')
-      ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at')->orderBy('rating','DESC')
-      ->where('product_status','1')
-      ->get();
+        ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at')->orderBy('rating','DESC');
+      $query=$query1->whereMonth('stocks.created_at', date('m'));
+      $query=$query1->where('product_status','1')->get();
+       $prod1=$query;
+        $product=$prod1->shuffle();
+
+        $query2=$query1->where('product_status','1')->get();
+        $prod3=$query2;
+        $product3=$prod3->shuffle();
+        //dd($produ);
       foreach($product as $pro) {
     
      $pro->image=Image::where('Image_id',$pro->id)->get();
+      $pro->stock2=Stock2::where('stock_id',$pro->id)
+         ->where('stock_status','1')->take(1)->get();
+          
+      }
+      foreach($product3 as $prod) {
+    
+     $prod->image=Image::where('Image_id',$prod->id)->get();
+      $prod->stock2=Stock2::where('stock_id',$prod->id)
+         ->where('stock_status','1')->take(1)->get();
       
       }
-     // dd($product);
+     
+  
         
-    $product2= Stock::
+    $prod= Stock::
       leftjoin('reviews','stocks.id','=','reviews.review_id')
-      
+      ->leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
       ->select('review_id', \DB::raw('avg(rating) as rating')
-       ,'stocks.drop_id','stocks.id','stocks.product'    ,'reviews.review_id','stocks.created_at')
-      ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at')->orderBy('rating','DESC')
-       ->where('product_status','1')
+       ,'stocks.drop_id','stocks.id','stocks.product'    ,'reviews.review_id','stocks.created_at','stock2s.sell_price','stock2s.discount')
+      ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stock2s.sell_price','stock2s.discount')->orderBy('rating','DESC')
+      ->where('product_status','1')
+      ->where('stock_status','1')
       ->get();
-   
+   $product2= $prod->shuffle();
     
       foreach($product2 as $pro) {
     
        $pro->image=Image::where('Image_id',$pro->id)->get();
-      
+   
       }
-
-      //dd($img);
-    
-
-    $front=Mainpage::latest()->take(1)->get();
-    //dd($front);
-    return view('home',compact('slider','product','product2','front'));
+   //dd($product3);
+      return view('home',compact('slider','product','product2','front','product3'));
   }
-
- 
-
 
   function uploadSlider(Request $req)
   {
@@ -192,10 +200,16 @@ class SliderController extends Controller
 
   function search(Request $req)
   {
-    $search=$req->search;
-    $search2=Product::join('images','stocks.id','=','images.image_id')
-    ->where('name','LIKE',"%{$search}%")->get();
-  //dd($search2);
+     try {
+        $search=$req->search;
+    $search2=Stock::join('images','stocks.id','=','images.image_id')
+    ->where('product','LIKE',"%{$search}%")->get();
+
+    } catch (\Exception $e) {
+        return redirect()->back()->withError('Not data Found for Search ' . $request->input('search'))->withInput();
+    }
+    
+ 
     return view('search',compact('search2'));
   }
 

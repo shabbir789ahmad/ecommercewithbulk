@@ -18,7 +18,8 @@ class CreateStock2sTable extends Migration
             $table->string('stock');
             $table->string('price');
             $table->string('sell_price');
-            $table->string('invoice');
+            $table->string('ship');
+            $table->string('stock_status');
             $table->bigInteger('supply_id')->unsigned();
             $table->foreign('supply_id')->references('id')->on('supplies')->onUpdate('cascade')->onDelete('cascade');
             $table->bigInteger('stock_id')->unsigned();

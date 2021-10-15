@@ -78,11 +78,19 @@
     @foreach($drop as $d)
      <p>{{ucfirst($d['name'])}}</p>
      @endforeach
-     <p class="cash">$ {{$order['price']}} <span class="text-success ml-3">{{ucwords($order['payment'])}}</span></p>
-     <p class="detail">{{$order['detail']}}</p>
+     <p class="cash">$ {{$order['total']}} <span class="text-success ml-3">{{ucwords($order['payment'])}}</span></p>
+     <p class="detail">{{ucfirst($order['detail'])}}</p>
      
       
        <div class="row mt-5 ">
+        <div class="col-md-4 ">
+        <p class="cash">Price: </p>
+        </div>
+        <div class="col-md-8">
+         <p>${{$order['total']}}</p>
+        </div>
+      </div>
+      <div class="row  ">
         <div class="col-md-4 ">
         <p class="cash">Size: </p>
         </div>

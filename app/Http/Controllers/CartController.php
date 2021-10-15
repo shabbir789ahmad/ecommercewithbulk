@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Stock;
 use App\Models\User;
 
 class CartController extends Controller
@@ -27,10 +27,11 @@ class CartController extends Controller
         {
             $color=$req->get('cartcolor');
         }
-        echo $color;
-        $product = Product::
-        join('images','products.id','=','images.image_id')
-        ->select('products.name','products.price','products.discount','products.detail','products.id','images.rimage','products.drop_id','products.detail')
+        //echo $color;
+        $product = Stock::
+        join('stock2s','stocks.id','=','stock2s.stock_id')
+       ->join('images','stocks.id','=','images.image_id')
+        ->select('stocks.product','stock2s.sell_price','stock2s.discount','stocks.detail','stocks.id','images.rimage','stocks.drop_id','stock2s.ship')
         ->findorfail($id);
          // dd($product);
         $cart = session()->get('cart', []);
@@ -41,11 +42,11 @@ class CartController extends Controller
             $cart[$id] = [
                 'pid' => $product['id'],
                 "drop_id" => $product['drop_id'],
-                "name" => $product['name'],
+                "name" => $product['product'],
                 "detail" => $product['detail'],
                 "ship" => $product['ship'],
                 "quantity" => 1,
-                "price" => $product->discount,
+                "price" => $product->sell_price -$product->discount,
                 "image" => $product->rimage,
                 "color" => $req->color,
                 "size" => $req->size,
@@ -84,9 +85,10 @@ class CartController extends Controller
 
     function wishlist($id,Request $req)
     {
-         $product = Product::
-        join('images','products.id','=','images.image_id')
-        ->select('products.name','products.price','products.discount','products.detail','products.id','images.rimage','products.drop_id','products.detail')
+         $product = Stock::
+        join('stock2s','stocks.id','=','stock2s.stock_id')
+       ->join('images','stocks.id','=','images.image_id')
+        ->select('stocks.product','stock2s.sell_price','stock2s.discount','stocks.detail','stocks.id','images.rimage','stocks.drop_id','stock2s.ship')
         ->findorfail($id);
         $wishlist= session()->get('wishlist',[]);
 
@@ -96,18 +98,20 @@ class CartController extends Controller
            $wishlist[$id]['quentity']++;
         }else{
             $wishlist[$id]=[
+                'pid' => $product['id'],
                 "drop_id" => $product['drop_id'],
-                "name" => $product['name'],
+                "name" => $product['product'],
                 "detail" => $product['detail'],
                 "ship" => $product['ship'],
                 "quantity" => 1,
-                "price" => $product->discount,
+                "price" => $product->sell_price -$product->discount,
                 "image" => $product->rimage,
                 "color" => $req->color,
+                "size" => $req->size,
             ];
         }
          session()->put('wishlist', $wishlist);
-        return redirect()->back()->with('success', 'Product added to Wishlist successfully!');
+        return redirect()->back()->with('success3', 'Product added to Wishlist successfully!');
     }
 
     function updateWishlist(Request $req)
@@ -117,7 +121,7 @@ class CartController extends Controller
             $wishlist=session()->get('wishlist');
             $wishlist[$req->id]["quantity"]=$req->quantity;
             session()->put('wishlist',$wishlist);
-            session()->flash('success','Wishlist updated successfully');
+            session()->flash('success3','Wishlist updated successfully');
         }
  
     }
@@ -129,7 +133,7 @@ class CartController extends Controller
                 unset($wishlist[$request->id]);
                 session()->put('wishlist', $wishlist);
             }
-            session()->flash('success', 'Product removed successfully');
+            session()->flash('success3', 'Product removed successfully');
         }
     }
 }

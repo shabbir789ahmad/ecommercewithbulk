@@ -23,6 +23,7 @@ class ReviewController extends Controller
         $review->message=$req->message;
         $review->review_id=$req->review_id;
         $review->user_id=Auth::user()->id;
+        $review->image=Auth::user()->image;
         $review->save();
         return redirect()->back()->with('success','Thank you for Reviews');
         }else{

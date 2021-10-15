@@ -11,6 +11,7 @@ use App\Models\Dropdown;
 use App\Models\Color;
 use App\Models\Size;
 use App\Models\Store;
+use App\Models\Stock;
 use App\Models\Stock2;
 
 use Carbon\Carbon;
@@ -38,48 +39,49 @@ public function dropCat($id)
 
 
   //function for product detail 
-  function productDetail($id)
+  function productDetail($id,$drop_id)
   {
-    $detail= Product::
-         leftjoin('reviews','products.id','=','reviews.review_id')
-        
-        ->select('review_id', \DB::raw('avg(rating) as rating')
-        ,'products.id','products.name','products.discount','products.price','products.sell_price','reviews.review_id','products.created_at','products.detail')
-        ->groupBy('review_id','products.id','products.name','products.discount','products.sell_price','products.price','reviews.review_id','products.created_at','products.detail')->orderBy('rating','DESC')
-        ->findorfail($id);
-
+    $detail= Stock::
+      leftjoin('reviews','stocks.id','=','reviews.review_id')
+      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail')
+     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail')->orderBy('rating','DESC')
+     ->findorfail($id);
+   $stock2=Stock2::where('stock_id',$id)->where('stock_status','1')->first();
     $image=Image::where('image_id',$id)->get();
     // dd($detail);
       
-     $detail2= Product::
-     leftjoin('reviews','products.id','=','reviews.review_id')
+     $detail2= Stock::
+     leftjoin('reviews','stocks.id','=','reviews.review_id')
      ->select('review_id', \DB::raw('avg(rating) as rating')
-        ,'products.id','products.name','products.discount','products.sell_price','products.price','reviews.review_id','products.created_at')
-        ->groupBy('review_id','products.id','products.name','products.discount','products.sell_price','products.price','reviews.review_id','products.created_at')->orderBy('rating','DESC')
+        ,'stocks.id','stocks.product','stocks.created_at','stocks.drop_id')
+        ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.drop_id')->orderBy('rating','DESC')
+        ->where('drop_id',$drop_id)
         ->get();
         foreach($detail2 as $dt)
         {
-            $dt->image=Image::where('image_id',$dt->id)->take(1)->get();
+          $dt->image=Image::where('image_id',$dt->id)->take(1)->get();
+         $dt->stock2=Stock2::where('stock_id',$dt->id)
+           ->where('stock_status','1')->take(1)->get();
         }
 
-        $color= Product::
-        join('colors','products.id','=','colors.filter_id')
+        $color= Stock::
+        join('colors','stocks.id','=','colors.filter_id')
         ->where('filter_id',$id)
         ->get();
-        $size= Product::
-         join('sizes','products.id','=','sizes.size_id')
+        $size= Stock::
+         join('sizes','stocks.id','=','sizes.size_id')
          ->where('size_id',$id)
         ->get();
-        $brand= Product::
-         join('stores','products.id','=','stores.brand_id')
+        $brand= Stock::
+         join('stores','stocks.id','=','stores.brand_id')
          ->where('brand_id',$id)
         ->get();
-        $review= Product::
-         join('reviews','products.id','=','reviews.review_id')
+        $review= Stock::
+         join('reviews','stocks.id','=','reviews.review_id')
          ->where('review_id',$id)
         ->get();
 
-        return view('productpage',compact('detail','detail2','image','color','size','brand','review'));
+        return view('productpage',compact('detail','detail2','image','color','size','brand','review','stock2'));
   }  
 
     
@@ -113,35 +115,35 @@ public function dropCat($id)
     }
    
   //echo $new;
-    $query= Dropdown::leftjoin('products','dropdowns.id','=','products.drop_id')
+    $query= Dropdown::leftjoin('stocks','dropdowns.id','=','stocks.drop_id')
         
-        ->select('products.name','products.detail','products.price','products.discount','products.sell_price','products.id');
+        ->select('stocks.product','stocks.detail','stocks.id');
 
      if($req->get('color2') !== Null)
        {
-        $query=$query->join('colors','products.id','=','colors.filter_id');
+        $query=$query->join('colors','stocks.id','=','colors.filter_id');
         $query=$query->where('colors.color',$req->get('color2'));
         }
 
      if($req->get('brand2') !== Null)
        {
-          $query=$query->join('stores','products.id','=','stores.brand_id');
+          $query=$query->join('stores','stocks.id','=','stores.brand_id');
         $query=$query->where('brand',$req->get('brand2'));
         }
 
      if($req->get('size2') !== Null)
         {
-            $query=$query->join('sizes','products.id','=','sizes.size_id');
+            $query=$query->join('sizes','stocks.id','=','sizes.size_id');
         $query=$query->where('size',$req->get('size2'));
         }
 
-        if($sort=='name')
+        if($sort=='product')
         {
-            $query=$query->orderBy('name','asc');
+            $query=$query->orderBy('product','asc');
         }
         if($sort=='date')
         {
-            $query=$query->orderBy('products.created_at','asc');
+            $query=$query->orderBy('stocks.created_at','asc');
         }
         if($sort=='price_asc')
         {
@@ -158,38 +160,38 @@ public function dropCat($id)
         {
            $start = $now->startOfWeek()->format('Y-m-d H:i');
            $end = $now->endOfWeek()->format('Y-m-d H:i');
-           $query=$query->whereBetween('products.created_at',[$start,$end]);
+           $query=$query->whereBetween('stocks.created_at',[$start,$end]);
         }
         if($new=='last')
         {
        
-           $query=$query->where('products.created_at','>=',Carbon::now()->subdays(15));
+           $query=$query->where('stocks.created_at','>=',Carbon::now()->subdays(15));
         }
         if($new=='month')
         {
-            $query=$query->whereMonth('products.created_at', date('m'));
+            $query=$query->whereMonth('stocks.created_at', date('m'));
         }
    // price filter
-      if($price=='1000')
+      if($price=='10')
         {
-       
-           $query=$query->where('products.sell_price','<=','1000');
+          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+           $query=$query->where('sell_price','<=','10');
         }
-         if($price=='2000' )
+         if($price=='20' )
         {
-       
-           $query=$query->whereBetween('products.sell_price',['1000','2000']);
+          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+           $query=$query->whereBetween('sell_price',['10','20']);
         }
-         if($price=='3000' )
+         if($price=='30' )
         {
-       
-           $query=$query->whereBetween('products.sell_price',['2000','3000']);
+          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+           $query=$query->whereBetween('sell_price',['20','30']);
         }
         
-         if($price=='3100' )
+         if($price=='31' )
         {
-       
-           $query=$query->whereBetween('products.sell_price',['3100','6000']);
+          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+           $query=$query->whereBetween('sell_price',['31','60']);
         }
         $query=$query->where('drop_id',$id);
         $query=$query->paginate(10);
@@ -199,16 +201,18 @@ public function dropCat($id)
       foreach($product as $pro)
       {
         $pro->image=Image::where('image_id',$pro->id)->take(1)->get();
+         $pro->stock2=Stock2::where('stock_id',$pro->id)
+         ->where('stock_status','1')->take(1)->get();
       }
     
-     $color= Product::
-        leftjoin('colors','products.id','=','colors.filter_id')
-        ->select('products.drop_id','colors.color','colors.filter_id')
+     $color= Stock::
+        leftjoin('colors','stocks.id','=','colors.filter_id')
+        ->select('stocks.drop_id','colors.color','colors.filter_id')
           ->where('drop_id',$id)
         ->get();
-    $size= Product::
-       leftjoin('sizes','products.id','=','sizes.size_id')
-       ->select('products.drop_id','sizes.size','sizes.size_id')
+    $size= Stock::
+       leftjoin('sizes','stocks.id','=','sizes.size_id')
+       ->select('stocks.drop_id','sizes.size','sizes.size_id')
           ->where('drop_id',$id)
        ->get();
 
@@ -223,25 +227,8 @@ public function dropCat($id)
   
  
 
-  function stockM( $id)
-  {
-     $stock=Product::findorfail($id);
-     return view('Dashboard.stock_module',compact('stock'));
-  }
-  function discountUp(Request $req)
-  {
-    $product=Product::findorfail($req->id);
-    $product->discount=$req->discount;
-    $product->save();
-    return redirect()->back()->with('success','Discount Updated');
-  }
-  function deleteProduct($id)
-   {
-    $product=Product::findorfail($id);
-    $product->delete();
-
-    return redirect()->back()->with('success','Product Deleted Permanently');
-  }
+ 
+ 
  
  
     function colorStatus(Request $req)
@@ -266,6 +253,12 @@ function brandStatus(Request $req)
   {
     $store=Stock2::findorfail($req->id);
    $store->stock_status=$req->stock_status;
+   $store->save();
+  }
+  function productStatus(Request $req)
+  {
+    $store=Stock::findorfail($req->id);
+   $store->product_status=$req->product_status;
    $store->save();
   }
 }

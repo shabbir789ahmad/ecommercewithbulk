@@ -83,13 +83,7 @@
     <div class="col-md-4">
     </div>
     <div class="col-md-4 ">
-        <div class="mt-5 g border card shadow p-5">
-       <p class=" mt-2 ">Total:<span class="float-right"> ${{ $total }}</span></p>
-     <hr>
         
-        <a href="{{url('checkout')}}"><button class="btn rounded py-3 btn-style mt-3">Checkout</button></a>
-
-    </div>
     </div>
   </div>
 

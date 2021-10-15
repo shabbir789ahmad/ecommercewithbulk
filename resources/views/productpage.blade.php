@@ -33,7 +33,7 @@
  <div class="row">
   <div class="col-md-12 col-6">
   
-    <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['name'])}}</p>
+    <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}</p>
     <p class="text-dark name3 ml-3 ml-md-0">{{ucwords($detail['detail'])}}<br>
   <span class="text-dark"  style="font-size: 1.5rem;">
      @if($detail['rating'])
@@ -51,12 +51,14 @@
     <hr class="text-dark d-none d-md-block hr" >
     <hr class="mt-3">
     <div class="col-md-12 col-6 ">
-       <h5 class=" names ml-2  ml-md-0">${{$detail['discount']}}
+      
+       <h5 class=" names ml-2  ml-md-0">${{$stock2['sell_price']- $stock2['discount']}}
     <span>
-      <small class="text-danger"> <del>${{$detail['price']}}</del>
+      <small class="text-danger"> <del>${{$stock2['sell_price']}}</del>
        </small>
     </span>
   </h5>
+ 
     </div>
     
     <hr class="text-dark d-none d-md-block hr" >
@@ -156,12 +158,13 @@
  <hr class="mt-2">
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-3">
+  @php //dd($review ); @endphp
 @foreach($review as $rev)
-  <div class="item">
+  <div class="item ">
    <div class="card review-card">
      <div class="card-body  text-center">
         <div class="s text-center" style="width:30%; height:20%; margin: auto;">
-       <img src="{{asset('pic/1-web-desktop-list (3).webp')}}"  class="review-img">
+       <img src="{{asset('uploads/img/' .$rev['image'])}}"  class="review-img">
          </div>
           <p class="n mt-5">{{ucfirst($rev['uname'])}}</p>
           <p class="n mt-3 ">
@@ -199,21 +202,27 @@
   @foreach($detail2 as $pro)
 
   <div class="item">
-    <div class="card ">
+    <div class="card "> 
      <div class="a">
-       <a href="{{'productpage/'.$pro['id']}}"> 
+       <a href="{{url('productpage/'.$pro['id']. '/' .$pro['drop_id']) }}"> 
         @foreach($pro->image as $img)
         @if($loop->first)
         <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
         @endif
        @endforeach</a>
-        <a href="{{'productpage/'.$pro['id']}}"> <p class="overlay2 ">Quick View</p></a>
+        <a href="{{url('productpage/'.$pro['id']. '/' .$pro['drop_id']) }}"> <p class="overlay2 ">Quick View</p></a>
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 "><i class="far fa-heart text-danger m-2 fa-lg "></i></p></a>
-       <a href="{{url('add-to-cart/'.$pro['id'])}}">  <p class="overlay4 "><i class="fa fa-shopping-cart text-light m-2 fa-lg "></i></p></a>
+        @if($pro['discount'])
+        <a >  <p class="overlay4 text-light">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
+       }}%</p></a>
+       @else
+       @endif
      </div>
      <div class="card-body">
-      <p class="f">{{$pro['name']}}<span class="float-right ">${{$pro['discount']}}<del class="text-secondary">
-       <small class="text-danger">${{$pro['price']}}</small></del>  </span></p>
+      @foreach($pro->stock2 as $st)
+      <p class="f">{{$pro['product']}}<span class="float-right ">${{$st['discount']}}<del class="text-secondary">
+       <small class="text-danger">${{$st['price']}}</small></del>  </span></p>
+       @endforeach
        <hr>
        <div class="text-center">
         @if($pro['rating'])

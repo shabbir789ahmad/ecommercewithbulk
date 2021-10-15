@@ -32,7 +32,8 @@
         @if(session('cart'))
             @foreach(session('cart') as $id => $details)
                 @php $total +=(int) $details['price'] * $details['quantity'] @endphp
-               
+               @php  $sum[]=$details['ship'] @endphp
+               @php $sum2 = array_sum($sum) @endphp
 <div class="row  border-top pt-4 mb-3 ">
     
  <div class="col-md-2 col-sm-12 col-12 d-flex ">
@@ -65,6 +66,7 @@
 
 </div>
 </div>
+
     @endforeach
     @else
     <p class="text-danger text-center">
@@ -84,9 +86,17 @@
     </div>
     <div class="col-md-4 ">
         <div class="mt-5 g border p-5">
-       <p class=" mt-2 ">Total:<span class="float-right"> ${{ $total }}</span></p>
+       <p class=" mt-2 ">SubTotal:<span class="float-right"> ${{ $total }}</span></p>
+       @foreach(session('cart') as $id => $details)
+               @php  $sum[]=$details['ship'] @endphp
+               @php $sum2 = array_sum($sum) @endphp
+       <p class=" mt-2 ">Shipping:<span class="float-right"> 
+        ${{ $sum2 }} </span></p>
      <hr>
-        
+         <p class=" mt-2 ">Total:<span class="float-right">
+        {{ $sum2 + $total }} 
+          </span></p>
+          @endforeach
         <a href="{{url('checkout')}}"><button class="btn rounded py-3 btn-style mt-3">Checkout</button></a>
 
     </div>
