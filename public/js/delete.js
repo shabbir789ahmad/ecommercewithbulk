@@ -123,4 +123,25 @@ $(document).ready(function(){
      
       $('#stock_ids').val(stock_id)
     });
-});
+
+     $('.colornew').click(function(){
+     $('#color-modal2').modal('show');
+     var id=$(this).data('id');
+      $('#filter').val(id)
+      
+     });
+       $('.sizenew').click(function(){
+     $('#size-modal2').modal('show');
+     var id=$(this).data('id');
+
+      $('#sizen').val(id)
+      
+    });
+   
+    $('.brandnew').click(function(){
+     $('#brand-modal2').modal('show');
+     var id=$(this).data('id');
+      $('#br').val(id)
+      
+    });
+   });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Vendor;
 use App\Models\Order;
 use App\Models\Detail;
 use App\Models\Contact;
@@ -16,13 +17,16 @@ class CountController extends Controller
 {
     function count()
     {
-        $user=User::whereMonth('created_at', date('m'))->count();
-        if($user)
+        $comp=Order::whereMonth('created_at', date('m'))
+        ->count();
+        if($comp)
         {
-        $per=User::count();
-        $pr=$user/$per * 100;
+        $comp2=Order::
+        join('details','orders.id','=','details.order_id')
+        ->where('order_status','delivered')->count();
+        $com=$comp/$comp2 * 100;
         }else{
-            $pr=0;
+            $com=0;
         }
         
         
@@ -99,7 +103,42 @@ class CountController extends Controller
      
    
   
-    return view('Dashboard.dashboard',$arr,compact('user','pr','order','or','sale','sl','earn','en','message','today','order2'));
+    return view('vendor.vendorcount',$arr,compact('comp','com','order','or','sale','sl','earn','en','message','today','order2'));
+    }
+
+    function count2()
+    {
+        $user=User::whereMonth('created_at', date('m'))->count();
+        if($user)
+        {
+        $per=User::count();
+        $pr=$user/$per * 100;
+        }else{
+            $pr=0;
+        }
+
+        $vendor=Vendor::whereMonth('created_at', date('m'))->count();
+        if($vendor)
+        {
+        $per=User::count();
+        $pr2=$vendor/$per * 100;
+        }else{
+            $pr2=0;
+        }
+        
+        $msg=Contact::whereDay('created_at', date('d'))->count();
+         if($msg)
+        {
+        $ms=User::count();
+        $msg2=$msg/$ms * 100;
+        }else{
+            $msg2=0;
+        }
+
+        $message=Contact::whereDay('created_at', date('d'))->take(10)->get();
+      
+
+    return view('Dashboard.dashboard',compact('user','vendor','message','pr','pr2','msg','msg2'));
     }
     
 }

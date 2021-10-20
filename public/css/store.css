@@ -1,0 +1,104 @@
+.n2{
+	opacity: 1 !important;
+   color: #ffffff;
+}
+.n1{
+	margin-left: 1% !important;
+
+}
+.bg-store{
+	background-color: #166387;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link
+{
+	color: #ffffff;
+	background-color: #131921;
+}
+.store-banner{
+	background-color: #C8EBFF;
+	position: relative;
+}
+.txt{
+	position: absolute;
+	top: 0;
+   left: 60%;
+}
+.txt h4
+{
+    font-family : Montserrat, Arial, sans-serif;
+    font-size: 5vw; 
+    font-weight: 700;
+    line-height: 10vh;
+    font-style: italic;
+}
+.txt .dis
+{
+	margin-top: 20%;
+	margin-bottom: 0%;
+	font-family : Montserrat, Arial, sans-serif;
+    font-size: 2vw; 
+    font-weight: 700;
+    color: #ED3137;
+    font-style: italic;
+}
+.txt .btn-store{
+	background-color: #166387;
+
+	height: 3rem;
+
+}
+.stor-text{
+	font-family : Montserrat, Arial, sans-serif;
+font-size: 1.7vw; 
+ font-weight: 700;
+   margin: 0;
+   margin-left: 3%;
+}
+.pro {
+  font-family : Montserrat, Arial, sans-serif;
+font-size: 3vw; 
+ font-weight: 700;
+  color: #166387;
+  margin-left: 40%;
+  position:relative;
+    display:inline-block;
+}
+
+
+.pro:after{
+   content:'';
+    position:absolute;
+    left:0;right:10;
+    top:100%;
+    width:30%;
+    height:.2rem;
+    background:#ED7632;
+}
+.text2{
+    font-size: 1vw;
+	font-family : Montserrat, Arial, sans-serif;
+	margin-left: 3%;
+}
+@media screen and (max-width: 600px)
+{
+	.stor-text{
+	font-family : Montserrat, Arial, sans-serif;
+font-size: 4vw; 
+ font-weight: 700;
+   margin: 0;
+   margin-left: 3%;
+}
+.text2{
+    font-size: 3vw;
+	font-family : Montserrat, Arial, sans-serif;
+	margin-left: 3%;
+}
+.pro{
+	font-family : Montserrat, Arial, sans-serif;
+font-size: 4vw; 
+ font-weight: 700;
+ color: #166387;
+}
+}
+
+

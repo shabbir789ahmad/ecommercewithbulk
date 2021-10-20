@@ -15,6 +15,7 @@ class SliderController extends Controller
 {
   function  women()
   {
+    
     $slider=Slider::latest()->take('3')->get();
     $front=Mainpage::latest()->take(1)->get();
      $query1= Stock::

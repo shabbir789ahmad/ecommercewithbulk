@@ -17,11 +17,13 @@ class Submenue extends Migration
             $table->id();
             $table->string('smenue');
             $table->bigInteger('menue_id')->unsigned();
-         $table->foreign('menue_id')->
-          references('id')->on('categories')
-          ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('menue_id')->
+            references('id')->on('categories')
+            ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
-        });    }
+        }); 
+
+    }
 
     /**
      * Reverse the migrations.

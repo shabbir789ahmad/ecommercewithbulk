@@ -33,11 +33,11 @@
                   
           <input id="password" type="password" placeholder="Password" class="form-control mt-3 py-3 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+           @error('password')
+            <span class="invalid-feedback" role="alert">
+             <strong>{{ $message }}</strong>
+            </span>
+          @enderror
                      
 
  <input id="password-confirm" type="password" placeholder="Conform Password" class="form-control mt-3 py-3" name="password_confirmation" required autocomplete="new-password">

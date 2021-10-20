@@ -40,7 +40,7 @@
 
           </div>
           <div class="col-md-8 card col-sm-10 border border-success mt-5 p-5">
-            
+          
       <form action="{{url('admin/update-category')}}" method="POST" enctype="multipart/form-data">
         @csrf
     <input type="hidden" name="id" value="{{$showcat['id']}}">

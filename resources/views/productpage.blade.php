@@ -33,7 +33,7 @@
  <div class="row">
   <div class="col-md-12 col-6">
   
-    <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}</p>
+    <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}<span class="float-right store mr-2"><a href="{{url('store/'.$detail['user_id'])}}">Visit Store</a></span></p>
     <p class="text-dark name3 ml-3 ml-md-0">{{ucwords($detail['detail'])}}<br>
   <span class="text-dark"  style="font-size: 1.5rem;">
      @if($detail['rating'])
@@ -62,55 +62,59 @@
     </div>
     
     <hr class="text-dark d-none d-md-block hr" >
-    <div class="col-md-12 col-6">
-       <p class=" text-dark   ml-3 ml-md-0">Color:  <br> 
+ <div class="col-md-8 col-12 col-sm-12 col-lg-8">
+  <div class="col-md-12 col-6">
+    <p class=" text-dark   ml-3 ml-md-0">Color:  <br> 
    <span >
     @foreach($color as $s)
-      
-       <label class="containers " onclick="cartcolor('{{$s['color']}}') ">
+    <label class="containers " onclick="cartcolor('{{$s['color']}}') ">
      <input type="radio" checked="" name="radio"  >
-       <span class="checkmark" style="
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 2.3rem;
-  width: 2.3rem;
-    padding: 11% 0;
-    text-align: center;
-  background-color:{{$s['color']}};
-  border-radius: 5%;
-" ></span>
+     <span class="checkmark" style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 2.3rem;
+      width: 2.3rem;
+      padding: 11% 0;
+      text-align: center;
+      background-color:{{$s['color']}};
+      border-radius: 5%;" >
+      </span>
      </label>
-        
-
-       
-     @endforeach
+    @endforeach
     </span>
   </p>
-    </div>
-    <div class="col-md-12  col-6">
-      <h5 class="ml-1 mt-0 mt-md-3 text-dark">Size:</h5>
-  <div class="d-flex mt-0 mt-md-3 mb-4">
- 
+ </div>
+  <div class="col-md-12  col-6">
+    <h5 class="ml-1 mt-0 mt-md-3 text-dark">Size:</h5>
+   <div class="d-flex mt-0 mt-md-3 mb-4">
     @foreach($size as $s)
      <label class="span " >
-     <input type="radio" checked="" name="size" value="{{$s['size']}}" onclick="cartsize('{{$s['size']}}') ">
-       <span class="checkmark" style="
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 11% 0;
-  height: 2.3rem;
-  width: 2.3rem;
-  border: 1px solid #1F2833;
-  border-radius: 5%;
-  text-align: center;
-">{{$s['size']}}</span>
+      <input type="radio" checked="" name="size" value="{{$s['size']}}" onclick="cartsize('{{$s['size']}}') ">
+      <span class="checkmark" style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 11% 0;
+      height: 2.3rem;
+      width: 2.3rem;
+      border: 1px solid #1F2833;
+      border-radius: 5%;
+      text-align: center;">{{$s['size']}}</span>
      </label>
-    
     @endforeach
+   </div>
   </div>
+ </div>
+  <div class="col-md-4 col-0 d-none d-md-block col-sm-0 col-lg-4">
+    <div class="pre" id="mo-img">
+     <img src="{{asset('uploads/img/' .$detail['size_image'])}}" width="95%" height="200rem" class="mr-5 image-preview" id="myImg">
+      <div class="middle">
+       <div class="preview">preview</div>
+      </div>
     </div>
+   </div>
+
   </div>        
 
    <button class="btn btn-pro btn-block add-to-cart py-3 text-light mt-2 mt-md-3 rounded" data-id="{{$detail['id']}}" data-color="" data-size="" id="carts">Add To Cart</button>
@@ -278,6 +282,19 @@
 
 
 
+<div class="modal fade imgpop" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content ">
+      <div class="modal-img">
+        <img src="" width="100%" height="100%" id="img01">
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
 
 <script type="text/javascript">
     
@@ -300,6 +317,7 @@ function decr()
     }
 }
  
+
 
 </script>
  

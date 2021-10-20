@@ -150,7 +150,7 @@ class OrderController extends Controller
       ->count();
       $cat=Category::all();
       //dd($cancel);
-      return view('Dashboard.order_show',compact('order','today','pending','this_month','cancel','cat'));
+      return view('vendor.order_show',compact('order','today','pending','this_month','cancel','cat'));
     }
 
    function delivered()
@@ -159,7 +159,7 @@ class OrderController extends Controller
       join('details','orders.id','=','details.order_id')
       ->where('order_status','delivered')->paginate(10);
      
-      return view('Dashboard.order_deliver',compact('order'));
+      return view('vendor.order_deliver',compact('order'));
     }
    
     function cancelOrder($id)
@@ -176,7 +176,7 @@ class OrderController extends Controller
       ->findorfail($id);
       $drop=Dropdown::where('id',$order->drop_id)->get();
      // dd($drop);
-      return view('Dashboard.order_detail',compact('order','drop'));
+      return view('vendor.order_detail',compact('order','drop'));
     }
 
     function statusUp(Request $req)
@@ -194,7 +194,7 @@ class OrderController extends Controller
       join('details','orders.id','=','details.order_id')
       ->onlyTrashed()->paginate();
        //dd($order);
-      return view('Dashboard.order_cancel',compact('order'));
+      return view('vendor.order_cancel',compact('order'));
     }
     function restoreOrder($id)
     {

@@ -43,13 +43,13 @@
             
 <form action="{{url('admin/update-main2')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="text" name="id" value="{{$main['id']}}">
+        <input type="hidden" name="id" value="{{$main['id']}}">
  
 <br>
 <label class="mt-3">Main Category Name</label>  
 <div class="form-group">
  <div class="input-group clockpicker" id="clockPicker1">
-   <input type="hidden" name="category" placeholder="Product Name" class="form-control" value="{{$main['category']}}">
+   <input type="text" name="category" placeholder="Product Name" class="form-control" value="{{$main['category']}}">
    
   <div class="input-group-append">
     <span class="input-group-text">

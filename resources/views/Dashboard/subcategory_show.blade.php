@@ -46,10 +46,10 @@
   <li class="nav-item">
     <a class="nav-link text-light active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Men</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link text-light" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Women</a>
+  <li class="nav-item ml-2">
+    <a class="nav-link text-light 2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Women</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item ml-2">
     <a class="nav-link text-light" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Kids</a>
   </li>
 </ul>

@@ -12,6 +12,7 @@ use App\Models\Color;
 use App\Models\Size;
 use App\Models\Store;
 use App\Models\Category;
+use Auth;
 use Illuminate\Support\Facades\DB;
 class StockController extends Controller
 {
@@ -37,7 +38,7 @@ class StockController extends Controller
     function showSupplier()
     {
         $supply=Supply::paginate(10);
-         return view('Dashboard.supplier_show',compact('supply'));
+         return view('vendor.supplier_show',compact('supply'));
     }
     function deleteSupplier($id)
     {
@@ -50,14 +51,14 @@ class StockController extends Controller
         $main = DB::table("categories")->pluck("category","id");
      $brand = Brand::all();
         $supply=Supply::all();
-         return view('Dashboard.stock',compact('supply','main','brand'));
+         return view('vendor.stock',compact('supply','main','brand'));
     }
      function getSupplier2()
     {
         $main = DB::table("categories")->pluck("category","id");
      $brand = Brand::all();
         $supply=Supply::all();
-         return view('Dashboard.stock_bulk',compact('main','brand','supply'));
+         return view('vendor.stock_bulk',compact('main','brand','supply'));
     }
 
     function newStock(Request $req)
@@ -71,9 +72,8 @@ class StockController extends Controller
           'price' => 'required|numeric',
           'sell_price' => 'required|numeric',
           'ship' => 'required|numeric',
-         
-
-        ]);
+          
+          ]);
 
    DB::transaction(function() use($req){
         $file=$req->file('size_image');
@@ -87,6 +87,7 @@ class StockController extends Controller
            'size_image'=>$filename,
            'product_status'=>'1',
            'drop_id'=>$req->drop_id,
+           'user_id'=>Auth::user()->id,
         ]);
        
          Stock2::create([ 
@@ -356,7 +357,7 @@ class StockController extends Controller
         
  
        //dd($stock);
-        return view('Dashboard.stock_show',compact('stock','supply','main'));
+        return view('vendor.stock_show',compact('stock','supply','main'));
     }
 
     function updateSell(Request $req)
@@ -395,6 +396,7 @@ class StockController extends Controller
       $stock->price=$req->price;
       $stock->stock=$req->stock;
       $stock->ship=$req->ship;
+      $stock->stock_status='1';
       $stock->sell_price=$req->sell_price;
       $stock->stock_id=$req->stock_id;
       $stock->supply_id=$req->supply_id;
@@ -421,19 +423,17 @@ class StockController extends Controller
         $store=Store::where('brand_id', $id)->get();
         $stock2=Stock2::where('stock_id', $id)->get();
        
-       
-         
-         
-        return view('Dashboard.stock_detail',compact('stock','image','colors','size','store','stock2','supply'));
+        return view('vendor.stock_detail',compact('stock','image','colors','size','store','stock2','supply'));
     }
+
     function updateDetail(Request $req)
     {
         $stock=Stock::findorfail($req->id);
-         $stock->product=$req->product;
-      $stock->detail=$req->detail;
-      $stock->drop_id=$req->drop_id;
-      $stock->save();
-      return redirect()->back()->with('success',' Product Name And Detail Updated ');
+        $stock->product=$req->product;
+        $stock->detail=$req->detail;
+        $stock->drop_id=$req->drop_id;
+        $stock->save();
+        return redirect()->back()->with('success',' Product Name And Detail Updated ');
     }
 
     function searchStock(Request $req)
@@ -457,7 +457,7 @@ class StockController extends Controller
         }
        
         
-            return view('Dashboard.search',compact('stock'));
+            return view('vendor.search',compact('stock'));
          
        
     }

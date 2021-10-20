@@ -99,7 +99,7 @@ class SocialController extends Controller
         $link->tag4_id=$req->tag4_id;
         $link->c5=$req->c5;
         $link->tag5_id=$req->tag5_id;
-      
+      //dd($link);
         $link->save();
         return redirect()->back()->with('success',' Data Uploaded Successfully');
     }
@@ -111,11 +111,11 @@ class SocialController extends Controller
       return view('Dashboard.home_page_show',compact('main','drop'));
     }
      function deleteFront($id)
-    {
+     {
         $main=Mainpage::findorfail($id);
         $main->delete();
       return redirect()->back()->with('success','heading Deleted');
-    }
+     }
 
      function updateFront($id)
     {

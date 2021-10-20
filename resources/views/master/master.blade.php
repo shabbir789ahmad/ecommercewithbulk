@@ -22,6 +22,7 @@
 
 <link rel="stylesheet" type="text/css" href=" {{asset('css/homeproductround.css')}} ">
 <link rel="stylesheet" type="text/css" href=" {{asset('css/about.css')}} ">
+<link rel="stylesheet" type="text/css" href=" {{asset('css/store.css')}} ">
 
 <link rel="stylesheet" type="text/css" href=" {{asset('css/cart.css')}} ">
 <link rel="stylesheet" type="text/css" href=" {{asset('css/contact.css')}} ">
@@ -69,8 +70,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js" integrity="sha512-jWNpWAWx86B/GZV4Qsce63q5jxx/rpWnw812vh0RE+SBIo/mmepwOSQkY2eVQnMuE28pzUEO7ux0a5sJX91g8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
- 
- <script src="{{asset('js/select.js')}}"></script>  
+   
  <script src="{{asset('js/button.js')}}"></script> 
  <script src="{{asset('js/zoomsl.js')}}"></script> 
  <script src="{{asset('js/script.js')}}"></script> 

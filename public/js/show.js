@@ -13,17 +13,14 @@ $(document).ready(function(){
          $(".remove").click(function(){
           $(".frm").remove();
           });
-     
+
 
         $('.form').prop('disabled', true);
-       if($(this).val() != '') {
+         if($(this).val() != '') {
            $('.sb').prop('disabled', false);
         }
 	});
  
-
-
-   
 
  $('#bt').click(function(){
  	var va=$('.text')

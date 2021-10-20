@@ -29,7 +29,7 @@ class PriceController extends Controller
        function deleteBrand($id)
       {
       	$brand=Store::findorfail($id);
-        dd($brand);
+       // dd($brand);
       	$brand->delete();
       	return redirect()->back()->with('brand','Brand Deleted Successfully');
       }
@@ -107,6 +107,7 @@ class PriceController extends Controller
         $color->color=$req->color;
         $color->color_status='1';
         $color->filter_id=$req->filter_id;
+        //dd($color);
         $color->save();
         return redirect()->back()->with('success2','Color Added Successfully');
       }

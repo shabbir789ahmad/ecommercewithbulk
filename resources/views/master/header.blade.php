@@ -88,7 +88,7 @@ $sub=Submenue::submenu();
         <div class="dropdown">
        <ul>
           @foreach($sub as $su)
-      @if($su['menue_id']==1)
+      @if($su['menue_id']==4)
            <li class="dropdown-link">
            <a href="#">{{ucwords($su['smenue'])}}<i class="fas fa-caret-down"></i></a>
             <div class="dropdown second">

@@ -19,20 +19,18 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
 
-   
  
-
-public function subCategory2($id) 
- {        
-    $sub = DB::table("submenues")->where('menue_id',$id)
-    ->pluck("smenue","id");
-    return response()->json($sub);
-  }
-public function dropCat($id) 
- {        
-   $drop = DB::table("dropdowns")->where('dropdown_id',$id)->pluck("name","id");
-   return response()->json($drop);
-}
+ public function subCategory2($id) 
+   {        
+     $sub = DB::table("submenues")->where('menue_id',$id)
+     ->pluck("smenue","id");
+     return response()->json($sub);
+   }
+  public function dropCat($id) 
+   {        
+      $drop = DB::table("dropdowns")->where('dropdown_id',$id)->pluck("name","id");
+     return response()->json($drop);
+    }
 
 
 
@@ -43,14 +41,13 @@ public function dropCat($id)
   {
     $detail= Stock::
       leftjoin('reviews','stocks.id','=','reviews.review_id')
-      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail')
-     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail')->orderBy('rating','DESC')
+      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id')
+     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id')->orderBy('rating','DESC')
      ->findorfail($id);
    $stock2=Stock2::where('stock_id',$id)->where('stock_status','1')->first();
     $image=Image::where('image_id',$id)->get();
-    // dd($detail);
-      
-     $detail2= Stock::
+    
+    $detail2= Stock::
      leftjoin('reviews','stocks.id','=','reviews.review_id')
      ->select('review_id', \DB::raw('avg(rating) as rating')
         ,'stocks.id','stocks.product','stocks.created_at','stocks.drop_id')

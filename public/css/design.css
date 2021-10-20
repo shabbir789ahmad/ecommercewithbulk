@@ -67,16 +67,7 @@ font-family: proxima-nova, sans-serif;
   position:relative;
     display:inline-block;
 }
-.footer h5:after{
-   content:'';
-    position:absolute;
-    left:0;right:0;
-    top:100%;
-    
-    width:50%;
-    height:.2rem;
-    background:#ED7632;
-}
+
 .footers .fas {color:#ED7632;}
 .footers p {color:#ffffff; font-weight: 300;}
 .footers ul {line-height:30px;}

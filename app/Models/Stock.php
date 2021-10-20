@@ -12,7 +12,8 @@ class Stock extends Model
     'product',
     'size_image',
     'product_status',
-    'drop_id'
+    'drop_id',
+    'user_id'
    
    ];
 }

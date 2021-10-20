@@ -22,7 +22,7 @@ class BrandController extends Controller
     function getBrand()
     {
        $brand=Brand::all();
-       return view('Dashboard.brand_show',compact('brand'));
+       return view('vendor.brand_show',compact('brand'));
     }
 
     public function deleteBrand($id)
@@ -34,7 +34,7 @@ class BrandController extends Controller
      function updateBrand($id)
     {
        $brand=Brand::findorfail($id);
-       return view('Dashboard.brand_update',compact('brand'));
+       return view('vendor.brand_update',compact('brand'));
     }
      function updateBrand2(Request $req)
     {
@@ -42,6 +42,6 @@ class BrandController extends Controller
         $brand->bname=$req->bname;
         $brand->save();
 
-    return redirect()->route('admin.get-brand')->with('success','Brand  Updated');
+    return redirect()->route('vendor.get-brand')->with('success','Brand  Updated');
     }
 }

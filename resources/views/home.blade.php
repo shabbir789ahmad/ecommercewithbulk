@@ -1,6 +1,7 @@
 @extends('master.master')
 @section("content")
 <title>Home</title>
+
   <div id="carouselslider" class="carousel slide " data-ride="carousel">
     <div class="carousel-inner">
       @foreach($slider as $slide)

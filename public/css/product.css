@@ -64,6 +64,10 @@ a:hover,  a:active
 }
 @media screen and (max-width: 600px)
 {
+  .pre{
+  display: none;
+}
+
   .imgs{
     width: 100%; height: 20rem; overflow: hidden;
   }
@@ -201,4 +205,51 @@ background: black;
   .form-header{
     display: none;
   }
+}
+.modal-img{
+  width: 100%;
+  height: 40rem;
+}
+.pre{
+  position: relative;
+}
+.image-preview {
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+.pre:hover .middle {
+  opacity: 1;
+}
+.preview{
+  background-color: #166387;
+  font-size: 1.2vw;
+ padding: 10% 2rem;
+  color: #ffffff;
+}
+.store{
+  
+  background-color: #166387;
+  
+  padding: 1% 1%;
+  border: none;
+  border-radius: 2%;
+}
+.store a{
+  color: #ffffff;
+  text-decoration: none;
 }
