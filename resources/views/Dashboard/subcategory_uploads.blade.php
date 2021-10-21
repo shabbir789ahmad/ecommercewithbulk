@@ -46,53 +46,62 @@
    <form action="{{url('admin/upload-sub-category')}}" method="POST" enctype="multipart/form-data">
         @csrf
    
-<label class="mt-3">Main Category</label>  
-<div class="form-group">
-<div class="input-group clockpicker" id="clockPicker1">
- <select class="form-control select" id="main" name="category_id" required="">
-  <option disabled selected hidden> Select Main Category
-    </option>
-    @foreach($cat as $key => $s)
-     <option  value="{{$key}}">{{ucfirst($s)}}</option>
-    @endforeach
-  </select> 
+ 
+   <div class="form-group">
+    <div class="input-group clockpicker" id="clockPicker1">
+     <select class="form-control select" id="main" name="category_id" required="">
+      <option disabled selected hidden> Select Main Category
+      </option>
+      @foreach($cat as $key => $s)
+       <option  value="{{$key}}">{{ucfirst($s)}}</option>
+      @endforeach
+     </select> 
                       
- <div class="input-group-append">
-   <span class="input-group-text"><i class="fas fa-calendar"></i></span>
- </div>                      
-</div>
-</div>
-<span class="text-danger">@error('category_id') {{$message}} @enderror</span>
+     <div class="input-group-append">
+      <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+     </div>                      
+    </div>
+   </div>
+  <span class="text-danger">@error('category_id') {{$message}} @enderror</span>
 
-<label class="mt-3">Category</label>
 
-  <div class="form-group">
-<div class="input-group clockpicker" id="clockPicker1">
- <select class="form-control " id="sub" name="dropdown_id" required="">
-  <option disabled selected hidden> Select Main Category
-    </option>
-   
-  </select> 
+
+   <div class="form-group">
+      <div class="input-group clockpicker" id="clockPicker1">
+       <select class="form-control " id="sub" name="dropdown_id" required="">
+        <option disabled selected hidden> Select Main Category
+        </option>
+       </select> 
                       
- <div class="input-group-append">
-   <span class="input-group-text"><i class="fas fa-calendar"></i></span>
- </div>                      
-</div>
-</div>
+      <div class="input-group-append">
+       <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+      </div>                      
+     </div>
+   </div>
    <span class="text-danger">@error('dropdown_id') {{$message}} @enderror</span>
     
-<label class="mt-3">Sub Category</label>
+
    
-<div class="form-group">
- <div class="input-group clockpicker" id="clockPicker1">   
-     <input type="text" name="name" placeholder="Sub Category" class="form-control "  value="{{old('name')}}" required=""><br>
+    <div class="form-group">
+     <div class="input-group clockpicker" id="clockPicker1">   
+      <input type="text" name="name" placeholder="Sub Category" class="form-control "  value="{{old('name')}}" required=""><br>
               
-    <div class="input-group-append">
-   <span class="input-group-text"><i class="fas fa-tag"></i></span>
-   </div>                      
-  </div>
-</div>
+       <div class="input-group-append">
+        <span class="input-group-text"><i class="fas fa-tag"></i></span>
+      </div>                      
+     </div>
+    </div>
     <span class="text-danger">@error('name') {{$message}} @enderror</span>
+
+    <div class="form-group">
+     <div class="input-group clockpicker" id="clockPicker1">   
+      <input type="text" name="image_size" placeholder="Product image Height" class="form-control "  value="{{old('image_size')}}" required=""><br>
+      <div class="input-group-append">
+       <span class="input-group-text"><i class="fas fa-tag"></i></span>
+      </div>                      
+     </div>
+    </div>
+    <span class="text-danger">@error('image_size') {{$message}} @enderror</span>
 
   <button  class="btn btn-block btn-color text-light mt-5">Submit</button>
   </form>

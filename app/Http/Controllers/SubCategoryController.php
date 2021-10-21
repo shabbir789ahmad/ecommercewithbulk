@@ -50,12 +50,14 @@ public function subCategory2($id)
        'category_id'=>'required',
        'dropdown_id'=>'required',
        'name'=>'required',
+       'image_size'=>'required|numeric',
     ]);
 
     $drop=new Dropdown();
     $drop->category_id=$req->category_id;
     $drop->dropdown_id=$req->dropdown_id;
     $drop->name=$req->name;
+    $drop->image_size=$req->image_size;
 
     $drop->save();
     return redirect()->back()->with('success','Sub Category Uploaded');

@@ -9,6 +9,7 @@ use App\Models\Stock2;
 use App\Models\Category;
 use App\Models\Logo;
 use App\Models\Mainpage;
+use App\Models\Dropdown;
 use App\Models\Image;
 use Carbon\Carbon;
 class SliderController extends Controller
@@ -65,8 +66,9 @@ class SliderController extends Controller
        $pro->image=Image::where('Image_id',$pro->id)->get();
    
       }
+      $dropdown=Dropdown::all();
    //dd($product3);
-      return view('home',compact('slider','product','product2','front','product3'));
+      return view('home',compact('slider','product','product2','front','product3','dropdown'));
   }
 
   function uploadSlider(Request $req)

@@ -120,7 +120,7 @@ class CountController extends Controller
         $vendor=Vendor::whereMonth('created_at', date('m'))->count();
         if($vendor)
         {
-        $per=User::count();
+        $per=Vendor::count();
         $pr2=$vendor/$per * 100;
         }else{
             $pr2=0;

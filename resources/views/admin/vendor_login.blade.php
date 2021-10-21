@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container login mt-5 border p-5 shadow mb-4">
-      <h2 class="text-center font-weight-bold">Vendor Login Here</h2>
+      <h2 class="text-center font-weight-bold text-danger">Vendor Login </h2>
     <form method="POST" action="" class="mt-4">
       @csrf
    <input id="email" type="email" class="form-control py-3 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
@@ -38,7 +38,7 @@
         {{ __('Forgot Your Password?') }}
           </a>
      @endif
-             <a class="btn btn-link log-bt btn-dark rounded text-light py-3 mt-2 mt-sm-4 mb-5 ml-0 ml-sm-5" href="{{ route('register') }}">
+             <a class="btn btn-link log-bt btn-dark rounded text-light py-3 mt-2 mt-sm-4 mb-5 ml-0 ml-sm-5" href="{{ route('vendor.register') }}">
         {{ __('Create Your Account') }}
           </a>                
                     </form>

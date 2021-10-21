@@ -245,7 +245,7 @@ class StockController extends Controller
         foreach($req->file('rimage') as $file)
          {
            $ext=$file->getClientOriginalExtension();
-           $filename= time().rand(1,100).'.'.$ext;
+           $filename= time().rand(1,1000).'.'.$ext;
            $file->move('uploads/img/',$filename);
              foreach($items as $it)
                {  

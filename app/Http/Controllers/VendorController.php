@@ -72,4 +72,6 @@ class VendorController extends Controller
     {
         return Auth::guard('vendor');
     }
+
+  
 }

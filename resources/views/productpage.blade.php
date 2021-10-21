@@ -33,7 +33,7 @@
  <div class="row">
   <div class="col-md-12 col-6">
   
-    <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}<span class="float-right store mr-2"><a href="{{url('store/'.$detail['user_id'])}}">Visit Store</a></span></p>
+    <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}<span class="float-right store mr-4"><a href="{{url('store/'.$detail['user_id'])}}">Visit Store</a></span></p>
     <p class="text-dark name3 ml-3 ml-md-0">{{ucwords($detail['detail'])}}<br>
   <span class="text-dark"  style="font-size: 1.5rem;">
      @if($detail['rating'])
@@ -85,7 +85,7 @@
     </span>
   </p>
  </div>
-  <div class="col-md-12  col-6">
+  <div class="col-md-12 mt-3 col-6">
     <h5 class="ml-1 mt-0 mt-md-3 text-dark">Size:</h5>
    <div class="d-flex mt-0 mt-md-3 mb-4">
     @foreach($size as $s)

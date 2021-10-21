@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Vendor;
+use App\Models\User;
 use Auth;
 class UserController extends Controller
 {
@@ -22,5 +24,50 @@ class UserController extends Controller
         ->findorfail($id);
         //dd($order);
          return view('User.order_tracking',compact('order'));
+    }
+
+    function getvendor()
+    {
+        $vendor=Vendor::all();
+        return view('Dashboard.all_vendor',compact('vendor'));
+    }
+    function blockvendor()
+    {
+        $vendor=Vendor::onlyTrashed()->get();
+        return view('Dashboard.all_bock_vendor',compact('vendor'));
+    }
+      function deletevendor($id)
+    {
+        $vendor=Vendor::findorfail($id);
+        $vendor->delete();
+        return redirect()->back()->with('success','This vendor is Blocked');
+    }
+     function restorevendor($id)
+    {
+        $vendor=Vendor::withTrashed()->findorfail($id);
+        $vendor->restore();
+        return redirect()->back()->with('success','This vendor is Restored');
+    }
+     function getUser()
+    {
+        $user=User::all();
+        return view('Dashboard.all_user',compact('user'));
+    }
+     function blockuser()
+    {
+        $vendor=User::onlyTrashed()->get();
+        return view('Dashboard.all_block_user',compact('vendor'));
+    }
+     function deleteuser($id)
+    {
+        $user=User::findorfail($id);
+        $user->delete();
+        return redirect()->back()->with('success','This vendor is Blocked');
+    }
+     function restoreuser($id)
+    {
+        $user=User::withTrashed()->findorfail($id);
+        $user->restore();
+        return redirect()->back()->with('success','This vendor is Restored');
     }
 }

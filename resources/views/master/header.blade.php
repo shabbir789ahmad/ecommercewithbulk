@@ -4,41 +4,6 @@ $sub=Submenue::submenu();
 //echo "<pre>"; print_r($sub);die;
 ?>
 
-
-<div class=" d-none d-sm-none d-md-block d-lg-block d-xl-block" style="overflow:hidden">
-  <div class="row top-nav" >
-     @foreach($link as $lin)
-    <div class="col-md-9 col-sm-9 col-9 col-lg-9">
-       <p class="ml-2 mt-3 text-light">
-     <span class="mr-2"><i class="fas fa-phone-square-alt fa-lg mr-2"></i>{{$lin['phone']}}</span> |
-     <span class="ml-2"> <i class="fas fa-envelope fa-lg mr-2">
-     </i>{{$lin['email']}}</span>  
-       
-     <span class="ml-2"> <i class="fas fa-map-marker-alt fa-lg  mr-2"></i> {{$lin['address']}}</span>
-  </p>
-    </div>
-   
-    <div class="col-md-3  col-sm-3 col-3 col-lg-3 ">
-      <div class="float-right mr-2">
-
-    <a href="{{$lin['facebook']}}" class="  text-light  rounded " target="blank">
-    <i class="fab fa-facebook-square fa-lg mt-3"></i></a>
-
-    <a href="{{$lin['instagram']}}" class=" mt-2 ml-2 text-light rounded " target="blank">
-    <i class="fab fa-instagram fa-lg"></i></a>
-
-    <a href="{{$lin['linkdin']}}" class=" mt-2 ml-2 text-light rounded " target="blank">
-      <i class="fab fa-linkedin fa-lg"></i></a>
-
-      <a href="{{$lin['twitter']}}" class=" mt-2 ml-2 text-light rounded " target="blank">
-    <i class="fab fa-twitter-square fa-lg "></i></a> 
-
-      @endforeach
-    </div>
-    </div>
-  </div>
-</div>
-  
  <header >
         <div class="container con2">
             <input type="checkbox" name="" id="check">

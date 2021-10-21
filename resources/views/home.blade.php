@@ -64,7 +64,7 @@
        @endforeach
        <hr>
        <div class="text-center">
-        @if($pro['rating'])
+        
         @for($i=0; $i<5; $i++)
         @if($i<$pro['rating'])
         <span class="fa fa-star checked "></span>
@@ -72,7 +72,7 @@
         <span class="fa fa-star"></span> 
         @endif
          @endfor
-        @endif
+       
       </div> </div>
     </div>
   </div>
@@ -83,6 +83,35 @@
   
 </div>
 </div>
+
+<div class="bg-cate pt-4  mt-4">
+  <p class="feature text-center ">Featured Categories</p>
+  <div class="owl-carousel owl-theme ml-2">
+    @foreach($dropdown as $drop)
+   <div class="item ml-1">
+     <div class="card">
+      <div class="img-c">
+       <div class="cl">
+        <img src="{{asset('pic/product-2-300x300.jpg')}}" class="cat-imgs">
+       </div>
+       <div class="middle">
+        <a href="{{url('product/' .$drop['id'])}}">
+          <div class="text">View Detail</div>
+        </a>
+         
+       </div>
+      </div>
+      <div class="card-body">
+       <p class="cat-name">{{ucfirst($drop['name'])}}</p>
+      </div>
+    </div>
+   </div>
+   @endforeach
+    
+   
+  </div>
+</div>
+
 
       <!-- product slider-->
  <div class="container-fluid mt-5 ">
@@ -144,12 +173,14 @@
     </div>
   </div>
   @endif
-  @endforeach
-  
- 
-  
+  @endforeach 
 </div>
 </div>
+
+
+
+
+
 
  <!-- product slider-->
 
@@ -162,8 +193,22 @@
  @endforeach
 </div>
 
+ <!-- dsjksd-->
+<div class="container-fluid">
+   <div class="img-c">
+       <div class="cl">
+        <img src="{{asset('pic/cta-bg.jpg')}}" class="">
+       </div>
+     <div class="middle2">
+         <p class="add-txt">Fashion</p>
+        <p class="psd">Mega Sale</p>
+        <hr class="w-25 bg-light  ml-auto mr-auto">
+         <button class="  btn-add text-light rounded">Buy Now</button>
+       </div>
+</div>
+</div>
 
-             <!-- slider for populer categories -->
+<!-- slider for populer categories -->
 
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
@@ -218,13 +263,11 @@
   @endif
   @endforeach
   @endforeach
-  
  
-  
 </div>
 </div>
 
-  
+ 
  
 
          

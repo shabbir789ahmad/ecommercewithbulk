@@ -18,6 +18,7 @@
   
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('css/ruang-admin.min.css')}}" rel="stylesheet">
+<link href="{{asset('css/store.css')}}" rel="stylesheet">
  <link rel="stylesheet" href="{{asset('css/admin.css')}}">
 <link rel="stylesheet" href="{{asset('css/contact.css')}}">
 </head>
@@ -39,19 +40,44 @@
       <hr class="sidebar-divider">
      
        <li class="nav-item ">
-        <a class="nav-link " href="{{url('admin/dashboard')}}">
+        <a class="nav-link " href="{{url('vendor/dashboard')}}">
           <i class="fas fa-window-maximize text-light"></i>
           <span>Dashboard</span>
+        </a>
+       </li>
+       <li class="nav-item ">
+        <a class="nav-link " href="{{url('vendor/store')}}">
+          <i class="fas fa-window-maximize text-light"></i>
+          <span>Your Store</span>
         </a>
        </li>
        <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap5"
           aria-expanded="true" aria-controls="collapseBootstrap">
          <i class="fas fa-sliders-h text-light"></i>
+          <span> Banner</span>
+        </a>
+        <div id="collapseBootstrap5" class="collapse @if(request()->is('vendor/get-banner')) show
+         @elseif(request()->is('vendor/banner'))
+          show
+         @endif
+          " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class=" py-2 collapse-inner rounded">
+
+            <a class="collapse-item" href="{{url('vendor/get-banner')}}">All Banner</a>
+            <div class="dropdown-divider"></div>
+            <a class="collapse-item" href="{{url('vendor/banner')}}">Upload Banner</a>
+         </div>
+        </div>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap5"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+         <i class="fas fa-sliders-h text-light"></i>
           <span>Product</span>
         </a>
-        <div id="collapseBootstrap5" class="collapse @if(request()->is('admin/get-slider')) show
-         @elseif(request()->is('admin/slider'))
+        <div id="collapseBootstrap5" class="collapse @if(request()->is('vendor/get-slider')) show
+         @elseif(request()->is('vendor/slider'))
           show
          @endif
           " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
@@ -142,7 +168,7 @@
           <p> @guest
           @if (Route::has('login'))
            <li class="nav-item list-inline-item ml-5 mt-1   ml-2">
-         <a class="nav-link  border rounded text-light" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
+         <a class="nav-link  border rounded text-light" href="{{ route('vendor.login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 

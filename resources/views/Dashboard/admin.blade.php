@@ -156,6 +156,36 @@
         
       </li>
 
+    <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm2" aria-expanded="true" aria-controls="collapseForm">
+       <i class="fab fa-wpforms text-light"></i>
+       <span>Vendor</span>
+     </a>
+     <div id="collapseForm2" class="collapse
+       @if(request()->is('admin/show-vendor')) show
+        @endif"
+         aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class=" py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{url('admin/show-vendor')}}">All Vendors</a>
+         <a class="collapse-item" href="{{url('admin/block-vendor')}}">Blocked Vendors</a>
+       </div>
+      </div>
+    </li>
+    <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm3" aria-expanded="true" aria-controls="collapseForm">
+       <i class="fab fa-wpforms text-light"></i>
+       <span>Users</span>
+     </a>
+     <div id="collapseForm3" class="collapse
+       @if(request()->is('admin/show-user')) show
+        @endif"
+         aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class=" py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{url('admin/show-user')}}">All Users</a>
+        <a class="collapse-item" href="{{url('admin/block-user')}}">Blocked Users</a>
+       </div>
+      </div>
+    </li>
 
  
       

@@ -144,4 +144,15 @@ $(document).ready(function(){
       $('#br').val(id)
       
     });
-   });
+    $('.bann').click(function(e){
+
+        e.preventDefault();
+        $('#banner').modal('show');
+        let id=$(this).data('id')
+        $('#idb').val(id)
+        let h1=$(this).data('h1')
+        $('#head1').val(h1)
+        let h2=$(this).data('h2')
+        $('#head2').val(h2)
+    })
+});

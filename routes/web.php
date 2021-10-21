@@ -164,6 +164,17 @@ Route::post('add-supplier',[StockController::class,'Add'])->name('vendor.add-sup
 Route::get('show-supplier',[StockController::class,'showSupplier'])->name('vendor/show-supplier');
 Route::get('delete-supplier/{id}',[StockController::class,'deleteSupplier'])->name('vendor/delete-supplier/{id}');
 
+
+//store banner and data upload
+Route::view('banner','vendor.store_banner');
+Route::post('upload-banner',[StoreController::class,'upoloadBanner'])->name('vendor.upload-banner');
+Route::get('get-banner',[StoreController::class,'getBanner'])->name('vendor.get-banner');
+
+Route::get('delete-banner/{id}',[StoreController::class,'deletebanner'])->name('vendor.delete-banner/{id}');
+Route::post('update-banner',[StoreController::class,'updatebanner'])->name('vendor.update-banner');
+
+//store show to vendor
+Route::get('store',[StoreController::class,'getStore'])->name('vendor.store');
   });
 });
 
@@ -296,6 +307,16 @@ Route::get('get-front',[SocialController::class,'showfront'])->name('admin.get-f
 Route::get('delete-front/{id}',[SocialController::class,'deleteFront'])->name('admin.delete-front/{id}');
 Route::get('update-front/{id}',[SocialController::class,'updateFront'])->name('admin.update-front/{id}');
 Route::post('update-front2',[SocialController::class,'updateFront2'])->name('admin.update-front');
+//all vendor s route
+Route::get('show-vendor',[UserController::class,'getvendor'])->name('admin/show-vendor');
+Route::get('show-vendor',[UserController::class,'getvendor'])->name('admin/show-vendor');
+Route::get('block-vendor',[UserController::class,'blockvendor'])->name('admin/block-vendor');
+Route::get('delete-vendor/{id}',[UserController::class,'deletevendor'])->name('admin/delete-vendor/{id}');
+Route::get('restore-vendor/{id}',[UserController::class,'restorevendor'])->name('admin/restore-vendor/{id}');
 
+//all user Route
+Route::get('show-user',[UserController::class,'getUser'])->name('admin/show-user');
+Route::get('delete-user/{id}',[UserController::class,'deleteuser'])->name('admin/delete-user/{id}');
+Route::get('restore-user/{id}',[UserController::class,'restoreuser'])->name('admin/restore-user/{id}');
 });
 });

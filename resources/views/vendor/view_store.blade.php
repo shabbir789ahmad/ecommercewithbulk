@@ -1,4 +1,4 @@
-@extends('master.master')
+@extends('vendor.dashboard')
 @section('content')
 
  @foreach($banner as $bann)
@@ -15,7 +15,7 @@
 @endforeach
 <h4 class=" pro mt-5">Our Products</h4>
 
-<div class="container-fluid mt-0 mt-sm-0 mt-md-5" >
+<div class="container mt-0 mt-sm-0 mt-md-5" >
  <ul class="nav nav-pills  bg-store p-3" id="pills-tab" role="tablist">
   <li class="nav-item n1">
     <a class="nav-link n2 active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">New Product</a>
@@ -33,25 +33,15 @@
      <div class="row mt-3">
 		@foreach($store as $st)
 	
-	 <div class="col-md-3 col-sm-6 col-lg-3 ml-2">
+	 <div class="col-md-4 col-sm-6 col-lg-4 ">
       <div class="card store-card shadow">
       	<a href="">
       		@foreach($st->image as $img)
-      	<img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
+      	<img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="400rem" class="store-img">
         @endforeach
       </a>
        <div class="card-body p-0">
-       <p class="  text-danger">{{ucfirst($st['product'])}} <span class="float-right">
-     
-        @for($i=0; $i<5; $i++)
-        @if($i<$st['rating'])
-        <span class="fa fa-star checked "></span>
-        @else
-        <span class="fa fa-star"></span> 
-        @endif
-         @endfor
-       
-       </span></p>
+       <p class="stor-text text-danger">{{ucfirst($st['product'])}}</p>
        <div class="d-flex">
         <p class="text2">{{ucfirst($st['detail'])}} </p>
        	@foreach($st->stock as $stock)
@@ -60,7 +50,19 @@
         @endforeach
        </div>
       </div>
-      
+      <div class="card-footer">
+         <div class="text-center rating">
+        
+        @for($i=0; $i<5; $i++)
+        @if($i<$st['rating'])
+        <span class="fa fa-star checked "></span>
+        @else
+        <span class="fa fa-star"></span> 
+        @endif
+         @endfor
+       
+          </div>
+       </div>
       </div>
 	 </div>
 

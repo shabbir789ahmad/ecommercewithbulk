@@ -18,6 +18,11 @@
 	background-color: #C8EBFF;
 	position: relative;
 }
+
+.store-banner img{
+   width: 100%;
+   height: 31rem;
+}
 .txt{
 	position: absolute;
 	top: 0;
@@ -48,57 +53,109 @@
 
 }
 .stor-text{
-	font-family : Montserrat, Arial, sans-serif;
-font-size: 1.7vw; 
- font-weight: 700;
-   margin: 0;
-   margin-left: 3%;
+	  font-family : Montserrat, Arial, sans-serif;
+    font-size: 1.7vw; 
+    font-weight: 700;
+    margin: 0;
+    margin-left: 3%;
 }
-.pro {
-  font-family : Montserrat, Arial, sans-serif;
-font-size: 3vw; 
- font-weight: 700;
-  color: #166387;
-  margin-left: 40%;
-  position:relative;
+.pro 
+ {
+    font-family : Montserrat, Arial, sans-serif;
+    font-size: 3vw; 
+    font-weight: 700;
+    color: #166387;
+    margin-left: 40%;
+    position:relative;
     display:inline-block;
-}
-
-
-.pro:after{
-   content:'';
+  }
+.pro:after
+  {
+    content:'';
     position:absolute;
     left:0;right:10;
     top:100%;
     width:30%;
     height:.2rem;
     background:#ED7632;
-}
-.text2{
+  }
+.text2
+  {
     font-size: 1vw;
-	font-family : Montserrat, Arial, sans-serif;
-	margin-left: 3%;
-}
+	  font-family : Montserrat, Arial, sans-serif;
+	  margin-left: 3%;
+  }
 @media screen and (max-width: 600px)
 {
-	.stor-text{
-	font-family : Montserrat, Arial, sans-serif;
-font-size: 4vw; 
- font-weight: 700;
+.stor-text
+ {
+	 font-family : Montserrat, Arial, sans-serif;
+   font-size: 4vw; 
+   font-weight: 700;
    margin: 0;
    margin-left: 3%;
-}
-.text2{
+  }
+.text2
+  {
     font-size: 3vw;
-	font-family : Montserrat, Arial, sans-serif;
-	margin-left: 3%;
+	  font-family : Montserrat, Arial, sans-serif;
+	  margin-left: 3%;
+  }
+  .txt{
+  position: absolute;
+  top: 0;
+   left: 50%;
 }
-.pro{
-	font-family : Montserrat, Arial, sans-serif;
-font-size: 4vw; 
- font-weight: 700;
- color: #166387;
-}
+.pro
+  {
+	  font-family : Montserrat, Arial, sans-serif;
+    font-size: 4vw; 
+    font-weight: 700;
+    color: #166387;
+  }
+
+.store-banner img
+  {
+    width: 100%;
+    height: 15rem;
+  }
+
+.txt h4
+  {
+    font-family : Montserrat, Arial, sans-serif;
+    font-size: 8vw; 
+    font-weight: 700;
+    line-height: 4vh;
+    font-style: italic;
+  }
+.txt .dis
+  {
+    margin-top: 30%;
+    margin-bottom: 0%;
+    font-family : Montserrat, Arial, sans-serif;
+    font-size: 4vw; 
+    font-weight: 700;
+    color: #ED3137;
+    font-style: italic;
+  }
+.best
+  {
+     font-family : Montserrat, Arial, sans-serif;
+     font-size: 3vw; 
+     font-weight: 700;
+     font-style: italic;
+  }
+.txt .btn-store
+  {
+    background-color: #166387;
+    height: 2rem;
+  }
+.n2
+  {
+    font-size: 3vw;  
+  }
+
+
 }
 
 
