@@ -1,19 +1,50 @@
-.round
-{
-	width: 60%;
-	height: 60%;
-	padding: 0;
-	border-radius: 50%;
-	border:2px solid black;
-	
-}
 
-.body
-{
-	overflow: hidden;
+.ul-product li:hover  {
+  background-color: #166387;
+  
 }
 
 
+.swiper {
+        width: 100%;
+        height: 4rem;
+        background-color: #151629;
+      }
 
+      .swiper-slide {
+      	
+        text-align: center;
+        font-size: 1vw;
+        background: #151629;
+        color: #fff;
+        
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+}
+ .swiper-slide:hover:not(.active2s) {
+     background-color: #166387;
+     
+     font-size: 1.2vw;
 
+  }
+  .active2s{
+     background-color: #166387;
 
+  }
+  @media screen and (max-width: 900px)
+  {
+    .swiper-slide{
+        font-size: 4vw;
+    }
+    
+  }

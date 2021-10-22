@@ -33,10 +33,10 @@
  <div class="row">
   <div class="col-md-12 col-6">
   
-    <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}<span class="float-right store mr-4"><a href="{{url('store/'.$detail['user_id'])}}">Visit Store</a></span></p>
+    <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}</p>
     <p class="text-dark name3 ml-3 ml-md-0">{{ucwords($detail['detail'])}}<br>
-  <span class="text-dark"  style="font-size: 1.5rem;">
-     @if($detail['rating'])
+  <span class="text-dark"  style="font-size: 1.2rem;">
+     
   @for($i=0; $i<5; $i++)
   @if($i<$detail['rating'])
    <span class="fa fa-star checked fa-xs"></span>
@@ -44,7 +44,7 @@
    <span class="fa fa-star fa-xs"></span>
    @endif
    @endfor
-   @endif
+
    </span>
   </p>
     </div>
@@ -57,6 +57,7 @@
       <small class="text-danger"> <del>${{$stock2['sell_price']}}</del>
        </small>
     </span>
+    <span class="float-right  mr-4 mr-5 mr-md-0 mt-3 mt-md-0"><a href="{{url('store/'.$detail['user_id'])}}"><button class="btn-sm btn btn-store rounded btn-check text-light">Visit Store</button></a></span>
   </h5>
  
     </div>
@@ -140,54 +141,43 @@
          </div>
       </div>
    </div>
-<hr class="mt-4">
-     <div class="container-fluid mt-3">
-      <ul class="list-unstyled">
-        <li class="list-inline-item">
-          
-         <h2 class="font-weight-bold ml-3 ">Reviews</h2>
-        </li>
-          
-        
-        <li class="list-inline-item float-right mr-5">
-          
-         <button class="btn-lg btn btn-check mt-3 text-light rounded float-right"  data-toggle="modal" data-target="#exampleModal">Write Review</button>
-            
-        </li>
-         
-         
-      </ul>
-     </div>
+<hr class="mt-4 text-light">
 
- <hr class="mt-2">
-<div class="container-fluid mt-4">
- <div class="owl-carousel owl-theme ml-3">
-  @php //dd($review ); @endphp
-@foreach($review as $rev)
-  <div class="item ">
-   <div class="card review-card">
-     <div class="card-body  text-center">
+<div class="container-fluid mt-3 pb-5" style="background-color:#417CB8">
+  <ul class="list-unstyled">
+   <li class="list-inline-item">
+      <h2 class="font-weight-bold text-light mt-3 ml-3 ">Reviews</h2>
+   </li>
+   <li class="list-inline-item float-right mr-5">
+    <button class="btn-lg btn btn-check mt-3 text-light rounded float-right"  data-toggle="modal" data-target="#exampleModal">Write Review</button>
+    </li>
+   </ul>
+   <hr class="mt-2">
+   <div class="owl-carousel owl-theme ml-3">
+    @foreach($review as $rev)
+     <div class="item ">
+      <div class="card review-card">
+       <div class="card-body  text-center">
         <div class="s text-center" style="width:30%; height:20%; margin: auto;">
-       <img src="{{asset('uploads/img/' .$rev['image'])}}"  class="review-img">
-         </div>
-          <p class="n mt-5">{{ucfirst($rev['uname'])}}</p>
-          <p class="n mt-3 ">
+         <img src="{{asset('uploads/img/' .$rev['image'])}}"  class="review-img">
+        </div>
+        <p class="n mt-5">{{ucfirst($rev['uname'])}}</p>
+        <p class="n mt-3 ">
           @if($rev['rating'])
-           @for($i=0; $i<5; $i++)
-            @if($i<$rev['rating'])
+          @for($i=0; $i<5; $i++)
+          @if($i<$rev['rating'])
             <span class="fa fa-star checked2 fa-lg"></span>
           @else
-           <span class="fa fa-star  fa-lg"></span>
-           @endif
-           @endfor
-           @endif
+            <span class="fa fa-star  fa-lg"></span>
+          @endif
+          @endfor
+          @endif
         </p>
-         <p class="review-mesage mt-5">{{$rev['message']}}</p>
-    
+        <p class="review-mesage mt-5">{{$rev['message']}}</p>
+       </div>
+      </div>
      </div>
-   </div>
-  </div>
-   @endforeach
+    @endforeach
  </div>
 </div>
 

@@ -31,7 +31,7 @@ class CartController extends Controller
         $product = Stock::
         join('stock2s','stocks.id','=','stock2s.stock_id')
        ->join('images','stocks.id','=','images.image_id')
-        ->select('stocks.product','stock2s.sell_price','stock2s.discount','stocks.detail','stocks.id','images.rimage','stocks.drop_id','stock2s.ship')
+        ->select('stocks.product','stock2s.sell_price','stock2s.discount','stocks.detail','stocks.id','images.rimage','stocks.drop_id','stock2s.ship','stocks.user_id')
         ->findorfail($id);
          // dd($product);
         $cart = session()->get('cart', []);
@@ -45,6 +45,7 @@ class CartController extends Controller
                 "name" => $product['product'],
                 "detail" => $product['detail'],
                 "ship" => $product['ship'],
+                "vendor_id" => $product['user_id'],
                 "quantity" => 1,
                 "price" => $product->sell_price -$product->discount,
                 "image" => $product->rimage,

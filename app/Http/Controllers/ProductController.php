@@ -41,9 +41,11 @@ class ProductController extends Controller
   {
     $detail= Stock::
       leftjoin('reviews','stocks.id','=','reviews.review_id')
-      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id')
-     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id')->orderBy('rating','DESC')
-     ->findorfail($id);
+      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id')
+     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id')->orderBy('rating','DESC')
+        ->where('drop_id',$drop_id)
+        ->findorfail($id);
+     
    $stock2=Stock2::where('stock_id',$id)->where('stock_status','1')->first();
     $image=Image::where('image_id',$id)->get();
     
@@ -52,8 +54,8 @@ class ProductController extends Controller
      ->select('review_id', \DB::raw('avg(rating) as rating')
         ,'stocks.id','stocks.product','stocks.created_at','stocks.drop_id')
         ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.drop_id')->orderBy('rating','DESC')
-        ->where('drop_id',$drop_id)
-        ->get();
+         ->where('stocks.drop_id',$drop_id)
+        ->where('stocks.id',$id)->get();
         foreach($detail2 as $dt)
         {
           $dt->image=Image::where('image_id',$dt->id)->take(1)->get();
@@ -77,7 +79,7 @@ class ProductController extends Controller
          join('reviews','stocks.id','=','reviews.review_id')
          ->where('review_id',$id)
         ->get();
-
+     //dd($detail2);
         return view('productpage',compact('detail','detail2','image','color','size','brand','review','stock2'));
   }  
 

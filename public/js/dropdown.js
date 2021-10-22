@@ -112,4 +112,116 @@ jQuery(document).ready(function ()
     });
   
 
+$('#stock_cat2').change(function(){
+     
+     var id=$(this).val();
+    
+     if(id)
+     {
+      $.ajax({
+        
+         url : "/admin/stock-cat/" +id,
+         type : "GET",
+         dataType : "json",
+
+         success:function(sunmenue)
+         {
+
+          $('#stock_sub2').empty();
+          $.each(sunmenue,function(key,value){
+
+        $('#stock_sub2').append('<option disabled hidden selected>Select Category</option>')
+          $('#stock_sub2').append('<option value="' + key + '">'+ value +' </option>');
+
+          });
+         }
+
+      });
+     }
+  
+
+  });
+
+   $('#stock_sub2').change(function(){
+     
+      var id=$(this).val();
+      //alert (id)
+      if(id)
+      {
+        $.ajax({
+       
+         url : "/admin/stock-drop/" +id,
+         type : "GET",
+         dataType : "json",
+     
+       success:function(sub)
+       {
+        $('#stock_drop2').empty();
+        $.each(sub, function(key,value){
+          $('#stock_drop2').append('<option disabled hidden selected>Select Category</option>')
+          $('#stock_drop2').append('<option value="' + key + '">'+ value +' </option>');
+
+        });
+       }
+        });
+
+      }
+    });
+
+
+$('#stock_cat3').change(function(){
+     
+     var id=$(this).val();
+    
+     if(id)
+     {
+      $.ajax({
+        
+         url : "/admin/stock-cat/" +id,
+         type : "GET",
+         dataType : "json",
+
+         success:function(sunmenue)
+         {
+
+          $('#stock_sub3').empty();
+          $.each(sunmenue,function(key,value){
+
+        $('#stock_sub3').append('<option disabled hidden selected>Select Category</option>')
+          $('#stock_sub3').append('<option value="' + key + '">'+ value +' </option>');
+
+          });
+         }
+
+      });
+     }
+  
+
+  });
+
+   $('#stock_sub3').change(function(){
+     
+      var id=$(this).val();
+      //alert (id)
+      if(id)
+      {
+        $.ajax({
+       
+         url : "/admin/stock-drop/" +id,
+         type : "GET",
+         dataType : "json",
+     
+       success:function(sub)
+       {
+        $('#stock_drop3').empty();
+        $.each(sub, function(key,value){
+          $('#stock_drop3').append('<option disabled hidden selected>Select Category</option>')
+          $('#stock_drop3').append('<option value="' + key + '">'+ value +' </option>');
+
+        });
+       }
+        });
+
+      }
+    });
 });

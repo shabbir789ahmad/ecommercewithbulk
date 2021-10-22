@@ -22,15 +22,15 @@ class Mainpage extends Migration
             $table->string('c5');
            $table->bigInteger('tag3_id')->unsigned();
             $table->foreign('tag3_id')->
-            references('id')->on('dropdowns')
+            references('id')->on('categories')
             ->onDelete('cascade')->onUpdate('cascade');
              $table->bigInteger('tag4_id')->unsigned();
             $table->foreign('tag4_id')->
-            references('id')->on('dropdowns')
+            references('id')->on('categories')
             ->onDelete('cascade')->onUpdate('cascade');
              $table->bigInteger('tag5_id')->unsigned();
             $table->foreign('tag5_id')->
-            references('id')->on('dropdowns')
+            references('id')->on('categories')
             ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

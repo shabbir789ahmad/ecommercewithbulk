@@ -34,7 +34,10 @@
 
 <link rel="stylesheet" type="text/css" href=" {{asset('css/vendor.css')}} ">
 <link rel="stylesheet" type="text/css" href=" {{asset('css/style.css')}} ">
-
+ <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
 <link rel="stylesheet" type="text/css" href=" {{asset('css/design.css')}} ">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -68,13 +71,14 @@
 
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js" integrity="sha512-jWNpWAWx86B/GZV4Qsce63q5jxx/rpWnw812vh0RE+SBIo/mmepwOSQkY2eVQnMuE28pzUEO7ux0a5sJX91g8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
    
  <script src="{{asset('js/button.js')}}"></script> 
  <script src="{{asset('js/zoomsl.js')}}"></script> 
  <script src="{{asset('js/script.js')}}"></script> 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
  @if(Session()->has('message'))
 <script>
@@ -127,7 +131,18 @@
 })
     </script>
 
-
+ <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 5,
+        centeredSlides: false,
+        spaceBetween: 1,
+        grabCursor: true,
+        pagination: {
+          
+          clickable: true,
+        },
+      });
+    </script>
  <script type="text/javascript">
      function loded()
      {

@@ -13,6 +13,6 @@ class Dropdown extends Model
     'category_id',
     'dropdown_id',
     'name',
-    'image_size',
+    'drop_image',
     ];
 }

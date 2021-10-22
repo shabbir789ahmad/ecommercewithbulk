@@ -54,12 +54,11 @@ class OrderController extends Controller
          'phone' =>  $req->phone,
          'country' =>  $req->country,
          'city' =>  $req->city,
-        
-         'zip' =>  $req->post_code,
+        'zip' =>  $req->post_code,
          'payment' =>  $req->payment,
           'user_id' =>  Auth::user()->id,
        ]);
-
+       //dd($req->vendor_id);
        $count=sizeof($req->product);
        for($i=0; $i < $count; $i++)
        {
@@ -72,6 +71,7 @@ class OrderController extends Controller
           'detail'=> $req->detail[$i],
            'color' =>  $req->color[$i],
          'size' =>  $req->size[$i],
+          'vendor_id'=> $req->vendor_id[$i],
           'drop_id'=> $req->drop_id[$i],
           'order_status'=> 'Pending',
           'order_id'=> $order->id,
@@ -89,7 +89,7 @@ class OrderController extends Controller
 
         return view('shopping');
       }else{
-        return redirect()->route('logn')->with('message','Please Login First');
+        return redirect()->route('login')->with('message','Please Login First');
       }
       
     }

@@ -41,7 +41,7 @@
         @endforeach
       </a>
        <div class="card-body p-0">
-       <p class="  text-danger">{{ucfirst($st['product'])}} <span class="float-right">
+       <p class=" ml-2 text-danger mt-3">{{ucfirst($st['product'])}} <span class="float-right mr-2 text-dark">
      
         @for($i=0; $i<5; $i++)
         @if($i<$st['rating'])

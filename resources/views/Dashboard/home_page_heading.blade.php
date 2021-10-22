@@ -47,9 +47,10 @@
  
  <div class="row">
  <div class="col-md-6">
+    <label class="text-danger">Top Selling</label>
 <div class="form-group">
  <div class="input-group clockpicker" id="clockPicker1">   
-    <input type="text" name="c1" placeholder="Category one" class="form-control "  value="{{old('c1')}}"><br>
+    <input type="text" name="c1"  class="form-control "  value="{{old('c1')}}"><br>
                
     <div class="input-group-append">
    <span class="input-group-text"><i class="fas fa-images"></i></span>
@@ -57,10 +58,10 @@
   </div>
  </div>
  <span class="text-danger">@error('c1') {{$message}} @enderror</span>
-
+ <label class="text-danger">Category 3  </label>
 <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">   
-     <input type="text" name="c3" placeholder="Category 3" class="form-control "  value="{{old('c3')}}"><br>
+     <input type="text" name="c3"  class="form-control "  value="{{old('c3')}}"><br>
               
     <div class="input-group-append">
    <span class="input-group-text"><i class="fas fa-tag"></i></span>
@@ -68,9 +69,10 @@
   </div>
  </div>
   <span class="text-danger">@error('c3') {{$message}} @enderror</span>
+   <label class="text-danger">Category 4  </label>
 <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">
-     <input type="text" name="c4" placeholder="Category 4 " class="form-control"  value="{{old('c4')}}">
+     <input type="text" name="c4"  class="form-control"  value="{{old('c4')}}">
                  
     <div class="input-group-append">
    <span class="input-group-text"><i class="fas fa-tag"></i></span>
@@ -79,11 +81,11 @@
  </div>      
 
  <span class="text-danger">@error('c4') {{$message}} @enderror</span>
-
+ <label class="text-danger">Category 5  </label>
 <div class="form-group">
   <div class="input-group clockpicker" id="clockPicker1">
   
-   <input type="text" name="c5" placeholder="Category 5" class="form-control " value="{{old('c5')}}">
+   <input type="text" name="c5"  class="form-control " value="{{old('c5')}}">
  
             
   <div class="input-group-append">
@@ -95,9 +97,10 @@
 
 </div>
 <div class="col-md-6">
+   <label class="text-danger">Category 2  </label>
 <div class="form-group">
  <div class="input-group clockpicker" id="clockPicker1">
-        <input type="text" name="c2" placeholder="Category 2" class="form-control" value="{{old('c2')}}">
+        <input type="text" name="c2" class="form-control" value="{{old('c2')}}">
    
     <div class="input-group-append">
     <span class="input-group-text"><i class="fab fa-product-hunt"></i></span>
@@ -106,54 +109,44 @@
   </div>
  <span class="text-danger">@error('c2') {{$message}} @enderror</span>
 
-<div class="form-group">
-   <div class="input-group clockpicker" id="clockPicker1">
-     <select class="form-control" name="tag3_id">
-        <option selected hidden disabled> Select Search tag</option>
-           @foreach($dropdown as $drop)  
-         <option value="{{$drop['id']}}">{{$drop['name']}}</option>
-            @endforeach 
-     </select>
-     
-    <div class="input-group-append">
-   <span class="input-group-text"><i class="fas fa-tag"></i></span>
-   </div>                      
-  </div>
- </div>
+<label class="text-danger ">Search tag for Category 3</label>
+
+   <select class="form-control" name="tag3_id"  id="stock_cat">
+    <option selected="" disabled hidden="" >Main Category</option>
+     @foreach($cat as $m)
+      <option value="{{$m['id']}}">{{ucfirst($m['category'])}}</option>
+     @endforeach
+   </select> 
+
+
   <span class="text-danger">@error('tag3') {{$message}} @enderror</span>
 
-<div class="form-group">
-   <div class="input-group clockpicker" id="clockPicker1">
-     <select class="form-control" name="tag4_id" required>
-        <option selected hidden disabled> Select Search tag</option>
-           @foreach($dropdown as $drop)  
-         <option value="{{$drop['id']}}">{{$drop['name']}}</option>
-            @endforeach 
-     </select>
-     
-    <div class="input-group-append">
-   <span class="input-group-text"><i class="fas fa-tag"></i></span>
-   </div>                      
-  </div>
- </div>
-  <span class="text-danger">@error('tag4') {{$message}} @enderror</span>
 
-<div class="form-group">
-   <div class="input-group clockpicker" id="clockPicker1">
-     <select class="form-control" name="tag5_id">
-        <option selected hidden disabled> Select Search tag</option>
-           @foreach($dropdown as $drop)  
-         <option value="{{$drop['id']}}">{{$drop['name']}}</option>
-            @endforeach 
-     </select>
-     
-    <div class="input-group-append">
-   <span class="input-group-text"><i class="fas fa-tag"></i></span>
-   </div>                      
-  </div>
- </div>
-  <span class="text-danger">@error('tag5') {{$message}} @enderror</span>
 
+
+<label class="text-danger mt-3">Search tag for Category 4</label>
+
+   <select class="form-control" name="tag4_id"  id="stock_cat2">
+    <option selected="" disabled hidden="" >Main Category</option>
+     @foreach($cat as $m)
+      <option value="{{$m['id']}}">{{ucfirst($m['category'])}}</option>
+     @endforeach
+   </select> 
+
+
+  <span class="text-danger">@error('tag4_id') {{$message}} @enderror</span>
+
+<label class="text-danger mt-3">Search tag for Category 5</label>
+
+   <select class="form-control" name="tag5_id"  id="stock_cat3">
+    <option selected="" disabled hidden="" >Main Category</option>
+     @foreach($cat as $m)
+      <option value="{{$m['id']}}">{{ucfirst($m['category'])}}</option>
+     @endforeach
+   </select> 
+
+
+  <span class="text-danger">@error('tag3') {{$message}} @enderror</span>
  </div>
  </div>
 

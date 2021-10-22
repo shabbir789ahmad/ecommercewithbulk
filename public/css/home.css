@@ -37,31 +37,43 @@ select{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .a .overlay2 {
-  position: absolute; 
-  bottom: 30%;
-  left: 0%; 
+   position: absolute; 
+  bottom: 72%;
+  right:3%; 
   background: #166387;
   color: #f1f1f1; 
-  width: 100%;
+  width: 15%;
   transition: .5s ease;
-  opacity:0;
+  opacity:1;
   color: white;
-  
-  padding: 5%;
+  padding: 2%;
   text-align: center;
 }
 
 .a .overlay3 {
   position: absolute; 
-  bottom: 85%;
-  right:0%; 
+  bottom: 82%;
+  right:3%; 
   background: black;
   color: #f1f1f1; 
   width: 15%;
   transition: .5s ease;
-  opacity:0;
+  opacity:1;
   color: white;
   padding: 2%;
+  text-align: center;
+}
+.a .overlay5 {
+  position: absolute; 
+  bottom: 82%;
+  left:3%; 
+  background: black;
+  color: #f1f1f1; 
+  width: 15%;
+  transition: .5s ease;
+  opacity:1;
+  color: white;
+  padding: 3%;
   text-align: center;
 }
 .a .overlay4 {
@@ -76,19 +88,14 @@ select{
 .card-img-top{
   display: block;
   width: 100%;
-  
-  height: 30rem;
+  object-fit: contain;
+  height: 20rem;
   object-fit: cover;
 }
 
 
-.a:hover .overlay3 {
-  opacity: 1;
-  margin-right: 10%;
-}
-.a:hover .overlay2 {
-  opacity: 1;
-}
+
+
 .checked{
 	color: #ED7632;
 }
@@ -203,7 +210,15 @@ opacity:.4;
   transition: .5s ease;
   backface-visibility: hidden;
 }
-
+.cl2{
+  opacity: 1;
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
 .middle2{
   position: absolute;
   position: absolute;

@@ -66,8 +66,8 @@ class UserController extends Controller
     }
      function restoreuser($id)
     {
-        $user=User::withTrashed()->findorfail($id);
-        $user->restore();
-        return redirect()->back()->with('success','This vendor is Restored');
+        $vendor=User::withTrashed()->findorfail($id);
+        $vendor->restore();
+        return redirect()->back()->with('success','This User is Restored');
     }
 }

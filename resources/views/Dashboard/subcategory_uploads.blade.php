@@ -95,13 +95,13 @@
 
     <div class="form-group">
      <div class="input-group clockpicker" id="clockPicker1">   
-      <input type="text" name="image_size" placeholder="Product image Height" class="form-control "  value="{{old('image_size')}}" required=""><br>
+      <input type="file" name="drop_image" placeholder="Product image Height" class="form-control "  value="{{old('drop_image')}}" required=""><br>
       <div class="input-group-append">
        <span class="input-group-text"><i class="fas fa-tag"></i></span>
       </div>                      
      </div>
     </div>
-    <span class="text-danger">@error('image_size') {{$message}} @enderror</span>
+    <span class="text-danger">@error('drop_image') {{$message}} @enderror</span>
 
   <button  class="btn btn-block btn-color text-light mt-5">Submit</button>
   </form>

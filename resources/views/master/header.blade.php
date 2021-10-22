@@ -5,21 +5,18 @@ $sub=Submenue::submenu();
 ?>
 
  <header >
-        <div class="container con2">
-            <input type="checkbox" name="" id="check">
-            
-            <div class="logo-container">
-                @foreach($logo as $log)
-              <a href="{{url('/')}}"> <img src="{{asset('uploads/img/' .$log['logo'])}}" width="100%"></a>
-              @endforeach
-            </div>
+   <div class="container con2">
+     <input type="checkbox" name="" id="check">
+     <div class="logo-container">
+     @foreach($logo as $log)
+         <a href="{{url('/')}}"> <img src="{{asset('uploads/img/' .$log['logo'])}}" width="100%"></a>
+     @endforeach
+     </div>
 
     <div class="nav-btn">
      <div class="nav-links">
       <ul>
-       <li class="nav-link" style="--i: .6s">
-         <a href="{{url('/')}}">Home</a>
-       </li>
+       
     
       <li class="nav-link" style="--i: .85s">
        <a href="#">Women<i class="fas fa-caret-down"></i></a>
@@ -162,7 +159,10 @@ $sub=Submenue::submenu();
        </div>
       
           </a>
-          
+          <a href="{{url('vendor/login')}}" class="float-right">
+            <button class="btn btn-sm text-light btn-color mt-1">vendor</button>
+            
+          </a>
 
             </div>      
   <div class="hamburger-menu-container">

@@ -32,8 +32,9 @@ class CategoryController extends Controller
           ->leftjoin('dropdowns','submenues.id','=','dropdowns.dropdown_id')
             ->select('submenues.id','categories.category','submenues.menue_id','submenues.smenue','dropdowns.name')
           ->get();
+          $cat=Category::all();
         //dd($showcat);
-    return view('Dashboard.category_show',compact('showcat'));
+    return view('Dashboard.category_show',compact('showcat','cat'));
    
     }
 

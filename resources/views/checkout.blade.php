@@ -72,9 +72,11 @@
                   
         <div id="carouselslider" class="carousel slide " data-ride="carousel">
     <div class="carousel-inner">
+       @php //dd(session('cart')) @endphp
        @php $total = 0 @endphp
         @if(session('cart'))
             @foreach(session('cart') as $id => $details)
+             $details['vendor_id']
                 @php $total += $details['price'] * $details['quantity'] @endphp
                 @php  $sum[]=$details['ship'] @endphp
                @php $sum2 = array_sum($sum) @endphp
@@ -92,7 +94,8 @@
                    <input type="hidden" name="image[]" value="{{ $details['image']}}">
                    <input type="hidden" name="drop_id[]" value="{{ $details['drop_id']}}">
                    <input type="hidden" name="detail[]" value="{{ $details['detail']}}">
-                   <input type="hidden" name="color[]" value="{{ $details['size']}}">
+                   <input type="hidden" name="color[]" value="{{ $details['color']}}">
+                   <input type="text" name="vendor_id[]" value="{{ $details['vendor_id']}}">
                    <input type="hidden" name="size[]" value="{{ $details['size']}}">
          @endforeach
         @endif
@@ -111,7 +114,7 @@
         <input type="hidden" name="total" value="{{$sum2 + $total}}">
        </div>
       
-        <h3 class="  mt-5 py-3 px-2">Total <span class="float-right text-light">Rs : {{$sum2 + $total}}</span></h3>
+        <h3 class="  mt-5 py-3 px-2">Total <span class="float-right text-light">$: {{$sum2 + $total}}</span></h3>
        
  	 </div>
       

@@ -45,7 +45,7 @@
         @if($pro)   
       <li>
       <a href="javascript:void(0)" onclick="setcolor('{{$pro['color']}}') " class="filter2">
-     <i class="fas fa-circle fa-2x " style="color: {{$pro['color']}};"></i>
+   <i class="fas fa-circle fa-2x " style="color:{{$pro['color']}};"></i>
      <span class="mb-5 ml-2">{{ucfirst($pro['color'])}}</span></a>
      </li>
      @else
@@ -155,18 +155,32 @@
   </nav>
 
        
-<div id="content">
+<div id="content" style="overflow:hidden">
+  
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide active2s">New</div>
 
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="swiper-slide">All</div>
+        <div class="swiper-slide">Alld</div>
+        <div class="swiper-slide">Alls</div>
+        <div class="swiper-slide">Alls</div>
+        <div class="swiper-slide">Alld</div>
+       
+      </div>
+     </div>
+ 
+ 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-    <button type="button" id="sidebarCollapse" class="btn btn-info d-block d-md-none">
+     <button type="button" id="sidebarCollapse" class="btn btn-info d-block d-md-none">
       <i class="fas fa-align-left "></i>
-                        <span>Filter</span>
-      </button>
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              </div>
-             </div>
-   </nav>
+      <span>Filter</span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     </div>
+    </div>
+  </nav>
 
 <div class="row mr-2">
   @foreach($product as $pro)

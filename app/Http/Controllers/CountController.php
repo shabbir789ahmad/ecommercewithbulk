@@ -21,9 +21,7 @@ class CountController extends Controller
         ->count();
         if($comp)
         {
-        $comp2=Order::
-        join('details','orders.id','=','details.order_id')
-        ->where('order_status','delivered')->count();
+        $comp2=Order::count();
         $com=$comp/$comp2 * 100;
         }else{
             $com=0;

@@ -50,15 +50,22 @@ public function subCategory2($id)
        'category_id'=>'required',
        'dropdown_id'=>'required',
        'name'=>'required',
-       'image_size'=>'required|numeric',
+       'drop_image'=>'required',
     ]);
 
     $drop=new Dropdown();
     $drop->category_id=$req->category_id;
     $drop->dropdown_id=$req->dropdown_id;
     $drop->name=$req->name;
-    $drop->image_size=$req->image_size;
-
+    if($req->hasfile('drop_image'))
+    {
+      $file=$req->file('drop_image');
+      $ext=$file->getClientOriginalExtension();
+      $filename=time().rand(1,1000).'.'.$ext;
+      $file->move('uploads/img/' ,$filename);
+      $drop->drop_image=$filename;
+    }
+   //dd($drop);
     $drop->save();
     return redirect()->back()->with('success','Sub Category Uploaded');
    }
@@ -67,10 +74,12 @@ public function subCategory2($id)
    {
     $data=Category::
     join('submenues','categories.id','=','submenues.menue_id')
-    ->join('dropdowns','submenues.id','=','dropdowns.dropdown_id')
+    ->leftjoin('dropdowns','submenues.id','=','dropdowns.dropdown_id')
     ->get();
-    // dd($data);
-    return view('Dashboard.subcategory_show',compact('data'));
+    
+   $cat=Category::all();
+   // dd($data);
+    return view('Dashboard.subcategory_show',compact('data','cat'));
    }
 
 
@@ -101,6 +110,14 @@ public function subCategory2($id)
     $drop->category_id=$req->category_id;
     $drop->dropdown_id=$req->dropdown_id;
     $drop->name=$req->name;
+     if($req->hasfile('drop_image'))
+    {
+      $file=$req->file('drop_image');
+      $ext=$file->getClientOriginalExtension();
+      $filename=time().rand(1,1000).'.'.$ext;
+      $file->move('uploads/img/' ,$filename);
+      $drop->drop_image=$filename;
+    }
     $drop->save();
     return redirect()->route('admin.show-sub-category')->with('success','Sub Category Updated');
    }

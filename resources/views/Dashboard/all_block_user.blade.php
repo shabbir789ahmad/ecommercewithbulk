@@ -67,7 +67,7 @@
     <td>
      <div class="b d-flex justify-content-center mt-1">
       
-       <a href="{{'restore-vendor/'.$show['id']}}" class="border shadow  py-2 px-3 ml-1">Restore<i class="fas fa-pen text-success"></i></a>
+       <a href="{{'restore-user/'.$show['id']}}" class="border shadow  py-2 px-3 ml-1">Restore<i class="fas fa-pen text-success"></i></a>
      
 
        </div> 

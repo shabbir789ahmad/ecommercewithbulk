@@ -62,6 +62,17 @@
 </div>
     <span class="text-danger">@error('smenue') {{$message}} @enderror</span>
 
+    <div class="form-group">
+ <div class="input-group clockpicker" id="clockPicker1">   
+     <input type="file" name="drop_image" placeholder="Sub Category" class="form-control "  value="{{$data['drop_image']}}" required=""><br>
+              
+    <div class="input-group-append">
+   <span class="input-group-text"><i class="fas fa-tag"></i></span>
+   </div>                      
+  </div>
+</div>
+    <span class="text-danger">@error('drop_image') {{$message}} @enderror</span>
+
  <button  class="btn btn-block btn-color text-light mt-5">Update</button>
 </form>
           </div>

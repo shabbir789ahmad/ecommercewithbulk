@@ -37,31 +37,29 @@
 
   <div class="c mt-3" id="container-wrapper ">
     <!-- Row -->
-          <div class="row">
-            <!-- Datatables -->
-            <div class="col-lg-12">
-              <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link text-light active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Men</a>
-  </li>
+  <div class="row">
+   <div class="col-lg-12">
+    <div class="card mb-4">
+     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+         @foreach($cat as $show)
   <li class="nav-item ml-2">
-    <a class="nav-link text-light 2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Women</a>
+    <a class="nav-link text-light @if($loop->first) active @endif" id="pills-home-tab" data-toggle="pill" href="#pills-{{$show['id']}}" role="tab" aria-controls="pills-{{$show['id']}}" aria-selected="true">{{ucfirst($show['category'])}}</a>
   </li>
-  <li class="nav-item ml-2">
-    <a class="nav-link text-light" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Kids</a>
-  </li>
+   @endforeach
+ 
 </ul>
      </div>
 
-      <div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-    
+<div class="tab-content" id="pills-tabContent">
+  @foreach($cat as $sho)
+  <div class="tab-pane fade @if($loop->first) show active @endif" id="pills-{{$sho['id']}}" role="tabpanel" aria-labelledby="pills-{{$sho['id']}}-tab">
+    @if($loop->first)
   <div class="table-responsive p-3">
   <table class="table align-items-center table-flush" id="dataTable">
    <thead class="thead-light">
    <tr>
+    <th>Image</th>
     <th>Sub Category</th>
     <th>Category</th>
     <th>Main Category</th>
@@ -72,8 +70,11 @@
                     
    <tbody>
    @foreach($data as $show)
-   @if($show['menue_id']==1)
+   @if($show['category_id']==$sho['id'])
   <tr>
+    <td class="a col-2" >
+      <img  src="{{asset('uploads/img/' .$show['drop_image'])}}"  alt="..." width="70%">
+    </td>
     <td>{{ucfirst($show['name'])}}</td>
     <td>{{ucfirst($show['smenue'])}}</td>
     <td>{{ucfirst($show['category'])}}</td>
@@ -87,57 +88,18 @@
         </div> 
       </td>
         </tr>
-         @endif
+       @endif
          @endforeach
          </tbody>
          </table>
        </div>
-  </div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-    
-   <div class="table-responsive p-3">
-  <table class="table align-items-center table-flush" id="dataTable">
-   <thead class="thead-light">
-   <tr>
-    <th>Sub Category</th>
-    <th>Category</th>
-    <th>Main Category</th>
-    
-    <th class="text-center">Operation</th>
-    </tr>
-    </thead>
-                    
-   <tbody>
-   @foreach($data as $show)
-   @if($show['menue_id']==2)
-  <tr>
-    <td>{{ucfirst($show['name'])}}</td>
-     <td>{{ucfirst($show['smenue'])}}</td>
-    <td>{{ucfirst($show['category'])}}</td>
-    
-    <td>
-     <div class="b d-flex justify-content-center mt-3">
-       <a href="{{'update-sub-category/'.$show['id']}}" class="border shadow  py-2 px-3"><i class="fas fa-pen text-success"></i></a>
-       
-        <a href="{{'delete-sub-category/'.$show['id']}}" class="border ml-3 py-2 px-3" onclick="return confirm('Are you sure?')">  
-         <i class="fas fa-trash-alt text-danger"> </i>
-       </a>
-        </div> 
-      </td>
-        </tr>
-         @endif
-         @endforeach
-         </tbody>
-         </table>
-       </div>
+       @else
 
-  </div>
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-    
-     <div class="table-responsive p-3">
+    <div class="table-responsive p-3">
   <table class="table align-items-center table-flush" id="dataTable">
    <thead class="thead-light">
    <tr>
+    <th>Image</th>
     <th>Sub Category</th>
     <th>Category</th>
     <th>Main Category</th>
@@ -148,8 +110,12 @@
                     
    <tbody>
    @foreach($data as $show)
-   @if($show['menue_id']==3)
+   @if($show['category_id']==$sho['id'])
   <tr>
+    
+     <td class="a col-2" >
+      <img  src="{{asset('uploads/img/' .$show['drop_image'])}}"  alt="..." width="70%">
+    </td>
     <td>{{ucfirst($show['name'])}}</td>
     <td>{{ucfirst($show['smenue'])}}</td>
     <td>{{ucfirst($show['category'])}}</td>
@@ -163,13 +129,16 @@
         </div> 
       </td>
         </tr>
-         @endif
+       @endif
          @endforeach
          </tbody>
          </table>
        </div>
+       @endif
+    </div>
+ @endforeach
 
-  </div>
+ 
 </div>
 
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Social;
 use App\Models\Mainpage;
-use App\Models\Dropdown;
+use App\Models\Category;
 class SocialController extends Controller
 {
     function uploadLink(Request $req)
@@ -70,8 +70,8 @@ class SocialController extends Controller
     }
    function getCat()
    {
-     $dropdown=Dropdown::all();
-     return view('Dashboard.home_page_heading',compact('dropdown'));
+     $cat=Category::all();
+     return view('Dashboard.home_page_heading',compact('cat'));
 
    }
 

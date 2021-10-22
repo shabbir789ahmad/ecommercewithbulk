@@ -43,21 +43,19 @@
   <div class="card mb-4">
    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+     @foreach($cat as $ct)
   <li class="nav-item">
-    <a class="nav-link active text-light" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Men</a>
+    <a class="nav-link @if($loop->first) active @endif text-light" id="pills-home-tab" data-toggle="pill" href="#pills-{{$ct['id']}}" role="tab" aria-controls="pills-{{$ct['id']}}" aria-selected="true">{{$ct['category']}}</a>
   </li>
-  <li class="nav-item ml-2">
-    <a class="nav-link text-light" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Women</a>
-  </li>
-  <li class="nav-item ml-2">
-    <a class="nav-link text-light" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Kids</a>
-  </li>
+ @endforeach
 </ul>
      </div>
 
-      <div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-    
+ <div class="tab-content" id="pills-tabContent">
+
+  @foreach($cat as $ct)
+  <div class="tab-pane fade @if($loop->first) show active @endif" id="pills-{{$ct['id']}}" role="tabpanel" aria-labelledby="pills-home-tab">
+     @if($loop->first)
   <div class="table-responsive p-3">
   <table class="table align-items-center table-flush" id="dataTable">
    <thead class="thead-light">
@@ -71,7 +69,7 @@
                     
    <tbody>
    @foreach($showcat as $show)
-   @if($show['menue_id']==1)
+   @if($show['menue_id']==$ct['id'])
   <tr>
     <td>{{ucfirst($show['smenue'])}}</td>
     <td>{{ucfirst($show['category'])}}</td>
@@ -90,45 +88,8 @@
          </tbody>
          </table>
        </div>
-  </div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-    
-   <div class="table-responsive p-3">
-  <table class="table align-items-center table-flush" id="dataTable">
-   <thead class="thead-light">
-   <tr>
-    <th>Category</th>
-    <th>Main Category</th>
-    <th>Sub Category</th>
-    <th class="text-center">Operation</th>
-    </tr>
-    </thead>
-                    
-   <tbody>
-   @foreach($showcat as $show)
-   @if($show['menue_id']==2)
-  <tr>
-     <td>{{ucfirst($show['smenue'])}}</td>
-    <td>{{ucfirst($show['category'])}}</td>
-    <td>{{ucfirst($show['name'])}}</td>
-    <td>
-     <div class="b d-flex justify-content-center mt-3">
-       <a href="{{'get-category/'.$show['id']}}" class="border shadow  py-2 px-3"><i class="fas fa-pen text-success"></i></a>
-        <a href="{{'delete-category/'.$show['id']}}" class="border ml-3 py-2 px-3" onclick="return confirm('Are you sure?')">  
-         <i class="fas fa-trash-alt text-danger"> </i>
-       </a>
-        </div> 
-      </td>
-        </tr>
-         @endif
-         @endforeach
-         </tbody>
-         </table>
-       </div>
+       @else
 
-  </div>
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-    
      <div class="table-responsive p-3">
   <table class="table align-items-center table-flush" id="dataTable">
    <thead class="thead-light">
@@ -142,7 +103,7 @@
                     
    <tbody>
    @foreach($showcat as $show)
-   @if($show['menue_id']==3)
+   @if($show['menue_id']==$ct['id'])
   <tr>
     <td>{{ucfirst($show['smenue'])}}</td>
     <td>{{ucfirst($show['category'])}}</td>
@@ -161,8 +122,11 @@
          </tbody>
          </table>
        </div>
-
+       @endif
   </div>
+  @endforeach
+
+ 
 </div>
 
 
