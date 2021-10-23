@@ -48,6 +48,13 @@ class UserController extends Controller
         $vendor->restore();
         return redirect()->back()->with('success','This vendor is Restored');
     }
+    function vendorStatus(Request $req)
+    {
+         $status=Vendor::findorfail($req->id);
+         $status->vendor_status=$req->vendor_status;
+         $status->save();
+
+    }
      function getUser()
     {
         $user=User::all();
@@ -69,5 +76,12 @@ class UserController extends Controller
         $vendor=User::withTrashed()->findorfail($id);
         $vendor->restore();
         return redirect()->back()->with('success','This User is Restored');
+    }
+    function userStatus(Request $req)
+    {
+         $status=User::findorfail($req->id);
+         $status->user_status=$req->user_status;
+         $status->save();
+
     }
 }

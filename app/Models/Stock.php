@@ -13,6 +13,7 @@ class Stock extends Model
     'size_image',
     'product_status',
     'drop_id',
+    'cat_id',
     'user_id'
    
    ];

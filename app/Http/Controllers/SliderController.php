@@ -57,8 +57,8 @@ class SliderController extends Controller
      join('Stocks','vendors.id','=','stocks.user_id')
       ->leftjoin('reviews','stocks.id','=','reviews.review_id')
       ->select('review_id', \DB::raw('avg(rating) as rating')
-       ,'stocks.drop_id','stocks.id','stocks.product'    ,'reviews.review_id','stocks.created_at','vendors.deleted_at')
-      ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','vendors.deleted_at')->orderBy('rating','DESC')
+       ,'stocks.drop_id','stocks.id','stocks.product'    ,'reviews.review_id','stocks.created_at','vendors.deleted_at','stocks.cat_id')
+      ->groupBy('review_id','stocks.drop_id','stocks.cat_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','vendors.deleted_at')->orderBy('rating','DESC')
       ->where('product_status','1')
       ->whereNull('vendors.deleted_at')
       ->get();
@@ -71,14 +71,15 @@ class SliderController extends Controller
          ->where('stock_status','1')->take(1)->get();
       }
       $dropdown=Dropdown::all();
-   //dd($product3);
+   //dd($product2);
       return view('home',compact('slider','product','product2','front','product3','dropdown'));
   }
 
   function uploadSlider(Request $req)
   {
     $req->validate([
-     'image'=>'required',
+   'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048|dimensions:min_width=500,min_height=1000',
+     'heading'=>'required|min:22|max:40',
     
     ]);
     if($req->hasfile('image'))
@@ -90,7 +91,7 @@ class SliderController extends Controller
             $file->move('uploads/img/', $filename);
             $slider->image=$filename;
     }
-    
+     $slider->heading=$req->heading;
     $slider->save();
     return redirect()->back()->with('success','Slider has been Uploaded');
   }

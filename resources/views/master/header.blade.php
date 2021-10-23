@@ -1,6 +1,6 @@
 <?php 
-use App\Models\Submenue;
-$sub=Submenue::submenu();
+use App\Models\Category;
+$sub=Category::category();
 //echo "<pre>"; print_r($sub);die;
 ?>
 
@@ -15,93 +15,47 @@ $sub=Submenue::submenu();
 
     <div class="nav-btn">
      <div class="nav-links">
+  <ul>
+   <li class="nav-link" style="--i: .85s">
+    <a href="#">Category<i class="fas fa-caret-down"></i></a>
+     <div class="dropdown">
       <ul>
-       
-    
-      <li class="nav-link" style="--i: .85s">
-       <a href="#">Women<i class="fas fa-caret-down"></i></a>
-        <div class="dropdown">
-       <ul>
-          @foreach($sub as $su)
-      @if($su['menue_id']==2)
-           <li class="dropdown-link">
-           <a href="#">{{ucwords($su['smenue'])}}<i class="fas fa-caret-down"></i></a>
-            <div class="dropdown second">
-           <ul>
-             @foreach($su['dropdowns'] as $drop)
-             <li class="dropdown-link">
-              <a href="{{url('product/' .$drop['id'])}}">{{$drop['name']}}</a>
-              </li>
-               @endforeach
-           
-            <div class="arrow"></div>
-                  </ul>
-                   </div>
-                  </li>
-                     @endif
-            @endforeach              
-                   <div class="arrow"></div>
-                  </ul>
-                  </div>
-                        </li>
+        @foreach($sub as $cat)
+        <li class="dropdown-link">
+         <a href="#">{{$cat['category']}}<i class="fas fa-caret-down"></i></a>
+          <div class="dropdown second">
+          <ul>
+            @foreach($cat['subcat'] as $subc)
+            <li class="dropdown-link">
+              <a href="#">{{$subc['smenue']}}<i class="fas fa-caret-down"></i></a>
+               <div class="dropdown second">
+          <ul>
 
-        <li class="nav-link" style="--i: .85s">
-      <a href="#">Men<i class="fas fa-caret-down"></i></a>
-        <div class="dropdown">
-       <ul>
-          @foreach($sub as $su)
-      @if($su['menue_id']==4)
-           <li class="dropdown-link">
-           <a href="#">{{ucwords($su['smenue'])}}<i class="fas fa-caret-down"></i></a>
-            <div class="dropdown second">
-           <ul>
-             @foreach($su['dropdowns'] as $drop)
-             <li class="dropdown-link">
-              <a href="{{url('product/' .$drop['id'])}}">{{$drop['name']}}</a>
-              </li>
-               @endforeach
-           
+            @foreach($cat['drop'] as $drp)
+              @if($subc['id']==$drp['dropdown_id'])
+            <li class="dropdown-link">
+              <a href="{{url('product/' .$drp['id'])}}">{{$drp['name']}}</a>
+            </li>
+            @endif
+            @endforeach
             <div class="arrow"></div>
-                  </ul>
-                   </div>
-                  </li>
-                     @endif
-            @endforeach              
-                   <div class="arrow"></div>
-                  </ul>
-                  </div>
-                        </li>                 
-          
-        <li class="nav-link" style="--i: .85s">
-      <a href="#">Kids<i class="fas fa-caret-down"></i></a>
-        <div class="dropdown">
-       <ul>
-          @foreach($sub as $su)
-      @if($su['menue_id']==3)
-           <li class="dropdown-link">
-           <a href="#">{{ucwords($su['smenue'])}}<i class="fas fa-caret-down"></i></a>
-            <div class="dropdown second">
-           <ul>
-             @foreach($su['dropdowns'] as $drop)
-             <li class="dropdown-link">
-              <a href="{{url('product/' .$drop['id'])}}">{{$drop['name']}}</a>
-              </li>
-               @endforeach
+          </ul>
+          </div>
+            </li>
            
-            <div class="arrow"></div>
-                  </ul>
-                   </div>
-                  </li>
-                     @endif
-            @endforeach              
-                   <div class="arrow"></div>
-                  </ul>
-                  </div>
-                        </li>   
+            @endforeach
+             <div class="arrow"></div>
+          </ul>
+          </div>
+        </li>
+        @endforeach
+        <div class="arrow"></div>
+     </ul>
       
-                       
-                    </ul>
-                </div>
+    </div>
+   </li>
+  </ul>
+</div>
        
   <form class="form-inline mb-3" action="{{url('search')}}" method="GET" class="">
    <div class="input-group form-header">
@@ -119,7 +73,7 @@ $sub=Submenue::submenu();
         @guest
           @if (Route::has('login'))
         <a href="{{url('login')}}">
-       <i class="fas fa-user text-light  fa-2x float-right"></i>
+       <i class="fas fa-user text-light  fa-lg mt-3 mt-md-3 float-right"></i>
           </a>
           @endif
           @else
@@ -146,7 +100,7 @@ $sub=Submenue::submenu();
     <a href="{{url('get-wishlist')}}">
      <div id="ex4" class="float-right ">
        <span class="p1 fa-stack fa-lg text-light has-badge" data-count="{{ count((array) session('wishlist')) }}">
-       <i class=" far fa-heart fa-stack-1x xfa-inverse fa-lg" data-count="4b"></i>
+       <i class=" far fa-heart fa-stack-1x xfa-inverse " data-count="4b"></i>
        </span>
      </div>
     </a>
@@ -154,7 +108,7 @@ $sub=Submenue::submenu();
           <a href="{{url('cart')}}">
              <div id="ex4" class="float-right ">
           <span class="p1 fa-stack fa-lg text-light has-badge" data-count="{{ count((array) session('cart')) }}">
-         <i class=" fa fa-shopping-cart fa-stack-1x xfa-inverse fa-lg" data-count="4b"></i>
+         <i class=" fa fa-shopping-cart fa-stack-1x xfa-inverse " data-count="4b"></i>
        </span>
        </div>
       

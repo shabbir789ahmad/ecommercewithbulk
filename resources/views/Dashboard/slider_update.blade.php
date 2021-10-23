@@ -44,6 +44,17 @@
   <form action="{{url('admin/update-slider')}}" method="POST" enctype="multipart/form-data">
         @csrf
   <input type="hidden" name="id" value="{{$slider['id']}}">
+  <label class="text-dark">Slider Heading</label> 
+<div class="form-group">
+ <div class="input-group clockpicker" id="clockPicker1">  
+  <input type="text" name="heading" placeholder="Slider Heading" class="form-control "  value="{{$slider['heading']}}" required="">
+  <br>
+  <div class="input-group-append">
+   <span class="input-group-text"><i class="fas fa-images"></i></span>
+  </div>                      
+ </div>
+</div>
+<span class="text-danger mt-3">@error('heading') {{$message}} @enderror</span> 
   <label class="text-dark">Slider Image</label>
   
 <div class="form-group">

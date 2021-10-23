@@ -46,7 +46,7 @@
 
 </head>
 <body onload="loded()">
-    <div id="loading">
+ <div id="loading">
        
     </div>
 	{{View::make('master.header')}}
@@ -108,11 +108,11 @@
   @endif
 
  <script type="text/javascript">
-      $('.owl-carousel').owlCarousel({
+ $('.owl-carousel').owlCarousel({
     loop:false,
     margin:10,
     nav:false,
-    
+    stagePadding: 2,
     responsive:{
         0:{
             items:1
@@ -128,21 +128,37 @@
         }
 
     }
-})
+});
+
+
     </script>
 
  <script>
       var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 5,
+       
         centeredSlides: false,
         spaceBetween: 1,
         grabCursor: true,
-        pagination: {
-          
-          clickable: true,
+       
+         breakpoints: {  
+        '480': {
+            slidesPerView: 2,
+             spaceBetween: 40,},
+          '640': {
+             slidesPerView: 3,
+             spaceBetween: 50, },
+             '1000': {
+             slidesPerView: 7,
+             spaceBetween: 50, },
+  },
+        navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+              clickable: true,
         },
       });
     </script>
+   
  <script type="text/javascript">
      function loded()
      {

@@ -161,11 +161,10 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide active2s">New</div>
 
-        <div class="swiper-slide">All</div>
-        <div class="swiper-slide">Alld</div>
-        <div class="swiper-slide">Alls</div>
-        <div class="swiper-slide">Alls</div>
-        <div class="swiper-slide">Alld</div>
+        <div class="swiper-slide">New</div>
+        <div class="swiper-slide">Top Rated</div>
+        <div class="swiper-slide">Best Selling</div>
+        
        
       </div>
      </div>

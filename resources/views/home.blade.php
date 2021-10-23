@@ -6,7 +6,16 @@
     <div class="carousel-inner">
       @foreach($slider as $slide)
       <div class="carousel-item  @if($loop->first) active @endif caro" >
+         
+        <div class="slider">
         <img class="d-block w-100" src="{{asset('uploads/img/' .$slide['image'])}}" alt="Firstlide" style="">
+        <div class="slider-colo">
+         <div class="slider-text">
+           <p>{{$slide['heading']}}</p>
+           <button class="btn btn-sm btn-md-lg rounded btn-check text-light py-sm-0 py-md-3">Shop Now</button>
+         </div>
+      </div>
+    </div>
       </div>
       @endforeach
     </div>
@@ -84,30 +93,27 @@
 
 <div class="bg-cate pt-4  mt-4">
   <p class="feature text-center ">Featured Categories</p>
-  <div class="owl-carousel owl-theme ml-2">
-    @foreach($dropdown as $drop)
-   <div class="item ml-1">
-     <div class="card">
-      <div class="img-c">
-       <div class="cl">
-        <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" class="cat-imgs">
-       </div>
-       <div class="middle">
-        <a href="{{url('product/' .$drop['id'])}}">
-          <div class="text">View Detail</div>
-        </a>
-         
-       </div>
+
+   <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+       @foreach($dropdown as $drop)  
+     
+      <div class="swiper-slide ">
+        <div class="round-img" >
+          <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" class="cat">
+        
+           <p class="textc">{{$drop['name']}}</p>
+        </div>
       </div>
-      <div class="card-body">
-       <p class="cat-name">{{ucfirst($drop['name'])}}</p>
-      </div>
-    </div>
-   </div>
-   @endforeach
-    
-   
-  </div>
+      
+      @endforeach
+        
+       </div>
+        <div class="swiper-button-prev text-dark"></div>
+    <div class="swiper-button-next text-dark "></div>
+     </div>
+
+ 
 </div>
 
 
@@ -203,7 +209,7 @@
 
   @foreach($product2 as $pro)
  @foreach($front as $f)
- @if($f['tag3_id']==$pro['drop_id'])
+ @if($f['tag3_id']==$pro['cat_id'])
   <div class="item">
     <div class="card ">
      <div class="a">
@@ -277,7 +283,7 @@
 
   @foreach($product2 as $pro)
    @foreach($front as $f)
- @if($f['tag4_id']==$pro['drop_id'])
+ @if($f['tag4_id']==$pro['cat_id'])
   <div class="item">
     <div class="card ">
      <div class="a">
@@ -341,7 +347,7 @@
 
   @foreach($product2 as $pro)
    @foreach($front as $f)
- @if($f['tag5_id']==$pro['drop_id'])
+ @if($f['tag5_id']==$pro['cat_id'])
   <div class="item">
     <div class="card ">
      <div class="a">

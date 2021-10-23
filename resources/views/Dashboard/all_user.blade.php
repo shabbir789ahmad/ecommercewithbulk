@@ -62,12 +62,12 @@
     <td class="a col-2">{{$show->email}}</td>
     <td class="a col-2">{{$show->phone}}</td>
     
-    <td class="a col-2" ><input type="checkbox" data-id="{{ $show['id'] }}" name="product_status" class="js-switch" 
-     {{ $show->product_status == 1 ? 'checked' : '' }} ></td>
+    <td class="a col-2" ><input type="checkbox" data-id="{{ $show['id'] }}" name="user_status" class="js-switchu" 
+     {{ $show->user_status == 1 ? 'checked' : '' }} ></td>
     <td>
      <div class="b d-flex justify-content-center mt-1">
       
-       <a href="{{'stock-detail/'.$show['id']}}" class="border shadow  py-2 px-3 ml-1"><i class="fas fa-pen text-success"></i></a>
+       <a href="#" class="border shadow  py-2 px-3 ml-1"><i class="fas fa-pen text-success"></i></a>
         <a href="{{'delete-user/'.$show['id']}}" class="border shadow  py-2 px-3 ml-1" onclick="return confirm('Are you sure? This will delete all of product data')"><i class="fas fa-trash-alt  text-danger "></i>
        </a>
 

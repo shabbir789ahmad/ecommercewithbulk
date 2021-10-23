@@ -312,11 +312,13 @@ Route::get('show-vendor',[UserController::class,'getvendor'])->name('admin/show-
 Route::get('block-vendor',[UserController::class,'blockvendor'])->name('admin/block-vendor');
 Route::get('delete-vendor/{id}',[UserController::class,'deletevendor'])->name('admin/delete-vendor/{id}');
 Route::get('restore-vendor/{id}',[UserController::class,'restorevendor'])->name('admin/restore-vendor/{id}');
+Route::get('vendor-status',[UserController::class,'vendorStatus'])->name('admin/vendor-status');
 
 //all user Route
 Route::get('show-user',[UserController::class,'getUser'])->name('admin/show-user');
 Route::get('delete-user/{id}',[UserController::class,'deleteuser'])->name('admin/delete-user/{id}');
 Route::get('restore-user/{id}',[UserController::class,'restoreuser'])->name('admin/restore-user/{id}');
 Route::get('block-user',[UserController::class,'blockuser'])->name('admin/block-user');
+Route::get('user-status',[UserController::class,'userStatus'])->name('admin/user-status');
 });
 });

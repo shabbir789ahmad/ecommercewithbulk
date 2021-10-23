@@ -54,7 +54,18 @@
   </div>                      
  </div>
 </div>
-<span class="text-danger mt-3">@error('image') {{$message}} @enderror</span> 
+<span class="text-danger mt-3">@error('image') image size should be greater than 1000px height @enderror</span><br>
+<label class="text-dark">Slider Heading</label> 
+<div class="form-group">
+ <div class="input-group clockpicker" id="clockPicker1">  
+  <input type="text" name="heading" placeholder="Slider Heading" class="form-control "  value="{{old('heading')}}" required="">
+  <br>
+  <div class="input-group-append">
+   <span class="input-group-text"><i class="fas fa-images"></i></span>
+  </div>                      
+ </div>
+</div>
+<span class="text-danger mt-3">@error('heading') {{$message}} @enderror</span> 
     
   <button  class="btn btn-block btn-color text-light mt-5">Submit</button>
   </form>

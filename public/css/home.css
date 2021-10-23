@@ -123,17 +123,19 @@ color:#5E473E  ;
     font-size: 1.4vw !important;
     font-weight: 500;
   }
-  .caro{
-    height:15rem
-  }
+  
   .feature{
     font-size:1.7vw;
     color: #000000;
     font-family: Barlow;
   }
-  .keephome{
-  font-size: 2vw;
-}
+.keephome{
+     font-size: 2vw;
+  }
+  .slider{
+    position: relative;
+    height:60rem
+  }
 }
 @media screen and (min-width: 900px)
 {
@@ -141,9 +143,8 @@ color:#5E473E  ;
     font-size: 1.2vw !important;
     font-weight: 500;
   }
-  .caro{
-    height:25rem
-  }
+  
+
   .feature{
     font-family :Montserrat, Arial, sans-serif;
     font-size:1.9vw;
@@ -157,6 +158,7 @@ color:#5E473E  ;
   }
   .cat-img{
     filter: drop-shadow(30px 10px 4px #E6E9EC);
+
   }
   .cat-name
   {
@@ -168,28 +170,56 @@ color:#5E473E  ;
 .keephome{
   font-size: 2vw;
 }
+.slider{
+    position: relative;
+    height:30rem
+  }
+
+  .slider-colo{
+     position: absolute;
+       top: .1%;
+       background: rgba(0, 0, 0, 0.3); 
+       padding: 17% 60%;
+       height: auto;
+      
+  }
+.slider-text{
+    position: absolute;
+    top: 30%;
+    left:12%;
+    width: 40rem;
+    color: #000;
+
+  }
+
+.slider-text p{
+      font-size: 4vw;
+      font-family: sans-serif;
+      font-weight: 600;
+      line-height: 5vw;
+      color: #F0F0F0;
+  }
 }
 
 .img-c{
-  position: relative;
-}
+      position: relative;
+  }
 .middle{
-  position: absolute;
-   transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
+       position: absolute;
+       transition: .5s ease;
+       opacity: 0;
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+       text-align: center;
+  }
 
 .img-c:hover .cat-imgs,.cl {
-background-color:#166387;
-opacity:.4;
-
-}
+      background-color:#166387;
+      opacity:.4;
+  }
 
 .img-c:hover .middle {
   opacity: 1;
@@ -206,7 +236,7 @@ opacity:.4;
   display: block;
   width: 100%;
   object-fit: cover;
-  height: 10rem;
+  height:5rem;
   transition: .5s ease;
   backface-visibility: hidden;
 }
@@ -280,4 +310,37 @@ padding: 0% 3rem;
   border: none;
   margin-top: 2%;
 }
+.slider-colo{
+     position: absolute;
+       top: .1%;
+       background: rgba(0, 0, 0, 0.5); 
+       padding: 28% 60%;
+       height: auto;
+      
+  }
+.slider-text{
+  
+position: absolute;
+  top: 15%;
+  left:10%;
+  width: 40%;
+  color: #000;
 }
+
+.slider-text p{
+  font-size: 5vw;
+  font-family: sans-serif;
+  font-weight: 600;
+  line-height: 6vw;
+  color: #fff;
+}
+. .slider{
+    position: relative;
+    height:40rem
+  }
+}
+
+
+
+
+

@@ -24,7 +24,12 @@
 </head>
 
 <body id="page-top " >
+ 
   <div id="wrapper" >
+     @if(Auth::user()->deleted_at)
+   <p>Your Acount has been Blocked </p>
+   <button class="btn-color btn text-light">Contact Us for more Info</button>
+  @else
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -45,6 +50,14 @@
           <span>Dashboard</span>
         </a>
        </li>
+       @if(Auth::user()->vendor_status==0)
+        <li class="nav-item ">
+        <a class="nav-link " href="{{url('vendor/verify')}}">
+          <i class="fas fa-window-maximize text-light"></i>
+          <span>Verify Your Account</span>
+        </a>
+       </li>
+      @else
        <li class="nav-item ">
         <a class="nav-link " href="{{url('vendor/store')}}">
           <i class="fas fa-window-maximize text-light"></i>
@@ -70,6 +83,7 @@
          </div>
         </div>
       </li>
+      
        <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap5"
           aria-expanded="true" aria-controls="collapseBootstrap">
@@ -155,8 +169,9 @@
           </div>
         </div>
       </li>    
-   
+     @endif
     </ul>
+    @endif
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">

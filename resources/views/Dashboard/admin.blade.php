@@ -88,6 +88,19 @@
           </div>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap16"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+         <i class="fas fa-window-maximize text-light"></i>
+          <span>Logo</span>
+        </a>
+        <div id="collapseBootstrap16" class="collapse
+         " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class=" py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{url('admin/sell')}}">Make Sell</a>
+           </div>
+        </div>
+      </li>
        <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap12"
           aria-expanded="true" aria-controls="collapseBootstrap">
@@ -400,29 +413,17 @@
   </script>
 
 <script>
-  let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+ 
 
-elems.forEach(function(html) {
-    let switchery = new Switchery(html,  { size: ' small' });
-});
-
- let elems2 = Array.prototype.slice.call(document.querySelectorAll('.js-switch2'));
+ let elems2 = Array.prototype.slice.call(document.querySelectorAll('.js-switchv'));
 
 elems2.forEach(function(html) {
     let switchery = new Switchery(html,  { size: ' small' });
 });
- let elems3 = Array.prototype.slice.call(document.querySelectorAll('.js-switch3'));
+ 
+let elemsu = Array.prototype.slice.call(document.querySelectorAll('.js-switchu'));
 
-elems3.forEach(function(html) {
-    let switchery = new Switchery(html,  { size: ' small' });
-});
- let elems4 = Array.prototype.slice.call(document.querySelectorAll('.js-switch4'));
-
-elems4.forEach(function(html) {
-    let switchery = new Switchery(html,  { size: ' small' });
-});
-let elems5 = Array.prototype.slice.call(document.querySelectorAll('.js-switch5'));
-elems5.forEach(function(html) {
+elemsu.forEach(function(html) {
     let switchery = new Switchery(html,  { size: ' small' });
 });
 

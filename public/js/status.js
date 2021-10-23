@@ -79,5 +79,44 @@ $('.js-switch4').change(function () {
   });
  });
 
+ $('.js-switchv').change(function(e){
+
+    e.preventDefault();
+    var status=$(this).prop('checked')===true? 1:0;
+    var id=$(this).data('id')
+    
+     $.ajax({
+          
+           url:'/admin/vendor-status/',
+           dataType : "json",
+           type: 'GET',
+           data: {'vendor_status' : status, 'id':id},
+           success:function(data)
+           {
+            console.log(data.message);
+           }
+
+     });
+
+ });
+
+ $('.js-switchu').change(function(e){
+   e.preventDefault()
+
+   let  status=$(this).prop('checked')===true? 1:0;
+   let id=$(this).data('id')
+   $.ajax({
+      
+         url: '/admin/user-status/',
+         dataType: "json",
+         'type' :'GET',
+         data:{'user_status':status,'id':id},
+         success:function(data){
+            console.log(data.message);
+         }
+
+   });
+ });
+
 });
 

@@ -103,12 +103,12 @@ section{
 }
 }
 .nav-btn{
-    flex: 3;
+    flex: 1;
     display: flex;
 }
 
 .nav-links{
-    flex: 2;
+
 }
 
 .log-sign{
@@ -351,6 +351,7 @@ section{
 }
 
 @media (max-width: 920px){
+
     .hamburger-menu-container{
         display: flex;
         width: 1rem;

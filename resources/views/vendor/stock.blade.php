@@ -69,7 +69,7 @@
    <span class="text-danger">@error('cat_id') Main Category Field is required @enderror</span>
 <div class="form-group mt-3">
 <div class="input-group clockpicker" id="clockPicker1">
-  <select class="form-control select" id="main2" name="" required="">
+  <select class="form-control select" name="cat_id" id="main2" name="" required="">
     <option disabled selected hidden> Select Main Category</option>
          @foreach($main as $key=> $mc)
      <option value="{{$key}}">{{ucfirst($mc)}}</option>

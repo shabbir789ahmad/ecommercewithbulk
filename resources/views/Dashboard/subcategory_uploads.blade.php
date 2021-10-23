@@ -102,7 +102,7 @@
      </div>
     </div>
     <span class="text-danger">@error('drop_image') {{$message}} @enderror</span>
-
+  <label class="text-danger">The Width and height of the Image Should be same</label>
   <button  class="btn btn-block btn-color text-light mt-5">Submit</button>
   </form>
        </div>

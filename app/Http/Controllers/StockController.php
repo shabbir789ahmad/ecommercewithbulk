@@ -68,6 +68,7 @@ class StockController extends Controller
           'product' => 'required',
           'detail' => 'required',
           'drop_id' => 'required',
+          'cat_id' => 'required',
           'stock' => 'required|numeric',
           'price' => 'required|numeric',
           'sell_price' => 'required|numeric',
@@ -80,13 +81,14 @@ class StockController extends Controller
         $ext=$file->getClientOriginalExtension();
           $filename= time().rand(1,100).'.'.$ext;
           $file->move('uploads/img/',$filename);
-
+     
        $stock= Stock::create([ 
            'product'=> $req->product,
            'detail'=>$req->detail,
            'size_image'=>$filename,
            'product_status'=>'1',
            'drop_id'=>$req->drop_id,
+           'cat_id'=>$req->cat_id,
            'user_id'=>Auth::user()->id,
         ]);
        

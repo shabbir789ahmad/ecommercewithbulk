@@ -23,6 +23,8 @@ class Stocks extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('drop_id')->unsigned();
             $table->foreign('drop_id')->references('id')->on('dropdowns')->onDelete('cascade')->onUpdate('cascade');
+             $table->bigInteger('cat_id')->unsigned();
+            $table->foreign('cat_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
            $table->timestamps();
         });
     }
