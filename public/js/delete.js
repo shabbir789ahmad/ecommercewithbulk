@@ -154,5 +154,18 @@ $(document).ready(function(){
         $('#head1').val(h1)
         let h2=$(this).data('h2')
         $('#head2').val(h2)
-    })
+    });
+    $('.sale').click(function(e){
+        e.preventDefault();
+        $('#salemodal').modal('show')
+        let id=$(this).data('id')
+        $('#sid').val(id)
+        let name=$(this).data('name')
+        $('#sell').val(name)
+        let start=$(this).data('start')
+        $('#strt').val(start)
+        let end=$(this).data('end')
+        $('#en').val(end)
+    });
+
 });

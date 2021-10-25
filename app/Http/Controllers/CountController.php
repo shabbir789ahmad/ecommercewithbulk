@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Detail;
 use App\Models\Contact;
 use App\Models\Stock;
+use App\Models\Sell;
 use App\Models\Stock2;
 use App\Notifications\ProductStock;
 use Notification;
@@ -99,9 +100,9 @@ class CountController extends Controller
      
       }
      
-   
+    $salee=Sell::latest()->take(1)->get();
   
-    return view('vendor.vendorcount',$arr,compact('comp','com','order','or','sale','sl','earn','en','message','today','order2'));
+    return view('vendor.vendorcount',$arr,compact('comp','com','order','or','sale','sl','earn','en','message','today','order2','salee'));
     }
 
     function count2()

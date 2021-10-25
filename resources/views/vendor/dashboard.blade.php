@@ -85,13 +85,13 @@
       </li>
       
        <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap5"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap12"
           aria-expanded="true" aria-controls="collapseBootstrap">
          <i class="fas fa-sliders-h text-light"></i>
           <span>Product</span>
         </a>
-        <div id="collapseBootstrap5" class="collapse @if(request()->is('vendor/get-slider')) show
-         @elseif(request()->is('vendor/slider'))
+        <div id="collapseBootstrap12" class="collapse @if(request()->is('vendor/stock-show')) show
+         @elseif(request()->is('vendor/add-stock'))
           show
          @endif
           " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
@@ -316,6 +316,7 @@
   <script src="{{asset('js/adminfilter.js')}}"></script>  
   <script src="{{asset('js/colorpicker.js')}}"></script>  
   <script src="{{asset('js/show.js')}}"></script>  
+  <script src="{{asset('js/vendor.js')}}"></script>  
 <script src="{{asset('js/jquery.multifield.min.js')}}"></script>
    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  @if(Session()->has('success'))

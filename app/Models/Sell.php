@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Sell extends Model
 {
     use HasFactory;
+    protected $fillable=[
+       'sell_name',
+       'end_time'
+    ];
 }

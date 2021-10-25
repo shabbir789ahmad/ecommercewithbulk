@@ -35,35 +35,28 @@
  
  <div class="container-fluid mt-5">
   <div class="row">
-    @php //dd($logo) @endphp
-      @foreach($logo as $log)
-   
-      <div class="col-md-4 col-sm-4 col-12 mt-3">
-       <div class="card">
-          <div class="card-body">
-            <img src="{{asset('uploads/img/'.$log['logo'])}}" width="100%">
-        
-          <div class="b d-flex justify-content-center mt-5 ">
-       <a href="{{'update-logo/'.$log['id']}}">
-           <button class="btn btn-lg btn-color text-light"> Update
+   @foreach($logos as $log)
+    <div class="col-md-4 col-sm-4 col-12 mt-3">
+     <div class="card">
+      <div class="card-body bg-dark">
+       <img src="{{asset('uploads/img/'.$log['logo'])}}" width="100%" class="bg-dark">
+       <div class="b d-flex justify-content-center mt-5 ">
+        <a href="{{'update-logo/'.$log['id']}}">
+          <button class="btn btn-lg btn-color text-light"> Update
            </button>
         </a>
-       <a href="{{'delete-logo/'.$log['id']}}">  
-         <button class="btn btn-lg btn-danger ml-3" onclick="return confirm('Are you sure?  ')"> Delete
-         </button>
-       </a>
-           
-           </div>
-          </div>
+        <a href="{{'delete-logo/'.$log['id']}}">  
+          <button class="btn btn-lg btn-danger ml-3" onclick="return confirm('Are you sure?  ')"> Delete
+          </button>
+        </a>
        </div>
-
+      </div>
+     </div>
     </div>
- 
-@endforeach
+   @endforeach
+  </div>
+ </div>
+
 </div>
-
- </div>
-
- </div>
 
  @endsection

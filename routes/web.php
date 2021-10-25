@@ -20,6 +20,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\SellController;
 use App\Http\Controllers\DropdownController;
 
 
@@ -175,6 +176,8 @@ Route::post('update-banner',[StoreController::class,'updatebanner'])->name('vend
 
 //store show to vendor
 Route::get('store',[StoreController::class,'getStore'])->name('vendor.store');
+Route::get('vendor-store-product',[StoreController::class,'getProduct'])->name('vendor.vendor-store-product');
+Route::post('on-sale',[StoreController::class,'onSale'])->name('vendor.on-sale');
   });
 });
 
@@ -295,6 +298,14 @@ Route::get('delete-logo/{id}',[SliderController::class,'deleteLogo'])->name('adm
 Route::get('update-logo/{id}',[SliderController::class,'updateLogo'])->name('admin.update-logo/{id}');
 
 Route::post('update-logo2',[SliderController::class,'updateLogo2'])->name('admin.update-logo2');
+
+
+//route for search
+Route::view('sell','Dashboard.make_sell');
+Route::post('make-sell',[SellController::class,'Sell'])->name('admin.make-sell');
+Route::get('show-sale',[SellController::class,'showSale'])->name('admin.show-sale');
+Route::get('delete-sale/{id}',[SellController::class,'deleteSale'])->name('admin.delete-sale/{id}');
+Route::post('update-sale',[SellController::class,'updateSale'])->name('admin.update-sale');
 
 
 //route for search

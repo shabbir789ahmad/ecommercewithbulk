@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Image;
 use App\Models\Stock2;
+use App\Models\Sell;
 use App\Models\Banner;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -124,4 +125,34 @@ class StoreController extends Controller
 
       return redirect()->back()->with('success','Store Banner Updated');
      }
+
+     function getProduct()
+     {
+       $product= Stock::
+        leftjoin('reviews','stocks.id','=','reviews.review_id')
+        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id')
+        ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id')->orderBy('rating','DESC')
+        ->where('stocks.user_id',Auth::user()->id)->get();
+      foreach($product as $st)
+       {
+        $st->image=Image::where('image_id',$st['id'])->take(1)->get();
+        $st->stock=Stock2::where('stock_id',$st['id'])->take(1)->get();
+      }
+
+      $sale=Sell::latest()->take(1)->get();
+     
+      return view('vendor.sale_product',compact('product','sale'));
+    }
+
+    function onSale(Request $req)
+    {
+        $sale=Stock2::findorfail($req->id);
+          
+           $sale->sell_price=$req->sell_price;
+           $sale->discount=$req->discount;
+           $sale->on_sale='1';
+           $sale->save();
+           return redirect()->back()->with('success','your product is on sale');
+        
+    }
 }

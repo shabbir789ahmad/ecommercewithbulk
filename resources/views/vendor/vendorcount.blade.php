@@ -90,8 +90,37 @@
                 </div>
               </div>
             </div>
+          
+   @if($salee)
+     <div class="card-header mt-5 d-inline-block rounded-top  py-3 w-100">
+      <div class="row">
+        <div class="col-md-6">
+         <div class="sale">
+      @foreach($salee as $sal)
+        <h2 class="font-weight-bold ml-3 text-light ">{{ucwords($sal['sell_name'])}}</h2>
+       <div class="d-flex">
+        <p class="ml-4 text-light font-weight-bold">Sale End In 
+         <div id="time " class="d-flex ml-5">
+          <p id="d" class="p-1 bg-warning ml-2 text-light">f</p>
+          <p id="h" class="p-1 bg-warning ml-2 text-light">f</p>
+          <p id="m" class="p-1 bg-warning ml-2 text-light">f</p>
+          <p id="s" class="p-1 bg-warning ml-2 text-light">f</p>
+         </div>
+       </p>
+       </div>
+     @endforeach
+    </div>
+        </div>
+        <div class="col-md-6">
+         <a href="{{url('vendor/store')}}" class="float-right"><p class="btn btn-outline-warning text-light py-2 btn-sm ">Participate</p></a>
+        </div>
+      </div>
+      
+    
+   </div>
+  @endif
  <!-- Area Chart -->
-            <div class="row">
+            <div class="row mt-3">
             <div class="col-xl-8 col-lg-7">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -184,4 +213,43 @@
     </script>
 
 
+<script>
+ @php
+foreach($salee as $sal)
+{
+  $en =date('mdYhms', strtotime($sal->end_time)) ;
+}
+@endphp
+
+var endtime={{ $en}};
+
+ 
+  var timer=setInterval(function(){
+  var strt=new Date().getTime();
+ // alert(strt)
+    var t=endtime-strt;
+//alert(t)
+    if(t>0)
+    {
+      let da = Math.floor(t / (1000 * 60 * 60 * 24));
+      let hr = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let ms = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        let sc = Math.floor((t % (1000 * 60)) / 1000);
+
+document.getElementById("d").innerHTML= ("0" + da).slice(-2) +
+"<span class='d'>d</span>";
+
+document.getElementById("h").innerHTML= ("0" + hr).slice(-2) +
+"<span class='d'>h</span>";
+
+document.getElementById("m").innerHTML= ("0" + ms).slice(-2) +
+"<span class='d'>m</span>";
+
+document.getElementById("s").innerHTML= ("0" + sc).slice(-2) +
+"<span class='d'>s</span>";
+    }else{
+
+    }
+  },1000);
+</script>
 @endsection

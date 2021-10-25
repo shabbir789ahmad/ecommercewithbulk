@@ -30,7 +30,73 @@
   </div>
 
 
-    
+ <div class="container-fluid mt-5 d-inline-block">
+  <div class="sale">
+   @foreach($sale as $sal)
+    <h2 class="font-weight-bold ml-3 keephome ">{{ucwords($sal['sell_name'])}}</h2>
+    <div class="d-flex">
+   <p class="ml-4 text-primary">On Sale Now
+       <div id="time " class="d-flex ml-5">
+        <p id="d" class="p-1 bg-primary ml-2 text-light">f</p>
+        <p id="h" class="p-1 bg-primary ml-2 text-light">f</p>
+        <p id="m" class="p-1 bg-primary ml-2 text-light">f</p>
+        <p id="s" class="p-1 bg-primary ml-2 text-light">f</p>
+       </div>
+    </p>
+  </div>
+   @endforeach
+  </div>
+
+ </div>
+
+
+
+<div class="container-fluid mt-4">
+ <div class="owl-carousel owl-theme ml-2">
+@foreach($product as $pro)
+
+  <div class="item">
+    <div class="card ">
+     <div class="a">
+      <a href="{{'productpage/'.$pro['id']. '/' .$pro['drop_id']}}"> @foreach($pro->image as $img)
+        @if($loop->first)
+        <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
+        @endif
+       @endforeach</a>
+       
+       <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
+
+       @foreach($pro->stock2 as $st)
+       <a > 
+        <p class="overlay5 ">
+        <span class="fa fa-star text-light ">{{$pro['rating']}}</span>
+        </p>
+       </a>
+
+        @if($st['discount'])
+        <a >  <p class="overlay2 ">{{ceil( ($st['discount']/$st['sell_price'])*100)
+       }}% </p></a>
+       @else
+       @endif
+     </div>
+     <div class="card-body">
+       <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$st['sell_price'] - $st['discount']}}<del class="text-secondary">
+       <small class="text-danger">${{$st['sell_price']}}</small></del>  </span>
+      </p>
+       @endforeach
+      
+        </div>
+    </div>
+  </div>
+
+  @endforeach
+  
+ 
+  
+</div>
+</div>
+
+
 
 <div class="container-fluid mt-5 ">
   @foreach($front as $f)
@@ -58,7 +124,7 @@
         <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
         @endif
        @endforeach</a>
-        <a href="{{'productpage/'.$pro['id']. '/' .$pro['drop_id']}}"> <p class="overlay2 "><i class="fas fa-eye fa-lg"></i></p></a>
+       
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
 
        @foreach($pro->stock2 as $st)
@@ -69,7 +135,7 @@
        </a>
 
         @if($st['discount'])
-        <a >  <p class="overlay4 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
+        <a >  <p class="overlay2 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
        }}%</p></a>
        @else
        @endif
@@ -141,7 +207,7 @@
         @endif
        @endforeach
       </a>
-      <a href="{{'productpage/'.$pro['id']. '/' .$pro['drop_id']}}"> <p class="overlay2 "><i class="fas fa-eye fa-lg"></i></p></a>
+      
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 "><i class="far fa-heart text-danger m-2 fa-lg "></i></p></a>
         @foreach($pro->stock2 as $st)
         <a > 
@@ -150,7 +216,7 @@
         </p>
        </a>
         @if($st['discount'])
-        <a >  <p class="overlay4 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
+        <a >  <p class="overlay2 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
        }}%</p></a>
        @else
        @endif
@@ -220,7 +286,7 @@
         @endif
        @endforeach
       </a>
-        <a href="{{'productpage/'.$pro['id']. '/' .$pro['drop_id']}}"> <p class="overlay2 "><i class="fas fa-eye fa-lg"></i></p></a>
+       
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 "><i class="far fa-heart text-danger m-2 fa-lg "></i></p></a>
        <a > 
         <p class="overlay5 ">
@@ -236,7 +302,7 @@
        </a>
 
         @if($st['discount'])
-        <a >  <p class="overlay4 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
+        <a >  <p class="overlay2 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
        }}%</p></a>
        @else
        @endif
@@ -294,7 +360,7 @@
         @endif
        @endforeach
       </a>
-       <a href="{{'productpage/'.$pro['id']. '/' .$pro['drop_id']}}"> <p class="overlay2 "><i class="fas fa-eye fa-lg"></i></p></a>
+       
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 "><i class="far fa-heart text-danger m-2 fa-lg "></i></p></a>
       @foreach($pro->stock2 as $st)
        <a > 
@@ -304,7 +370,7 @@
        </a>
 
         @if($st['discount'])
-        <a >  <p class="overlay4 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
+        <a >  <p class="overlay2 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
        }}%</p></a>
        @else
        @endif
@@ -358,7 +424,7 @@
         @endif
        @endforeach
        </a>
-       <a href="{{'productpage/'.$pro['id']. '/' .$pro['drop_id']}}"> <p class="overlay2 "><i class="fas fa-eye fa-lg"></i></p></a>
+       
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 "><i class="far fa-heart text-danger m-2 fa-lg "></i></p></a>
       @foreach($pro->stock2 as $st)
        <a > 
@@ -368,7 +434,7 @@
        </a>
 
         @if($st['discount'])
-        <a >  <p class="overlay4 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
+        <a >  <p class="overlay2 text-light">{{ceil( ($st['discount']/$st['sell_price'])*100)
        }}%</p></a>
        @else
        @endif
@@ -388,4 +454,45 @@
   
 </div>
 </div>
+
+
+<script>
+ @php
+foreach($sale as $sal)
+{
+  $en =date('mdYhms', strtotime($sal->end_time)) ;
+}
+@endphp
+
+var endtime={{ $en}};
+
+ 
+  var timer=setInterval(function(){
+  var strt=new Date().getTime();
+ // alert(strt)
+    var t=endtime-strt;
+//alert(t)
+    if(t>0)
+    {
+      let da = Math.floor(t / (1000 * 60 * 60 * 24));
+      let hr = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let ms = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        let sc = Math.floor((t % (1000 * 60)) / 1000);
+
+document.getElementById("d").innerHTML= ("0" + da).slice(-2) +
+"<span >d</span>";
+
+document.getElementById("h").innerHTML= ("0" + hr).slice(-2) +
+"<span >h</span>";
+
+document.getElementById("m").innerHTML= ("0" + ms).slice(-2) +
+"<span >m</span>";
+
+document.getElementById("s").innerHTML= ("0" + sc).slice(-2) +
+"<span>s</span>";
+    }else{
+
+    }
+  },1000);
+</script>
   @endsection 

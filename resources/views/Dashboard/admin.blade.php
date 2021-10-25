@@ -92,12 +92,14 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap16"
           aria-expanded="true" aria-controls="collapseBootstrap">
          <i class="fas fa-window-maximize text-light"></i>
-          <span>Logo</span>
+          <span>Make Sale</span>
         </a>
         <div id="collapseBootstrap16" class="collapse
          " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('admin/sell')}}">Make Sell</a>
+            <a class="collapse-item" href="{{url('admin/sell')}}">Make Sale</a>
+             <div class="dropdown-divider"></div>
+            <a class="collapse-item" href="{{url('admin/show-sale')}}">All Sale</a>
            </div>
         </div>
       </li>

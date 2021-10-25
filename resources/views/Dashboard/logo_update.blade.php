@@ -43,9 +43,9 @@
             
   <form action="{{url('admin/update-logo2')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        @foreach($logo as $log)
-  <input type="hidden" name="id" value="{{$log['id']}}">
-  @endforeach
+        
+  <input type="hidden" name="id" value="{{$slider['id']}}">
+
   <label class="text-dark">Logo Image</label>
   
 <div class="form-group">
@@ -58,7 +58,7 @@
  </div>
 </div>
   <span class="text-danger mt-3">@error('image') {{$message}} @enderror</span>
-  <img src="" width="20%">
+  <img src="{{asset('uploads/img/' .$slider['logo'])}}" width="20%" class="bg-dark">
   
  
     

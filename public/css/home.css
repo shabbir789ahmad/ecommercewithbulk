@@ -40,12 +40,11 @@ select{
    position: absolute; 
   bottom: 72%;
   right:3%; 
-  background: #166387;
-  color: #f1f1f1; 
+  background: #000000;
+  color: #CE2224; 
   width: 15%;
   transition: .5s ease;
   opacity:1;
-  color: white;
   padding: 2%;
   text-align: center;
 }
@@ -76,15 +75,7 @@ select{
   padding: 3%;
   text-align: center;
 }
-.a .overlay4 {
- position: absolute;
- width: 15%;
- padding: 2%;
- bottom: 88%;
- left: 3%;
- text-align: center;
- background:#166387 ;
-}
+
 .card-img-top{
   display: block;
   width: 100%;

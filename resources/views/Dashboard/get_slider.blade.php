@@ -40,8 +40,9 @@
       <div class="col-md-4 col-sm-4 col-12 mt-3">
        <div class="card">
           <div class="card-body">
-            <img src="{{asset('uploads/img/'.$slid['image'])}}" width="100%">
+            <img src="{{asset('uploads/img/'.$slid['image'])}}" width="100%" height="160rem">
         
+        <p class="font-weight-bold">{{$slid['heading']}}</p>
           <div class="b d-flex justify-content-center mt-3">
        <a href="{{'update-slider/'.$slid['id']}}">
            <button class="btn btn-lg btn-color text-light"> Update

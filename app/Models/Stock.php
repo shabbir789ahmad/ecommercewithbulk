@@ -12,6 +12,7 @@ class Stock extends Model
     'product',
     'size_image',
     'product_status',
+    'on_sale',
     'drop_id',
     'cat_id',
     'user_id'

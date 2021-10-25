@@ -9,6 +9,7 @@ use App\Models\Stock2;
 use App\Models\Vendor;
 use App\Models\Category;
 use App\Models\Logo;
+use App\Models\Sell;
 use App\Models\Mainpage;
 use App\Models\Dropdown;
 use App\Models\Image;
@@ -71,8 +72,9 @@ class SliderController extends Controller
          ->where('stock_status','1')->take(1)->get();
       }
       $dropdown=Dropdown::all();
-   //dd($product2);
-      return view('home',compact('slider','product','product2','front','product3','dropdown'));
+   
+     $sale=Sell::latest()->take(1)->get();
+      return view('home',compact('slider','product','product2','front','product3','dropdown','sale'));
   }
 
   function uploadSlider(Request $req)
@@ -106,7 +108,10 @@ class SliderController extends Controller
   function deleteSlider($id)
   {
     $slider=Slider::findorfail($id);
-    
+     if($slider->image)
+     {
+      unlink('uploads/img/' .$slider->image);
+     }
     $slider->delete();
 
     return redirect()->back()->with('success',"Slider has been Deleted");
@@ -163,9 +168,9 @@ class SliderController extends Controller
 
   function getLogo()
   {
-    $logo=Logo::all();
+    $logos=Logo::all();
       //dd($logo);
-    return view('Dashboard.logo_show',compact('logo'));
+    return view('Dashboard.logo_show',compact('logos'));
   }
 
   function deleteLogo($id)
@@ -179,6 +184,7 @@ class SliderController extends Controller
     function updateLogo($id)
   {
     $slider=Logo::findorfail($id);
+    //dd($slider);
    return view('Dashboard.logo_update',compact('slider'));
   }
 
