@@ -35,6 +35,7 @@
   
     <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}</p>
     <p class="text-dark name3 ml-3 ml-md-0">{{ucwords($detail['detail'])}}<br>
+      <span class="float-right"><button class="btn-sm btn btn-store rounded btn-check text-light">Detail</button></span>
   <span class="text-dark"  style="font-size: 1.2rem;">
      
   @for($i=0; $i<5; $i++)

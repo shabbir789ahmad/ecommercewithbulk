@@ -15,7 +15,7 @@
     
     <div class="card shadow border ml-auto w-50 p-0 ">
     <div class="card-body text-dark">
-  <h4 class="text-center font-weight-bold text-color">Update or Delete Front Page Heading</h4>
+  <h4 class="text-center font-weight-bold text-color">Update or Delete Front Page Categories</h4>
    </div>
  </div>
 
@@ -47,14 +47,14 @@
 <table class="table align-items-center table-flush" id="dataTable">
    <thead class="thead-light">
    <tr>
-    <th>Heading 1</th>
-    <th>Heading 2</th>
-    <th>Heading 3</th>
-    <th>Tag 3</th>
+    <th>Category </th>
+    <th>Category </th>
+    <th>Category </th>
+    <th>Search Tag </th>
     <th >Heading 4</th>
-    <th >tag 4</th>
+    <th >Search Tag </th>
     <th >Heading 5</th>
-    <th >Tag 5</th>
+    <th >Search Tag </th>
     
     <th class="text-center">Operation</th>
     </tr>
@@ -70,20 +70,20 @@
     <td class="a">{{ucfirst($show['c3'])}}</td>
      @foreach($drop as $d)
     @if($show['tag3_id']==$d['id'])
-    <td class="a">{{ucfirst($d['name'])}}</td>
+    <td class="a">{{ucfirst($d['category'])}}</td>
     @endif
      @endforeach
     <td class="a">{{ucfirst($show['c4'])}}</td>
      @foreach($drop as $d)
     @if($show['tag4_id']==$d['id'])
-    <td class="a">{{ucfirst($d['name'])}}</td>
+    <td class="a">{{ucfirst($d['category'])}}</td>
     @endif
      @endforeach
    
     <td class="a">{{ucfirst($show['c5'])}}</td>
     @foreach($drop as $d)
     @if($show['tag5_id']==$d['id'])
-    <td class="a">{{ucfirst($d['name'])}}</td>
+    <td class="a">{{ucfirst($d['category'])}}</td>
     @endif
      @endforeach
    

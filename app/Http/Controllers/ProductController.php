@@ -217,11 +217,142 @@ class ProductController extends Controller
 
     $brand= Brand::all();
           
-         //dd($size);
       
         return view('product',compact('product','color','brand','size'));
   }
 
+ function SaleProduct (Request $req)
+   {
+    $sort="";
+    $color="";
+    $size="";
+    $brand="";
+    $price="";
+    $min="1000";
+    $max="2000";
+
+     $now=Carbon::now();
+    
+    if($req->get('sort2') !== Null)
+    {
+        $sort=$req->get('sort2');
+    }
+    
+     $new="";
+    if($req->get('new2') !== Null)
+    {
+        $new=$req->get('new2');
+    }
+     $price="";
+    if($req->get('price') !== Null)
+    {
+        $price=$req->get('price');
+    }
+   
+  //echo $new;
+    $query= Stock::
+      join('stock2s','stocks.id','=','stock2s.stock_id')
+       ->select('stocks.product','stocks.detail','stocks.id','stocks.drop_id','stock2s.on_sale','stock2s.sell_price','stock2s.discount');
+
+     if($req->get('color2') !== Null)
+       {
+        $query=$query->join('colors','stocks.id','=','colors.filter_id');
+        $query=$query->where('colors.color',$req->get('color2'));
+        }
+
+     if($req->get('brand2') !== Null)
+       {
+          $query=$query->join('stores','stocks.id','=','stores.brand_id');
+        $query=$query->where('brand',$req->get('brand2'));
+        }
+
+     if($req->get('size2') !== Null)
+        {
+            $query=$query->join('sizes','stocks.id','=','sizes.size_id');
+        $query=$query->where('size',$req->get('size2'));
+        }
+
+        if($sort=='product')
+        {
+            $query=$query->orderBy('product','asc');
+        }
+        if($sort=='date')
+        {
+            $query=$query->orderBy('stocks.created_at','asc');
+        }
+        if($sort=='price_asc')
+        {
+            $query=$query->orderBy('sell_price','asc');
+        }
+        if($sort=='price_desc')
+        {
+            $query=$query->orderBy('sell_price','desc');
+        }
+
+        //sort by week and month
+        
+         if($new=='this')
+        {
+           $start = $now->startOfWeek()->format('Y-m-d H:i');
+           $end = $now->endOfWeek()->format('Y-m-d H:i');
+           $query=$query->whereBetween('stocks.created_at',[$start,$end]);
+        }
+        if($new=='last')
+        {
+          $query=$query->where('stocks.created_at','>=',Carbon::now()->subdays(15));
+        }
+        if($new=='month')
+        {
+            $query=$query->whereMonth('stocks.created_at', date('m'));
+        }
+   // price filter
+      if($price=='10')
+        {
+          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+           $query=$query->where('sell_price','<=','10');
+        }
+         if($price=='20' )
+        {
+          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+           $query=$query->whereBetween('sell_price',['10','20']);
+        }
+         if($price=='30' )
+        {
+          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+           $query=$query->whereBetween('sell_price',['20','30']);
+        }
+        
+         if($price=='31' )
+        {
+          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+           $query=$query->whereBetween('sell_price',['31','60']);
+        }
+         $query=$query->where('on_sale','1');
+        $query=$query->paginate(10);
+   
+     $product=$query;
+ //dd($product);
+      foreach($product as $pro)
+      {
+        $pro->image=Image::where('image_id',$pro->id)->take(1)->get();
+         $pro->stock2=Stock2::where('stock_id',$pro->id)
+         ->where('stock_status','1')->take(1)->get();
+      }
+    
+     $color= Stock::
+        leftjoin('colors','stocks.id','=','colors.filter_id')
+        ->select('stocks.drop_id','colors.color','colors.filter_id')->get();
+    $size= Stock::
+       leftjoin('sizes','stocks.id','=','sizes.size_id')
+       ->select('stocks.drop_id','sizes.size','sizes.size_id')
+        ->get();
+
+    $brand= Brand::all();
+          
+          //dd($product);
+      
+        return view('sale_product',compact('product','color','brand','size'));
+  }
 
   
  

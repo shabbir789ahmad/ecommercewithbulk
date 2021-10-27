@@ -1,136 +1,133 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Laravel Crop Image Before Upload using Cropper JS</title>
-    <meta name="_token" content="{{ csrf_token() }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" integrity="sha256-jKV9n9bkk/CTP8zbtEtnKaKf+ehRovOYeKoyfthwbC8=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js" integrity="sha256-CgvH7sz3tHhkiVKh05kSUgG97YtzYNnWt6OXcmYzqHY=" crossorigin="anonymous"></script>
-</head>
-<style type="text/css">
-img {
-  display: block;
-  max-width: 100%;
-}
-.preview {
-  overflow: hidden;
-  width: 160px; 
-  height: 160px;
-  margin: 10px;
-  border: 1px solid red;
-}
-.modal-lg{
-  max-width: 1000px !important;
-}
-</style>
-<body>
-<div class="container">
-    <h1>Laravel Crop Image Before Upload using Cropper JS - NiceSnippets.com</h1>
-    <input type="file" name="image" class="image">
-</div>
-
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Laravel Crop Image Before Upload using Cropper JS - NiceSnippets.com</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
+<div class="container mt-0 mt-sm-0 mt-md-5" >
+ <ul class="nav nav-pills  bg-store p-3" id="pills-tab" role="tablist">
+  <li class="nav-item n1">
+    <a class="nav-link n2 active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Without Sale</a>
+  </li>
+  <li class="nav-item n1">
+    <a class="nav-link n2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">On Sale</a>
+  </li>
+ 
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+     <!-- top rated-->
+     <div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+   @foreach($product as $st)
+   @foreach($st->stock as $stock)
+   @if(!$stock['on_sale'])
+   <div class="swiper-slide">
+    <div class="card store-card shadow">
+     <div class="overly">
+      <a href="{{url('vendor/stock-detail/' .$st['id'])}}">
+      @foreach($st->image as $img)
+       <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
+      @endforeach
+      </a>
+      @foreach($st->stock as $stock)
+      @foreach($sale as $sl)
+      @if($sl['end_time']>= $date)
+      <div class="over-text">
+       <p class="sle mt-2" data-id="{{$stock['id']}}">Apply Sale </p>
       </div>
-      <div class="modal-body">
-        <div class="img-container">
-            <div class="row">
-                <div class="col-md-8">
-                    <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
-                </div>
-                <div class="col-md-4">
-                    <div class="preview"></div>
-                </div>
-            </div>
-        </div>
+      @endif
+      @endforeach
+       <div class="over-text2">
+        <p class="sle2 text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
+           }}%</p>
+       </div>
+       @endforeach
+     </div>
+     <div class="card-body p-0">
+      <p class="stor-text text-danger">{{ucfirst($st['product'])}}</p>
+      <div class="d-flex">
+        @foreach($st->stock as $stock)
+         <p class="ml-auto mr-2 text2">${{$stock['sell_price']-$stock['discount']}} 
+          <del class="text-danger">@if($stock['discount']) ${{$stock['sell_price']}} @else @endif</del></p>
+        @endforeach
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" id="crop">Crop</button>
+     </div>
+     <div class="card-footer">
+      <div class="text-center rating">
+        @for($i=0; $i<5; $i++)
+        @if($i<$st['rating'])
+        <span class="fa fa-star checked "></span>
+        @else
+        <span class="fa fa-star"></span> 
+        @endif
+         @endfor
+       </div>
       </div>
     </div>
+   </div>
+   @endif
+   @endforeach
+   @endforeach
   </div>
-</div>
+    <div class="swiper-pagination"></div>
+ </div>
+        
+    </div>
+
+  </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <!-- New Product-->
+  <div class="row mt-3">
+    @foreach($product as $st)
+      @foreach($st->stock as $stock)
+      @if($stock['on_sale'])
+     <div class="col-md-4 col-sm-6 col-lg-4 ">
+      <div class="card store-card shadow">
+        <div class="overly">
+        <a href="{{url('vendor/stock-detail/' .$st['id'])}}">
+          @foreach($st->image as $img)
+        <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
+        @endforeach
+      </a>
+      @foreach($st->stock as $stock)
+      @foreach($sale as $sl)
+      @if($sl['end_time']>= $date)
+     <div class="over-text">
+       <p class="sle-end mt-2" data-eid="{{$stock['id']}}" data-edisc="{{$stock['discount']}}" data-esell="{{$stock['sell_price']}}">End Sale </p>
+       </div>
+       @endif
+       @endforeach
+       <div class="over-text2">
+        <p class="sle2 text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
+       }}%</p>
+       </div>
+       @endforeach
+     
+    </div>
+       <div class="card-body p-0">
+       <p class="stor-text text-danger">{{ucfirst($st['product'])}}</p>
+       <div class="d-flex">
+        <p class="text2">{{ucfirst($st['detail'])}} </p>
+        @foreach($st->stock as $stock)
+        <p class="ml-auto mr-2 text2">${{$stock['sell_price']-$stock['discount']}} 
+          <del class="text-danger">@if($stock['discount']) ${{$stock['sell_price']}} @else @endif</del></p>
+        @endforeach
+       </div>
+      </div>
+      <div class="card-footer">
+         <div class="text-center rating">
+        
+        @for($i=0; $i<5; $i++)
+        @if($i<$st['rating'])
+        <span class="fa fa-star checked "></span>
+        @else
+        <span class="fa fa-star"></span> 
+        @endif
+         @endfor
+       
+          </div>
+       </div>
+      </div>
+   </div>
+     @endif
+   @endforeach
+   @endforeach
+  </div>
+  </div>
 
 </div>
-</div>
-<script>
-
-var $modal = $('#modal');
-var image = document.getElementById('image');
-var cropper;
-  
-$("body").on("change", ".image", function(e){
-    var files = e.target.files;
-    var done = function (url) {
-      image.src = url;
-      $modal.modal('show');
-    };
-    var reader;
-    var file;
-    var url;
-
-    if (files && files.length > 0) {
-      file = files[0];
-
-      if (URL) {
-        done(URL.createObjectURL(file));
-      } else if (FileReader) {
-        reader = new FileReader();
-        reader.onload = function (e) {
-          done(reader.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-});
-
-$modal.on('shown.bs.modal', function () {
-    cropper = new Cropper(image, {
-      aspectRatio: 1,
-      viewMode: 3,
-      preview: '.preview'
-    });
-}).on('hidden.bs.modal', function () {
-   cropper.destroy();
-   cropper = null;
-});
-
-$("#crop").click(function(){
-    canvas = cropper.getCroppedCanvas({
-        width: 160,
-        height: 160,
-      });
-
-    canvas.toBlob(function(blob) {
-        url = URL.createObjectURL(blob);
-        var reader = new FileReader();
-         reader.readAsDataURL(blob); 
-         reader.onloadend = function() {
-            var base64data = reader.result; 
-
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "image-cropper/upload",
-                data: {'_token': $('meta[name="_token"]').attr('content'), 'image': base64data},
-                success: function(data){
-                    $modal.modal('hide');
-                    alert("success upload image");
-                }
-              });
-         }
-    });
-})
-
-</script>
-</body>
-</html> 

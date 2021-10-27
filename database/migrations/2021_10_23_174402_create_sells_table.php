@@ -16,7 +16,9 @@ class CreateSellsTable extends Migration
         Schema::create('sells', function (Blueprint $table) {
             $table->id();
             $table->string('sell_name');
+            $table->datetime('start_time');
             $table->datetime('end_time');
+            $table->string('sell_status');
             $table->timestamps();
         });
     }

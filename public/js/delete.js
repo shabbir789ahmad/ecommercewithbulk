@@ -164,6 +164,7 @@ $(document).ready(function(){
         $('#sell').val(name)
         let start=$(this).data('start')
         $('#strt').val(start)
+        
         let end=$(this).data('end')
         $('#en').val(end)
     });

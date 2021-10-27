@@ -103,7 +103,7 @@ section{
 }
 }
 .nav-btn{
-    flex: 1;
+    flex: 5;
     display: flex;
 }
 
@@ -136,7 +136,6 @@ section{
     padding: .5rem 1.3rem;
     font-size: .8rem;
     border: 2px solid #fff;
-    border-radius: 2rem;
     line-height: 1;
    justify-content: right;
     transition: .3s;
@@ -378,7 +377,7 @@ section{
         background-color: black;
         flex-direction: column;
         align-items: center;
-        justify-content: space-between;
+        
         overflow-x: hidden;
         overflow-y: auto;
         transform: translateX(-100%);

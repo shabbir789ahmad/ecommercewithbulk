@@ -92,6 +92,8 @@
             </div>
           
    @if($salee)
+   @foreach($salee as $sal)
+    @if($sal['end_time']>=$date)
      <div class="card-header mt-5 d-inline-block rounded-top  py-3 w-100">
       <div class="row">
         <div class="col-md-6">
@@ -112,12 +114,14 @@
     </div>
         </div>
         <div class="col-md-6">
-         <a href="{{url('vendor/store')}}" class="float-right"><p class="btn btn-outline-warning text-light py-2 btn-sm ">Participate</p></a>
+         <a href="{{url('vendor/vendor-store-product')}}" class="float-right"><p class="btn btn-outline-warning text-light py-2 btn-sm ">Participate</p></a>
         </div>
       </div>
       
     
    </div>
+  @endif
+  @endforeach
   @endif
  <!-- Area Chart -->
             <div class="row mt-3">
@@ -217,7 +221,7 @@
  @php
 foreach($salee as $sal)
 {
-  $en =date('mdYhms', strtotime($sal->end_time)) ;
+  $en = strtotime($sal->end_time)*1000 ;
 }
 @endphp
 

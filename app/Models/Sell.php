@@ -10,6 +10,8 @@ class Sell extends Model
     use HasFactory;
     protected $fillable=[
        'sell_name',
-       'end_time'
+       'start_time',
+       'end_time',
+       'sell_status'
     ];
 }

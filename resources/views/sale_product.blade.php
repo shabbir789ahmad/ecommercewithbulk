@@ -157,9 +157,42 @@
        
 <div id="content" style="overflow:hidden">
   
-  
- 
- 
+  <div class="container-fluid" style="height: 7rem; background: #166387;">
+   <div class="nav-btn ">
+     <div class="nav-links">
+      <ul>
+       <li class="nav-link" style="--i: .85s">
+        <a href="#">Category<i class="fas fa-caret-down"></i></a>
+         <div class="dropdown">
+          <ul>
+            <li class="dropdown-link" >
+             <a href="#">ghfg<i class="fas fa-caret-down"></i></a>
+              <div class="dropdown second">
+               <ul>
+                <li class="dropdown-link">
+                 <a href="#">fgdfg<i class="fas fa-caret-down"></i></a>
+                 <div class="dropdown second">
+                 <ul>
+                  <li class="dropdown-link">
+                   <a href="">bvb</a>
+                  </li>
+                  <div class="arrow"></div>
+               </ul>
+              </div>
+            </li>
+            <div class="arrow"></div>
+          </ul>
+        </div>
+       </li>
+       <div class="arrow"></div>
+     </ul>
+    </div>
+   </li>
+  </ul>
+</div>
+</div>
+</div>
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
      <button type="button" id="sidebarCollapse" class="btn btn-info d-block d-md-none">
@@ -170,6 +203,8 @@
      </div>
     </div>
   </nav>
+
+
 
  <div class="row mr-2">
    @foreach($product as $pro)

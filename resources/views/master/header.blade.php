@@ -22,19 +22,19 @@ $sub=Category::category();
       <ul>
         @foreach($sub as $cat)
         <li class="dropdown-link">
-         <a href="#">{{$cat['category']}}<i class="fas fa-caret-down"></i></a>
+         <a href="#">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
           <div class="dropdown second">
           <ul>
             @foreach($cat['subcat'] as $subc)
             <li class="dropdown-link">
-              <a href="#">{{$subc['smenue']}}<i class="fas fa-caret-down"></i></a>
+              <a href="#">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
                <div class="dropdown second">
           <ul>
 
             @foreach($cat['drop'] as $drp)
               @if($subc['id']==$drp['dropdown_id'])
             <li class="dropdown-link">
-              <a href="{{url('product/' .$drp['id'])}}">{{$drp['name']}}</a>
+              <a href="{{url('product/' .$drp['id'])}}">{{ucwords($drp['name'])}}</a>
             </li>
             @endif
             @endforeach
@@ -65,7 +65,10 @@ $sub=Category::category();
      </div>
    </div>
   </form>
-      
+   <a href="{{url('vendor/login')}}" class="ml-sm-0 ml-md-auto mt-3 rounded">
+    <button class="btn btn-sm text-light btn-color mt-1">vendor</button></a> 
+   <a href="{{url('affiliate')}}" class=" mt-3 ml-1">
+    <button class="btn btn-sm text-light btn-color mt-1">Affiliate</button> </a>
 </div>
 
       <div class="icn mt-3 float-right mr-3 mr-md-0">
@@ -113,10 +116,7 @@ $sub=Category::category();
        </div>
       
           </a>
-          <a href="{{url('vendor/login')}}" class="float-right">
-            <button class="btn btn-sm text-light btn-color mt-1">vendor</button>
-            
-          </a>
+          
 
             </div>      
   <div class="hamburger-menu-container">

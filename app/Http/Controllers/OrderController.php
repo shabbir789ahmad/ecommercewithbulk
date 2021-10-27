@@ -81,7 +81,12 @@ class OrderController extends Controller
 
          if($data)
          {
+          foreach($data as $dt)
+          {
+            $quen=Stock2::where('id',$dt['id'])->get();
+            $quen->decrement('stock');
             $req->session()->forget('cart');
+          }
             
          }
           $this->orderConform($order,$data);

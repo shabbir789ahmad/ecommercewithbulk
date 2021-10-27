@@ -53,6 +53,13 @@ $('#stock_search').change(function(){
 
 });
 
+$('#shedule').change(function(){
+  var stat=$(this).val();
+  $('#sale-sh').val(stat);
+   $('#form-shedul').submit();
+
+});
+
 });
 	
 

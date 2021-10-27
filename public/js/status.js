@@ -118,5 +118,22 @@ $('.js-switch4').change(function () {
    });
  });
 
+ $('.js-switchsa').change(function(e){
+   
+   let status=$(this).prop('checked')===true ? 1:0;
+   let id=$(this).data('id')
+   $.ajax({
+
+     url :'/admin/sale-status/',
+     dataType :'json',
+     type : 'GET',
+     data: {'sell_status':status,'id':id},
+     success:function(data)
+     {
+        console.log(data.message);
+     }
+   });
+ });
+
 });
 

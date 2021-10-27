@@ -94,12 +94,15 @@
          <i class="fas fa-window-maximize text-light"></i>
           <span>Make Sale</span>
         </a>
-        <div id="collapseBootstrap16" class="collapse
+        <div id="collapseBootstrap16" class="collapse @if(request()->is('admin/sell')) show
+         @elseif(request()->is('admin/show-sale'))
+          show
+         @endif
          " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('admin/sell')}}">Make Sale</a>
+            <a class="collapse-item @if(request()->is('admin/sell')) active @endif" href="{{url('admin/sell')}}">Make Sale</a>
              <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/show-sale')}}">All Sale</a>
+            <a class="collapse-item @if(request()->is('admin/show-sale')) active @endif" href="{{url('admin/show-sale')}}">All Sale</a>
            </div>
         </div>
       </li>
@@ -129,7 +132,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
           aria-expanded="true" aria-controls="collapseBootstrap">
          <i class="fas fa-bars text-light"></i>
-          <span>Menue</span>
+          <span>Category</span>
         </a>
         <div id="collapseBootstrap4" class="collapse
        @if(request()->is('admin/show-category')) show
@@ -139,10 +142,10 @@
         " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">
 
-          <a class="collapse-item" href="{{url('admin/show-category')}}">All Menu</a>
+          <a class="collapse-item" href="{{url('admin/show-category')}}">All Category</a>
 
              <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/get-cat')}}">Upload Menu</a>
+            <a class="collapse-item" href="{{url('admin/get-cat')}}">Upload Category</a>
           
           </div>
         </div>
@@ -152,18 +155,18 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
           aria-controls="collapseForm">
           <i class="fab fa-wpforms text-light"></i>
-          <span>SubMenue</span>
+          <span>Sub Category</span>
         </a>
         <div id="collapseForm" class="collapse @if(request()->is('admin/show-sub-category')) show
          @elseif(request()->is('admin/get-sub-category'))
           show
          @endif" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">
-           <a class="collapse-item" href="{{url('admin/show-sub-category')}}">All SubMenu</a>
+           <a class="collapse-item" href="{{url('admin/show-sub-category')}}">All Sub category</a>
             
 
              <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/get-sub-category')}}">Upload SubMenu</a>
+            <a class="collapse-item" href="{{url('admin/get-sub-category')}}">Upload Sub category</a>
          
             
           </div>
@@ -426,6 +429,11 @@ elems2.forEach(function(html) {
 let elemsu = Array.prototype.slice.call(document.querySelectorAll('.js-switchu'));
 
 elemsu.forEach(function(html) {
+    let switchery = new Switchery(html,  { size: ' small' });
+});
+let elemssa = Array.prototype.slice.call(document.querySelectorAll('.js-switchsa'));
+
+elemssa.forEach(function(html) {
     let switchery = new Switchery(html,  { size: ' small' });
 });
 

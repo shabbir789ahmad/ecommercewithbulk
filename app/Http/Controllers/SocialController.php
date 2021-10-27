@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Social;
 use App\Models\Mainpage;
 use App\Models\Category;
+use App\Models\Dropdown;
 class SocialController extends Controller
 {
     function uploadLink(Request $req)
@@ -106,7 +107,7 @@ class SocialController extends Controller
     function showfront()
     {
         $main=Mainpage::paginate(10);
-        $drop=Dropdown::All();
+        $drop=Category::All();
         // dd($drop);
       return view('Dashboard.home_page_show',compact('main','drop'));
     }

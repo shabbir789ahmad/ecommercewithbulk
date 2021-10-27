@@ -146,10 +146,10 @@
              spaceBetween: 40,},
           '640': {
              slidesPerView: 3,
-             spaceBetween: 50, },
+             spaceBetween: 10, },
              '1000': {
-             slidesPerView: 7,
-             spaceBetween: 50, },
+             slidesPerView: 10,
+             spaceBetween: 10, },
   },
         navigation: {
               nextEl: '.swiper-button-next',

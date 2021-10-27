@@ -15,7 +15,7 @@
     
     <div class="card shadow border ml-auto w-50 p-0 ">
     <div class="card-body text-dark">
-  <h4 class="text-center font-weight-bold text-color">All Sale</h4>
+  <h4 class="text-center font-weight-bold text-color">Search Results</h4>
    </div>
  </div>
 
@@ -39,28 +39,7 @@
  <div class="row">
   <div class="col-lg-12">
    <div class="card mb-4">
-    <div class="row mt-3">
-     <div class="col-md-4 col-12">
-      <select class="form-control ml-2" id="shedule">
-        <option selected disabled hidden>Filter Sale</option>
-        <option value="online">Online Now Sale</option>
-        <option value="finished">OffLine Sale</option>
-        <option value="shedule">Schedule Sale</option>
-      </select>
-     </div>
-     <div class="col-md-4"></div>
-     <div class="col-md-4">
-      @if (session('error'))
-      <div class="alert alert-danger">{{ session('error') }}</div>
-      @endif
-      <form class="form-inline my-2 my-lg-0 w-100" method="GET" action="{{url('admin/search-sale')}}">
-       <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search" name="search">
-       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-     </form>
-     </div> 
-    </div>
 
-   
 <div class="table-responsive p-3">
 <table class="table align-items-center table-flush" id="dataTable">
    <thead class="thead-light">
@@ -133,7 +112,5 @@
   </div>
 </div>
 
-<form id="form-shedul">
-  <input type="hidden" name="sale_sche" id="sale-sh">
-</form>
+
  @endsection

@@ -51,18 +51,17 @@
        </div>                      
       </div>
      </div>
-
-     <label class="text-dark">Sale Start Time</label> 
+ <label class="text-dark">Sale Start Time</label> 
      <div class="form-group">
       <div class="input-group clockpicker" id="clockPicker1">  
-       <input type="datetime-local" name="start_time"  class="form-control "  value="{{old('start_time')}}" required="">
+       <input type="datetime-local" name="start_time" placeholder="Sell End Time" class="form-control "  value="{{old('start_time')}}" required="">
        <br>
        <div class="input-group-append">
         <span class="input-group-text"><i class="fas fa-images"></i></span>
        </div>                      
       </div>
      </div>
-     <span class="text-danger mt-3">@error('start_time') {{$message}} @enderror</span> 
+     <span class="text-danger mt-3">@error('start_time') {{$message}} @enderror</span>
     
      <label class="text-dark">Sale End Time</label> 
      <div class="form-group">

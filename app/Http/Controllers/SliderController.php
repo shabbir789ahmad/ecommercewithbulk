@@ -21,35 +21,36 @@ class SliderController extends Controller
     
     $slider=Slider::latest()->take('3')->get();
     $front=Mainpage::latest()->take(1)->get();
-     $query1= Vendor::
+    $dropdown=Dropdown::all();
+    $sale=Sell::latest()->take(1)->get();
+    $query1= Vendor::
      join('Stocks','vendors.id','=','stocks.user_id')
-      ->leftjoin('reviews','stocks.id','=','reviews.review_id')
-      ->select('review_id', \DB::raw('avg(rating) as rating')
-      ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at')
-        ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at')->orderBy('rating','DESC');
-      $query=$query1->whereMonth('stocks.created_at', date('m'));
-      $query=$query1->whereNull('vendors.deleted_at');
-      $query=$query1->where('product_status','1')->get();
-       $prod1=$query;
-        $product=$prod1->shuffle();
+     ->leftjoin('reviews','stocks.id','=','reviews.review_id')
+     ->select('review_id', \DB::raw('avg(rating) as rating')
+     ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at')
+     ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at')->orderBy('rating','DESC');
+     $query=$query1->whereMonth('stocks.created_at', date('m'));
+     $query=$query1->whereNull('vendors.deleted_at');
+     $query=$query1->where('product_status','1')->get();
+     $prod1=$query;
+     $product=$prod1->shuffle();
 
-        $query2=$query1->where('product_status','1')->get();
-        $prod3=$query2;
-        $product3=$prod3->shuffle();
-        //dd($produ);
-      foreach($product as $pro) {
-    
-     $pro->image=Image::where('Image_id',$pro->id)->get();
+     $query2=$query1->where('product_status','1')->get();
+     $prod3=$query2;
+     $product3=$prod3->shuffle();
+        
+     
+    foreach($product as $pro) {
+      $pro->image=Image::where('Image_id',$pro->id)->get();
       $pro->stock2=Stock2::where('stock_id',$pro->id)
-         ->where('stock_status','1')->take(1)->get();
-          
+      ->where('stock_status','1')
+      ->take(1)->get();
       }
-      foreach($product3 as $prod) {
-    
-     $prod->image=Image::where('Image_id',$prod->id)->get();
+    //dd($product);
+    foreach($product3 as $prod) {
+      $prod->image=Image::where('Image_id',$prod->id)->get();
       $prod->stock2=Stock2::where('stock_id',$prod->id)
-         ->where('stock_status','1')->take(1)->get();
-      
+      ->where('stock_status','1')->take(1)->get();
       }
      
   
@@ -71,9 +72,7 @@ class SliderController extends Controller
     $pro->stock2=Stock2::where('stock_id',$pro->id)
          ->where('stock_status','1')->take(1)->get();
       }
-      $dropdown=Dropdown::all();
-   
-     $sale=Sell::latest()->take(1)->get();
+      
       return view('home',compact('slider','product','product2','front','product3','dropdown','sale'));
   }
 

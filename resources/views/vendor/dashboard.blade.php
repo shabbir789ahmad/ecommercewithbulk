@@ -15,7 +15,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <link rel="icon" href="{!! asset('pic/logo2.png') !!} " >
 
-  
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('css/ruang-admin.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/store.css')}}" rel="stylesheet">
@@ -317,8 +317,10 @@
   <script src="{{asset('js/colorpicker.js')}}"></script>  
   <script src="{{asset('js/show.js')}}"></script>  
   <script src="{{asset('js/vendor.js')}}"></script>  
-<script src="{{asset('js/jquery.multifield.min.js')}}"></script>
-   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{{asset('js/jquery.multifield.min.js')}}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
  @if(Session()->has('success'))
 <script>
    swal.fire({
@@ -332,6 +334,17 @@
 {{Session::forget('success')}}
   @endif
  
+
+<script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+    </script>
 
 <script>
   let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));

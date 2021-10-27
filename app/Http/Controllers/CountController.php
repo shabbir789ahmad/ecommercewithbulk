@@ -13,6 +13,7 @@ use App\Models\Sell;
 use App\Models\Stock2;
 use App\Notifications\ProductStock;
 use Notification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 class CountController extends Controller
 {
@@ -101,8 +102,8 @@ class CountController extends Controller
       }
      
     $salee=Sell::latest()->take(1)->get();
-  
-    return view('vendor.vendorcount',$arr,compact('comp','com','order','or','sale','sl','earn','en','message','today','order2','salee'));
+    $date=Carbon::now();
+    return view('vendor.vendorcount',$arr,compact('comp','com','order','or','sale','sl','earn','en','message','today','order2','salee','date'));
     }
 
     function count2()

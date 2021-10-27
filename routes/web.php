@@ -28,12 +28,15 @@ Route::get('/', function () {
     return view('home');
 });
 Auth::routes();
+Route::view('affiliate','affiliate');
+
 Route::get('/',[SliderController::class,'women']);
 Route::get('search',[SliderController::class,'search']);
 
 Route::get('master',[SubCategoryController::class,'subCategory']);
 
 Route::get('productpage/{id}/{drop_id}',[ProductController::class,'productDetail'])->name('productpage/{id}/{drop_id}');
+Route::get('all-product-sale',[ProductController::class,'SaleProduct'])->name('all-product-sale');
 
 
 Route::get('cart',[CartController::class,'cart']);
@@ -178,6 +181,7 @@ Route::post('update-banner',[StoreController::class,'updatebanner'])->name('vend
 Route::get('store',[StoreController::class,'getStore'])->name('vendor.store');
 Route::get('vendor-store-product',[StoreController::class,'getProduct'])->name('vendor.vendor-store-product');
 Route::post('on-sale',[StoreController::class,'onSale'])->name('vendor.on-sale');
+Route::post('out-sale',[StoreController::class,'outSale'])->name('vendor.out-sale');
   });
 });
 
@@ -306,6 +310,8 @@ Route::post('make-sell',[SellController::class,'Sell'])->name('admin.make-sell')
 Route::get('show-sale',[SellController::class,'showSale'])->name('admin.show-sale');
 Route::get('delete-sale/{id}',[SellController::class,'deleteSale'])->name('admin.delete-sale/{id}');
 Route::post('update-sale',[SellController::class,'updateSale'])->name('admin.update-sale');
+Route::get('sale-status',[SellController::class,'saleStatus'])->name('admin.sale-status');
+Route::get('search-sale',[SellController::class,'searchSale'])->name('admin.search-sale');
 
 
 //route for search

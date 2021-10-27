@@ -7,7 +7,7 @@
 
    .swiper 
     {
-        width: 100%;
+        width: 100% !important;
         height: 12rem;
 
       }
@@ -18,7 +18,7 @@
       }
       .textc {
          
-         background-color: #ED7632;
+        
          color: #ffffff;
          font-size: 1.1vw;
          width: 100%;
@@ -63,5 +63,15 @@
            overflow: hidden;
           padding-bottom: 4%;
         }
+          .textc {
+         
+         background-color: #ED7632;
+         color: #ffffff;
+         font-size: 4vw;
+         width: 100%;
+         height: 2.5rem;
+         border: none;
+         padding-top: 8%;
+       }
     
   }

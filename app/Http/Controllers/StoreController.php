@@ -8,10 +8,13 @@ use App\Models\Image;
 use App\Models\Stock2;
 use App\Models\Sell;
 use App\Models\Banner;
+use App\Http\Traits\StoreTrait;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 class StoreController extends Controller
 {
+    use StoreTrait;
     function showStore($id)
     {
        $store= Stock::
@@ -42,28 +45,9 @@ class StoreController extends Controller
 
     function getStore()
     {
-        $store= Stock::
-      leftjoin('reviews','stocks.id','=','reviews.review_id')
-      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id')
-     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id')->orderBy('rating','DESC')
-     ->where('stocks.user_id',Auth::user()->id)->get();
-     foreach($store as $st)
-     {
-        $st->image=Image::where('image_id',$st['id'])->take(1)->get();
-        $st->stock=Stock2::where('stock_id',$st['id'])->take(1)->get();
-     }
-     $storenew= Stock::
-       leftjoin('reviews','stocks.id','=','reviews.review_id')
-       ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id')
-       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id')->orderBy('rating','DESC')
-       ->where('stocks.user_id',Auth::user()->id)
-       ->whereMonth('stocks.created_at',date('m'))->get();
-      foreach($storenew as $st)
-      {
-        $st->image=Image::where('image_id',$st['id'])->take(1)->get();
-        $st->stock=Stock2::where('stock_id',$st['id'])->take(1)->get();
-      }
-
+     $store = $this->Stockall();
+     $storenew = $this->stockNew();
+     
      $banner=Banner::latest()->take(1)->get();
      return view('vendor.view_store',compact('store','storenew','banner'));
 
@@ -128,20 +112,12 @@ class StoreController extends Controller
 
      function getProduct()
      {
-       $product= Stock::
-        leftjoin('reviews','stocks.id','=','reviews.review_id')
-        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id')
-        ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id')->orderBy('rating','DESC')
-        ->where('stocks.user_id',Auth::user()->id)->get();
-      foreach($product as $st)
-       {
-        $st->image=Image::where('image_id',$st['id'])->take(1)->get();
-        $st->stock=Stock2::where('stock_id',$st['id'])->take(1)->get();
-      }
-
+       $product=  $this->Stockall();
+       $cat=  $this->category();
+      //dd($cat);
       $sale=Sell::latest()->take(1)->get();
-     
-      return view('vendor.sale_product',compact('product','sale'));
+        $date=Carbon::now();
+      return view('vendor.sale_product',compact('product','sale','date','cat'));
     }
 
     function onSale(Request $req)
@@ -153,6 +129,18 @@ class StoreController extends Controller
            $sale->on_sale='1';
            $sale->save();
            return redirect()->back()->with('success','your product is on sale');
+        
+    }
+     function outSale(Request $req)
+    {
+        $sale=Stock2::findorfail($req->id);
+          
+           $sale->sell_price=$req->sell_price;
+           $sale->discount=$req->discount;
+           $sale->on_sale='0';
+           $sale->save();
+           $req->session()->flash('success','your product is Out Sale');
+           return redirect()->back();
         
     }
 }
