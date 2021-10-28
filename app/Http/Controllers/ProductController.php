@@ -196,7 +196,7 @@ class ProductController extends Controller
         $query=$query->paginate(10);
    
      $product=$query;
- //dd($product);
+ dd($product);
       foreach($product as $pro)
       {
         $pro->image=Image::where('image_id',$pro->id)->take(1)->get();
@@ -224,6 +224,8 @@ class ProductController extends Controller
  function SaleProduct (Request $req)
    {
     $sort="";
+    $sell="";
+    $top_sale="";
     $color="";
     $size="";
     $brand="";
@@ -236,6 +238,14 @@ class ProductController extends Controller
     if($req->get('sort2') !== Null)
     {
         $sort=$req->get('sort2');
+    }
+    if($req->get('sale-product') !== Null)
+    {
+        $sell=$req->get('sale-product');
+    }
+    if($req->get('sale-rate') !== Null)
+    {
+        $top_sale=$req->get('sale-rate');
     }
     
      $new="";
@@ -250,9 +260,11 @@ class ProductController extends Controller
     }
    
   //echo $new;
-    $query= Stock::
-      join('stock2s','stocks.id','=','stock2s.stock_id')
-       ->select('stocks.product','stocks.detail','stocks.id','stocks.drop_id','stock2s.on_sale','stock2s.sell_price','stock2s.discount');
+      $query= Stock::
+        leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
+        ->leftjoin('reviews','stocks.id','=','reviews.review_id')
+        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale')
+       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale')->orderBy('rating','DESC');
 
      if($req->get('color2') !== Null)
        {
@@ -272,6 +284,14 @@ class ProductController extends Controller
         $query=$query->where('size',$req->get('size2'));
         }
 
+        if($sell=='new')
+        {
+          $query=$query->where('stocks.created_at','>=',Carbon::now()->subdays(10));
+        }
+        if($top_sale=='top')
+        {
+         $query=$query->where('rating','>','4');
+        }
         if($sort=='product')
         {
             $query=$query->orderBy('product','asc');
@@ -308,30 +328,29 @@ class ProductController extends Controller
    // price filter
       if($price=='10')
         {
-          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+          
            $query=$query->where('sell_price','<=','10');
         }
          if($price=='20' )
         {
-          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+         
            $query=$query->whereBetween('sell_price',['10','20']);
         }
          if($price=='30' )
         {
-          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
+          
            $query=$query->whereBetween('sell_price',['20','30']);
         }
         
          if($price=='31' )
         {
-          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
            $query=$query->whereBetween('sell_price',['31','60']);
         }
          $query=$query->where('on_sale','1');
         $query=$query->paginate(10);
    
      $product=$query;
- //dd($product);
+
       foreach($product as $pro)
       {
         $pro->image=Image::where('image_id',$pro->id)->take(1)->get();

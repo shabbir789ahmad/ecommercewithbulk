@@ -1,5 +1,10 @@
 @extends('master.master')
 @section('content')
+<?php 
+use App\Models\Category;
+$sub=Category::category();
+//echo "<pre>"; print_r($sub);die;
+?>
 <title>Product</title>
 <div class="wrapper3">
       
@@ -10,7 +15,7 @@
   <ul class="list-unstyled">
     @foreach($brand as $br)
     <li>
-      <a href="javascript:void(0)" onclick="setbrand('{{$br['bname']}}')" >
+      <a href="javascript:void(0)" onclick="setbrand2('{{$br['bname']}}')" >
         <i class="fas fa-caret-right mr-2 fa-lg"></i>{{$br['bname']}}
       </a>
     </li>
@@ -157,33 +162,48 @@
        
 <div id="content" style="overflow:hidden">
   
-  <div class="container-fluid" style="height: 7rem; background: #166387;">
-   <div class="nav-btn ">
+  <h4 class=" pro mt-3">All Products</h4>
+
+
+
+  <div class=" d-flex store-nav-color" >
+    <div class="nav-btn ml-3">
      <div class="nav-links">
       <ul>
-       <li class="nav-link" style="--i: .85s">
+       <li class="nav-link fhg" style="--i: .85s">
         <a href="#">Category<i class="fas fa-caret-down"></i></a>
          <div class="dropdown">
           <ul>
+            @foreach($sub as $cat)
             <li class="dropdown-link" >
-             <a href="#">ghfg<i class="fas fa-caret-down"></i></a>
+             <a href="#">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
               <div class="dropdown second">
                <ul>
+                @foreach($cat['subcat'] as $subc)
                 <li class="dropdown-link">
-                 <a href="#">fgdfg<i class="fas fa-caret-down"></i></a>
+                 <a href="#">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
                  <div class="dropdown second">
                  <ul>
-                  <li class="dropdown-link">
-                   <a href="">bvb</a>
+
+                  @php //dd($c->dropdown); @endphp
+                  @foreach($cat['drop'] as $drp)
+                  @if($subc['id']==$drp['dropdown_id'] )
+                  <li class="dropdown-link store-drop"  value="{{$drp['id']}}">
+                   <a >{{ucwords($drp['name'])}}</a>
                   </li>
+                   @endif
+                 
+                  @endforeach
                   <div class="arrow"></div>
                </ul>
               </div>
             </li>
+            @endforeach
             <div class="arrow"></div>
           </ul>
         </div>
        </li>
+       @endforeach
        <div class="arrow"></div>
      </ul>
     </div>
@@ -191,6 +211,10 @@
   </ul>
 </div>
 </div>
+
+<button class="btn-store ml-1" id="sale-new" value="new">New Product</button>
+<button class="btn-store ml-1" id="sale-rated" value="top">Top Rated</button>
+<button class="btn-store ml-1">Button</button>
 </div>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -254,18 +278,22 @@
    </div>
     </div>
 
-   
-<form id="sort_form">
-  <input type="hidden" name="sort2" id="sort2">
-  <input type="hidden" name="brand2" id="brand2">
+  <form id="salee_form">
+  <input type="hidden" name="sale-product" id="sale-product">
+  <input type="hidden" name="sale-rate" id="sale-rate">
 </form>
 
-<form id="color_form">
-  <input type="hidden" name="color2" id="color2">
-  <input type="hidden" name="size2" id="size2">
+<form id="sell_form">
+  <input type="hidden" name="sort2" id=" -sale">
+  <input type="hidden" name="brand2" id="brand-sale">
 </form>
-<form id="new_form">
-  <input type="hidden" name="new2" id="new2">
+
+<form id="sale_color_form">
+  <input type="hidden" name="color2" id="color-sale">
+  <input type="hidden" name="size2" id="size-sale">
+</form>
+<form id="new_sale_form">
+  <input type="hidden" name="new2" id="new_sale">
 </form>
 <form id="price_form">
   <input type="hidden" name="price" id="price">

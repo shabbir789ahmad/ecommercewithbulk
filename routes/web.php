@@ -179,7 +179,7 @@ Route::post('update-banner',[StoreController::class,'updatebanner'])->name('vend
 
 //store show to vendor
 Route::get('store',[StoreController::class,'getStore'])->name('vendor.store');
-Route::get('vendor-store-product',[StoreController::class,'getProduct'])->name('vendor.vendor-store-product');
+
 Route::post('on-sale',[StoreController::class,'onSale'])->name('vendor.on-sale');
 Route::post('out-sale',[StoreController::class,'outSale'])->name('vendor.out-sale');
   });

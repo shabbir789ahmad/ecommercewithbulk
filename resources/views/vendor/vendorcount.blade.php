@@ -114,7 +114,7 @@
     </div>
         </div>
         <div class="col-md-6">
-         <a href="{{url('vendor/vendor-store-product')}}" class="float-right"><p class="btn btn-outline-warning text-light py-2 btn-sm ">Participate</p></a>
+         <a href="{{url('vendor/store')}}" class="float-right"><p class="btn btn-outline-warning text-light py-2 btn-sm ">Participate</p></a>
         </div>
       </div>
       

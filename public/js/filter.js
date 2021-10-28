@@ -1,3 +1,4 @@
+
 function sort_by()
 {
 	var sort_value=$('#sort').val();
@@ -90,5 +91,28 @@ function price_filter4()
 $('#price').val(price_value)
 	  $('#price_form').submit()
 }
-//filter for admin product
+
+
+ $('#sale-new').click(function(){
+   let sale_value=$(this).val();
+
+   $('#sale-product').val(sale_value);
+   $('#salee_form').submit();
+ });
+
+ $('#sale-rated').click(function(){
+   let sale_value=$(this).val();
+
+   $('#sale-rate').val(sale_value);
+   $('#salee_form').submit();
+ });
+
+
+
+
+function setbrand2(brand)
+{
+	$('#brand-sale').val(brand)
+	 $('#sell_form').submit()
+}
 

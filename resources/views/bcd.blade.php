@@ -17,48 +17,7 @@
    @foreach($st->stock as $stock)
    @if(!$stock['on_sale'])
    <div class="swiper-slide">
-    <div class="card store-card shadow">
-     <div class="overly">
-      <a href="{{url('vendor/stock-detail/' .$st['id'])}}">
-      @foreach($st->image as $img)
-       <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
-      @endforeach
-      </a>
-      @foreach($st->stock as $stock)
-      @foreach($sale as $sl)
-      @if($sl['end_time']>= $date)
-      <div class="over-text">
-       <p class="sle mt-2" data-id="{{$stock['id']}}">Apply Sale </p>
-      </div>
-      @endif
-      @endforeach
-       <div class="over-text2">
-        <p class="sle2 text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
-           }}%</p>
-       </div>
-       @endforeach
-     </div>
-     <div class="card-body p-0">
-      <p class="stor-text text-danger">{{ucfirst($st['product'])}}</p>
-      <div class="d-flex">
-        @foreach($st->stock as $stock)
-         <p class="ml-auto mr-2 text2">${{$stock['sell_price']-$stock['discount']}} 
-          <del class="text-danger">@if($stock['discount']) ${{$stock['sell_price']}} @else @endif</del></p>
-        @endforeach
-      </div>
-     </div>
-     <div class="card-footer">
-      <div class="text-center rating">
-        @for($i=0; $i<5; $i++)
-        @if($i<$st['rating'])
-        <span class="fa fa-star checked "></span>
-        @else
-        <span class="fa fa-star"></span> 
-        @endif
-         @endfor
-       </div>
-      </div>
-    </div>
+   
    </div>
    @endif
    @endforeach
@@ -78,27 +37,7 @@
       @if($stock['on_sale'])
      <div class="col-md-4 col-sm-6 col-lg-4 ">
       <div class="card store-card shadow">
-        <div class="overly">
-        <a href="{{url('vendor/stock-detail/' .$st['id'])}}">
-          @foreach($st->image as $img)
-        <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
-        @endforeach
-      </a>
-      @foreach($st->stock as $stock)
-      @foreach($sale as $sl)
-      @if($sl['end_time']>= $date)
-     <div class="over-text">
-       <p class="sle-end mt-2" data-eid="{{$stock['id']}}" data-edisc="{{$stock['discount']}}" data-esell="{{$stock['sell_price']}}">End Sale </p>
-       </div>
-       @endif
-       @endforeach
-       <div class="over-text2">
-        <p class="sle2 text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
-       }}%</p>
-       </div>
-       @endforeach
-     
-    </div>
+       
        <div class="card-body p-0">
        <p class="stor-text text-danger">{{ucfirst($st['product'])}}</p>
        <div class="d-flex">
@@ -130,4 +69,71 @@
   </div>
   </div>
 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- without sale product slider-->
+   <div class="container-fluid mt-4">
+    <div class="owl-carousel2 owl-theme ml-2">
+    @foreach($product as $pro)
+    @foreach($pro->stock as $stock)
+    @if($stock['on_sale'])
+     <div class="item">
+      <div class="card store-card shadow">
+       <div class="overly">
+        <a href="{{url('vendor/stock-detail/' .$pro['id'])}}">
+          @foreach($pro->image as $img)
+           <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
+          @endforeach
+        </a>
+        @foreach($pro->stock as $stock)
+        @foreach($sale as $sl)
+        @if($sl['end_time']>= $date)
+         <div class="over-text">
+          <p class="sle mt-2" data-id="{{$stock['id']}}">Apply Sale </p>
+         </div>
+        @endif
+        @endforeach
+        <div class="over-text2">
+          <p class="sle2 text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
+           }}%</p>
+        </div>
+        @endforeach
+       </div>
+      <div class="card-body p-0">
+       <p class="stor-text text-danger">{{ucfirst($pro['product'])}}</p>
+       <div class="d-flex">
+        <p class="ml-auto mr-2 text2">${{$pro['sell_price']-$pro['discount']}} 
+        <del class="text-danger">@if($pro['discount']) ${{$pro['sell_price']}} @else @endif</del></p>
+       </div>
+      </div>
+      <div class="card-footer">
+       <div class="text-center rating">
+        @for($i=0; $i<5; $i++)
+        @if($i<$pro['rating'])
+         <span class="fa fa-star checked "></span>
+        @else
+         <span class="fa fa-star"></span> 
+        @endif
+        @endfor
+       </div>
+      </div>
+    </div>
+  </div>
+  @endif
+  @endforeach
+  @endforeach
+</div>
 </div>

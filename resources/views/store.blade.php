@@ -1,153 +1,209 @@
 @extends('master.master')
 @section('content')
+<?php 
+use App\Models\Category;
+$sub=Category::category();
+//echo "<pre>"; print_r($sub);die;
+?>
 
- @foreach($banner as $bann)
+@foreach($banner as $bann)
 <div class="store-banner">
  <img src="{{asset('uploads/img/' .$bann['banner'])}}"  >
 
  <div class="txt">
- 	<p class="dis">60% Discount</p>
+  <p class="dis">60% Discount</p>
 <h4 class="">{{ucfirst($bann['heading1'])}}</h4>
 <p class="best">{{ucfirst($bann['heading2'])}}</p>
  <button class="btn btn-xl btn-store text-light rounded"> Shop Now</button>
  </div>
 </div>
 @endforeach
-<h4 class=" pro mt-5">Our Products</h4>
 
-<div class="container-fluid mt-0 mt-sm-0 mt-md-5" >
- <ul class="nav nav-pills  bg-store p-3" id="pills-tab" role="tablist">
-  <li class="nav-item n1">
-    <a class="nav-link n2 active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">New Product</a>
+<h4 class=" pro mt-5">All Products</h4>
+@foreach($sale as $sl)
+  <p class="text-center">Put Your Product In <span class="text-danger font-weight-bold">{{ucwords($sl['sell_name'])}}<span></p>
+  @endforeach
+
+
+  <div class=" d-flex store-nav-color" >
+
+   <div class="nav-btn ml-3">
+     <div class="nav-links">
+      <ul>
+       <li class="nav-link fhg" style="--i: .85s">
+        <a href="#">Category<i class="fas fa-caret-down"></i></a>
+         <div class="dropdown">
+          <ul>
+            @foreach($sub as $cat)
+            <li class="dropdown-link" >
+             <a href="#">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
+              <div class="dropdown second">
+               <ul>
+                @foreach($cat['subcat'] as $subc)
+                <li class="dropdown-link">
+                 <a href="#">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
+                 <div class="dropdown second">
+                 <ul>
+
+                  @php //dd($c->dropdown); @endphp
+                  @foreach($cat['drop'] as $drp)
+                  @if($subc['id']==$drp['dropdown_id'] )
+                  <li class="dropdown-link store-drop"  value="{{$drp['id']}}">
+                   <a >{{ucwords($drp['name'])}}</a>
+                  </li>
+                   @endif
+                 
+                  @endforeach
+                  <div class="arrow"></div>
+               </ul>
+              </div>
+            </li>
+            @endforeach
+            <div class="arrow"></div>
+          </ul>
+        </div>
+       </li>
+       @endforeach
+       <div class="arrow"></div>
+     </ul>
+    </div>
+   </li>
+  </ul>
+</div>
+</div>
+
+<button class="btn-store ml-1" id="new" value="new">New Product</button>
+<button class="btn-store ml-1" id="top-rated" value="top">Top Rated</button>
+<button class="btn-store ml-1">Button</button>
+</div>
+
+<div class="container-fluid mt-2 ml-2 mb-5">
+ <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item mr-2 ">
+    <a class="nav-link  active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Without Sale</a>
   </li>
-  <li class="nav-item n1">
-    <a class="nav-link n2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Top Rated</a>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">On Sale</a>
   </li>
-  <li class="nav-item n1">
-    <a class="nav-link n2" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">All Product</a>
-  </li>
+ 
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-  	 <!-- top rated-->
-     <div class="row mt-3">
-		@foreach($store as $st)
-	
-	 <div class="col-md-3 col-sm-6 col-lg-3 ml-2">
+    
+    <!-- without sale product slider-->
+   <div class="container-fluid mt-4">
+    <div class="owl-carousel owl-theme ml-2">
+    @foreach($product as $pro)
+    @foreach($pro->stock as $stock)
+    @if(!$stock['on_sale'])
+     <div class="item">
       <div class="card store-card shadow">
-      	<a href="">
-      		@foreach($st->image as $img)
-      	<img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
-        @endforeach
-      </a>
-       <div class="card-body p-0">
-       <p class=" ml-2 text-danger mt-3">{{ucfirst($st['product'])}} <span class="float-right mr-2 text-dark">
-     
-        @for($i=0; $i<5; $i++)
-        @if($i<$st['rating'])
-        <span class="fa fa-star checked "></span>
-        @else
-        <span class="fa fa-star"></span> 
-        @endif
-         @endfor
-       
-       </span></p>
-       <div class="d-flex">
-        <p class="text2">{{ucfirst($st['detail'])}} </p>
-       	@foreach($st->stock as $stock)
-        <p class="ml-auto mr-2 text2">${{$stock['sell_price']-$stock['discount']}} 
-          <del class="text-danger">@if($stock['discount']) ${{$stock['sell_price']}} @else @endif</del></p>
-        @endforeach
-       </div>
-      </div>
-      
-      </div>
-	 </div>
-
-	 @endforeach
-	</div>
-
-  </div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-  	<!-- New Product-->
-  	<div class="row mt-3">
-		@foreach($storenew as $st)
-      @if($st['rating']>3)
-	 <div class="col-md-4 col-sm-6 col-lg-4">
-      <div class="card store-card shadow">
-      	<a href="">
-      		@foreach($st->image as $img)
-      	<img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="400rem" class="store-img">
-        @endforeach
-      </a>
-       <div class="card-body p-0">
-        
-       <p class="stor-text text-danger">{{ucfirst($st['product'])}}</p>
-       <div class="d-flex">
-        <p class="text2">{{ucfirst($st['detail'])}} </p>
-        @foreach($st->stock as $stock)
-       	<p class="ml-auto mr-2 text2">${{$stock['sell_price']-$stock['discount']}} <del class="text-danger">@if($stock['discount']) ${{$stock['sell_price']}} @else @endif</del></p>
-        @endforeach
-       </div>
-      </div>
-      <div class="card-footer">
-         <div class="text-center rating">
-           @for($i=0; $i<5; $i++)
-        @if($i<$st['rating'])
-        <span class="fa fa-star checked "></span>
-        @else
-        <span class="fa fa-star"></span> 
-        @endif
-         @endfor
-          </div>
-       </div>
-      </div>
-	 </div>
-   @endif
-	 @endforeach
-	</div>
-  </div>
-<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-  	<!-- all product-->
-  <div class="row mt-3">
-		@foreach($store as $st)
-	 <div class="col-md-4 col-sm-6 col-lg-4">
-     <div class="card store-card shadow">
-      	<a href="">
-      		@foreach($st->image as $img)
-      	   <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="400rem" class="store-img">
+       <div class="overly">
+        <a href="{{url('vendor/stock-detail/' .$pro['id'])}}">
+          @foreach($pro->image as $img)
+           <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
           @endforeach
         </a>
+        @foreach($pro->stock as $stock)
+       <div class="over-text2">
+          <p class="sle2 text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
+           }}%</p>
+        </div>
+       
+       </div>
       <div class="card-body p-0">
-         <p class="stor-text text-danger">{{ucfirst($st['product'])}}</p>
-         <div class="d-flex">
-          <p class="text2">{{ucfirst($st['detail'])}} </p>
-       	  @foreach($st->stock as $stock)
-        <p class="ml-auto mr-2 text2">
-          
-          ${{$stock['sell_price']-$stock['discount']}} 
-          <del class="text-danger">@if($stock['discount']) ${{$stock['sell_price']}} @else @endif</del></p>
-        @endforeach
-         </div>
+       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($pro['product'])}}<span class="float-right ">${{$stock['sell_price'] - $stock['discount']}}<del class="text-secondary">
+       <small class="text-danger">${{$stock['sell_price']}}</small></del>  </span>
+      </p>
       </div>
+       @endforeach
       <div class="card-footer">
-         <div class="text-center rating">
-           @for($i=0; $i<5; $i++)
-           @if($i<$st['rating'])
-            <span class="fa fa-star checked "></span>
-           @else
-            <span class="fa fa-star"></span> 
-           @endif
-           @endfor
-          </div>
+       <div class="text-center rating">
+        @for($i=0; $i<5; $i++)
+        @if($i<$pro['rating'])
+         <span class="fa fa-star checked "></span>
+        @else
+         <span class="fa fa-star"></span> 
+        @endif
+        @endfor
        </div>
       </div>
-	 </div>
-	 @endforeach
-	</div>
+    </div>
+  </div>
+  @endif
+  @endforeach
+  @endforeach
+</div>
+</div>
+  </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <!-- without sale product slider-->
+   <div class="container-fluid mt-4">
+    <div class="owl-carousel owl-theme ml-2">
+    @foreach($product as $pro)
+    @foreach($pro->stock as $stock)
+    @if($stock['on_sale'])
+     <div class="item">
+      <div class="card store-card shadow">
+       <div class="overly">
+        <a href="{{url('vendor/stock-detail/' .$pro['id'])}}">
+          @foreach($pro->image as $img)
+           <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
+          @endforeach
+        </a>
+        @foreach($pro->stock as $stock)
+       @foreach($sale as $sl)
+      @if($sl['end_time']>= $date)
+     <div class="over-text">
+       <p class="sle-e mt-2" data-eid="{{$stock['id']}}" data-edisc="{{$stock['discount']}}" data-esell="{{$stock['sell_price']}}">End Sale </p>
+       </div>
+       @endif
+       @endforeach
+        <div class="over-text2 ">
+          <p class="sle2  text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
+           }}%</p>
+        </div>
+        @endforeach
+       </div>
+      <div class="card-body p-0">
+       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($pro['product'])}}<span class="float-right ">${{$stock['sell_price'] - $stock['discount']}}<del class="text-secondary">
+       <small class="text-danger">${{$stock['sell_price']}}</small></del>  </span>
+      </p>
+      </div>
+      <div class="card-footer">
+       <div class="text-center rating">
+        @for($i=0; $i<5; $i++)
+        @if($i<$pro['rating'])
+         <span class="fa fa-star checked "></span>
+        @else
+         <span class="fa fa-star"></span> 
+        @endif
+        @endfor
+       </div>
+      </div>
+    </div>
+  </div>
+  @endif
+  @endforeach
+  @endforeach
+</div>
+</div>
   </div>
 </div>
-	
+ </div>
 
-</div>
+
+
+
+
+
+
+
+<form id="new-form">
+  <input type="hidden" name="newpro" id="newpro">
+  <input type="hidden" name="topr" id="topr">
+  <input type="hidden" name="drop_search" id="drop_search">
+</form>
+
+
 @endsection

@@ -5,8 +5,17 @@ $(document).ready(function(){
   	$('#modalsale').modal('show')
   	let id=$(this).data('id')
   	$('#sid').val(id);
-  	let disc=$(this).data('disc')
-  	$('#dis').val(disc);
+  	let sel=$(this).data('sel')
+  	$('#seller').val(sel);
+    let desco=$(this).data('desco')
+    if(desco=='')
+    {
+      $('#discounter').val('0');
+    }else
+    {
+      $('#discounter').val(desco);
+    }
+    
   })
 
    $('.sle-end').click(function(e){

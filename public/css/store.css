@@ -59,6 +59,23 @@
     margin: 0;
     margin-left: 3%;
 }
+
+.store-banner2{
+    background-color: #C8EBFF;
+    position: relative;
+}
+
+.store-banner2 img{
+   width: 100%;
+   height: 16rem;
+}
+.abcd{
+    animation: wigg 2s linear infinite;
+}
+.store-nav-color{
+    height: 4rem;
+     background: #166387;
+}
 .pro 
  {
     font-family : Montserrat, Arial, sans-serif;
@@ -159,14 +176,17 @@
 .overly{
   position: relative;
 }
-
+.bg-time 
+{
+  background-color: #166387;    
+}
 .over-text{
   position: absolute;
-left: 37%;
-
-text-align: center;
+  left: 37%;
+  border-radius: 5%;
+  text-align: center;
   bottom: 10%;
-  background-color: #000000;
+  background-color: #166387;
   color: #ffffff;
   border: none;
 }
@@ -178,12 +198,13 @@ text-align: center;
 .over-text2{
    position: absolute;
    right: 2%; 
+   border-radius: 5%;
    text-align: center;
    top: 10%;
    background-color: #000000;
    color: #ffffff;
    border: none;
-    padding: .3rem 1rem;
+    padding: .1rem 1rem;
 }
 
 
@@ -207,9 +228,6 @@ ul{
 a{
     text-decoration: none;
 }
-
-
-
 .overlay{
     position: absolute;
     width: 100%;
@@ -226,7 +244,8 @@ a{
     display: flex;
     position: relative;
 }
-.nav-link
+.fhg
+
 {
   background-color: #1A8E76;
 }
@@ -272,7 +291,7 @@ a{
     transition: .5s;
 }
 }
-.nav-btn{
+.nav-btn2{
     
     display: flex;
 }
@@ -314,6 +333,7 @@ a{
     top: 100%;
     left: 0;
     width: 10rem;
+    z-index: 900;
     transform: translateY(10px);
     opacity: 0;
     pointer-events: none;

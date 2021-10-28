@@ -15,12 +15,14 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <link rel="icon" href="{!! asset('pic/logo2.png') !!} " >
 
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+ 
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('css/ruang-admin.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/store.css')}}" rel="stylesheet">
  <link rel="stylesheet" href="{{asset('css/admin.css')}}">
 <link rel="stylesheet" href="{{asset('css/contact.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body id="page-top " >
@@ -301,7 +303,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js" integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  
   <script src="{{asset('js/jquery.easing.min.js')}}"></script>
   <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
@@ -319,7 +322,7 @@
   <script src="{{asset('js/vendor.js')}}"></script>  
   <script src="{{asset('js/jquery.multifield.min.js')}}"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  
 
  @if(Session()->has('success'))
 <script>
@@ -334,17 +337,30 @@
 {{Session::forget('success')}}
   @endif
  
-
-<script>
-      var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
+ <script type="text/javascript">
+ $('.owl-carousel').owlCarousel({
+    loop:false,
+    margin:10,
+    nav:false,
+    stagePadding: 2,
+    responsive:{
+        0:{
+            items:1
         },
-      });
+        430:{
+            items:2
+        },
+        1000:{
+            items:4
+        },
+         1500:{
+            items:5
+        }
+
+    }
+});
     </script>
+
 
 <script>
   let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));

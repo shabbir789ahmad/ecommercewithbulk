@@ -30,6 +30,8 @@
 <link rel="stylesheet" type="text/css" href=" {{asset('css/track.css')}} ">
 
 <link rel="stylesheet" type="text/css" href=" {{asset('css/header.css')}} ">
+
+<link rel="stylesheet" type="text/css" href=" {{asset('css/searchnav.css')}} ">
 <link rel="stylesheet" type="text/css" href=" {{asset('css/zoom.css')}} ">
 
 <link rel="stylesheet" type="text/css" href=" {{asset('css/vendor.css')}} ">
@@ -66,14 +68,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js" integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="{{asset('js/filter.js')}}">
-</script>
+
 
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js" integrity="sha512-jWNpWAWx86B/GZV4Qsce63q5jxx/rpWnw812vh0RE+SBIo/mmepwOSQkY2eVQnMuE28pzUEO7ux0a5sJX91g8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-   
+ <script  src="{{asset('js/filter.js')}}"></script>
  <script src="{{asset('js/button.js')}}"></script> 
  <script src="{{asset('js/zoomsl.js')}}"></script> 
  <script src="{{asset('js/script.js')}}"></script> 
