@@ -17,17 +17,17 @@ $sub=Category::category();
      <div class="nav-links">
   <ul>
    <li class="nav-link" style="--i: .85s">
-    <a href="#">Category<i class="fas fa-caret-down"></i></a>
+    <a href="javascript:void(0)">Category<i class="fas fa-caret-down"></i></a>
      <div class="dropdown">
       <ul>
         @foreach($sub as $cat)
         <li class="dropdown-link">
-         <a href="#">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
+         <a href="javascript:void(0)">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
           <div class="dropdown second">
           <ul>
             @foreach($cat['subcat'] as $subc)
             <li class="dropdown-link">
-              <a href="#">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
+              <a href="{{url('product/' .$subc['id'])}}">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
                <div class="dropdown second">
           <ul>
 

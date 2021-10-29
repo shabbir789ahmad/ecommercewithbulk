@@ -14,21 +14,23 @@ use App\Models\Mainpage;
 use App\Models\Dropdown;
 use App\Models\Image;
 use Carbon\Carbon;
+use App\Http\Traits\StoreTrait;
 class SliderController extends Controller
 {
+    use StoreTrait;
   function  women()
   {
-    
+  
     $slider=Slider::latest()->take('3')->get();
-    $front=Mainpage::latest()->take(1)->get();
-    $dropdown=Dropdown::all();
-    $sale=Sell::latest()->take(1)->get();
+    $front=Mainpage::latest()->take('1')->get();
+    $dropdown=$this->dropdown();
+    $sale=$this->sale();
     $query1= Vendor::
      join('Stocks','vendors.id','=','stocks.user_id')
      ->leftjoin('reviews','stocks.id','=','reviews.review_id')
      ->select('review_id', \DB::raw('avg(rating) as rating')
-     ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at')
-     ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at')->orderBy('rating','DESC');
+     ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stocks.sponser')
+     ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stocks.sponser')->orderBy('rating','DESC');
      $query=$query1->whereMonth('stocks.created_at', date('m'));
      $query=$query1->whereNull('vendors.deleted_at');
      $query=$query1->where('product_status','1')->get();
@@ -46,7 +48,7 @@ class SliderController extends Controller
       ->where('stock_status','1')
       ->take(1)->get();
       }
-    //dd($product);
+    //dd($sale);
     foreach($product3 as $prod) {
       $prod->image=Image::where('Image_id',$prod->id)->get();
       $prod->stock2=Stock2::where('stock_id',$prod->id)
@@ -96,10 +98,16 @@ class SliderController extends Controller
     $slider->save();
     return redirect()->back()->with('success','Slider has been Uploaded');
   }
+   
+   function slide()
+   {
+    $slider=Slider::all();
+    return $slider;
+   }
 
   function getSlider()
   {
-    $slider=Slider::all();
+    $slider=$this->slide();
 
     return view('Dashboard.get_slider',compact('slider'));
   }

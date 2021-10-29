@@ -29,16 +29,51 @@ $sub=Category::category();
 </div>
 <div class="top_cat ml-3">
   <ul class="list-unstyled ">
-    @foreach($brand as $br)
+    
     <li>
-      <a href="javascript:void(0)" onclick="setbrand('{{$br['bname']}}')" class="filter2">
-       <span class="label">
-        <input type="checkbox" name="filter_brand" >
-        <label class="ml-2"> {{$br['bname']}}</label>
-       </span>
-      </a>
+      <div class="rating " data-val="5">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="float-right text-danger">Rating 5</span>
+       
+       </div>
+       <div class="rating mt-2" data-val="4">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="text-danger float-right">Rating 4</span>
+       </div>
+       <div class="rating mt-2" data-val="3">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="text-danger float-right">Rating 3</span>
+       </div>
+       <div class="rating mt-2" data-val="2">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="text-danger float-right">Rating 2</span>
+       </div>
+       <div class="rating mt-2" data-val="1">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="text-danger float-right">Rating 1</span>
+       </div>
     </li>
-    @endforeach
+   
   </ul>
 </div>
      <hr class="ml-3 bg-dark ">
@@ -49,7 +84,7 @@ $sub=Category::category();
         @foreach($color as $pro)  
         @if($pro)   
       <li>
-      <a href="javascript:void(0)" onclick="setcolor('{{$pro['color']}}') " class="filter2">
+      <a href="javascript:void(0)" onclick="setcolor2('{{$pro['color']}}') " class="filter2">
    <i class="fas fa-circle fa-2x " style="color:{{$pro['color']}};"></i>
      <span class="mb-5 ml-2">{{ucfirst($pro['color'])}}</span></a>
      </li>
@@ -70,7 +105,7 @@ $sub=Category::category();
        <div class=" top_cat ml-4">
          @foreach($size as $pro)  
         @if($pro)  
-         <a href="javascript:void(0)" onclick="setsize('{{$pro['size']}}')">
+         <a href="javascript:void(0)" onclick="setsize2('{{$pro['size']}}')">
           <button class="btn btn-sm rounded  btn-secondary border text-light">{{$pro['size']}}</button>
         </a>
          @endif
@@ -86,35 +121,35 @@ $sub=Category::category();
       <ul class="list-unstyled ">
     
        <li>
-      <a href="javascript:void(0)" onclick="price_filter()" class="filter2">
+      <a href="javascript:void(0)" onclick="price_filters()" class="filter2">
       <span class="label">
-     <input type="checkbox" name="filter_brand" id="price1" value="10">
-       <label class="ml-2"> Under $10 doller</label>
+     <input type="checkbox" name="filter_brand" id="price1" value="1000">
+       <label class="ml-2"> Under Rs 1000</label>
      </span>
      </a>
      </li>
     
            <li>
-      <a href="javascript:void(0)" onclick="price_filter2()" class="filter2">
+      <a href="javascript:void(0)" onclick="price_filters2()" class="filter2">
       <span class="label">
-     <input type="checkbox" name="filter_brand" id="price2" value="20">
-       <label class="ml-2"> Under $20  doller</label>
+     <input type="checkbox" name="filter_brand" id="price2" value="2000">
+       <label class="ml-2"> Under Rs 2000</label>
      </span>
      </a>
      </li>
           <li>
-      <a href="javascript:void(0)" onclick="price_filter3()" class="filter2">
+      <a href="javascript:void(0)" onclick="price_filters3()" class="filter2">
       <span class="label">
-     <input type="checkbox" name="filter_brand" id="price3" value="30">
-       <label class="ml-2"> Under $30 doller </label>
+     <input type="checkbox" name="filter_brand" id="price3" value="3000">
+       <label class="ml-2"> Under Rs 30000 </label>
      </span>
      </a>
      </li>
         <li>
-      <a href="javascript:void(0)" onclick="price_filter4()" class="filter2">
+      <a href="javascript:void(0)" onclick="price_filters4()" class="filter2">
       <span class="label">
-     <input type="checkbox" name="filter_brand" id="price4" value="31">
-       <label class="ml-2"> Over $30 doller </label>
+     <input type="checkbox" name="filter_brand" id="price4" value="3100">
+       <label class="ml-2"> Over Rs 3000  </label>
      </span>
      </a>
      </li>
@@ -131,25 +166,25 @@ $sub=Category::category();
       <ul class="list-unstyled ">
      
        <li>
-      <a href="javascript:void(0)" onclick="newarrival()" class="filter2">
+      <a href="javascript:void(0)" onclick="newarrivals()" class="filter2">
       <span class="label">
-    <input type="checkbox" name="filter_brand" id="n" value="this">
+    <input type="checkbox" name="filter_brand" id="ns" value="this">
        <label class="ml-2"> This Week</label>
      </span>
      </a>
      </li>
        <li>
-      <a href="javascript:void(0)" onclick="newarrival2()" class="filter2">
+      <a href="javascript:void(0)" onclick="newarrivals2()" class="filter2">
       <span class="label">
-    <input type="checkbox" name="filter_brand" id="ne" value="last">
+    <input type="checkbox" name="filter_brand" id="nes" value="last">
        <label class="ml-2"> Last Week</label>
      </span>
      </a>
      </li>
         <li>
-      <a href="javascript:void(0)" onclick="newarrival3()" class="filter2">
+      <a href="javascript:void(0)" onclick="newarrivals3()" class="filter2">
       <span class="label">
-    <input type="checkbox" name="filter_brand" id="ne3" value="month">
+    <input type="checkbox" name="filter_brand" id="nes3" value="month">
        <label class="ml-2"> This Month</label>
      </span>
      </a>
@@ -171,17 +206,17 @@ $sub=Category::category();
      <div class="nav-links">
       <ul>
        <li class="nav-link fhg" style="--i: .85s">
-        <a href="#">Category<i class="fas fa-caret-down"></i></a>
+        <a href="javascript:void(0)">Category<i class="fas fa-caret-down"></i></a>
          <div class="dropdown">
           <ul>
             @foreach($sub as $cat)
             <li class="dropdown-link" >
-             <a href="#">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
+             <a href="javascript:void(0)">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
               <div class="dropdown second">
                <ul>
                 @foreach($cat['subcat'] as $subc)
                 <li class="dropdown-link">
-                 <a href="#">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
+                 <a href="javascript:void(0)">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
                  <div class="dropdown second">
                  <ul>
 
@@ -295,7 +330,13 @@ $sub=Category::category();
 <form id="new_sale_form">
   <input type="hidden" name="new2" id="new_sale">
 </form>
-<form id="price_form">
-  <input type="hidden" name="price" id="price">
+<form id="price_sale_form">
+  <input type="hidden" name="price" id="sale_price">
+</form>
+<form id="drop_sale_form">
+  <input type="hidden" name="drop_sale" id="drop_sale">
+</form>
+<form id="rate_form">
+  <input type="text" name="rating" id="search-rate">
 </form>
 @endsection

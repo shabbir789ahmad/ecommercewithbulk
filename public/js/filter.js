@@ -1,17 +1,13 @@
+$('.btn-store').click(function(){
+    let srt=$(this).val();
+    $('#sort_pro').val(srt)
+    $('#product_rate').submit()
 
-function sort_by()
-{
-	var sort_value=$('#sort').val();
-
-	 $('#sort2').val(sort_value)
-	 $('#sort_form').submit()
-
-}
-
+});
 
 function setcolor(color)
 {
-    $('#color2').val(color)
+     $('#color2').val(color)
 	 $('#color_form').submit()
 }
 
@@ -107,6 +103,24 @@ $('#price').val(price_value)
    $('#salee_form').submit();
  });
 
+ $('.store-drop').click(function(){
+ 	   let sale_value=$(this).val();
+   $('#drop_sale').val(sale_value);
+   $('#drop_sale_form').submit();
+ });
+$('.rating').click(function(){
+
+   let rate=$(this).data('val')
+   $('#search-rate').val(rate);
+   $('#rate_form').submit();
+});
+
+$('.ratings').click(function(){
+
+   let rate=$(this).data('vals')
+   $('#rate_pro').val(rate);
+   $('#product_rate').submit();
+});
 
 
 
@@ -114,5 +128,72 @@ function setbrand2(brand)
 {
 	$('#brand-sale').val(brand)
 	 $('#sell_form').submit()
+}
+
+function setcolor2(color)
+{
+    $('#color-sale').val(color)
+	 $('#sale_color_form').submit()
+}
+function setsize2(size)
+{
+   $('#size-sale').val(size)
+	 $('#sale_color_form').submit()
+}
+function setbrand2(brand)
+{  
+    $('#brand-sale').val(brand)
+	 $('#sort_form').submit()
+}
+
+function price_filters()
+{
+ var price_value=$('#price1').val();
+ $('#sale_price').val(price_value)
+	  $('#price_sale_form').submit()
+}
+
+function price_filters2()
+{
+ 
+ var price_value=$('#price2').val();
+     $('#sale_price').val(price_value)
+	  $('#price_sale_form').submit()
+}
+function price_filters3()
+{
+ 
+ var price_value=$('#price3').val();
+ 
+   $('#sale_price').val(price_value)
+	  $('#price_sale_form').submit()
+}
+function price_filters4()
+{
+ 
+ var price_value=$('#price4').val();
+     $('#sale_price').val(price_value)
+	  $('#price_sale_form').submit()
+}
+
+function newarrivals()
+{
+   var new_value=$('#ns').val();
+   $('#new_sale').val(new_value)
+	 $('#new_sale_form').submit()
+}
+
+function newarrivals2()
+{
+   var new_value=$('#nes').val();
+   $('#new_sale').val(new_value)
+	 $('#new_sale_form').submit()
+}
+
+function newarrivals3()
+{
+  	var new_value=$('#nes3').val();
+    $('#new_sale').val(new_value)
+	  $('#new_sale_form').submit()
 }
 

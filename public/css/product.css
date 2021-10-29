@@ -21,7 +21,9 @@ select{
   background-color: #f1f1f1;
 }
 
-
+.rating ,.ratings{
+  cursor: pointer;
+}
 
 
 .fl{

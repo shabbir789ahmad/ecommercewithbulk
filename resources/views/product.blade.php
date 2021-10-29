@@ -1,5 +1,10 @@
 @extends('master.master')
 @section('content')
+<?php 
+use App\Models\Category;
+$sub=Category::category();
+//echo "<pre>"; print_r($sub);die;
+?>
 <title>Product</title>
 <div class="wrapper3">
       
@@ -24,16 +29,49 @@
 </div>
 <div class="top_cat ml-3">
   <ul class="list-unstyled ">
-    @foreach($brand as $br)
     <li>
-      <a href="javascript:void(0)" onclick="setbrand('{{$br['bname']}}')" class="filter2">
-       <span class="label">
-        <input type="checkbox" name="filter_brand" >
-        <label class="ml-2"> {{$br['bname']}}</label>
-       </span>
-      </a>
+      <div class="ratings mr-2" data-vals="5">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="float-right text-danger">Rating 5</span>
+       
+       </div>
+       <div class="ratings mt-2 mr-2" data-vals="4">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="text-danger float-right">Rating 4</span>
+       </div>
+       <div class="ratings mt-2 mr-2" data-vals="3">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="text-danger float-right">Rating 3</span>
+       </div>
+       <div class="ratings mt-2 mr-2" data-vals="2">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="text-danger float-right">Rating 2</span>
+       </div>
+       <div class="ratings mt-2 mr-2" data-vals="1">
+       <span class="fa fa-star fa-lg checked"></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="fa fa-star fa-lg "></span>
+       <span class="text-danger float-right">Rating 1</span>
+       </div>
     </li>
-    @endforeach
   </ul>
 </div>
      <hr class="ml-3 bg-dark ">
@@ -156,8 +194,13 @@
 
        
 <div id="content" style="overflow:hidden">
-  
-  
+  <h4 class=" pro mt-3">All Products</h4>
+  <div class=" d-flex store-nav-color" >
+<button class="btn-store ml-1" id="sale-new" value="new">New Product</button>
+<button class="btn-store ml-1" id="sale-rated" value="top">Top Rated</button>
+<button class="btn-store ml-1" value="sale">ON Sale</button>
+
+</div>
  
  
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -176,7 +219,7 @@
    <div class="col-sm-4 col-12 col-md-4 col-lg-4  mt-2">
     <div class="card ">
      <div class="a">
-       <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">
+       <a href="{{url('productpage/' .$pro['id']. '/'.$pro['drop_id'])}}">
         @foreach($pro->image as $img)
          @if($loop->first)
          <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
@@ -234,5 +277,9 @@
 </form>
 <form id="price_form">
   <input type="hidden" name="price" id="price">
+</form>
+<form id="product_rate">
+  <input type="hidden" name="rating" id="rate_pro">
+  <input type="hidden" name="sorts" id="sort_pro">
 </form>
 @endsection

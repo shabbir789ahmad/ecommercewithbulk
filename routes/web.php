@@ -331,6 +331,8 @@ Route::get('delete-vendor/{id}',[UserController::class,'deletevendor'])->name('a
 Route::get('restore-vendor/{id}',[UserController::class,'restorevendor'])->name('admin/restore-vendor/{id}');
 Route::get('vendor-status',[UserController::class,'vendorStatus'])->name('admin/vendor-status');
 
+Route::get('vendor-product/{id}',[StockController::class,'adminProduct'])->name('admin.vendor-product/{id}');
+
 //all user Route
 Route::get('show-user',[UserController::class,'getUser'])->name('admin/show-user');
 Route::get('delete-user/{id}',[UserController::class,'deleteuser'])->name('admin/delete-user/{id}');

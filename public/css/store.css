@@ -47,7 +47,7 @@
     font-style: italic;
 }
 .txt .btn-store{
-	background-color: #166387;
+	background-color:#00A9A4;
 
 	height: 3rem;
 
@@ -164,7 +164,7 @@
   }
 .txt .btn-store
   {
-    background-color: #166387;
+    background-color: #00A9A4;
     height: 2rem;
   }
 .n2
@@ -247,7 +247,7 @@ a{
 .fhg
 
 {
-  background-color: #1A8E76;
+  background-color: #00A9A4;
 }
 .nav-link > a:hover{
     background-color: #1A8E76;
@@ -494,7 +494,7 @@ color: white;
 @media screen and (min-width: 600px)
 {
   .btn-store{
-    background-color: #1A8E76; 
+    background-color: #00A9A4; 
   border: none;
   color: white;
   padding: 1rem 2rem;
@@ -507,7 +507,7 @@ color: white;
   @media screen and (max-width: 600px)
 {
   .btn-store{
-    background-color: #1A8E76; 
+    background-color: #00A9A4; 
   border: none;
   color: white;
   padding: .5rem .5rem;
@@ -532,7 +532,7 @@ color: white;
       .swiper-slide {
         text-align: center;
         font-size: 18px;
-        background: #fff;
+      
 
         /* Center slide text vertically */
         display: -webkit-box;

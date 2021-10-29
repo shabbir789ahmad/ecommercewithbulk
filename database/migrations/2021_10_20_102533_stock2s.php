@@ -19,6 +19,7 @@ class Stock2s extends Migration
          $table->string('price');
          $table->string('sell_price');
          $table->string('ship');
+         $table->string('on_sale')->nullable();
          $table->string('discount')->nullable();
          $table->string('stock_status');
          $table->bigInteger('supply_id')->unsigned();

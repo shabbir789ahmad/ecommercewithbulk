@@ -109,7 +109,7 @@ $sub=Category::category();
 </div>
 
 <div class="container-fluid mt-2 ml-2 mb-5">
- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+ <ul class="nav nav-pills mb-3 mt-2 justify-content-center" id="pills-tab" role="tablist">
   <li class="nav-item mr-2 ">
     <a class="nav-link  active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Without Sale</a>
   </li>
@@ -251,6 +251,12 @@ $sub=Category::category();
         <form method="POST" action="{{url('vendor/on-sale')}}">
           @csrf
         <input type="hidden" name="id" id="sid">
+        <label>SAle Name</label>
+        <select class="form-control" name="sell_id">
+        @foreach($sale as $sl)
+        <option value="{{$sl['id']}}">{{$sl['sell_name']}}</option>
+        @endforeach
+         </select>
         <label>New Price</label>
         <input type="text" class="form-control" name="sell_price" id="seller">
         <label>New Discount</label>
@@ -302,6 +308,7 @@ $sub=Category::category();
 
 <script>
  @php
+ $en='';
 foreach($sale as $sal)
 {
   $en = strtotime($sal->end_time)*1000 ;

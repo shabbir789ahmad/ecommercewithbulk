@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 class StoreController extends Controller
 {
     use StoreTrait;
+
+    
     function showStore($id, Request $req)
     {
        $new="";
@@ -86,7 +88,7 @@ class StoreController extends Controller
         }
        $date=Carbon::now();
        $query= Stock::
-        leftjoin('stock2s','stocks.id','=','stock2.stock_id')
+        leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
         ->leftjoin('reviews','stocks.id','=','reviews.review_id')
         ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale')
        ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale')->orderBy('rating','DESC');
@@ -180,6 +182,7 @@ class StoreController extends Controller
      function onSale(Request $req)
      {
           $sale=Stock2::findorfail($req->id);
+          $sale->sell_id=$req->sell_id;
           $sale->sell_price=$req->sell_price;
           $sale->discount=$req->discount;
           $sale->on_sale='1';
@@ -191,6 +194,7 @@ class StoreController extends Controller
     {
         $sale=Stock2::findorfail($req->id);
           
+           $sale->sell_id='0';
            $sale->sell_price=$req->sell_price;
            $sale->discount=$req->discount;
            $sale->on_sale='0';

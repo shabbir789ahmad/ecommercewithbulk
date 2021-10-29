@@ -83,14 +83,17 @@ class ProductController extends Controller
         return view('productpage',compact('detail','detail2','image','color','size','brand','review','stock2'));
   }  
 
+
     
 
   function allproduct($id, Request $req)
   {
-    $sort="";
+   
     $color="";
     $size="";
+    $sort="";
     $brand="";
+    $rate="";
     $price="";
     $min="1000";
     $max="2000";
@@ -101,7 +104,14 @@ class ProductController extends Controller
     {
         $sort=$req->get('sort2');
     }
-    
+    if($req->get('rating') !== Null)
+    {
+        $rate=$req->get('rating');
+    }
+    if($req->get('sorts') !== Null)
+    {
+        $sort=$req->get('sorts');
+    }
      $new="";
     if($req->get('new2') !== Null)
     {
@@ -113,11 +123,12 @@ class ProductController extends Controller
         $price=$req->get('price');
     }
    
-  //echo $new;
-    $query= Dropdown::leftjoin('stocks','dropdowns.id','=','stocks.drop_id')
-        
-        ->select('stocks.product','stocks.detail','stocks.id');
-
+  //echo $drop;
+     $query= Stock::
+        leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
+        ->leftjoin('reviews','stocks.id','=','reviews.review_id')
+        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale')
+       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale')->orderBy('rating','DESC');
      if($req->get('color2') !== Null)
        {
         $query=$query->join('colors','stocks.id','=','colors.filter_id');
@@ -136,21 +147,25 @@ class ProductController extends Controller
         $query=$query->where('size',$req->get('size2'));
         }
 
-        if($sort=='product')
+       
+        if($rate)
         {
-            $query=$query->orderBy('product','asc');
+            $query=$query->where('rating',$rate);
         }
-        if($sort=='date')
+        
+         if($sort=='new')
         {
-            $query=$query->orderBy('stocks.created_at','asc');
+           $start = $now->startOfWeek()->format('Y-m-d H:i');
+           $end = $now->endOfWeek()->format('Y-m-d H:i');
+           $query=$query->whereBetween('stocks.created_at',[$start,$end]);
         }
-        if($sort=='price_asc')
+        if($sort=='top')
         {
-            $query=$query->orderBy('sell_price','asc');
+            $query=$query->where('rating','>=','4');
         }
-        if($sort=='price_desc')
+        if($sort=='sale')
         {
-            $query=$query->orderBy('sell_price','desc');
+            $query=$query->where('on_sale','1');
         }
 
         //sort by week and month
@@ -171,32 +186,30 @@ class ProductController extends Controller
             $query=$query->whereMonth('stocks.created_at', date('m'));
         }
    // price filter
-      if($price=='10')
+      if($price=='1000')
         {
-          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-           $query=$query->where('sell_price','<=','10');
+           $query=$query->where('sell_price','<=','1000');
         }
-         if($price=='20' )
+         if($price=='2000' )
         {
-          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-           $query=$query->whereBetween('sell_price',['10','20']);
+          
+           $query=$query->whereBetween('sell_price',['1000','2000']);
         }
-         if($price=='30' )
+         if($price=='3000' )
         {
-          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-           $query=$query->whereBetween('sell_price',['20','30']);
+          
+           $query=$query->whereBetween('sell_price',['2000','3000']);
         }
         
-         if($price=='31' )
+         if($price=='3100' )
         {
-          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-           $query=$query->whereBetween('sell_price',['31','60']);
+           $query=$query->where('sell_price','>','3100');
         }
         $query=$query->where('drop_id',$id);
         $query=$query->paginate(10);
    
      $product=$query;
- dd($product);
+ //dd($product);
       foreach($product as $pro)
       {
         $pro->image=Image::where('image_id',$pro->id)->take(1)->get();
@@ -229,12 +242,18 @@ class ProductController extends Controller
     $color="";
     $size="";
     $brand="";
+    $drop="";
+    $rate="";
     $price="";
     $min="1000";
     $max="2000";
 
      $now=Carbon::now();
     
+    if($req->get('rating') !== Null)
+    {
+        $rate=$req->get('rating');
+    }
     if($req->get('sort2') !== Null)
     {
         $sort=$req->get('sort2');
@@ -258,8 +277,12 @@ class ProductController extends Controller
     {
         $price=$req->get('price');
     }
-   
-  //echo $new;
+
+    if($req->get('drop_sale') !== Null)
+    {
+        $drop=$req->get('drop_sale');
+    }
+
       $query= Stock::
         leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
         ->leftjoin('reviews','stocks.id','=','reviews.review_id')
@@ -283,7 +306,14 @@ class ProductController extends Controller
             $query=$query->join('sizes','stocks.id','=','sizes.size_id');
         $query=$query->where('size',$req->get('size2'));
         }
-
+         if($drop)
+        {
+          $query=$query->where('stocks.drop_id',$drop);
+        }
+         if($rate)
+        {
+          $query=$query->where('rating',$rate);
+        }
         if($sell=='new')
         {
           $query=$query->where('stocks.created_at','>=',Carbon::now()->subdays(10));
@@ -326,25 +356,25 @@ class ProductController extends Controller
             $query=$query->whereMonth('stocks.created_at', date('m'));
         }
    // price filter
-      if($price=='10')
+      if($price=='1000')
         {
           
-           $query=$query->where('sell_price','<=','10');
+           $query=$query->where('sell_price','<=','1000');
         }
-         if($price=='20' )
+         if($price=='2000' )
         {
          
-           $query=$query->whereBetween('sell_price',['10','20']);
+           $query=$query->whereBetween('sell_price',['1000','2000']);
         }
-         if($price=='30' )
+         if($price=='3000' )
         {
           
-           $query=$query->whereBetween('sell_price',['20','30']);
+           $query=$query->whereBetween('sell_price',['2000','3000']);
         }
         
-         if($price=='31' )
+         if($price=='3100' )
         {
-           $query=$query->whereBetween('sell_price',['31','60']);
+           $query=$query->whereBetween('sell_price',['3100','6000']);
         }
          $query=$query->where('on_sale','1');
         $query=$query->paginate(10);

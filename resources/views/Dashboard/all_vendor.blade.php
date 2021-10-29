@@ -67,7 +67,7 @@
     <td>
      <div class="b d-flex justify-content-center mt-1">
       
-       <a href="#" class="border shadow  py-2 px-3 ml-1"><i class="fas fa-pen text-success"></i></a>
+       <a href="{{url('admin/vendor-product/' .$show['id'])}}" class="border shadow  py-2 px-3 ml-1"><i class="fas fa-pen text-success"></i></a>
         <a href="{{'delete-vendor/'.$show['id']}}" class="border shadow  py-2 px-3 ml-1" ><i class="fas fa-trash-alt  text-danger "></i>
        </a>
 

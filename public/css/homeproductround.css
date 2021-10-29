@@ -16,35 +16,18 @@
         height: 8rem;
         border-radius: 50%;
       }
+
       .textc {
          
         
-         color: #ffffff;
+         color: #fff;
          font-size: 1.1vw;
          width: 100%;
          height: 2.5rem;
          border: none;
          padding-top: 8%;
        }
-      .swiper-slide {
-      	
-        text-align: center;
-        font-size: 1vw;
-        color: #fff;
-        
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-}
+      
 
   @media screen and (max-width: 900px)
   {

@@ -18,10 +18,10 @@ class Stocks extends Migration
             $table->string('product');
             $table->string('detail');
             $table->string('product_status');
-            $table->string('on_sale')->nullable();
+            $table->string('sponser');
             $table->string('size_image');
              $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('vendors')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('drop_id')->unsigned();
             $table->foreign('drop_id')->references('id')->on('dropdowns')->onDelete('cascade')->onUpdate('cascade');
              $table->bigInteger('cat_id')->unsigned();

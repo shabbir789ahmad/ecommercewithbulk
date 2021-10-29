@@ -1,4 +1,4 @@
-@extends(' vendor.dashboard')
+@extends(' Dashboard.admin')
 @section('content')
 
 <div class="b p-3 mt-0" style="background-color:#F0F0F0">
@@ -111,7 +111,7 @@
    </tr>
   </thead>
   <tbody>
-
+ @php //dd($stock) @endphp
    @foreach($stock as $show)
    <tr>
     <td class="a col-1">
@@ -123,7 +123,7 @@
     <td class="a " ><input type="checkbox" data-id="{{ $show['id'] }}" name="product_status" class="js-switch" 
      {{ $show->product_status == 1 ? 'checked' : '' }} ></td>
     
-    
+   
     <td class="a">{{$show['price']}}</td>
     <td class="a col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span>
      
@@ -132,7 +132,7 @@
     @if($show['discount'] > '1')
   {{$show['discount']}}@else 0 @endif</span>
     </td>
-   
+
     <td class="a col-2">{{$show->stock}}</td>
     <td class="a col-2">{{$show->count}}</td>
     <td>

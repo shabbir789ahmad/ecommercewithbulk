@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Detail;
 use App\Models\Dropdown;
 use App\Models\Stock;
+use App\Models\Stock2;
 use App\Models\Category;
 use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Mail;
@@ -69,8 +70,8 @@ class OrderController extends Controller
           'price'=> $req->price[$i],
           'quentity'=> $req->quentity[$i],
           'detail'=> $req->detail[$i],
-           'color' =>  $req->color[$i],
-         'size' =>  $req->size[$i],
+          'color' =>  $req->color[$i],
+          'size' =>  $req->size[$i],
           'vendor_id'=> $req->vendor_id[$i],
           'drop_id'=> $req->drop_id[$i],
           'order_status'=> 'Pending',
@@ -81,12 +82,9 @@ class OrderController extends Controller
 
          if($data)
          {
-          foreach($data as $dt)
-          {
-            $quen=Stock2::where('id',$dt['id'])->get();
-            $quen->decrement('stock');
+          
+            $quen=Stock2::where('id',$dt['id'])->decrement('stock');
             $req->session()->forget('cart');
-          }
             
          }
           $this->orderConform($order,$data);

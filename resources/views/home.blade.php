@@ -29,7 +29,7 @@
     </a>
   </div>
 
-
+@if($sale)
  <div class="container-fluid mt-5 d-inline-block">
   <div class="sale">
    @foreach($sale as $sal)
@@ -48,9 +48,8 @@
   </div>
    @endforeach
   </div>
-
  </div>
-
+@endif
 
 
 <div class="container-fluid mt-4">
@@ -94,12 +93,75 @@
   @endif
   @endforeach
   @endforeach
+
+</div>
+</div>
+
+ <div class="container-fluid mt-5 d-inline-block">
+  <div class="sale">
+   <h2 class="font-weight-bold ml-3 keephome ">Sponsered</h2>
+  </div>
+ </div>
+
+
+
+<div class="container-fluid ">
+ <div class="owl-carousel owl-theme ml-2">
+  @foreach($product as $pro)
+  
+   @if($pro['sponser'])
+  <div class="item">
+    <div class="card ">
+     <div class="a">
+      <a href="{{'productpage/'.$pro['id']. '/' .$pro['drop_id']}}"> @foreach($pro->image as $img)
+        @if($loop->first)
+        <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
+        @endif
+       @endforeach</a>
+       
+       <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
+
+       @foreach($pro->stock2 as $st)
+       <a > 
+        <p class="overlay5 ">
+        <span class="far fa-flag text-light fa-lg"></span>
+        </p>
+       </a>
+        @if($st['discount'])
+        <a >  <p class="overlay2 ">{{ceil( ($st['discount']/$st['sell_price'])*100)
+       }}% </p></a>
+       @else
+       @endif
+     </div>
+     <div class="card-body">
+       <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$st['sell_price'] - $st['discount']}}<del class="text-secondary">
+       <small class="text-danger">${{$st['sell_price']}}</small></del>  </span>
+      </p>
+     
+      <div class="text-center">
+     
+        @for($i=0; $i<5; $i++)
+        @if($i<$pro['rating'])
+        <span class="fa fa-star checked "></span>
+        @else
+        <span class="fa fa-star"></span> 
+        @endif
+         @endfor
+       
+      </div>
+       @endforeach
+      
+        </div>
+    </div>
+  </div>
+  @endif
+ 
+  @endforeach
   
  
   
 </div>
 </div>
-
 
 
 <div class="container-fluid mt-5 ">
@@ -433,21 +495,27 @@
 </div>
 
 
-
 <script>
  @php
+$ens='';
 foreach($sale as $sal)
 {
-  $en = strtotime($sal->end_time)*1000 ;
+  if($sal['end_time'] != null)
+  {
+    $ens = strtotime($sal->end_time)*1000 ;
+  }else{
+    $ens='0';
+  }
+  
 }
 @endphp
 
-var endtime={{ $en}};
+let endtime={{$ens}};
 
  
   var timer=setInterval(function(){
   var strt=new Date().getTime();
-  //alert(endtime)
+ // alert(strt)
     var t=endtime-strt;
 //alert(t)
     if(t>0)
@@ -458,16 +526,16 @@ var endtime={{ $en}};
         let sc = Math.floor((t % (1000 * 60)) / 1000);
 
 document.getElementById("d").innerHTML= ("0" + da).slice(-2) +
-"<span >d</span>";
+"<span class='d'>d</span>";
 
 document.getElementById("h").innerHTML= ("0" + hr).slice(-2) +
-"<span >h</span>";
+"<span class='d'>h</span>";
 
 document.getElementById("m").innerHTML= ("0" + ms).slice(-2) +
-"<span >m</span>";
+"<span class='d'>m</span>";
 
 document.getElementById("s").innerHTML= ("0" + sc).slice(-2) +
-"<span>s</span>";
+"<span class='d'>s</span>";
     }else{
 
     }

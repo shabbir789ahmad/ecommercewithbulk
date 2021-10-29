@@ -13,10 +13,11 @@ use App\Models\Size;
 use App\Models\Store;
 use App\Models\Category;
 use Auth;
+use App\Http\Traits\StoreTrait;
 use Illuminate\Support\Facades\DB;
 class StockController extends Controller
 {
-
+ use StoreTrait;
     function Add(Request $req)
     {
         $req->validate([
@@ -269,97 +270,23 @@ class StockController extends Controller
 
 
     public function getStock(Request $req)
-    {    $main = Category::all();
-         $supply=Supply::all();
-         $supply2='';
-         $stock2='';
-         if($req->get('supply')!== Null)
-         {
-            $supply2=$req->get('supply');
-         }
-         if($req->get('stock1') !== Null)
-         {
-            $stock2=$req->get('stock1');
-         }
-         $drop2='';
-    
-     if($req->get('drop_category') !== Null)
-
-     {
-        $drop2=$req->get('drop_category');
-     }
-         //echo $stock2;
-       $query=Stock::
-        select('stocks.product','stocks.detail','stocks.drop_id','stocks.product_status','stocks.id');
-
-         if($supply2)
-         {
-          $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-            $query=$query->where('stock2s.supply_id',$supply2);
-         }
-         if($drop2)
-        {
-         $query=$query->where('stocks.drop_id', $drop2);
-        }
-
-          if($stock2 == 10 )
-         {
-            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-            $query=$query->where('stock2s.stock','<=',$stock2);
-            
-         }
-          if($stock2 == 20 )
-         {
-            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-            $query=$query->where('stock2s.stock','>=',10)
-            ->where('stock2s.stock','<=',$stock2);
-            
-         }
-          if($stock2 == 30 )
-         {
-            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-            $query=$query->where('stock2s.stock','>=',20)
-            ->where('stock2s.stock','<=',$stock2);
-            
-         }
-          if($stock2 == 40 )
-         {
-            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-            $query=$query->where('stock2s.stock','>=',30)
-            ->where('stock2s.stock','<=',$stock2);
-            
-         }
-         if($stock2 == 50 )
-         {
-            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-            $query=$query->where('stock2s.stock','>=',40)
-            ->where('stock2s.stock','<=',$stock2);
-            
-         }
-          if($stock2 == 60 )
-         {
-            $query=$query->join('stock2s','stocks.id','=','stock2s.stock_id');
-            $query=$query->where('stock2s.stock','>=',50);
-            
-         }
-        
-        $query=$query->paginate(10);
-        $stock=$query;
-        foreach($stock as $st)
-        {
-         $st->image=Image::where('image_id',$st->id)->take(1)->get();
-         $st->stock2=Stock2::where('stock_id',$st->id)
-         ->where('stock_status','1')->take(1)->get();
-         $st->total=Stock2::where('stock_id',$st->id)
-         ->sum('stock');
-          $st->count=Stock2::where('stock_id',$st->id)
-         ->count();
-
-        }
-        
+    {    $main = $this->category();
+         $supply=$this->supply();
+         $id=Auth::user()->id;
+        $stock=$this->products($id);
  
-       //dd($stock);
+       
         return view('vendor.stock_show',compact('stock','supply','main'));
+    }
+
+    function adminProduct($id)
+    {
+      $main = $this->category();
+         $supply=$this->supply();
+        $stock=$this->products($id);
+
+        //dd($stock);
+      return view('Dashboard.vendor_product',compact('stock','supply','main'));
     }
 
     function updateSell(Request $req)
