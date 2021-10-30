@@ -80,7 +80,8 @@ use Auth;
          //echo $stock2;
        $query=Stock::
          join('stock2s','stocks.id','=','stock2s.stock_id')
-        ->select('stocks.product','stocks.detail','stocks.drop_id','stocks.product_status','stocks.id','stocks.user_id','stock2s.supply_id','stock2s.stock','stock2s.sell_price','stock2s.discount','stock2s.price');
+         ->join('sponsers','stocks.id','=','sponsers.sponser_id')
+        ->select('stocks.product','stocks.detail','stocks.drop_id','stocks.product_status','stocks.id','stocks.user_id','stock2s.supply_id','stock2s.stock','stock2s.sell_price','stock2s.discount','stock2s.price','stock2s.sold_stock','sponsers.sponser');
 
          if($supply2)
          {
@@ -140,9 +141,6 @@ use Auth;
         {
          $st->image=Image::where('image_id',$st->id)->take(1)->get();
         
-         
-          $st->count=Stock2::where('stock_id',$st->id)
-         ->count();
 
         }
 

@@ -41,10 +41,10 @@ $sub=Category::category();
          <div class="d-flex ml-auto">
         <p class="ml-auto text-dark font-weight-bold">Sale End In 
          <div id="time mr-5" class="d-flex ml-5">
-          <p id="d" class="p-1 bg-time ml-2 text-light">f</p>
-          <p id="h" class="p-1 bg-time ml-2 text-light">f</p>
-          <p id="m" class="p-1 bg-time ml-2 text-light">f</p>
-          <p id="s" class="p-1 bg-time ml-2 text-light">f</p>
+          <p id="day" class="p-1 bg-time ml-2  text-light">f</p>
+          <p id="hour" class="p-1 bg-time ml-2 text-light">f</p>
+          <p id="minute" class="p-1 bg-time ml-2 text-light">f</p>
+          <p id="second" class="p-1 bg-time ml-2 text-light">f</p>
          </div>
        </p>
        </div>
@@ -79,8 +79,8 @@ $sub=Category::category();
                   @php //dd($c->dropdown); @endphp
                   @foreach($cat['drop'] as $drp)
                   @if($subc['id']==$drp['dropdown_id'] )
-                  <li class="dropdown-link store-drop"  value="{{$drp['id']}}">
-                   <a >{{ucwords($drp['name'])}}</a>
+                  <li class="dropdown-link  store-drop"  value="{{$drp['id']}}">
+                   <a href="javascript:void(0)">{{ucwords($drp['name'])}}</a>
                   </li>
                    @endif
                  
@@ -309,7 +309,7 @@ $sub=Category::category();
 <script>
  @php
  $en='';
-foreach($sale as $sal)
+foreach($sells as $sal)
 {
   $en = strtotime($sal->end_time)*1000 ;
 }
@@ -330,20 +330,20 @@ var endtime={{ $en}};
         let ms = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
         let sc = Math.floor((t % (1000 * 60)) / 1000);
 
-document.getElementById("d").innerHTML= ("0" + da).slice(-2) +
+document.getElementById("day").innerHTML= ("0" + da).slice(-2) +
 "<span class='d'>d</span>";
 
-document.getElementById("h").innerHTML= ("0" + hr).slice(-2) +
+document.getElementById("hour").innerHTML= ("0" + hr).slice(-2) +
 "<span class='d'>h</span>";
 
-document.getElementById("m").innerHTML= ("0" + ms).slice(-2) +
+document.getElementById("minute").innerHTML= ("0" + ms).slice(-2) +
 "<span class='d'>m</span>";
 
-document.getElementById("s").innerHTML= ("0" + sc).slice(-2) +
+document.getElementById("second").innerHTML= ("0" + sc).slice(-2) +
 "<span class='d'>s</span>";
     }else{
 
     }
   },1000);
-</script>
+</script>  
 @endsection

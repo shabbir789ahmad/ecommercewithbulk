@@ -35,13 +35,9 @@
                @php  $sum[]=$details['ship'] @endphp
                @php $sum2 = array_sum($sum) @endphp
 <div class="row  border-top pt-4 mb-3 ">
-    
- <div class="col-md-2 col-sm-12 col-12 d-flex ">
-
-        <img src="{{asset('uploads/img/'.$details['image'])  }}" width="100%" height="100%" class="img-responsive cart-image"/>
-
-    
-    </div>
+  <div class="col-md-2 col-sm-12 col-12 d-flex ">
+   <img src="{{asset('uploads/img/'.$details['image'])  }}" width="100%" height="100%" class="img-responsive cart-image"/>
+  </div>
  <div class="col-sm-6 col-6 col-md-3">
 <h4 class=" mt-4 ml-0 ml-md-4 oproduct-name">{{ucwords($details['name'] )}}</h4>
 

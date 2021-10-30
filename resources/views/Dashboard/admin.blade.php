@@ -173,7 +173,21 @@
         </div>
         
       </li>
-
+    <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm2" aria-expanded="true" aria-controls="collapseForm">
+       <i class="fab fa-wpforms text-light"></i>
+       <span>Sponser Product</span>
+     </a>
+     <div id="collapseForm2" class="collapse
+       @if(request()->is('admin/show-vendor')) show
+        @endif"
+         aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class=" py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{url('admin/all-sponser-product')}}">All Product</a>
+         
+       </div>
+      </div>
+    </li>
     <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm2" aria-expanded="true" aria-controls="collapseForm">
        <i class="fab fa-wpforms text-light"></i>

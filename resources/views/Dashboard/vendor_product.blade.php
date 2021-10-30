@@ -101,12 +101,12 @@
    <tr>
     <th>Image</th>
     <th>Product</th>
-    <th > Status</th>
+    <th > Sponser</th>
     <th>Price</th>
     <th class="col-2">Sell Price</th>
     <th >Discount </th>
     <th >Total Stock </th>
-    <th >Stocks </th>
+    <th >Remaining Stock </th>
     <th class="text-center">Actions</th>
    </tr>
   </thead>
@@ -120,8 +120,13 @@
       @endforeach
     </td>
     <td class="a col-2">{{$show->product}}</td>
-    <td class="a " ><input type="checkbox" data-id="{{ $show['id'] }}" name="product_status" class="js-switch" 
-     {{ $show->product_status == 1 ? 'checked' : '' }} ></td>
+    <td class="a col-2">
+      @if($show['sponser'])
+       Sponser
+      @else
+      <span class="bag "></span><i class="fas fa-tags discount border sponser2 p-2 " data-id="{{$show['id']}}" ></i>
+      @endif
+    </td>
     
    
     <td class="a">{{$show['price']}}</td>
@@ -134,7 +139,7 @@
     </td>
 
     <td class="a col-2">{{$show->stock}}</td>
-    <td class="a col-2">{{$show->count}}</td>
+    <td class="a col-2">{{$show['stock'] - $show['sold_stock']}}</td>
     <td>
      <div class="b d-flex justify-content-center mt-1">
       
@@ -169,6 +174,33 @@
   <input type="hidden" name="stock1" id="stock1">
 </form>
 
+
+<!-- Modal -->
+<div class="modal fade" id="sopnser_modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sponser This Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url('admin/sponser-product2')}}" method="POST">
+          @csrf
+          <input type="hidden" name="sponser_id" id="sid">
+          <select class="form-control " name="sponser">
+            <option disabled hidden selected>Sponser This Product</option>
+            <option value="1">Sponser</option>
+          </select>
+
+         <button type="submit" class="btn btn-primary mt-3 float-right">Save changes</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
  @endsection
 

@@ -233,6 +233,13 @@
          var id=$(this).data('id');
          var colors=$(this).data('color');
          var sizes=$(this).data('size');
+          if(colors=='Null' || colors=='' && sizes=='Null' || sizes=='')
+          {
+            $('#message').html('please Select Size and Color')
+             $('.carts').prop('disabled', true);
+          }else{
+
+
           
         $.ajax({
             url : '/add-to-cart/' +id,
@@ -254,6 +261,7 @@
               
             }
         });
+    }
     });
 
 

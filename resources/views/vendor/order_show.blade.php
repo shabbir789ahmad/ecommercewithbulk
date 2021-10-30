@@ -2,10 +2,8 @@
 @section('content')
 
 <div class="b p-3 mt-0" style="background-color:#F0F0F0">
-
- 
-    
 <div class="card shadow d-flex border  p-0 ">
+  
   <div class="card-body text-dark">
     <div class="row">
       <div class="col-md-2">
@@ -13,6 +11,7 @@
        <i class="fab fa-product-hunt text-success text-center fa-2x mt-2"></i></a>
       </div>
     <div class="col-md-8">
+      
      <h4 class="text-center font-weight-bold mt-3 text-color">All Orders</h4>
     </div>
     <div class="col-md-1">
@@ -26,12 +25,23 @@
   </div>
  </div>
 </div>
+
+ 
 <div class="row mt-2">
   <div class="col-md-3">
     <div class="card">
-      <p class="card-header  text-light font-weight-bold">Today Orders</p>
-      <div class="card-body">
+      <div class="card-header d-flex">
+        <p class=" text-light font-weight-bold"> Orders</p>
+        <select class="form-control w-50 ml-auto" id="order_count">
+          <option disabled selected hidden>Filter</option>
+          <option value="this">Order This Week</option>
+          <option value="mid">Order Last 15 Days</option>
+          <option value="month">Order This Month</option>
+        </select>
+      </div>
+      <div class="card-body d-flex">
         <h3 class="text-center font-weight-bold">{{$today}}</h3>
+    
       </div>
     </div>
   </div>
@@ -49,7 +59,7 @@
   </div>
   <div class="col-md-3">
     <div class="card">
-      <p class="card-header text-light font-weight-bold" style="background-color:#1A8E76;">Orders This Month</p>
+      <p class="card-header text-light font-weight-bold" style="background-color:#1A8E76;">Delivered Orders</p>
       <div class="card-body">
         <h3 class="text-center font-weight-bold">{{$this_month}}</h3>
       </div>
@@ -63,7 +73,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 
@@ -140,7 +149,7 @@
     <td class="a ">{{ucfirst($show['id'])}}</td>
     <td>
      <div class="b d-flex justify-content-center mt-1">
-       <a href="{{'show-order/'.$show['id']}}" class="border shadow  py-2 px-3"><i class="fas fa-pen text-success"></i>
+       <a href="{{'show-order/'.$show['id']}}" class="border shadow  py-2 px-3"><i class="fas fa-eye text-success"></i>
        </a>
        <a href="{{'cancel-order/'.$show['id']}}" class="border ml-3 py-2 px-3" onclick="return confirm('Are you sure?')">  
          <i class="fas fa-trash-alt text-danger"></i>
@@ -181,7 +190,7 @@
       <div class="modal-body">
         <form action="{{url('admin/status-up')}}" method="POST">
           @csrf
-      <input type="text" name="order_id" id="ids">
+      <input type="hidden" name="order_id" id="ids">
       <select class="form-control" id="status" name="order_status">
         <option>Pending</option>
         <option>Shipped</option>
@@ -197,5 +206,8 @@
   </div>
 </div>
 
+<form id="order_form">
+  <input type="text" name="counte" id="order_counte">
+</form>
  @endsection
 

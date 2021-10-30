@@ -20,7 +20,11 @@ class Details extends Migration
             $table->string('price');      
             $table->string('image');
             $table->string('total');
+            $table->string('ship');
+            $table->string('color');
+            $table->string('size');
             $table->string('detail');
+            $table->string('product_id');
             $table->string('order_status');
             $table->bigInteger('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->onDelete('cascade');

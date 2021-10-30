@@ -118,8 +118,8 @@
    </div>
 
   </div>        
-
-   <button class="btn btn-pro btn-block add-to-cart py-3 text-light mt-2 mt-md-3 rounded" data-id="{{$detail['id']}}" data-color="" data-size="" id="carts">Add To Cart</button>
+ <p class="text-danger" id="message"></p>
+   <button class="btn btn-pro btn-block add-to-cart py-3 text-light mt-2 mt-md-3 rounded"  data-id="{{$detail['id']}}" data-color="" data-size="" id="carts">Add To Cart</button>
 
 
 

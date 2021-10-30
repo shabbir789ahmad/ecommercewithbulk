@@ -169,4 +169,17 @@ $(document).ready(function(){
         $('#en').val(end)
     });
 
+    $('.sponser').click(function(e){
+     $('#sopnser_modal').modal('show')
+     let id=$(this).data('id')
+     $('#sid').val(id)
+
+    });
+     $('.sponser2').click(function(e){
+     $('#sopnser_modal2').modal('show')
+     let id=$(this).data('id')
+     $('#sid').val(id)
+    
+    });
+
 });

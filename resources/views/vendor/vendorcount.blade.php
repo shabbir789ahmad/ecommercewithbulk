@@ -5,7 +5,14 @@
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            
+             <h3 class="ml-auto mr-2">Filter</h3>
+             <select class="form-control w-50 " id="sale_count">
+               <option disabled selected hidden>Filter Sale and Product</option>
+               <option value="this">Sale This Week</option>
+               <option value="mid">Sale Last 15 Days</option>
+               <option value="month">Sale This Month</option>
+               
+              </select>
           </div>
 
           <div class="row mb-3">
@@ -15,10 +22,11 @@
                 <div class="card-body">
                   <div class="row align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Earnings (Monthly)</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Earnings (Monthly)
+                      </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">{{$earn}}</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"> {{$en}}%</span>
+                        <span class="text-success mr-2"> {{ceil($en)}}%</span>
                         <span>Since last month</span>
                       </div>
                     </div>
@@ -35,10 +43,10 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Sales</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Pending</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">{{$sale}}</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"></i>{{$sl}}%</span>
+                        <span class="text-success mr-2"></i>{{ceil($sl)}}%</span>
                         <span>Since last Month</span>
                       </div>
                     </div>
@@ -59,12 +67,12 @@
                       <div class="text-xs font-weight-bold text-uppercase mb-1">Order</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">{{$order}}</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2">{{$or}}%</span>
-                        <span>Since yesterday</span>
+                        <span class="text-success mr-2">{{ceil($or)}}%</span>
+                        <span>Since last Month</span>
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-warning"></i>
+                      <i class="fas fa-shopping-cart fa-2x text-warning"></i>
                     </div>
                   </div>
                 </div>
@@ -79,7 +87,7 @@
                       <div class="text-xs font-weight-bold text-uppercase mb-1">Completed Orders</div>
                       <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$comp}}</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2">{{$com}}%</span>
+                        <span class="text-success mr-2">{{ceil($com)}}%</span>
                         <span>Since last month</span>
                       </div>
                     </div>
@@ -91,22 +99,22 @@
               </div>
             </div>
           
-   @if($salee)
-   @foreach($salee as $sal)
+   @if($sells)
+   @foreach($sells as $sal)
     @if($sal['end_time']>=$date)
      <div class="card-header mt-5 d-inline-block rounded-top  py-3 w-100">
       <div class="row">
         <div class="col-md-6">
          <div class="sale">
-      @foreach($salee as $sal)
+      @foreach($sells as $sal)
         <h2 class="font-weight-bold ml-3 text-light ">{{ucwords($sal['sell_name'])}}</h2>
        <div class="d-flex">
         <p class="ml-4 text-light font-weight-bold">Sale End In 
          <div id="time " class="d-flex ml-5">
-          <p id="d" class="p-1 bg-warning ml-2 text-light">f</p>
-          <p id="h" class="p-1 bg-warning ml-2 text-light">f</p>
-          <p id="m" class="p-1 bg-warning ml-2 text-light">f</p>
-          <p id="s" class="p-1 bg-warning ml-2 text-light">f</p>
+          <p id="day" class="p-1 bg-warning ml-2 text-light">f</p>
+          <p id="hour" class="p-1 bg-warning ml-2 text-light">f</p>
+          <p id="minute" class="p-1 bg-warning ml-2 text-light">f</p>
+          <p id="second" class="p-1 bg-warning ml-2 text-light">f</p>
          </div>
        </p>
        </div>
@@ -193,6 +201,9 @@
         </div>
         <!---Container Fluid-->
       </div>
+      <form id="count_form">
+        <input type="text" name="counter" id="sale_counter">
+      </form>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
@@ -219,7 +230,8 @@
 
 <script>
  @php
-foreach($salee as $sal)
+ $en='';
+foreach($sells as $sal)
 {
   $en = strtotime($sal->end_time)*1000 ;
 }
@@ -240,20 +252,20 @@ var endtime={{ $en}};
         let ms = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
         let sc = Math.floor((t % (1000 * 60)) / 1000);
 
-document.getElementById("d").innerHTML= ("0" + da).slice(-2) +
+document.getElementById("day").innerHTML= ("0" + da).slice(-2) +
 "<span class='d'>d</span>";
 
-document.getElementById("h").innerHTML= ("0" + hr).slice(-2) +
+document.getElementById("hour").innerHTML= ("0" + hr).slice(-2) +
 "<span class='d'>h</span>";
 
-document.getElementById("m").innerHTML= ("0" + ms).slice(-2) +
+document.getElementById("minute").innerHTML= ("0" + ms).slice(-2) +
 "<span class='d'>m</span>";
 
-document.getElementById("s").innerHTML= ("0" + sc).slice(-2) +
+document.getElementById("second").innerHTML= ("0" + sc).slice(-2) +
 "<span class='d'>s</span>";
     }else{
 
     }
   },1000);
-</script>
+</script>  
 @endsection

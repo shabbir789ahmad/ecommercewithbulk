@@ -24,13 +24,13 @@ class SliderController extends Controller
     $slider=Slider::latest()->take('3')->get();
     $front=Mainpage::latest()->take('1')->get();
     $dropdown=$this->dropdown();
-    $sale=$this->sale();
     $query1= Vendor::
-     join('Stocks','vendors.id','=','stocks.user_id')
+     join('stocks','vendors.id','=','stocks.user_id')
+     ->join('stock2s','stocks.id','=','stock2s.stock_id')
      ->leftjoin('reviews','stocks.id','=','reviews.review_id')
      ->select('review_id', \DB::raw('avg(rating) as rating')
-     ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stocks.sponser')
-     ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stocks.sponser')->orderBy('rating','DESC');
+     ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stocks.sponser','stock2s.sell_price','stock2s.discount','stock2s.on_sale','stock2s.stock_status')
+     ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stocks.sponser','stock2s.sell_price','stock2s.discount','stock2s.on_sale','stock2s.stock_status')->orderBy('rating','DESC');
      $query=$query1->whereMonth('stocks.created_at', date('m'));
      $query=$query1->whereNull('vendors.deleted_at');
      $query=$query1->where('product_status','1')->get();
@@ -42,40 +42,35 @@ class SliderController extends Controller
      $product3=$prod3->shuffle();
         
      
-    foreach($product as $pro) {
-      $pro->image=Image::where('Image_id',$pro->id)->get();
-      $pro->stock2=Stock2::where('stock_id',$pro->id)
-      ->where('stock_status','1')
-      ->take(1)->get();
-      }
-    //dd($sale);
-    foreach($product3 as $prod) {
+     foreach($product as $pro) 
+     {
+       $pro->image=Image::where('Image_id',$pro->id)->get();
+     }
+   
+    foreach($product3 as $prod) 
+    {
       $prod->image=Image::where('Image_id',$prod->id)->get();
-      $prod->stock2=Stock2::where('stock_id',$prod->id)
-      ->where('stock_status','1')->take(1)->get();
-      }
+    }
      
-  
+  //dd($product);
         
-    $prod= Vendor::
-     join('Stocks','vendors.id','=','stocks.user_id')
+    $product2= Vendor::
+      join('stocks','vendors.id','=','stocks.user_id')
+      ->join('stock2s','stocks.id','=','stock2s.stock_id')
       ->leftjoin('reviews','stocks.id','=','reviews.review_id')
       ->select('review_id', \DB::raw('avg(rating) as rating')
-       ,'stocks.drop_id','stocks.id','stocks.product'    ,'reviews.review_id','stocks.created_at','vendors.deleted_at','stocks.cat_id')
-      ->groupBy('review_id','stocks.drop_id','stocks.cat_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','vendors.deleted_at')->orderBy('rating','DESC')
+       ,'stocks.drop_id','stocks.id','stocks.product'    ,'reviews.review_id','stocks.created_at','vendors.deleted_at','stocks.cat_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale','stock2s.stock_status','stocks.sponser')
+      ->groupBy('review_id','stocks.drop_id','stocks.cat_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','vendors.deleted_at','stock2s.sell_price','stock2s.discount','stock2s.on_sale','stock2s.stock_status','stocks.sponser')->orderBy('rating','DESC')
       ->where('product_status','1')
       ->whereNull('vendors.deleted_at')
-      ->get();
-   $product2= $prod->shuffle();
-    
-      foreach($product2 as $pro) {
-    
-       $pro->image=Image::where('Image_id',$pro->id)->get();
-    $pro->stock2=Stock2::where('stock_id',$pro->id)
-         ->where('stock_status','1')->take(1)->get();
-      }
+      ->get()->shuffle();
       
-      return view('home',compact('slider','product','product2','front','product3','dropdown','sale'));
+       foreach($product2 as $pro)
+       {
+        $pro->image=Image::where('Image_id',$pro->id)->get();
+       }
+
+      return view('home',compact('slider','product','product2','front','product3','dropdown'));
   }
 
   function uploadSlider(Request $req)

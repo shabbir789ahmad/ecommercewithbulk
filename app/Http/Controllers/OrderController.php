@@ -10,6 +10,7 @@ use App\Models\Stock;
 use App\Models\Stock2;
 use App\Models\Category;
 use App\Mail\OrderMail;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -72,6 +73,7 @@ class OrderController extends Controller
           'detail'=> $req->detail[$i],
           'color' =>  $req->color[$i],
           'size' =>  $req->size[$i],
+          'product_id' =>  $req->pid[$i],
           'vendor_id'=> $req->vendor_id[$i],
           'drop_id'=> $req->drop_id[$i],
           'order_status'=> 'Pending',
@@ -80,18 +82,16 @@ class OrderController extends Controller
         ]);
        }
 
-         if($data)
-         {
+    if($data)
+    {
+      $quen=Stock2::where('id',$data['product_id'])->increment('sold_stock');
+      $req->session()->forget('cart');
+    }
           
-            $quen=Stock2::where('id',$dt['id'])->decrement('stock');
-            $req->session()->forget('cart');
-            
-         }
-          $this->orderConform($order,$data);
-        });
+   });
 
-        return view('shopping');
-      }else{
+     return view('shopping');
+    }else{
         return redirect()->route('login')->with('message','Please Login First');
       }
       
@@ -104,13 +104,18 @@ class OrderController extends Controller
 
     function getOrder(Request $req)
     {
-      
+      $now=Carbon::now();
       $stat="";
-      if($req->get('status'))
+      $counter="";
+      if($req->get('status')!== null)
       {
         $stat=$req->get('status');
       }
-     // echo $stat;
+      if($req->get('counte')!== null)
+      {
+        $counter=$req->get('counte');
+      }
+    // echo $counter;
      
       $query=Order::join('details','orders.id','=','details.order_id')
       ->select('orders.id','details.product','details.image','details.price','details.quentity','details.order_status','orders.payment','details.total');
@@ -137,20 +142,66 @@ class OrderController extends Controller
        $query=$query->withoutTrashed();
       $query=$query->paginate(10);
 
-   $order=$query;
-    //dd($order);
-       $query2=Order::join('details','orders.id','=','details.order_id');
-       $today=$query2->whereDay('orders.created_at', date('d'))
-      ->count();
-      $this_month=Order::join('details','orders.id','=','details.order_id')
-       ->whereMonth('orders.created_at', date('m'))
-      ->count();
+       $order=$query;
+      //dd($order);
+       $query2=Order::join('details','orders.id','=','details.order_id')->whereMonth('details.created_at', date('m'))->where('order_status','!=','delivered');
+       if($counter=='this')
+       {
+         $start = $now->startOfWeek()->format('Y-m-d H:i');
+         $end = $now->endOfWeek()->format('Y-m-d H:i');
+         $query2=$query2->whereBetween('details.created_at',[$start,$end]);
+       }
+       if($counter=='mid')
+       {
+        $query2=$query2->where('details.created_at','>=',$now->subdays(15));
+       }
+       if($counter=='month')
+        {
+            $query2=$query2->whereMonth('details.created_at', date('m'));
+        }
+       $today=$query2->count();
+       //dd($now);
+      $query=Order::join('details','orders.id','=','details.order_id')
+       ->whereMonth('orders.created_at', date('m'))->where('order_status','delivered');
+     
+       if($counter=='this')
+       {
+         $start = $now->startOfWeek()->format('Y-m-d H:i');
+         $end = $now->endOfWeek()->format('Y-m-d H:i');
+         $query=$query->whereBetween('details.created_at',[$start,$end]);
+       }
+       if($counter=='mid')
+       {
+        $query=$query->where('details.created_at','>=',$now->subdays(15));
+       }
+       if($counter=='month')
+        {
+            $query=$query->whereMonth('details.created_at', date('m'));
+        }
+
+      $this_month=$query->count();
       $pending=$query2
       ->where('order_status','pending')
       ->count();
-       $cancel=Order::join('details','orders.id','=','details.order_id')
-      ->onlyTrashed()
-      ->count();
+
+      $query=Order::join('details','orders.id','=','details.order_id')
+      ->onlyTrashed();
+      if($counter=='this')
+       {
+         $start = $now->startOfWeek()->format('Y-m-d H:i');
+         $end = $now->endOfWeek()->format('Y-m-d H:i');
+         $query=$query->whereBetween('details.created_at',[$start,$end]);
+       }
+       if($counter=='mid')
+       {
+        $query=$query->where('details.created_at','>=',$now->subdays(15));
+       }
+       if($counter=='month')
+        {
+            $query=$query->whereMonth('details.created_at', date('m'));
+        }
+
+      $cancel=$query->count();
       $cat=Category::all();
       //dd($cancel);
       return view('vendor.order_show',compact('order','today','pending','this_month','cancel','cat'));
@@ -160,8 +211,8 @@ class OrderController extends Controller
     {
       $order=Order::
       join('details','orders.id','=','details.order_id')
-      ->where('order_status','delivered')->paginate(10);
-     
+      ->where('order_status','=','delivered')->paginate(10);
+  
       return view('vendor.order_deliver',compact('order'));
     }
    

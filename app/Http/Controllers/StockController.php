@@ -11,6 +11,7 @@ use App\Models\Image;
 use App\Models\Color;
 use App\Models\Size;
 use App\Models\Store;
+use App\Models\Sponser;
 use App\Models\Category;
 use Auth;
 use App\Http\Traits\StoreTrait;
@@ -277,6 +278,43 @@ class StockController extends Controller
  
        
         return view('vendor.stock_show',compact('stock','supply','main'));
+    }
+    function sponserdProduct()
+    { 
+         $id='';
+        $stock=$this->products($id);
+    //dd($stock);
+       return view('Dashboard.sponser_product',compact('stock'));
+    }
+    function sponserProduct(Request $req)
+    {
+        $sponser= Sponser::findorfail($req->sponser_id);
+        $sponser->sponser=$req->sponser;
+        $sponser->save();
+        $req->session()->flash('success', 'Product Updated Successly');
+        return redirect()->back();
+    }
+    function sponserProduct2(Request $req)
+    {
+        $req->validate([
+         'sponser'=>'required',
+         'sponser_id'=>'required'
+        ]);
+
+   $ree = Sponser::where(['sponser_id' => $req->sponser_id])->first();
+   if($ree)
+   {
+     $req->session()->flash('success', 'This Product Is already Sponsered');
+        return redirect()->back();
+   }else{
+       $sponser=new Sponser;
+        $sponser->sponser=$req->sponser;
+        $sponser->sponser_id=$req->sponser_id;
+        $sponser->save();
+        $req->session()->flash('success', 'Product Updated Successly');
+        return redirect()->back();
+   }
+        
     }
 
     function adminProduct($id)

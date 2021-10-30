@@ -332,6 +332,9 @@ Route::get('restore-vendor/{id}',[UserController::class,'restorevendor'])->name(
 Route::get('vendor-status',[UserController::class,'vendorStatus'])->name('admin/vendor-status');
 
 Route::get('vendor-product/{id}',[StockController::class,'adminProduct'])->name('admin.vendor-product/{id}');
+Route::get('all-sponser-product',[StockController::class,'sponserdProduct'])->name('admin.all-sponser-product');
+Route::get('sponser-product',[StockController::class,'sponserProduct'])->name('admin.sponser-product');
+Route::Post('sponser-product2',[StockController::class,'sponserProduct2'])->name('admin.sponser-product2');
 
 //all user Route
 Route::get('show-user',[UserController::class,'getUser'])->name('admin/show-user');

@@ -337,6 +337,6 @@ $sub=Category::category();
   <input type="hidden" name="drop_sale" id="drop_sale">
 </form>
 <form id="rate_form">
-  <input type="text" name="rating" id="search-rate">
+  <input type="hidden" name="rating" id="search-rate">
 </form>
 @endsection

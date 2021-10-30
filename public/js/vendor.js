@@ -27,6 +27,20 @@ $(document).ready(function(){
     $('#dis').val(disc);
     let send=$(this).data('esell')
     $('#sell-end').val(send);
-  })
+  });
+
+   $('#sale_count').change(function(e){
+    e.preventDefault();
+    let sale_va=$(this).val()
+    $('#sale_counter').val(sale_va)
+    $('#count_form').submit()
+   });
+
+   $('#order_count').change(function(e){
+    e.preventDefault();
+    let order_va=$(this).val()
+    $('#order_counte').val(order_va)
+     $('#order_form').submit()
+   });
  
 });

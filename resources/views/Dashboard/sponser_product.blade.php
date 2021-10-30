@@ -1,4 +1,4 @@
-@extends(' vendor.dashboard')
+@extends(' Dashboard.admin')
 @section('content')
 
 <div class="b p-3 mt-0" style="background-color:#F0F0F0">
@@ -36,65 +36,7 @@
 <div class="row ">
  <div class="col-lg-12">
   <div class="card mb-4">
-    
-    <div class="row mt-4 ml-2 mr-2">
-     <div class="col-md-4">
-      <select class="form-control" id="supplier">
-        <option selected disabled hidden="">Sort By Supplier</option>
-        @foreach($supply as $sup)
-        <option value="{{$sup['id']}}">{{$sup['supplier_name']}}</option>
-       @endforeach
-      </select>
-     </div>
-     
-     <div class="col-md-4">
-      <select class="form-control" id="stock_search">
-        <option selected hidden disabled="">Sort By Stock</option>
-        <option value="10">Less Than 10</option>
-        <option value="20">Less Than 20</option>
-        <option value="30">Less Than 30</option>
-        <option value="40">Less Than 40</option>
-        <option value="50">Less Than 50</option>
-        <option value="60">Greater Than 60</option>
-      </select>
-     </div>
- <div class="col-md-4">
-  <form class="d-flex" action="{{url('admin/search-product')}}" method="GET">
-  <div class="input-group mb-3">
-  <input type="text" class="form-control" name="search" placeholder="Search"  aria-describedby="basic-addon2">
-  <div class="input-group-append">
-    <button class="btn btn-color text-light mr-2" type="submit">Search</button>
-  </div>
-</div>
-</form>
-     </div>
-    </div>
-    <div class="row mt-4 ml-2 mr-2">
-     
-  <div class="col-md-4">
-   <select class="form-control"  id="stock_cat">
-    <option selected="" disabled hidden="" >Main Category</option>
 
-    @foreach($main as $m)
-  <option value="{{$m['id']}}">{{ucfirst($m['category'])}}</option>
-  @endforeach
-</select>
-
-  </div>
-  <div class="col-md-4">
-   <select class="form-control"  id="stock_sub">
-   
-   
-</select>
-
-  </div>
-  <div class="col-md-4">
-     <select class="form-control"  id="stock_drop">
-    
-     </select>
-  </div>
-  
-</div>
 <div class="table-responsive p-3">
 <table class="table align-items-center table-flush" id="dataTable">
   <thead class="thead-light">
@@ -107,13 +49,13 @@
     <th >Discount </th>
     <th >Total Stock </th>
     <th >Remaining Stock </th>
-
     <th class="text-center">Actions</th>
    </tr>
   </thead>
   <tbody>
 
    @foreach($stock as $show)
+   @if($show['sponser']=='1')
    <tr>
     <td class="a col-1">
       @foreach($show->image as $img)
@@ -121,19 +63,13 @@
       @endforeach
     </td>
     <td class="a col-2">{{$show->product}}</td>
-    <td class="a " ><input type="checkbox" data-id="{{ $show['id'] }}" name="product_status" class="js-switch" 
-     {{ $show->product_status == 1 ? 'checked' : '' }} ></td>
-    
-    
+    <td class="a col-2"><span class="bag ">  {{ucfirst($show['sponser'])}}</span><i class="fas fa-tags discount border sponser p-2 " data-id="{{$show['id']}}" ></i></td>
     <td class="a">{{$show['price']}}</td>
-    <td class="a col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span>
-     
-    </td>
+    <td class="a col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span></td>
     <td class="a col-2"><span class="bag ">
-    @if($show['discount'] > '1')
-  {{$show['discount']}}@else 0 @endif</span>
+        @if($show['discount'] > '1')
+        {{$show['discount']}}@else 0 @endif</span>
     </td>
-   
     <td class="a col-2">{{$show->stock}}</td>
     <td class="a col-2">{{$show['stock'] - $show['sold_stock']}}</td>
     <td>
@@ -146,8 +82,8 @@
        </div> 
     </td>
    </tr>
- 
-         @endforeach
+  @endif
+   @endforeach
          </tbody>
          </table>
        </div>
@@ -158,17 +94,35 @@
 </div>
 </div>
   
-<form id="drop_form">
-  <input type="hidden" name="drop_category" id="drop">
-</form>
 
 
-<form id="supply_form">
-  <input type="hidden" name="supply" id="supply">
-</form>
-<form id="stock_form">
-  <input type="hidden" name="stock1" id="stock1">
-</form>
+<!-- Modal -->
+<div class="modal fade" id="sopnser_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url('admin/sponser-product')}}" method="GET">
+          @csrf
+          <input type="hidden" name="sponser_id" id="sid">
+          <select class="form-control " name="sponser">
+            <option disabled hidden selected>Change Sponser Status</option>
+            <option value="1">Sponser</option>
+            <option value="0">Disapprove</option>
+          </select>
+
+         <button type="submit" class="btn btn-primary mt-3 float-right">Save changes</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 
  @endsection

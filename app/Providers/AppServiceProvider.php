@@ -9,9 +9,11 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use App\Models\Social;
 use App\Models\Logo;
+use App\Http\Traits\StoreTrait;
 use View;
 class AppServiceProvider extends ServiceProvider
 {
+    use StoreTrait;
     /**
      * Register any application services.
      *
@@ -34,10 +36,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         View::composer('*', function($view)
         {
-             
+             $sells=$this->sale();
               $link=Social::latest()->take(1)->get();
               $logo=Logo::latest()->take(1)->get();
-            $view->with('link', $link)->with('logo', $logo);
+            $view->with('link', $link)->with('logo', $logo)->with('sells',$sells);
         });
 
       

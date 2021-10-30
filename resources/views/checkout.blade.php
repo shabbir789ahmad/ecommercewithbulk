@@ -58,6 +58,8 @@
 
           <span>Payment On Delivery</span>
            <span class="text-danger">@error ('payment') {{$message}} @enderror</span>
+
+           
        </div>
    </div>
       	</div>
@@ -89,14 +91,15 @@
       </div>
       
         <input type="hidden" name="product[]" value="{{$details['name']}}">
-                   <input type="hidden" name="quentity[]" value="{{$details['quantity']}}">
-                   <input type="hidden" name="price[]" value="{{$details['price']}}">
-                   <input type="hidden" name="image[]" value="{{ $details['image']}}">
-                   <input type="hidden" name="drop_id[]" value="{{ $details['drop_id']}}">
-                   <input type="hidden" name="detail[]" value="{{ $details['detail']}}">
-                   <input type="hidden" name="color[]" value="{{ $details['color']}}">
-                   <input type="text" name="vendor_id[]" value="{{ $details['vendor_id']}}">
-                   <input type="hidden" name="size[]" value="{{ $details['size']}}">
+        <input type="hidden" name="pid[]" value="{{$details['pid']}}">
+        <input type="hidden" name="quentity[]" value="{{$details['quantity']}}">
+       <input type="hidden" name="price[]" value="{{$details['price']}}">
+        <input type="hidden" name="image[]" value="{{ $details['image']}}">
+        <input type="hidden" name="drop_id[]" value="{{ $details['drop_id']}}">
+        <input type="hidden" name="detail[]" value="{{ $details['detail']}}">
+        <input type="hidden" name="color[]" value="{{ $details['color']}}">
+        <input type="text" name="vendor_id[]" value="{{ $details['vendor_id']}}">
+        <input type="hidden" name="size[]" value="{{ $details['size']}}">
          @endforeach
         @endif
     </div>

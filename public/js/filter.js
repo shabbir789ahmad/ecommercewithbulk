@@ -197,3 +197,5 @@ function newarrivals3()
 	  $('#new_sale_form').submit()
 }
 
+
+

@@ -16,6 +16,7 @@ class Stock2s extends Migration
          Schema::create('stock2s', function (Blueprint $table) {
          $table->id();
          $table->string('stock');
+         $table->string('sold_stock')->default(0);
          $table->string('price');
          $table->string('sell_price');
          $table->string('ship');

@@ -19,10 +19,34 @@ use Illuminate\Support\Facades\DB;
 class CountController extends Controller
 {
     use StoreTrait;
-    function count()
-    {
-        $comp=Order::whereMonth('created_at', date('m'))
-        ->count();
+    function count(Request $req)
+    {    
+        $now=Carbon::now();
+        $counter='';
+        if($req->get('counter') !== Null)
+        { 
+            $counter=$req->get('counter');
+        }
+        //echo $counter;
+        $query=Order::join('details','orders.id','=','details.order_id')->whereMonth('orders.created_at',date('m'))->where('details.order_status','delivered');
+        
+        if($counter=='this')
+        {
+          $start = $now->startOfWeek()->format('Y-m-d H:i');
+          $end = $now->endOfWeek()->format('Y-m-d H:i');
+          $query=$query->whereBetween('orders.created_at',[$start,$end]);
+        }
+        if($counter=='mid')
+        {   
+            $query=$query->where('orders.created_at','>=',$now->subdays(15));
+        }
+        if($counter=='month')
+        {
+            $query=$query->whereMonth('orders.created_at', date('m'));
+        }
+
+        $comp=$query->count();
+        //dd($comp);
         if($comp)
         {
         $comp2=Order::count();
@@ -32,10 +56,24 @@ class CountController extends Controller
         }
         
         
-      $order=Order::whereMonth('created_at', date('m'))->count();
-      $order2=Order::
-      join('details','orders.id','=','details.order_id')->
-      whereDay('orders.created_at', date('m'))->take('3')->get();
+      $query=Order::whereMonth('created_at', date('m'));
+       
+        if($counter=='this')
+        {
+          $start = $now->startOfWeek()->format('Y-m-d H:i');
+          $end = $now->endOfWeek()->format('Y-m-d H:i');
+          $query=$query->whereBetween('created_at',[$start,$end]);
+        }
+        if($counter=='mid')
+        {
+          $query=$query->where('created_at','>=',$now->subdays(15));
+        }
+        if($counter=='month')
+        {
+            $query=$query->whereMonth('created_at', date('m'));
+        }
+      $order=$query->count();
+      
         if($order)
         {
         $order2=Order::count();
@@ -44,35 +82,73 @@ class CountController extends Controller
             $or=0;
         }
 
-        $sale=Order::
+        $query=Order::
         join('details','orders.id','=','details.order_id')
-        ->where('order_status','delivered')
-        ->whereMonth('orders.created_at', date('m'))->count();
+        ->where('order_status','pending')
+        ->whereMonth('orders.created_at', date('m'));
+        if($counter=='this')
+        {
+            $start = $now->startOfWeek()->format('Y-m-d H:i');
+            $end = $now->endOfWeek()->format('Y-m-d H:i');
+          $query=$query->whereBetween('details.created_at',[$start,$end]);
+        }
+        if($counter=='mid')
+        {
+          $query=$query->where('details.created_at','>=',$now->subdays(15));
+        }
+        if($counter=='month')
+        {
+            $query=$query->whereMonth('details.created_at', date('m'));
+        }
+        $sale=$query->count();
+        // dd($sale);
         if($sale)
         {
         $sale2=Order::
         join('details','orders.id','=','details.order_id')
-        ->where('order_status','delivered')->count();
+        ->count();
         $sl=$sale/$sale2 * 100;
         }else{
             $sl=0;
         }
         
-        $earn=Order::
+        $query=Order::
         join('details','orders.id','=','details.order_id')
         ->where('order_status','delivered')
-        ->whereMonth('orders.created_at', date('m'))->count('price');
+        ->whereMonth('details.created_at', date('m'));
+         
+          if($counter=='this')
+          {
+            $start = $now->startOfWeek()->format('Y-m-d H:i');
+            $end = $now->endOfWeek()->format('Y-m-d H:i');
+            $query=$query->whereBetween('details.created_at',[$start,$end]);
+          }
+          if($counter=='mid')
+        {
+          $query=$query->where('details.created_at','>=',$now->subdays(15));
+        }
+        if($counter=='month')
+        {
+            $query=$query->whereMonth('details.created_at', date('m'));
+        }
+
+        $earn=$query->sum('price');
+
+
+      $earn3= Order::
+        join('details','orders.id','=','details.order_id')
+        ->whereMonth('details.created_at', date('m'))->count();
          
          if($earn)
         {
         $earn2=Order::
         join('details','orders.id','=','details.order_id')
-        ->where('order_status','delivered')->count('price');
-        $en=$earn/$earn2 * 100;
+        ->where('order_status','delivered')->count();
+        $en=$earn2/$earn3 * 100;
         }else{
             $en=0;
         }
-        
+        //dd($earn3);
         $message=Contact::whereDay('created_at', date('d'))->take(10)->get();
         $today=Order::
         join('details','orders.id','=','details.order_id')
@@ -103,9 +179,8 @@ class CountController extends Controller
      
       }
      
-    $salee=$this->sale();
     $date=Carbon::now();
-    return view('vendor.vendorcount',$arr,compact('comp','com','order','or','sale','sl','earn','en','message','today','order2','salee','date'));
+    return view('vendor.vendorcount',$arr,compact('comp','com','order','or','sale','sl','earn','en','message','today','order2','date'));
     }
 
     function count2()
