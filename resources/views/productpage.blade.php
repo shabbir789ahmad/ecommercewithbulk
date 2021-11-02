@@ -35,7 +35,7 @@
   
     <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}</p>
     <p class="text-dark name3 ml-3 ml-md-0">{{ucwords($detail['detail'])}}<br>
-      <span class="float-right"><button class="btn-sm btn btn-store rounded btn-check text-light">Detail</button></span>
+      <span class="float-right"><button class="btn-sm btn btn-store rounded btn-check text-light detail" data-name="{{$detail['product']}}" data-detail="{{$detail['detail']}}">Detail</button></span>
   <span class="text-dark"  style="font-size: 1.2rem;">
      
   @for($i=0; $i<5; $i++)
@@ -285,6 +285,24 @@
 </div>
 
 
+
+<!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3 class="name"></h3>
+        <p class="detalis"></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <script type="text/javascript">

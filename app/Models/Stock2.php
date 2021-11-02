@@ -17,6 +17,6 @@ class Stock2 extends Model
     'stock_status',
     'supply_id',
     'stock_id',
-    'sell_id',
+ 
    ];
 }

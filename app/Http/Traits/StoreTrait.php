@@ -9,10 +9,16 @@ use App\Models\Submenue;
 use App\Models\Dropdown;
 use App\Models\Banner;
 use App\Models\Sell;
+use App\Models\Sponser;
 use App\Models\Supply;
+use Carbon\Carbon;
 use Auth;
  trait StoreTrait {
-     
+     public function carbon()
+     {
+       $time=Carbon::now();
+        return $time;;
+     }
      public function dropdown()
      {
        $drop=Dropdown::all();
@@ -30,7 +36,8 @@ use Auth;
      }
      function sale()
      {
-      $sale=Sell::latest()->take(1)->get();
+      $time=Carbon::now();
+      $sale=Sell::where('sell_status','1')->where('end_time','>',$time)->where('start_time','<=',$time)->latest()->take(1)->get();
       return $sale;
      }
      function banner()
@@ -80,8 +87,7 @@ use Auth;
          //echo $stock2;
        $query=Stock::
          join('stock2s','stocks.id','=','stock2s.stock_id')
-         ->join('sponsers','stocks.id','=','sponsers.sponser_id')
-        ->select('stocks.product','stocks.detail','stocks.drop_id','stocks.product_status','stocks.id','stocks.user_id','stock2s.supply_id','stock2s.stock','stock2s.sell_price','stock2s.discount','stock2s.price','stock2s.sold_stock','sponsers.sponser');
+        ->select('stocks.product','stocks.detail','stocks.drop_id','stocks.product_status','stocks.id','stocks.user_id','stock2s.supply_id','stock2s.stock','stock2s.sell_price','stock2s.discount','stock2s.price','stock2s.sold_stock');
 
          if($supply2)
          {
@@ -140,7 +146,7 @@ use Auth;
         foreach($stock as $st)
         {
          $st->image=Image::where('image_id',$st->id)->take(1)->get();
-        
+         $st->sponser=Sponser::where('sponser_id',$st->id)->get();
 
         }
 

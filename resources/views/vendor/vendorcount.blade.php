@@ -6,13 +6,13 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
              <h3 class="ml-auto mr-2">Filter</h3>
-             <select class="form-control w-50 " id="sale_count">
-               <option disabled selected hidden>Filter Sale and Product</option>
-               <option value="this">Sale This Week</option>
-               <option value="mid">Sale Last 15 Days</option>
-               <option value="month">Sale This Month</option>
-               
-              </select>
+             <form id="count_form" class="d-flex">
+               <input type="datetime-local" name="from" class="form-control " >
+             <input type="datetime-local" name="to" class="form-control " >
+             <button class="btn btn-color text-light ml-1" id="sale_count">filter</button>
+             </form>
+             
+            
           </div>
 
           <div class="row mb-3">
@@ -201,9 +201,7 @@
         </div>
         <!---Container Fluid-->
       </div>
-      <form id="count_form">
-        <input type="text" name="counter" id="sale_counter">
-      </form>
+      
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 

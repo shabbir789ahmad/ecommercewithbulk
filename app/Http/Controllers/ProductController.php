@@ -32,10 +32,6 @@ class ProductController extends Controller
      return response()->json($drop);
     }
 
-
-
-
-
   //function for product detail 
   function productDetail($id,$drop_id)
   {
@@ -126,9 +122,10 @@ class ProductController extends Controller
   //echo $drop;
      $query= Stock::
         leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
+        ->leftjoin('sales','stocks.id','=','sales.sale_id')
         ->leftjoin('reviews','stocks.id','=','reviews.review_id')
-        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale')
-       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale')->orderBy('rating','DESC');
+        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','sales.on_sale')
+       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','sales.on_sale')->orderBy('rating','DESC');
      if($req->get('color2') !== Null)
        {
         $query=$query->join('colors','stocks.id','=','colors.filter_id');

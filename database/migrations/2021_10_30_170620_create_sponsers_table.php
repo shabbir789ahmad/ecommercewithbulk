@@ -16,6 +16,9 @@ class CreateSponsersTable extends Migration
         Schema::create('sponsers', function (Blueprint $table) {
             $table->id();
             $table->string('sponser');
+            $table->datetime('sponser_start');
+            $table->datetime('sponser_end');
+            $table->string('sponser_status');
             $table->bigInteger('sponser_id')->unsigned();
             $table->foreign('sponser_id')->references('id')->on('stocks')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

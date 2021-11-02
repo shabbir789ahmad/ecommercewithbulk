@@ -135,5 +135,25 @@ $('.js-switch4').change(function () {
    });
  });
 
+ $('.js-switchspon').change(function(e){
+     
+     e.preventDefault();
+     let status=$(this).prop('checked')===true ? 1:0;
+     let id=$(this).data('id')
+     $.ajax({
+      
+       url: "/admin/sponser-status/",
+       dataType : 'json',
+       type :'GET',
+       data: {'sponser_status':status,'id':id},
+       success:function(data)
+       {
+        console.log(data.message);
+       }
+     });
+
+ 
+   });
+
 });
 

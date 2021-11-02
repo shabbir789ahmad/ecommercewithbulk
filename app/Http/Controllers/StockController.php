@@ -13,6 +13,7 @@ use App\Models\Size;
 use App\Models\Store;
 use App\Models\Sponser;
 use App\Models\Category;
+use Carbon\Carbon;
 use Auth;
 use App\Http\Traits\StoreTrait;
 use Illuminate\Support\Facades\DB;
@@ -75,14 +76,21 @@ class StockController extends Controller
           'price' => 'required|numeric',
           'sell_price' => 'required|numeric',
           'ship' => 'required|numeric',
+          'color' => 'required',
+          'size' => 'required',
           
           ]);
 
    DB::transaction(function() use($req){
-        $file=$req->file('size_image');
-        $ext=$file->getClientOriginalExtension();
+         
+         $filename='';
+      if ($req->hasfile('size_image')) {
+          $file=$req->file('size_image');
+          $ext=$file->getClientOriginalExtension();
           $filename= time().rand(1,100).'.'.$ext;
           $file->move('uploads/img/',$filename);
+        }
+       
      
        $stock= Stock::create([ 
            'product'=> $req->product,
@@ -126,23 +134,27 @@ class StockController extends Controller
             ]);
            }
      
-          $n3 = sizeof($req->brand);
+         if($req->brand)
+         {
+            $n3 = sizeof($req->brand);
           for($i = 0;  $i < $n3; $i++)
            {
-              $brand= Store::create([
-            'brand' =>$req->brand[$i],
-            'brand_status' =>'1',
-            'brand_id' =>$stock->id,
+            $brand= Store::create([
+             'brand' =>$req->brand[$i],
+             'brand_status' =>'1',
+             'brand_id' =>$stock->id,
             ]);
            }
+         }
+          
         foreach($req->file('rimage') as $file)
            {
               $ext=$file->getClientOriginalExtension();
               $filename= time().rand(1,100).'.'.$ext;
               $file->move('uploads/img/',$filename);
              Image::create([
-            'rimage'=>$filename,
-             'image_id'=> $stock->id,
+              'rimage'=>$filename,
+              'image_id'=> $stock->id,
               ]);
       
            }
@@ -279,52 +291,47 @@ class StockController extends Controller
        
         return view('vendor.stock_show',compact('stock','supply','main'));
     }
-    function sponserdProduct()
-    { 
-         $id='';
-        $stock=$this->products($id);
-    //dd($stock);
-       return view('Dashboard.sponser_product',compact('stock'));
-    }
-    function sponserProduct(Request $req)
+   
+    function sponserStatus(Request $req)
     {
-        $sponser= Sponser::findorfail($req->sponser_id);
-        $sponser->sponser=$req->sponser;
+        $sponser= Sponser::findorfail($req->id);
+        $sponser->sponser_status=$req->sponser_status;
+        
+       // dd($sponser);
         $sponser->save();
-        $req->session()->flash('success', 'Product Updated Successly');
-        return redirect()->back();
+      
+    
     }
     function sponserProduct2(Request $req)
     {
         $req->validate([
          'sponser'=>'required',
-         'sponser_id'=>'required'
+         'sponser_id'=>'required',
+         'sponser_start'=>'required',
+         'sponser_end'=>'required'
         ]);
 
-   $ree = Sponser::where(['sponser_id' => $req->sponser_id])->first();
-   if($ree)
-   {
-     $req->session()->flash('success', 'This Product Is already Sponsered');
-        return redirect()->back();
-   }else{
        $sponser=new Sponser;
         $sponser->sponser=$req->sponser;
         $sponser->sponser_id=$req->sponser_id;
+        $sponser->sponser_start=$req->sponser_start;
+        $sponser->sponser_end=$req->sponser_end;
+        $sponser->sponser_status='0';
         $sponser->save();
-        $req->session()->flash('success', 'Product Updated Successly');
+        $req->session()->flash('success', 'Product Promotion Sent to Admin ');
         return redirect()->back();
-   }
+   
         
     }
 
     function adminProduct($id)
     {
-      $main = $this->category();
-         $supply=$this->supply();
+        $main = $this->category();
+        $supply=$this->supply();
         $stock=$this->products($id);
-
+        $time=$this->carbon();
         //dd($stock);
-      return view('Dashboard.vendor_product',compact('stock','supply','main'));
+      return view('Dashboard.vendor_product',compact('stock','supply','main','time'));
     }
 
     function updateSell(Request $req)

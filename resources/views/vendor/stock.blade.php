@@ -128,20 +128,27 @@
   </div>
  </div>
  
-<span class="text-danger">@error('bname') {{$message}} @enderror</span>
+ <span class="text-danger">@error('stock') {{$message}} @enderror</span>
                                
-   <div class="form-group">
- <div class="input-group clockpicker" id="clockPicker1">
-    <select class=" form-control" name="brand[]" multiple="multiple"  required="">
-      @foreach($brand as $b)
-      <option value="{{$b['bname']}}">{{$b['bname']}}</option>
-       @endforeach
-    </select>
+  <div class="form-group">
+   <div class="input-group clockpicker" id="clockPicker1">   
+     <input type="text" name="stock" placeholder="Total Stock" class="form-control "  value="{{old('stock')}}" required=""><br>
+              
     <div class="input-group-append">
-    <span class="input-group-text add" id="img"><i class="fas fa-store"></i></span>
+   <span class="input-group-text"><i class="fas fa-tag"></i></span>
+   </div>                      
   </div>
  </div>
-</div>
+                               
+<span class="text-danger">@error('price') {{$message}} @enderror</span>
+<div class="form-group">
+ <div class="input-group clockpicker" id="clockPicker1">
+    <input type="text" name="price" placeholder="Purchese Price per Product" class="form-control" value="{{old('price')}}" required="">
+    <div class="input-group-append">
+    <span class="input-group-text"><i class="fab fa-product-hunt"></i></span>
+    </div>                      
+    </div>
+  </div>
   
 <span class="text-danger">@error('rimage') {{$message}} @enderror</span>
   <div class="custom-file mt-2">
@@ -159,12 +166,13 @@
 
 <div class="col-md-6">
 
+
    <p ><span class="float-right  supply btn-color text-light" data-toggle="modal" data-target="#supply" >Add Supplier</span><span class="float-right mr-2 supply mb-3 btn-color text-light" data-toggle="modal" data-target="#brand" >Add Brand</span></p>  
- <span class="text-danger ">@error('phone') {{$message}} @enderror</span>
-                               
-  <div class="form-group">
+
+       
+ <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">   
-     <select class="form-control" name="supply_id" required>
+     <select class="form-control" name="supply_id" >
       <option disabled selected hidden="">Select Supplier</option>
        @foreach($supply as $sup)
        <option value="{{$sup['id']}}">{{ucfirst($sup['supplier_name'])}}</option>
@@ -175,28 +183,8 @@
    <span class="input-group-text"><i class="fas fa-tag"></i></span>
    </div>                      
   </div>
- </div> 
-  <span class="text-danger">@error('stock') {{$message}} @enderror</span>
-                               
-  <div class="form-group">
-   <div class="input-group clockpicker" id="clockPicker1">   
-     <input type="text" name="stock" placeholder="Total Stock" class="form-control "  value="{{old('stock')}}" required=""><br>
-              
-    <div class="input-group-append">
-   <span class="input-group-text"><i class="fas fa-tag"></i></span>
-   </div>                      
-  </div>
- </div>      
-
-<span class="text-danger">@error('price') {{$message}} @enderror</span>
-<div class="form-group">
- <div class="input-group clockpicker" id="clockPicker1">
-    <input type="text" name="price" placeholder="Price per Product" class="form-control" value="{{old('price')}}" required="">
-    <div class="input-group-append">
-    <span class="input-group-text"><i class="fab fa-product-hunt"></i></span>
-    </div>                      
-    </div>
-  </div>
+ </div>
+ <span class="text-danger">@error('supply_id') {{$message}} @enderror</span>   
  <span class="text-danger">@error('sell_price') {{$message}} @enderror</span>   
  <div class="form-group">
   <div class="input-group clockpicker" id="clockPicker1">
@@ -254,10 +242,27 @@
 <span class="text-danger">@error ('size') {{$message}} @enderror</span>
 </div>
  
+
+ <label class="text-danger">These Field are Optional</label>
+ <div class="form-group">
+ <div class="input-group clockpicker" id="clockPicker1">
+    <select class=" form-control" name="brand[]" multiple="multiple"  >
+      @foreach($brand as $b)
+      <option value="{{$b['bname']}}">{{$b['bname']}}</option>
+       @endforeach
+    </select>
+    <div class="input-group-append">
+    <span class="input-group-text add" id="img"><i class="fas fa-store"></i></span>
+  </div>
+ </div>
+</div>
+       
+
+
  <div class="img" id="more">
  <div class="form-group" >
    <div class="input-group clockpicker" id="clockPicker1">
-       <input type="file" name="size_image" placeholder="" class="form-control"  required>
+       <input type="file" name="size_image" placeholder="" class="form-control"  >
        <div class="input-group-append">
         <span class="input-group-text add" id="size"><i class="fas fa-plus"></i></span>
        </div>                      

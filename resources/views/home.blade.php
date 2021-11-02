@@ -37,10 +37,10 @@
     <div class="d-flex">
    <p class="ml-4 text-primary">On Sale Now
        <div id="time " class="d-flex ml-5">
-        <p id="d" class="p-1 bg-primary ml-2 text-light">f</p>
-        <p id="h" class="p-1 bg-primary ml-2 text-light">f</p>
-        <p id="m" class="p-1 bg-primary ml-2 text-light">f</p>
-        <p id="s" class="p-1 bg-primary ml-2 text-light">f</p>
+        <p id="d" class="p-1 bg-primary ml-2 text-light"></p>
+        <p id="h" class="p-1 bg-primary ml-2 text-light"></p>
+        <p id="m" class="p-1 bg-primary ml-2 text-light"></p>
+        <p id="s" class="p-1 bg-primary ml-2 text-light"></p>
        </div>
     </p>
     <a href="{{url('all-product-sale')}}" class="ml-auto py-2">
@@ -54,8 +54,9 @@
 
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
-  @foreach($product as $pro)
-   @if($pro['on_sale'])
+  @foreach($product2 as $pro)
+  @foreach($sells as $sal)
+   @if($pro['on_sale'] && $sal['id']==$pro['sell_id'])
    <div class="item">
     <div class="card ">
      <div class="a">
@@ -67,22 +68,15 @@
        
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
 
-       
-       <a > 
-        <p class="overlay5 ">
-        <span class="fa fa-star text-light ">{{$pro['rating']}}</span>
-        </p>
-       </a>
-
-        @if($pro['discount'])
-        <a >  <p class="overlay2 ">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
+      @if($pro['discount'])
+        <a >  <p class="overlay2 ">{{ceil( ($pro['discount']/$pro['new_price'])*100)
        }}% </p></a>
        @else
        @endif
      </div>
      <div class="card-body">
-       <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['sell_price'] - $pro['discount']}}<del class="text-secondary">
-       <small class="text-danger">${{$pro['sell_price']}}</small></del>  </span>
+       <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['new_price'] - $pro['discount']}}<del class="text-secondary">
+       <small class="text-danger">${{$pro['new_price']}}</small></del>  </span>
       </p>
        <div class="text-center">
         @for($i=0; $i<5; $i++)
@@ -100,6 +94,7 @@
   </div>
   @endif
   @endforeach
+  @endforeach
 
 </div>
 </div>
@@ -115,24 +110,20 @@
 <div class="container-fluid ">
  <div class="owl-carousel owl-theme ml-2">
   @foreach($product as $pro)
-  @if($pro['sponser'])
+  @if( $pro['sponser_status']=='1' && $pro['sponser_end'] > $time)
    <div class="item">
     <div class="card ">
      <div class="a">
-      <a href="{{'productpage/'.$pro['id']. '/' .$pro['drop_id']}}"> @foreach($pro->image as $img)
-        @if($loop->first)
-        <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
-        @endif
-       @endforeach</a>
+      <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}"> 
+        @foreach($pro->image as $img)
+         <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
+        @endforeach
+      </a>
        
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
 
-     
-       <a > 
-        <p class="overlay5 ">
-        <span class="far fa-flag text-light fa-lg"></span>
-        </p>
-       </a>
+       <p class="overlay5 "><span class="far fa-flag text-light fa-lg"></span></p>
+      
         @if($pro['discount'])
         <a >  <p class="overlay2 ">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
        }}% </p></a>
@@ -164,25 +155,21 @@
 </div>
 
 
-<div class="container-fluid mt-5 ">
-  @foreach($front as $f)
-  @if($loop->first)
- <h2 class="font-weight-bold ml-3 keephome ">hgh{{ucwords($f['c1'])}}
- </h2>
- @endif
-
- @endforeach
- 1
-</div>
+ <div class="container-fluid mt-5 ">
+   @foreach($front as $f)
+   @if($loop->first)
+    <h2 class="font-weight-bold ml-3 keephome ">{{ucwords($f['c1'])}}</h2>
+   @endif
+   @endforeach
+  </div>
 
 
 
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
 
-
   @foreach($product as $pro)
-   @if(!$pro['on_sale'])
+   @if( !$pro['sponser'])
   <div class="item">
     <div class="card ">
      <div class="a">
@@ -195,13 +182,7 @@
        
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
 
-       @if($pro['sponser'])
-       <a> 
-        <p class="overlay5 ">
-        <span class="far fa-flag text-light fa-lg"></span>
-        </p>
-       </a>
-        @endif
+       
         @if($pro['discount'])
         <a >  <p class="overlay2 text-danger">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
        }}%</p></a>
@@ -211,7 +192,7 @@
      <div class="card-body">
        <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['sell_price'] - $pro['discount']}}<del class="text-secondary">
        <small class="text-danger">${{$pro['sell_price']}}</small></del>  </span>
-      </p>
+       </p>
        <div class="text-center">
         @for($i=0; $i<5; $i++)
         @if($i<$pro['rating'])
@@ -221,16 +202,11 @@
         @endif
          @endfor
        </div>
-    
-      
-        </div>
+      </div>
     </div>
   </div>
   @endif
-  @endforeach
-  
- 
-  
+  @endforeach 
 </div>
 </div>
 
@@ -238,13 +214,15 @@
   <p class="feature text-center ">Featured Categories</p>
    <div class="swiper mySwiper">
       <div class="swiper-wrapper">
-       @foreach($dropdown as $drop)  
+       @foreach($dropdown as $drop) 
+       <a href="{{url('product/' .$drop['id'])}}"> 
        <div class="swiper-slide ">
         <div class="round-img" >
           <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" class="cat">
           <p class="textc">{{$drop['name']}}</p>
         </div>
        </div>
+     </a>
       @endforeach
       </div>
       <div class="swiper-button-prev text-dark"></div>
@@ -255,18 +233,17 @@
 
       <!-- product slider-->
  <div class="container-fluid mt-5 ">
-  @foreach($front as $f)
-  <h2 class="font-weight-bold ml-3 keephome ">{{ucwords($f['c2'])}}
-  </h2>
-  @endforeach
-  2
+   @foreach($front as $f)
+    <h2 class="font-weight-bold ml-3 keephome ">{{ucwords($f['c2'])}}
+    </h2>
+   @endforeach
  </div>
 
   
   <div class="container-fluid mt-4">
    <div class="owl-carousel owl-theme ml-2">
-   @foreach($product3 as $pro)
-   @if($pro['rating'] >=0 && !$pro['on_sale'])
+   @foreach($product as $pro)
+   @if($pro['rating'] >=0  && !$pro['sponser'])
   
   <div class="item ml-1">
     <div class="card ">
@@ -325,7 +302,7 @@
        </div>
      <div class="middle2">
          <p class="add-txt">Fashion</p>
-        <p class="psd">Mega Saclass="w-25 bg-light  ml-auto mr-auto">
+        <p class="psd">Mega Sale </p>
          <button class="  btn-add text-light rounded">Buy Now</button>
        </div>
 </div>
@@ -350,8 +327,9 @@
 
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
-  @foreach($product2 as $pro)
-   @if(!$pro['on_sale'])
+  @foreach($product as $pro)
+  @foreach($front as $fr)
+   @if( $pro['cat_id']==$fr['tag3_id'] && !$pro['sponser']) 
   <div class="item ml-1">
     <div class="card ">
      <div class="a">
@@ -396,6 +374,7 @@
   </div>
   @endif
   @endforeach 
+  @endforeach 
 </div>
 </div>
  
@@ -415,8 +394,9 @@
   <!---fgfg-->
   <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
-  @foreach($product2 as $pro)
-   @if(!$pro['on_sale'])
+  @foreach($product as $pro)
+ @foreach($front as $fr)
+   @if( $pro['cat_id']==$fr['tag4_id'] && !$pro['sponser'])
   <div class="item ml-1">
     <div class="card ">
      <div class="a">
@@ -462,6 +442,7 @@
   </div>
   @endif
   @endforeach 
+  @endforeach 
 </div>
 </div>
 
@@ -481,8 +462,9 @@
 <!--fdf-->
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
-  @foreach($product2 as $pro)
-   @if(!$pro['on_sale'])
+  @foreach($product as $pro)
+  @foreach($front as $fr)
+   @if( $pro['cat_id']==$fr['tag5_id'] && !$pro['sponser'])
   <div class="item ml-1">
     <div class="card ">
      <div class="a">
@@ -528,27 +510,33 @@
   </div>
   @endif
   @endforeach 
+  @endforeach 
 </div>
 </div>
 
 
 <script>
  @php
+ //dd($sells);
  $en='';
+ $strt='';
 foreach($sells as $sal)
 {
   $en = strtotime($sal->end_time)*1000 ;
+  $strt= strtotime($sal->start_time)*1000 ;
 }
 @endphp
 
-var endtime={{ $en}};
+let endtime={{ $en}};
+let strttime={{ $strt}};
 
- 
+
   var timer=setInterval(function(){
-  var strt=new Date().getTime();
- // alert(strt)
-    var t=endtime-strt;
-//alert(t)
+    var strt=new Date().getTime();
+    if(strttime < strt )
+    {
+   var t=endtime-strt;
+
     if(t>0)
     {
       let da = Math.floor(t / (1000 * 60 * 60 * 24));
@@ -570,6 +558,8 @@ document.getElementById("s").innerHTML= ("0" + sc).slice(-2) +
     }else{
 
     }
+  }
   },1000);
 </script>
+
   @endsection 

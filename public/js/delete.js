@@ -173,13 +173,14 @@ $(document).ready(function(){
      $('#sopnser_modal').modal('show')
      let id=$(this).data('id')
      $('#sid').val(id)
-
+      let strt=$(this).data('strt')
+     $('#sponser_start').val(strt)
+     let send=$(this).data('send')
+     $('#sponser_end').html(send)
+     $('#sponser_end2').val(send)
     });
-     $('.sponser2').click(function(e){
-     $('#sopnser_modal2').modal('show')
-     let id=$(this).data('id')
-     $('#sid').val(id)
     
-    });
+
+     
 
 });

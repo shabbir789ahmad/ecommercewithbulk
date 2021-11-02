@@ -85,6 +85,7 @@ class OrderController extends Controller
     if($data)
     {
       $quen=Stock2::where('id',$data['product_id'])->increment('sold_stock');
+      $quen=Stock2::where('id',$data['product_id'])->decrement('stock');
       $req->session()->forget('cart');
     }
           

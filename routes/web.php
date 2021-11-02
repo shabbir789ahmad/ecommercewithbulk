@@ -181,7 +181,10 @@ Route::post('update-banner',[StoreController::class,'updatebanner'])->name('vend
 Route::get('store',[StoreController::class,'getStore'])->name('vendor.store');
 
 Route::post('on-sale',[StoreController::class,'onSale'])->name('vendor.on-sale');
-Route::post('out-sale',[StoreController::class,'outSale'])->name('vendor.out-sale');
+Route::get('out-sale/{id}',[StoreController::class,'outSale'])->name('vendor.out-sale/{id}');
+
+//promote product route
+Route::Post('sponser-product',[StockController::class,'sponserProduct2'])->name('vendor.sponser-product');
   });
 });
 
@@ -332,9 +335,8 @@ Route::get('restore-vendor/{id}',[UserController::class,'restorevendor'])->name(
 Route::get('vendor-status',[UserController::class,'vendorStatus'])->name('admin/vendor-status');
 
 Route::get('vendor-product/{id}',[StockController::class,'adminProduct'])->name('admin.vendor-product/{id}');
-Route::get('all-sponser-product',[StockController::class,'sponserdProduct'])->name('admin.all-sponser-product');
-Route::get('sponser-product',[StockController::class,'sponserProduct'])->name('admin.sponser-product');
-Route::Post('sponser-product2',[StockController::class,'sponserProduct2'])->name('admin.sponser-product2');
+Route::get('sponser-status',[StockController::class,'sponserStatus'])->name('admin.sponser-status');
+Route::get('cancel-stock/{id}',[PriceController::class,'deletedStock'])->name('admin/cancel-stock/{id}');
 
 //all user Route
 Route::get('show-user',[UserController::class,'getUser'])->name('admin/show-user');

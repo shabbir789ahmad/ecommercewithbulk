@@ -5,6 +5,10 @@ $(document).ready(function(){
   	$('#modalsale').modal('show')
   	let id=$(this).data('id')
   	$('#sid').val(id);
+
+    let said=$(this).data('said')
+    $('#sale_id').val(said);
+
   	let sel=$(this).data('sel')
   	$('#seller').val(sel);
     let desco=$(this).data('desco')
@@ -18,21 +22,11 @@ $(document).ready(function(){
     
   })
 
-   $('.sle-end').click(function(e){
-    e.preventDefault();
-    $('#endsale').modal('show')
-    let id=$(this).data('eid')
-    $('#eid').val(id);
-    let disc=$(this).data('edisc')
-    $('#dis').val(disc);
-    let send=$(this).data('esell')
-    $('#sell-end').val(send);
-  });
+  
 
    $('#sale_count').change(function(e){
     e.preventDefault();
-    let sale_va=$(this).val()
-    $('#sale_counter').val(sale_va)
+   
     $('#count_form').submit()
    });
 
@@ -42,5 +36,20 @@ $(document).ready(function(){
     $('#order_counte').val(order_va)
      $('#order_form').submit()
    });
+
+  
+    $('.promote').click(function(e){
+     $('#promote_model').modal('show')
+     let id=$(this).data('id')
+     $('#spid').val(id)
+      let strt=$(this).data('strt')
+     
+    });
  
+  $('#promoted').click(function(){
+  var news=$(this).val();
+ $('#promot').val(news)
+ $('#new-form').submit();
+
+});
 });

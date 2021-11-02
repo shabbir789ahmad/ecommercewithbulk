@@ -75,8 +75,6 @@ $sub=Category::category();
                  <a href="#">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
                  <div class="dropdown second">
                  <ul>
-
-                  @php //dd($c->dropdown); @endphp
                   @foreach($cat['drop'] as $drp)
                   @if($subc['id']==$drp['dropdown_id'] )
                   <li class="dropdown-link  store-drop"  value="{{$drp['id']}}">
@@ -105,7 +103,7 @@ $sub=Category::category();
 
 <button class="btn-store ml-1" id="new" value="new">New Product</button>
 <button class="btn-store ml-1" id="top-rated" value="top">Top Rated</button>
-<button class="btn-store ml-1">Button</button>
+<button class="btn-store ml-1" id="promoted" value="prom">Promoted</button>
 </div>
 
 <div class="container-fluid mt-2 ml-2 mb-5">
@@ -124,41 +122,47 @@ $sub=Category::category();
     <!-- without sale product slider-->
    <div class="container-fluid mt-4">
     <div class="owl-carousel owl-theme ml-2">
-    @foreach($product as $pro)
-    @foreach($pro->stock as $stock)
-    @if(!$stock['on_sale'])
+    @foreach($products as $product)
+     @if(!$product['on_sale'] )
      <div class="item">
       <div class="card store-card shadow">
        <div class="overly">
-        <a href="{{url('vendor/stock-detail/' .$pro['id'])}}">
-          @foreach($pro->image as $img)
+        <a href="{{url('vendor/stock-detail/' .$product['id'])}}">
+          @foreach($product->image as $img)
            <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
           @endforeach
         </a>
-        @foreach($pro->stock as $stock)
+       
         @foreach($sale as $sl)
         @if($sl['end_time']>= $date)
          <div class="over-text">
-          <p class="sle mt-2" data-id="{{$stock['id']}}" data-sel="{{$stock['sell_price']}}" data-desco="{{$stock['discount']}}">Apply Sale </p>
+          <p class="sle mt-2" data-id="{{$product['id']}}" data-sel="{{$product['sell_price']}}" data-desco="{{$product['discount']}}" data-said="{{$product['id']}}">Apply Sale </p>
          </div>
+         @if($product['sponser'] && $product['sponser_end'] >$date)
+
+         @else
+         <div class="over-text3">
+          <p class="promote mt-2" data-id="{{$product['id']}}" >Promote </p>
+         </div>
+         @endif
         @endif
         @endforeach
         <div class="over-text2">
-          <p class="sle2 text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
+          <p class="sle2 text-danger mt-2" data-id="{{$product['id']}}">{{ceil( ($product['discount']/$product['sell_price'])*100)
            }}%</p>
         </div>
        
        </div>
       <div class="card-body p-0">
-       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($pro['product'])}}<span class="float-right ">${{$stock['sell_price'] - $stock['discount']}}<del class="text-secondary">
-       <small class="text-danger">${{$stock['sell_price']}}</small></del>  </span>
+       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($product['product'])}}<span class="float-right ">${{$product['sell_price'] - $product['discount']}}<del class="text-secondary">
+       <small class="text-danger">${{$product['sell_price']}}</small></del>  </span>
       </p>
       </div>
-       @endforeach
+     
       <div class="card-footer">
        <div class="text-center rating">
         @for($i=0; $i<5; $i++)
-        @if($i<$pro['rating'])
+        @if($i<$product['rating'])
          <span class="fa fa-star checked "></span>
         @else
          <span class="fa fa-star"></span> 
@@ -169,7 +173,6 @@ $sub=Category::category();
     </div>
   </div>
   @endif
-  @endforeach
   @endforeach
 </div>
 </div>
@@ -178,40 +181,39 @@ $sub=Category::category();
     <!-- without sale product slider-->
    <div class="container-fluid mt-4">
     <div class="owl-carousel owl-theme ml-2">
-    @foreach($product as $pro)
-    @foreach($pro->stock as $stock)
-    @if($stock['on_sale'])
+    @foreach($products as $product)
+    @if($product['on_sale'])
      <div class="item">
       <div class="card store-card shadow">
        <div class="overly">
-        <a href="{{url('vendor/stock-detail/' .$pro['id'])}}">
-          @foreach($pro->image as $img)
+        <a href="{{url('vendor/stock-detail/' .$product['id'])}}">
+          @foreach($product->image as $img)
            <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
           @endforeach
         </a>
-        @foreach($pro->stock as $stock)
+   
        @foreach($sale as $sl)
       @if($sl['end_time']>= $date)
-     <div class="over-text">
-       <p class="sle-end mt-2" data-eid="{{$stock['id']}}" data-edisc="{{$stock['discount']}}" data-esell="{{$stock['sell_price']}}">End Sale </p>
-       </div>
+     <a href="{{url('vendor/out-sale/'.$product['id'])}}"><div class="over-text">
+       <p class="sle-end mt-2" >End Sale</p> 
+       </div></a>
        @endif
        @endforeach
         <div class="over-text2 ">
-          <p class="sle2  text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
+          <p class="sle2  text-danger mt-2" data-id="{{$product['id']}}">{{ceil( ($product['discounts']/$product['new_price'])*100)
            }}%</p>
         </div>
-        @endforeach
+     
        </div>
       <div class="card-body p-0">
-       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($pro['product'])}}<span class="float-right ">${{$stock['sell_price'] - $stock['discount']}}<del class="text-secondary">
-       <small class="text-danger">${{$stock['sell_price']}}</small></del>  </span>
+       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($product['product'])}}<span class="float-right ">${{$product['sell_price'] - $product['discount']}}<del class="text-secondary">
+       <small class="text-danger">${{$product['sell_price']}}</small></del>  </span>
       </p>
       </div>
       <div class="card-footer">
        <div class="text-center rating">
         @for($i=0; $i<5; $i++)
-        @if($i<$pro['rating'])
+        @if($i<$product['rating'])
          <span class="fa fa-star checked "></span>
         @else
          <span class="fa fa-star"></span> 
@@ -223,7 +225,7 @@ $sub=Category::category();
   </div>
   @endif
   @endforeach
-  @endforeach
+
 </div>
 </div>
   </div>
@@ -251,14 +253,15 @@ $sub=Category::category();
         <form method="POST" action="{{url('vendor/on-sale')}}">
           @csrf
         <input type="hidden" name="id" id="sid">
-        <label>SAle Name</label>
+        <input type="text" name="sale_id" id="sale_id">
+        <label>Sale Name</label>
         <select class="form-control" name="sell_id">
         @foreach($sale as $sl)
         <option value="{{$sl['id']}}">{{$sl['sell_name']}}</option>
         @endforeach
          </select>
         <label>New Price</label>
-        <input type="text" class="form-control" name="sell_price" id="seller">
+        <input type="text" class="form-control" name="new_price" id="seller">
         <label>New Discount</label>
         <input type="text" class="form-control" name="discount" id="discounter">
        <button class="btn btn-color float-right btn-lg mt-4 text-light rounded">Update</button>
@@ -271,38 +274,46 @@ $sub=Category::category();
 </div>
 
 
-<!--put product on Modal -->
-<div class="modal fade" id="endsale" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+<!--promote Modal -->
+<div class="modal fade" id="promote_model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Disable Sale From This Product</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Promote Your Product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{url('vendor/out-sale')}}">
-          @csrf
-        <input type="hidden" name="id" id="eid">
-        <label>Update New Price</label>
-        <input type="text" class="form-control" name="sell_price" id="sell-end">
-        <label class="mt-2">Update New Discount</label>
-        <input type="text" class="form-control" name="discount" id="dis">
-       <button class="btn btn-color float-right btn-lg mt-4 text-light rounded">End Sale</button>
-     </form> 
-     </div>
-      
+        <form action="{{url('vendor/sponser-product')}}" method="Post">
+        @csrf
+          <input type="hidden" name="sponser_id" id="spid">
+          <select class="form-control desponser" name="sponser" required readonly>
+           <option value="1">Sponser </option>
+           </select>
        
+          <label class="mt-2">Start Time</label>
+          <input type="datetime-local" name="sponser_start" class="form-control" id="sponser_start">
+          <label class="mt-2">New End Time</label>
+          <input type="datetime-local" name="sponser_end" class="form-control" id="sponser_end2">
+          
+      
+         <button type="submit" class="btn btn-primary mt-3 float-right">Save changes</button>
+        </form>
+      </div>
+      
     </div>
   </div>
 </div>
-
 
 <form id="new-form">
   <input type="hidden" name="newpro" id="newpro">
   <input type="hidden" name="topr" id="topr">
   <input type="hidden" name="drop_search" id="drop_search">
+  <input type="hidden" name="promoted" id="promot">
 </form>
 
 

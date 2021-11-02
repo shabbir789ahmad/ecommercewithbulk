@@ -24,44 +24,37 @@ class SliderController extends Controller
     $slider=Slider::latest()->take('3')->get();
     $front=Mainpage::latest()->take('1')->get();
     $dropdown=$this->dropdown();
-    $query1= Vendor::
+    $time=$this->carbon();
+    $product= Vendor::
      join('stocks','vendors.id','=','stocks.user_id')
      ->join('stock2s','stocks.id','=','stock2s.stock_id')
+     ->leftjoin('sponsers','stocks.id','=','sponsers.sponser_id')
      ->leftjoin('reviews','stocks.id','=','reviews.review_id')
      ->select('review_id', \DB::raw('avg(rating) as rating')
-     ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stocks.sponser','stock2s.sell_price','stock2s.discount','stock2s.on_sale','stock2s.stock_status')
-     ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stocks.sponser','stock2s.sell_price','stock2s.discount','stock2s.on_sale','stock2s.stock_status')->orderBy('rating','DESC');
-     $query=$query1->whereMonth('stocks.created_at', date('m'));
-     $query=$query1->whereNull('vendors.deleted_at');
-     $query=$query1->where('product_status','1')->get();
-     $prod1=$query;
-     $product=$prod1->shuffle();
+     ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stock2s.sell_price','stock2s.discount','stock2s.stock_status','sponsers.sponser','stocks.cat_id','sponsers.sponser_status','sponsers.sponser_end')
+     ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','sponsers.sponser','stock2s.sell_price','stock2s.discount','stock2s.stock_status','stocks.cat_id','sponsers.sponser_status','sponsers.sponser_end')->orderBy('rating','DESC')
+     ->whereNull('vendors.deleted_at')
+     ->where('product_status','1')->get()
+     ->shuffle();
 
-     $query2=$query1->where('product_status','1')->get();
-     $prod3=$query2;
-     $product3=$prod3->shuffle();
-        
-     
      foreach($product as $pro) 
      {
-       $pro->image=Image::where('Image_id',$pro->id)->get();
+       $pro->image=Image::where('Image_id',$pro->id)->take('1')->get();
      }
    
-    foreach($product3 as $prod) 
-    {
-      $prod->image=Image::where('Image_id',$prod->id)->get();
-    }
-     
+    
   //dd($product);
         
     $product2= Vendor::
       join('stocks','vendors.id','=','stocks.user_id')
       ->join('stock2s','stocks.id','=','stock2s.stock_id')
+      ->leftjoin('sales','stocks.id','=','sales.sale_id')
       ->leftjoin('reviews','stocks.id','=','reviews.review_id')
       ->select('review_id', \DB::raw('avg(rating) as rating')
-       ,'stocks.drop_id','stocks.id','stocks.product'    ,'reviews.review_id','stocks.created_at','vendors.deleted_at','stocks.cat_id','stock2s.sell_price','stock2s.discount','stock2s.on_sale','stock2s.stock_status','stocks.sponser')
-      ->groupBy('review_id','stocks.drop_id','stocks.cat_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','vendors.deleted_at','stock2s.sell_price','stock2s.discount','stock2s.on_sale','stock2s.stock_status','stocks.sponser')->orderBy('rating','DESC')
+       ,'stocks.drop_id','stocks.id','stocks.product'    ,'reviews.review_id','stocks.created_at','vendors.deleted_at','stocks.cat_id','stock2s.stock_status','sales.new_price','sales.discounts','sales.on_sale','sales.sell_id')
+      ->groupBy('review_id','stocks.drop_id','stocks.cat_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','vendors.deleted_at','stock2s.stock_status','sales.new_price','sales.discounts','sales.on_sale','sales.sell_id')->orderBy('rating','DESC')
       ->where('product_status','1')
+      ->where('on_sale','1')
       ->whereNull('vendors.deleted_at')
       ->get()->shuffle();
       
@@ -69,8 +62,8 @@ class SliderController extends Controller
        {
         $pro->image=Image::where('Image_id',$pro->id)->get();
        }
-
-      return view('home',compact('slider','product','product2','front','product3','dropdown'));
+   //dd($product2);
+      return view('home',compact('slider','product','product2','front','dropdown','time'));
   }
 
   function uploadSlider(Request $req)

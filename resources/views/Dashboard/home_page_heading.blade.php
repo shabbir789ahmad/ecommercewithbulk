@@ -47,10 +47,10 @@
  
  <div class="row">
  <div class="col-md-6">
-    <label class="text-danger">Top Selling</label>
+    <label class="text-danger">Choosen For Top Selling</label>
 <div class="form-group">
  <div class="input-group clockpicker" id="clockPicker1">   
-    <input type="text" name="c1"  class="form-control "  value="{{old('c1')}}"><br>
+    <input type="text" name="c1"  class="form-control " placeholder="Like Best Selling, Top Selling..."  value="{{old('c1')}}"><br>
                
     <div class="input-group-append">
    <span class="input-group-text"><i class="fas fa-images"></i></span>
@@ -97,10 +97,10 @@
 
 </div>
 <div class="col-md-6">
-   <label class="text-danger">Category 2  </label>
+   <label class="text-danger">Selected For Top Rated product  </label>
 <div class="form-group">
  <div class="input-group clockpicker" id="clockPicker1">
-        <input type="text" name="c2" class="form-control" value="{{old('c2')}}">
+        <input type="text" name="c2" placeholder=" Like Top Reviewed Most Liked Product" class="form-control" value="{{old('c2')}}">
    
     <div class="input-group-append">
     <span class="input-group-text"><i class="fab fa-product-hunt"></i></span>

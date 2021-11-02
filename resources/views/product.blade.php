@@ -216,6 +216,7 @@ $sub=Category::category();
 
  <div class="row mr-2">
    @foreach($product as $pro)
+   @if(!$pro['on_sale'])
    <div class="col-sm-4 col-12 col-md-4 col-lg-4  mt-2">
     <div class="card ">
      <div class="a">
@@ -252,6 +253,7 @@ $sub=Category::category();
       </div>
     </div>
    </div>
+   @endif
    @endforeach
  </div>
 

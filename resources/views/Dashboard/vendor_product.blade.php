@@ -13,7 +13,7 @@
        <i class="fab fa-product-hunt text-success text-center fa-2x mt-2"></i></a>
       </div>
     <div class="col-md-8">
-     <h4 class="text-center font-weight-bold mt-3 text-color">All Product</h4>
+     <h4 class="text-center font-weight-bold mt-3 text-color">All Product For This Vendor</h4>
     </div>
     <div class="col-md-1">
      <a class="btn shadow border" href="{{url('vendor/stock-show')}}">
@@ -93,70 +93,196 @@
     
      </select>
   </div>
-  
+  </div>
+
+ <div class="store-nav-color mt-2 py-2" style="background-color:#00A9A4;">
+  <ul class="nav nav-pills ml-3" id="pills-tab" role="tablist">
+  <li class="nav-item ml-2">
+    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">All Products</a>
+  </li>
+  <li class="nav-item ml-2">
+    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Requested</a>
+  </li>
+  <li class="nav-item ml-2">
+    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Promoted</a>
+  </li>
+</ul>
 </div>
-<div class="table-responsive p-3">
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+    <!-- Without Promoted-->
+    <div class="table-responsive p-3">
 <table class="table align-items-center table-flush" id="dataTable">
   <thead class="thead-light">
    <tr>
     <th>Image</th>
     <th>Product</th>
-    <th > Sponser</th>
-    <th>Price</th>
     <th class="col-2">Sell Price</th>
-    <th >Discount </th>
     <th >Total Stock </th>
     <th >Remaining Stock </th>
     <th class="text-center">Actions</th>
+    <th class="text-center">Promote</th>
    </tr>
   </thead>
   <tbody>
- @php //dd($stock) @endphp
+
    @foreach($stock as $show)
+
    <tr>
     <td class="a col-1">
       @foreach($show->image as $img)
       <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
       @endforeach
     </td>
-    <td class="a col-2">{{$show->product}}</td>
-    <td class="a col-2">
-      @if($show['sponser'])
-       Sponser
-      @else
-      <span class="bag "></span><i class="fas fa-tags discount border sponser2 p-2 " data-id="{{$show['id']}}" ></i>
-      @endif
-    </td>
     
-   
-    <td class="a">{{$show['price']}}</td>
-    <td class="a col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span>
-     
-    </td>
-    <td class="a col-2"><span class="bag ">
-    @if($show['discount'] > '1')
-  {{$show['discount']}}@else 0 @endif</span>
-    </td>
-
-    <td class="a col-2">{{$show->stock}}</td>
-    <td class="a col-2">{{$show['stock'] - $show['sold_stock']}}</td>
+    <td class="a col-2">{{$show->product}}</td>
+    <td class="a col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span></td>
+    <td class="a col-2">{{$show['stock']+ $show['sold_stock']}}</td>
+    <td class="a col-2">{{$show['stock'] }}</td>
+    
     <td>
+      <div class="b d-flex justify-content-center mt-1">
+       <a href="{{'stock-detail/'.$show['id']}}" class="border shadow  py-2 px-3 ml-1"><i class="fas fa-pen text-success"></i></a>
+       <a href="{{url('admin/cancel-stock/'.$show['id'])}}" class="border shadow  py-2 px-3 ml-1" onclick="return confirm('Are you sure? This will delete all of product data')"><i class="fas fa-trash-alt  text-danger "></i>
+       </a>
+      </div> 
+    </td>
+    @foreach($show->sponser as $spn)
+    @if($spn['sponser'] && $spn['sponser_status']=='1')
+    <td class="a "><span class="badge badge-success py-1">Sponsered</span></td>
+    @elseif($spn['sponser'] && $spn['sponser_status']=='0')
+     <td class="a "><span class="badge badge-primary py-3">Requested</span></td>
+    @endif
+    @endforeach
+   </tr>
+       @endforeach
+         </tbody>
+         </table>
+       </div>
+
+{{ $stock->links() }}
+  </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <!-- Requested for promotion-->
+    <div class="table-responsive p-3">
+    <table class="table align-items-center table-flush" id="dataTable">
+      <thead class="thead-light">
+       <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th class="col-2">Sell Price</th>
+        <th >Total Stock </th>
+        <th >Remaining Stock </th>
+        @foreach($stock as $show)
+          @foreach($show->sponser as $sp)
+        <th > Sponser</th>
+        <th>Approve Sponser</th>
+        @endforeach
+        @endforeach
+        <th class="text-center">Actions</th>
+       </tr>
+      </thead>
+      <tbody>
+
+      @foreach($stock as $show)
+      @foreach($show->sponser as $sponser)
+      @if($sponser['sponser']&& $sponser['sponser_status']=='0')
+      <tr>
+       <td class="a col-1">
+         @foreach($show->image as $img)
+      <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
+         @endforeach
+       </td>
+    
+       <td class="a col-2">{{$show->product}}</td>
+       <td class="a col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span></td>
+       <td class="a col-2">{{$show['stock']+ $show['sold_stock']}}</td>
+       <td class="a col-2">{{$show['stock'] }}</td>
+       @foreach($show->sponser as $sponser)
+       <td class="a col-2"><span class="badge badge-primary py-3">Requested</span></td>
+       <td class="a sponser" ><input type="checkbox" data-id="{{ $sponser['id'] }}" name="sponser_status" class="js-switchspon" 
+       {{ $sponser->sponser_status == 1 ? 'checked' : '' }} ></td>
+       @endforeach
+      <td>
      <div class="b d-flex justify-content-center mt-1">
       
        <a href="{{'stock-detail/'.$show['id']}}" class="border shadow  py-2 px-3 ml-1"><i class="fas fa-pen text-success"></i></a>
-        <a href="{{'cancel-stock/'.$show['id']}}" class="border shadow  py-2 px-3 ml-1" onclick="return confirm('Are you sure? This will delete all of product data')"><i class="fas fa-trash-alt  text-danger "></i>
+        <a href="{{url('admin/cancel-stock/'.$show['id'])}}" class="border shadow  py-2 px-3 ml-1" onclick="return confirm('Are you sure? This will delete all of product data')"><i class="fas fa-trash-alt  text-danger "></i>
        </a>
 
        </div> 
     </td>
    </tr>
- 
+         @endif
+         @endforeach
+         @endforeach
+         </tbody>
+         </table>
+       </div>
+    {{ $stock->links() }}
+  </div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+    <!-- Requested for promotion-->
+    <div class="table-responsive p-3">
+    <table class="table align-items-center table-flush" id="dataTable">
+      <thead class="thead-light">
+       <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th class="col-2">Sell Price</th>
+        <th >Total Stock </th>
+        <th >Remaining Stock </th>
+        @foreach($stock as $show)
+          @foreach($show->sponser as $sp)
+        <th > Sponser</th>
+        <th>Approve Sponser</th>
+        @endforeach
+        @endforeach
+        <th class="text-center">Actions</th>
+       </tr>
+      </thead>
+      <tbody>
+
+      @foreach($stock as $show)
+      @foreach($show->sponser as $sponser)
+      @if($sponser['sponser_status']=='1')
+      <tr>
+       <td class="a col-1">
+         @foreach($show->image as $img)
+      <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
+         @endforeach
+       </td>
+    
+       <td class="a col-2">{{$show->product}}</td>
+       <td class="a col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span></td>
+       <td class="a col-2">{{$show['stock']+ $show['sold_stock']}}</td>
+       <td class="a col-2">{{$show['stock'] }}</td>
+       @foreach($show->sponser as $sponser)
+       <td class="a col-2"><span class="badge badge-success py-3">Sponser</span></td>
+       <td class="a sponser" ><input type="checkbox" data-id="{{ $sponser['id'] }}" name="sponser_status" class="js-switchspon" 
+       {{ $sponser->sponser_status == 1 ? 'checked' : '' }} ></td>
+       @endforeach
+      <td>
+     <div class="b d-flex justify-content-center mt-1">
+      
+       <a href="{{'stock-detail/'.$show['id']}}" class="border shadow  py-2 px-3 ml-1"><i class="fas fa-pen text-success"></i></a>
+        <a href="{{url('admin/cancel-stock/'.$show['id'])}}" class="border shadow  py-2 px-3 ml-1" onclick="return confirm('Are you sure? This will delete all of product data')"><i class="fas fa-trash-alt  text-danger "></i>
+       </a>
+
+       </div> 
+    </td>
+   </tr>
+         @endif
+         @endforeach
          @endforeach
          </tbody>
          </table>
        </div>
 
 {{ $stock->links() }}
+  </div>
+</div>
+
   </div>
   </div>
 </div>
@@ -175,32 +301,6 @@
 </form>
 
 
-<!-- Modal -->
-<div class="modal fade" id="sopnser_modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Sponser This Product</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{url('admin/sponser-product2')}}" method="POST">
-          @csrf
-          <input type="hidden" name="sponser_id" id="sid">
-          <select class="form-control " name="sponser">
-            <option disabled hidden selected>Sponser This Product</option>
-            <option value="1">Sponser</option>
-          </select>
-
-         <button type="submit" class="btn btn-primary mt-3 float-right">Save changes</button>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-</div>
 
  @endsection
 

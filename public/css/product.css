@@ -80,7 +80,7 @@ font-weight: 500;
 margin-bottom: 3px;
 }
  .name3{
- 
+ -webkit-line-clamp: 2;
 font-family : Arial, sans-serif;
 font-size:3vw;
 font-weight: 500;
