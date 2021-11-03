@@ -15,6 +15,7 @@ use App\Notifications\ProductStock;
 use Notification;
 use App\Http\Traits\StoreTrait;
 use Carbon\Carbon;
+use Auth;
 use Illuminate\Support\Facades\DB;
 class CountController extends Controller
 {
@@ -34,7 +35,7 @@ class CountController extends Controller
             $tos=$req->get('to');
         }
         echo $tos;
-        $query=Order::join('details','orders.id','=','details.order_id')->whereMonth('orders.created_at',date('m'))->where('details.order_status','delivered');
+        $query=Order::join('details','orders.id','=','details.order_id')->whereMonth('orders.created_at',date('m'))->where('details.order_status','delivered')->where('user_id',Auth::user()->id);
         
         if($from && $tos)
         {
@@ -47,14 +48,14 @@ class CountController extends Controller
         //dd($comp);
         if($comp)
         {
-        $comp2=Order::count();
+        $comp2=Order::where('user_id',Auth::user()->id)->count();
         $com=$comp/$comp2 * 100;
         }else{
             $com=0;
         }
         
         
-      $query=Order::whereMonth('created_at', date('m'));
+      $query=Order::whereMonth('created_at', date('m'))->where('user_id',Auth::user()->id);
        
         if($from && $tos)
         {
@@ -65,7 +66,7 @@ class CountController extends Controller
        //dd($order);
         if($order)
         {
-        $order2=Order::count();
+        $order2=Order::where('user_id',Auth::user()->id)->count();
         $or=$order/$order2 * 100;
         }else{
             $or=0;
@@ -74,7 +75,7 @@ class CountController extends Controller
         $query=Order::
         join('details','orders.id','=','details.order_id')
         ->where('order_status','pending')
-        ->whereMonth('orders.created_at', date('m'));
+        ->whereMonth('orders.created_at', date('m'))->where('user_id',Auth::user()->id);
         if($from && $tos)
         {
          
@@ -86,7 +87,7 @@ class CountController extends Controller
         {
         $sale2=Order::
         join('details','orders.id','=','details.order_id')
-        ->count();
+        ->where('user_id',Auth::user()->id)->count();
         $sl=$sale/$sale2 * 100;
         }else{
             $sl=0;
@@ -95,7 +96,7 @@ class CountController extends Controller
         $query=Order::
         join('details','orders.id','=','details.order_id')
         ->where('order_status','delivered')
-        ->whereMonth('orders.created_at', date('m'));
+        ->whereMonth('orders.created_at', date('m'))->where('user_id',Auth::user()->id);
          
           if($from && $tos)
         {
@@ -108,13 +109,13 @@ class CountController extends Controller
        
       $earn3= Order::
         join('details','orders.id','=','details.order_id')
-        ->whereMonth('orders.created_at', date('m'))->count();
+        ->whereMonth('orders.created_at', date('m'))->where('user_id',Auth::user()->id)->count();
          
          if($earn)
         {
         $earn2=Order::
         join('details','orders.id','=','details.order_id')
-        ->where('order_status','delivered')->count();
+        ->where('order_status','delivered')->where('user_id',Auth::user()->id)->count();
         $en=$earn2/$earn3 * 100;
         }else{
             $en=0;

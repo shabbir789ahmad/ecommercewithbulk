@@ -20,13 +20,43 @@ $sub=Category::category();
 @endforeach
 
 <h4 class=" pro mt-5">All Products</h4>
-@foreach($sale as $sl)
-  <p class="text-center">Put Your Product In <span class="text-danger font-weight-bold">{{ucwords($sl['sell_name'])}}<span></p>
-  @endforeach
 
+
+
+ @if($vendorsale)
+   @foreach($vendorsale as $sal)
+    @if($sal['sale_end']>=$date)
+     <div class="card-heade border mt-5 d-inline-block rounded-top  py-3 w-100">
+      <div class="row">
+        <div class="col-md-6">
+         <div class="sale">
+      @foreach($vendorsale as $sal)
+        <h2 class="font-weight-bold ml-3 text-dark ">{{ucwords($sal['sale_name'])}}</h2>
+       
+     @endforeach
+    </div>
+        </div>
+        <div class="col-md-6">
+         <div class="d-flex ml-auto">
+        <p class="ml-auto text-dark font-weight-bold">Sale End In 
+         <div id="time mr-5" class="d-flex ml-5">
+          <p id="day" class="p-1 bg-time ml-2  text-light">f</p>
+          <p id="hour" class="p-1 bg-time ml-2 text-light">f</p>
+          <p id="minute" class="p-1 bg-time ml-2 text-light">f</p>
+          <p id="second" class="p-1 bg-time ml-2 text-light">f</p>
+         </div>
+       </p>
+       </div>
+        </div>
+      </div>
+      
+    
+   </div>
+  @endif
+  @endforeach
+  @endif 
 
   <div class=" d-flex store-nav-color" >
-
    <div class="nav-btn ml-3">
      <div class="nav-links">
       <ul>
@@ -77,12 +107,12 @@ $sub=Category::category();
 <button class="btn-store ml-1">Button</button>
 </div>
 
-<div class="container-fluid mt-2 ml-2 mb-5">
- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item mr-2 ">
+<div class="container-fluid mt-2 ml-2 mb-5" >
+ <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+  <li class="nav-item mr-2 ml-2" id="bg">
     <a class="nav-link  active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Without Sale</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item ml-2" id="bg">
     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">On Sale</a>
   </li>
  
@@ -93,30 +123,28 @@ $sub=Category::category();
     <!-- without sale product slider-->
    <div class="container-fluid mt-4">
     <div class="owl-carousel owl-theme ml-2">
-    @foreach($product as $pro)
-    @foreach($pro->stock as $stock)
-    @if(!$stock['on_sale'])
+    @foreach($products as $pro)
+  
+    @if(!$pro['vendor_on_sale'])
      <div class="item">
       <div class="card store-card shadow">
        <div class="overly">
-        <a href="{{url('vendor/stock-detail/' .$pro['id'])}}">
+        <a href="{{url('vendor/pro-detail/' .$pro['id'])}}">
           @foreach($pro->image as $img)
            <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
           @endforeach
         </a>
-        @foreach($pro->stock as $stock)
        <div class="over-text2">
-          <p class="sle2 text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
+          <p class="sle2 text-danger mt-2" data-id="{{$pro['id']}}">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
            }}%</p>
         </div>
        
        </div>
       <div class="card-body p-0">
-       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($pro['product'])}}<span class="float-right ">${{$stock['sell_price'] - $stock['discount']}}<del class="text-secondary">
-       <small class="text-danger">${{$stock['sell_price']}}</small></del>  </span>
+       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['sell_price'] - $pro['discount']}}<del class="text-secondary">
+       <small class="text-danger">${{$pro['sell_price']}}</small></del>  </span>
       </p>
       </div>
-       @endforeach
       <div class="card-footer">
        <div class="text-center rating">
         @for($i=0; $i<5; $i++)
@@ -131,7 +159,7 @@ $sub=Category::category();
     </div>
   </div>
   @endif
-  @endforeach
+
   @endforeach
 </div>
 </div>
@@ -140,34 +168,27 @@ $sub=Category::category();
     <!-- without sale product slider-->
    <div class="container-fluid mt-4">
     <div class="owl-carousel owl-theme ml-2">
-    @foreach($product as $pro)
-    @foreach($pro->stock as $stock)
-    @if($stock['on_sale'])
+    @foreach($products as $pro)
+
+    @if($pro['vendor_on_sale'])
      <div class="item">
       <div class="card store-card shadow">
        <div class="overly">
-        <a href="{{url('vendor/stock-detail/' .$pro['id'])}}">
+        <a href="{{url('vendor/pro-detail/' .$pro['id'])}}">
           @foreach($pro->image as $img)
            <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
           @endforeach
         </a>
-        @foreach($pro->stock as $stock)
-       @foreach($sale as $sl)
-      @if($sl['end_time']>= $date)
-     <div class="over-text">
-       <p class="sle-e mt-2" data-eid="{{$stock['id']}}" data-edisc="{{$stock['discount']}}" data-esell="{{$stock['sell_price']}}">End Sale </p>
-       </div>
-       @endif
-       @endforeach
+        
+      
         <div class="over-text2 ">
-          <p class="sle2  text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
+          <p class="sle2  text-danger mt-2" data-id="{{$pro['id']}}">{{ceil( ($pro['vendor_discount']/$pro['vendor_new_price'])*100)
            }}%</p>
-        </div>
-        @endforeach
+
        </div>
       <div class="card-body p-0">
-       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($pro['product'])}}<span class="float-right ">${{$stock['sell_price'] - $stock['discount']}}<del class="text-secondary">
-       <small class="text-danger">${{$stock['sell_price']}}</small></del>  </span>
+       <p class="f font-weight-bold ml-1 mt-2">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['vendor_new_price'] - $pro['vendor_discounts']}}<del class="text-secondary">
+       <small class="text-danger">${{$pro['vendor_new_price']}}</small></del>  </span>
       </p>
       </div>
       <div class="card-footer">
@@ -184,7 +205,6 @@ $sub=Category::category();
     </div>
   </div>
   @endif
-  @endforeach
   @endforeach
 </div>
 </div>
@@ -205,5 +225,44 @@ $sub=Category::category();
   <input type="hidden" name="drop_search" id="drop_search">
 </form>
 
+<script>
+ @php
+ $en='';
+foreach($vendorsale as $sal)
+{
+  $en = strtotime($sal->sale_end)*1000 ;
+}
+@endphp
 
+var endtime={{ $en}};
+
+ 
+  var timer=setInterval(function(){
+  var strt=new Date().getTime();
+ // alert(strt)
+    var t=endtime-strt;
+//alert(t)
+    if(t>0)
+    {
+      let da = Math.floor(t / (1000 * 60 * 60 * 24));
+      let hr = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let ms = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        let sc = Math.floor((t % (1000 * 60)) / 1000);
+
+document.getElementById("day").innerHTML= ("0" + da).slice(-2) +
+"<span class='d'>d</span>";
+
+document.getElementById("hour").innerHTML= ("0" + hr).slice(-2) +
+"<span class='d'>h</span>";
+
+document.getElementById("minute").innerHTML= ("0" + ms).slice(-2) +
+"<span class='d'>m</span>";
+
+document.getElementById("second").innerHTML= ("0" + sc).slice(-2) +
+"<span class='d'>s</span>";
+    }else{
+
+    }
+  },1000);
+</script>
 @endsection

@@ -283,9 +283,10 @@ class StockController extends Controller
 
 
     public function getStock(Request $req)
-    {    $main = $this->category();
-         $supply=$this->supply();
-         $id=Auth::user()->id;
+    {
+        $id=Auth::user()->id;
+        $main = $this->category();
+        $supply=$this->supply();
         $stock=$this->products($id);
  
        

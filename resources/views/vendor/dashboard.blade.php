@@ -133,9 +133,9 @@
  </div>
 </li>
    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap14"
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap14"
           aria-expanded="true" aria-controls="collapseBootstrap">
-         <i class="fas fa-bold text-light"></i>
+      <i class="fas fa-bold text-light"></i>
           <span>Supplier</span>
         </a>
         <div id="collapseBootstrap14" class="collapse @if(request()->is('vendor/show-supplier')) show
@@ -147,6 +147,25 @@
          
            <div class="dropdown-divider"></div>
             <a class="collapse-item" href="{{url('vendor/add-supplier')}}">Add Supplier</a>
+          
+          </div>
+        </div>
+      </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap15"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+      <i class="fas fa-bold text-light"></i>
+          <span>Make Sale</span>
+        </a>
+        <div id="collapseBootstrap15" class="collapse @if(request()->is('vendor/show-supplier')) show
+         @elseif(request()->is('vendor/add-supplier'))
+          show
+         @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class=" py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{url('vendor/all-sale')}}">All Sale</a>
+         
+           <div class="dropdown-divider"></div>
+            <a class="collapse-item" href="{{url('vendor/new-sale')}}">New Sale</a>
           
           </div>
         </div>
@@ -386,6 +405,10 @@ elems4.forEach(function(html) {
 });
 let elems5 = Array.prototype.slice.call(document.querySelectorAll('.js-switch5'));
 elems5.forEach(function(html) {
+    let switchery = new Switchery(html,  { size: ' small' });
+});
+let elems6 = Array.prototype.slice.call(document.querySelectorAll('.js-switch6'));
+elems6.forEach(function(html) {
     let switchery = new Switchery(html,  { size: ' small' });
 });
 

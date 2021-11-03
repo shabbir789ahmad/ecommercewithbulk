@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Stock2;
 use App\Models\Sell;
 use App\Models\Sale;
+use App\Models\VendorSale;
 use App\Models\Banner;
 use App\Http\Traits\StoreTrait;
 use App\Http\Traits\ProductTrait;
@@ -20,27 +21,30 @@ class StoreController extends Controller
     use ProductTrait;
 
     
-    function showStore($id, Request $req)
+    function showStore($id)
     {
        
-      $products=$this->storeProduct($id);
+      $products=$this->storeProduct2($id);
       $sale=$this->sale();
       $banner=$this->banner();
       $date=$this->carbon();
-      return view('store',compact('products','sale','date','banner'));
-       
-     
-    }
+      $vendorsale=$this->vendorSale();
+      //dd($products);
+      return view('store',compact('products','sale','date','banner','vendorsale'));
+     }
 
     function getStore(Request $req)
     {
-        $id='';
+        $id=Auth::user()->id;
       $products=$this->storeProduct($id);
       $sale=$this->sale();
+      $sale2=$this->sale2();
       $banner=$this->banner();
       $date=$this->carbon();
-     //dd($products);
-      return view('vendor.sale_product',compact('products','sale','date','banner'));
+      $vendorsale=$this->vendorSale();
+      $vendorsale2=$this->vendorSale2();
+      //dd($products);
+      return view('vendor.sale_product',compact('products','sale','date','banner','sale2','vendorsale','vendorsale2'));
        
 
     }
@@ -108,18 +112,34 @@ class StoreController extends Controller
           $sale->sell_id=$req->sell_id;
           $sale->sale_id=$req->sale_id;
           $sale->new_price=$req->new_price;
-          $sale->discount=$req->discount;
+          $sale->discounts=$req->discounts;
           $sale->on_sale='1';
+          $sale->save();
+          return redirect()->back()->with('success','your product is on sale');
+        
+    }
+    function vendorOnSale(Request $req)
+     {
+          $sale=new VendorSale;
+          $sale->vendor_sell_id=$req->vendor_sell_id;
+          $sale->vendor_sale_id=$req->vendor_sale_id;
+          $sale->vendor_new_price=$req->vendor_new_price;
+          $sale->vendor_discount=$req->vendor_discount;
+          $sale->vendor_on_sale='1';
           $sale->save();
           return redirect()->back()->with('success','your product is on sale');
         
     }
      function outSale($id,Request $req)
     {
-        $sale=Sale::where('sale_id',$id)->delete();
-           
-         $req->session()->flash('success','your product is Out Sale');
-           return redirect()->back();
-        
+      $sale=Sale::where('sale_id',$id)->delete();
+      $req->session()->flash('success','your product is Out Sale');
+     return redirect()->back();
+    }
+     function vendorOutSale($id,Request $req)
+    {
+      $sale=VendorSale::where('vendor_sale_id',$id)->delete();
+      $req->session()->flash('success','your product is Out Sale');
+     return redirect()->back();
     }
 }

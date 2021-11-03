@@ -10,6 +10,7 @@ use App\Models\Dropdown;
 use App\Models\Banner;
 use App\Models\Sell;
 use App\Models\Sponser;
+use App\Models\VendorSell;
 use App\Models\Supply;
 use Carbon\Carbon;
 use Auth;
@@ -39,6 +40,25 @@ use Auth;
       $time=Carbon::now();
       $sale=Sell::where('sell_status','1')->where('end_time','>',$time)->where('start_time','<=',$time)->latest()->take(1)->get();
       return $sale;
+     }
+     function sale2()
+     {
+      $time=Carbon::now();
+      $sale2=Sell::where('sell_status','1')->where('end_time','>',$time)->orwhere('start_time','>=',$time)->latest()->get();
+      return $sale2;
+     }
+     function vendorSale()
+     {
+      $time=Carbon::now();
+      $vendorsale=VendorSell::where('sale_status','1')->where('sale_end','>',$time)->where('sale_start','<=',$time)->latest()->take(1)->get();
+      return $vendorsale;
+     }
+     
+     function vendorSale2()
+     {
+      $time=Carbon::now();
+      $vendorsale2=VendorSell::where('sale_status','1')->where('sale_end','>',$time)->orwhere('sale_start','>=',$time)->latest()->get();
+      return $vendorsale2;
      }
      function banner()
      {

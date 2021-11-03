@@ -155,5 +155,24 @@ $('.js-switch4').change(function () {
  
    });
 
+ $('.js-switch6').change(function(e){
+   
+   e.preventDefault();
+   let status=$(this).prop('checked')===true? 1:0;
+   let id=$(this).data('id');
+   $.ajax({
+      
+       url: '/vendor/sale-status',
+       dataType : 'json',
+       type : 'GET',
+       data : {'sale_status':status,'id':id},
+       success:function(data)
+       {
+        console.log(data.message);
+       }
+   });
+
+ });
+
 });
 

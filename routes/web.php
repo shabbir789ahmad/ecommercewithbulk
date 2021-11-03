@@ -22,6 +22,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\DropdownController;
+use App\Http\Controllers\VendorSaleController;
 
 
 Route::get('/', function () {
@@ -63,7 +64,7 @@ Route::post('contact2',[ContactController::class,'contact'])->name('contact2');
 Route::view('mail','mail.order_mail');
 Route::view('bcd','bcd');
 
-Route::get('checkout',[OrderController::class,'check']);
+Route::view('checkout','checkout');
  Route::post('review',[ReviewController::class,'review']);
 
 
@@ -181,10 +182,20 @@ Route::post('update-banner',[StoreController::class,'updatebanner'])->name('vend
 Route::get('store',[StoreController::class,'getStore'])->name('vendor.store');
 
 Route::post('on-sale',[StoreController::class,'onSale'])->name('vendor.on-sale');
+Route::post('vendor-on-sale',[StoreController::class,'vendorOnSale'])->name('vendor.vendor-on-sale');
 Route::get('out-sale/{id}',[StoreController::class,'outSale'])->name('vendor.out-sale/{id}');
+Route::get('vendor-out-sale/{id}',[StoreController::class,'vendorOutSale'])->name('vendor.vendor-out-sale/{id}');
 
 //promote product route
 Route::Post('sponser-product',[StockController::class,'sponserProduct2'])->name('vendor.sponser-product');
+
+//vendor make sale route
+Route::view('new-sale','vendor.vendor_make_sale');
+Route::post('make-new-sale',[VendorSaleController::class,'vendorSale'])->name('vendor.make-new-sale');
+Route::get('all-sale',[VendorSaleController::class,'getSale'])->name('all-sale');
+Route::get('sale-delete/{id}',[VendorSaleController::class,'deleteSale'])->name('vendor/sale-delete/{id}');
+Route::get('sale-status',[VendorSaleController::class,'statusSale'])->name('vendor/sale-status');
+Route::post('update-vendor-sale',[VendorSaleController::class,'updateSale'])->name('vendor/update-vendor-sale');
   });
 });
 

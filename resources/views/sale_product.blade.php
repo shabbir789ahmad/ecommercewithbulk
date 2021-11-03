@@ -279,16 +279,16 @@ $sub=Category::category();
        </a>
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
 
-       @if($pro['discount'])
-        <p class="overlay2 ">{{ceil( ($pro['discount']/$pro['sell_price'])*100)}}% </p>
+       @if($pro['discounts'])
+        <p class="overlay2 ">{{ceil( ($pro['discounts']/$pro['new_price'])*100)}}% </p>
        @else
 
        @endif
      </div>
      <div class="card-body">
        <p class="f">{{ucwords($pro['product'])}}
-        <span class="float-right ">${{$pro['sell_price'] -   $pro['discount']}}<del class="text-secondary">
-         <small class="text-danger">${{$pro['sell_price']}}</small></del> 
+        <span class="float-right ">${{$pro['new_price'] -   $pro['discounts']}}<del class="text-secondary">
+         <small class="text-danger">${{$pro['new_price']}}</small></del> 
         </span>
        </p>
        <div class="text-center rating">

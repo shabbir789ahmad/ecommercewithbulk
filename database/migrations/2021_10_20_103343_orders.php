@@ -24,7 +24,9 @@ class Orders extends Migration
             $table->string('zip');
             $table->string('payment');
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('vendor_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade')->onUpdate('cascade');
             $table->datetime('deleted_at')->nullable();
             $table->timestamps();
         });

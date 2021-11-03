@@ -83,6 +83,7 @@
     <div class="col-md-4 ">
         <div class="mt-5 g border p-5">
        <p class=" mt-2 ">SubTotal:<span class="float-right"> ${{ $total }}</span></p>
+       @if(session('cart'))
        @foreach(session('cart') as $id => $details)
                @php  $sum[]=$details['ship'] @endphp
                @php $sum2 = array_sum($sum) @endphp
@@ -93,7 +94,12 @@
         {{ $sum2 + $total }} 
           </span></p>
           @endforeach
+          @endif
+          @if(Auth::user())
         <a href="{{url('checkout')}}"><button class="btn rounded py-3 btn-style mt-3">Checkout</button></a>
+        @else
+        <button class="btn rounded py-3 btn-style mt-3" id="checkout">Checkout</button>
+        @endif
 
     </div>
     </div>
@@ -103,6 +109,78 @@
     
       
       
+<!--put product on Modal -->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-light">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Please Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex ">
+         <button type="button" id="loginform" class="btn btn-color py-3 text-light btn-block py-2">Login</button>
+        <button type="button" id="signinform" class="btn btn-color text-light btn-block py-2">Signup</button>
+        </div>
+        <div class="login_form" >
+        <form method="POST" action="{{url('login')}}">
+          @csrf
+           
+         <input id="email" type="email" class="form-control mt-3 py-3 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+          @error('email')
+           <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+           </span>
+          @enderror
+        
+         <input id="password" type="password" class="form-control py-3 mt-4 mb-5 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+         @error('password')
+          <span class="invalid-feedback mb-5" role="alert">
+           <strong>{{ $message }}</strong>
+          </span>
+         @enderror
+       <button class="btn btn-color float-right btn-block py-3 mt-5 text-light rounded">Save</button>
+     </form> 
+   </div>
 
+   <div class="signin_form" style="display: none;">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+          @csrf
+         <input id="email" type="email" class="form-control mt-3 py-3 @error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
+          @error('email')
+           <span class="invalid-feedback" role="alert">
+             <strong>{{ $message }}</strong>
+            </span>
+          @enderror
+         
+         <input id="phone" type="number" class="form-control mt-3 py-3 @error('phone') is-invalid @enderror" name="phone" placeholder="Phone" value="{{ old('phone') }}" required autocomplete="phone">
+  @error('phone')
+   <span class="invalid-feedback" role="alert">
+     <strong>{{ $message }}</strong>
+                </span>
+           @enderror
+
+            <input id="password" type="password" placeholder="Password" class="form-control mt-3 py-3 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+           @error('password')
+            <span class="invalid-feedback" role="alert">
+             <strong>{{ $message }}</strong>
+            </span>
+          @enderror
+          <input id="password-confirm" type="password" placeholder="Conform Password" class="form-control mt-3 py-3" name="password_confirmation" required autocomplete="new-password">
+     
+     <input id="image" type="file" placeholder="Choose Image" class="form-control mt-3 mb-5" name="image" required autocomplete="profile"> 
+        
+       <button class="btn btn-color float-right btn-block py-3 mt-4 text-light rounded">Save</button>
+     </form> 
+   </div>
+     </div>
+      
+       
+    </div>
+  </div>
+</div>
 
 @endsection

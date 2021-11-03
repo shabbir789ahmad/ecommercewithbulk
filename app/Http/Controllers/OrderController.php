@@ -13,21 +13,12 @@ use App\Mail\OrderMail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Auth;
+use App\Http\Traits\OrderTrait;
 use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
-
-  function check()
-  {
-    if(Auth::user())
-
-    {
-      return view('checkout');
-    }else
-    {
-      return redirect()->back()->with('message','Please Login First');
-    }
-  }
+  use OrderTrait;
+  
     function order(Request $req)
     {
 
@@ -105,46 +96,12 @@ class OrderController extends Controller
 
     function getOrder(Request $req)
     {
-      $now=Carbon::now();
-      $stat="";
+      $order=$this->orders();
       $counter="";
-      if($req->get('status')!== null)
-      {
-        $stat=$req->get('status');
-      }
-      if($req->get('counte')!== null)
-      {
-        $counter=$req->get('counte');
-      }
-    // echo $counter;
-     
-      $query=Order::join('details','orders.id','=','details.order_id')
-      ->select('orders.id','details.product','details.image','details.price','details.quentity','details.order_status','orders.payment','details.total');
-
-     
-       if($req->get('drop') !== Null)
-       {
-        $query=$query->where('details.drop_id',$req->get('drop'));
-        }
-        if($stat =='Shipped')
-       {
-        $query=$query->where('order_status','shipped');
-        }
-         if($stat =='Pending')
-       {
-        $query=$query->where('order_status','pending');
-        }
-         if($stat =='Enroute')
-       {
-        $query=$query->where('order_status','enroute');
-        }
-       
-       $query=$query->where('order_status','!=','delivered');
-       $query=$query->withoutTrashed();
-      $query=$query->paginate(10);
-
-       $order=$query;
-      //dd($order);
+        if($req->get('counte')!== null)
+         {
+          $counter=$req->get('counte');
+         }
        $query2=Order::join('details','orders.id','=','details.order_id')->whereMonth('details.created_at', date('m'))->where('order_status','!=','delivered');
        if($counter=='this')
        {
@@ -163,7 +120,7 @@ class OrderController extends Controller
        $today=$query2->count();
        //dd($now);
       $query=Order::join('details','orders.id','=','details.order_id')
-       ->whereMonth('orders.created_at', date('m'))->where('order_status','delivered');
+       ->whereMonth('orders.created_at', date('m'))->where('order_status','delivered')->where('user_id',Auth::user()->id);
      
        if($counter=='this')
        {
@@ -173,19 +130,19 @@ class OrderController extends Controller
        }
        if($counter=='mid')
        {
-        $query=$query->where('details.created_at','>=',$now->subdays(15));
+         $query=$query->where('details.created_at','>=',$now->subdays(15));
        }
        if($counter=='month')
         {
-            $query=$query->whereMonth('details.created_at', date('m'));
+          $query=$query->whereMonth('details.created_at', date('m'));
         }
 
       $this_month=$query->count();
       $pending=$query2
-      ->where('order_status','pending')
+      ->where('order_status','pending')->where('user_id',Auth::user()->id)
       ->count();
 
-      $query=Order::join('details','orders.id','=','details.order_id')
+      $query=Order::join('details','orders.id','=','details.order_id')->where('user_id',Auth::user()->id)
       ->onlyTrashed();
       if($counter=='this')
        {
@@ -210,9 +167,7 @@ class OrderController extends Controller
 
    function delivered()
     {
-      $order=Order::
-      join('details','orders.id','=','details.order_id')
-      ->where('order_status','=','delivered')->paginate(10);
+      $order=$this->orders();
   
       return view('vendor.order_deliver',compact('order'));
     }

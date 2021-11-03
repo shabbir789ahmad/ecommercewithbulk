@@ -4,12 +4,14 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-             <h3 class="ml-auto mr-2">Filter</h3>
+            <h1 class="h3 mb-0 font-weight-bold">Dashboard</h1>
+             
              <form id="count_form" class="d-flex">
+              <label class="font-weight-bold mt-2 mr-2">From</label>
                <input type="datetime-local" name="from" class="form-control " >
+               <label class="font-weight-bold mt-2 mr-2 ml-2">To</label>
              <input type="datetime-local" name="to" class="form-control " >
-             <button class="btn btn-color text-light ml-1" id="sale_count">filter</button>
+             <button class="btn btn-color text-light ml-1" id="sale_count">Filter</button>
              </form>
              
             

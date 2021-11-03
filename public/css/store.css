@@ -18,7 +18,9 @@
 	background-color: #C8EBFF;
 	position: relative;
 }
-
+.store-card{
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .store-banner img{
    width: 100%;
    height: 31rem;
@@ -35,6 +37,7 @@
     font-weight: 700;
     line-height: 10vh;
     font-style: italic;
+    color: #000;
 }
 .txt .dis
 {
@@ -43,13 +46,11 @@
 	font-family : Montserrat, Arial, sans-serif;
     font-size: 2vw; 
     font-weight: 700;
-    color: #ED3137;
+    color: #000000;
     font-style: italic;
 }
 .txt .btn-store{
 	background-color:#00A9A4;
-
-	height: 3rem;
 
 }
 .stor-text{
@@ -86,7 +87,17 @@
     position:relative;
     display:inline-block;
   }
-.pro:after
+  .pro2 
+ {
+    font-family : Montserrat, Arial, sans-serif;
+    font-size: 2vw; 
+    font-weight: 700;
+    color: #166387;
+    margin-left: 40%;
+    position:relative;
+    display:inline-block;
+  }
+.pro:after,.pro2:after
   {
     content:'';
     position:absolute;
@@ -104,6 +115,7 @@
   }
 @media screen and (max-width: 600px)
 {
+    
 .stor-text
  {
 	 font-family : Montserrat, Arial, sans-serif;
@@ -140,14 +152,14 @@
 .txt h4
   {
     font-family : Montserrat, Arial, sans-serif;
-    font-size: 8vw; 
+    font-size: 6vw; 
     font-weight: 700;
-    line-height: 4vh;
+    line-height: 3vh;
     font-style: italic;
   }
 .txt .dis
   {
-    margin-top: 30%;
+    
     margin-bottom: 0%;
     font-family : Montserrat, Arial, sans-serif;
     font-size: 4vw; 
@@ -165,7 +177,7 @@
 .txt .btn-store
   {
     background-color: #00A9A4;
-    height: 2rem;
+    
   }
 .n2
   {
@@ -180,9 +192,9 @@
 {
   background-color: #166387;    
 }
-.over-text , .over-text3{
+.over-text , .over-text3,.over-text4{
   position: absolute;
- padding: .1rem 1rem;
+ cursor: pointer;
   border-radius: 5%;
   text-align: center;
   bottom: 10%;
@@ -190,12 +202,18 @@
   color: #ffffff;
   border: none;
 }
-
+.over-text p , .over-text3 p, .over-text4 p{
+   padding: .0rem 1rem;
+   margin-top: 10rem;
+}
 .over-text, .over-text3 {
    left: 8%;
 }
 .over-text3 {
    left: 55%;
+}
+.over-text4 {
+   left: 40%;
 }
 .over-text2{
    position: absolute;

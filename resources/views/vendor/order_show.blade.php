@@ -26,23 +26,34 @@
  </div>
 </div>
 
+<div class="card">
+  <div class="card-body">
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+     <h1 class="h3 mb-0 font-weight-bold">Filter Orders </h1>
+      <form id="count_form" class="d-flex">
+      <label class="font-weight-bold mt-2 mr-2">From</label>
+      <input type="datetime-local" name="from" class="form-control " >
+      <label class="font-weight-bold mt-2 mr-2 ml-2">To</label>
+      <input type="datetime-local" name="to" class="form-control " >
+       <button class="btn btn-color text-light ml-1" id="sale_count">filter</button>
+      </form>
+   </div>
+  </div>
+</div>
+ 
  
 <div class="row mt-2">
-  <div class="col-md-3">
-    <div class="card">
-      <div class="card-header d-flex">
-        <p class=" text-light font-weight-bold"> Orders</p>
-        <select class="form-control w-50 ml-auto" id="order_count">
-          <option disabled selected hidden>Filter</option>
-          <option value="this">Order This Week</option>
-          <option value="mid">Order Last 15 Days</option>
-          <option value="month">Order This Month</option>
-        </select>
+  
+  <div class="col-md-3 ">
+    <div class="card card-border">
+      <p class="card-header  text-light font-weight-bold">Orders</p>
+     
+      <div class="card-body">
+        <h3 class="text-center font-weight-bold">{{$today}}
+         
+        </h3>
       </div>
-      <div class="card-body d-flex">
-        <h3 class="text-center font-weight-bold">{{$today}}</h3>
-    
-      </div>
+        
     </div>
   </div>
   <div class="col-md-3 ">
@@ -207,7 +218,7 @@
 </div>
 
 <form id="order_form">
-  <input type="text" name="counte" id="order_counte">
+  <input type="hidden" name="counte" id="order_counte">
 </form>
  @endsection
 

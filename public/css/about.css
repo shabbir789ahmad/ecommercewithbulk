@@ -17,6 +17,10 @@
 	object-fit: cover;
 }
 
+.btn-block{
+margin-top: 0 !important;
+}
+
 @media screen and(max-width: 678px)
 {
 .image2 .p2{
