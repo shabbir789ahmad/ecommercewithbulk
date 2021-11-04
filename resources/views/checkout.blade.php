@@ -3,15 +3,15 @@
 <title>Check Out</title>
 <div class="fy mb-5 "  style="background-color:#F5F5F5">
 <p class=" checkout text-dark pt-3"> Checkout</p>
-<div class="container mt-1 " >
-    <form action="{{url('chechout2')}}" method="POST" enctype="multipart/form-data">
+<div class="contr mt-1 ml-2 mr-2 " >
+  <form action="{{url('chechout2')}}" method="POST" enctype="multipart/form-data">
         @csrf
- <div class="row  rounded chechout-shadow">
- 	<div class="col-md-8 col-12 col-sm-12 bg-light mb-3" >
-         <div class="row">
-    <div class="col-md-6 ">
+ <div class="row  rounded ">
+ 	<div class="col-md-8 col-12 col-sm-12 bg-light mb-3 mb-md-0 chechout-shadow" >
+    <div class="row">
+     <div class="col-md-6 ">
       	 <div class="ml-0 mlsm-0 ml-md-2 mt-3 paymnt">
-                 <h3>User Detail </h3>
+           <h3>Shipping And Billing </h3>
       		<label><i class="fas fa-user mt-4"></i>Full Name</label>
           <input type="text" name="name" class="form-control" value="{{Auth::user()->name}}" required>
           <span class="text-danger">@error ('name') {{$message}} @enderror</span>
@@ -34,7 +34,8 @@
          
         <label class="mt-4"><i class="fas fa-globe"></i> Country</label>
          <select class="form-control" class="country" name="country" required>
-            <option selected hidden disabled >Choose Country</option>
+             <option selected hidden disabled >Choose Country
+             </option>
              <option>Pakistan</option>
              <option>Qatar</option>
              <option>UAE</option>
@@ -61,34 +62,28 @@
 
            
        </div>
-   </div>
-      	</div>
-        <button class=" btn btn-check   rounded py-3 text-light mb-1">Order Now</button>
-      </div>
- 	 <div class="col-md-4 col-12 col-sm-12 summary-bg mb-3">
-       
-       <div class=" mt-3   ">
-        <h3 class="mt-4 text-light">Orders </h3>
-       
-         
-                  
-        <div id="carouselslider" class="carousel slide " data-ride="carousel">
-    <div class="carousel-inner">
-       @php //dd(session('cart')) @endphp
-       @php $total = 0 @endphp
-        @if(session('cart'))
-            @foreach(session('cart') as $id => $details)
-             $details['vendor_id']
-                @php $total += $details['price'] * $details['quantity'] @endphp
-                @php  $sum[]=$details['ship'] @endphp
-               @php $sum2 = array_sum($sum) @endphp
-      <div class="carousel-item @if($loop->first) active @endif">
-        <div class="cart-img">
-        <img class="d-block w-100 rounded" height="320rem" src="{{asset('uploads/img/' .$details['image'])}}" alt="First slide">
-        <p class="overlayi ">{{ucwords($details['name'])}}</p>
+     </div>
+    </div>
         
     </div>
-      </div>
+
+ 	 <div class="col-md-4 col-12 col-sm-12  mb-3" >
+    <div class="">
+      <div class="chechout-shadow">
+         <p class=" checkout2 ml-3"> Cart<span class="float-right"><i class="fa fa-shopping-cart fa-lg mr-3 text-danger mt-2" ></i></span></p>
+      @php $total = 0 @endphp
+       @if(session('cart'))
+        @foreach(session('cart') as $id => $details)
+           @php $total += $details['price'] * $details['quantity'] @endphp
+           @php  $sum[]=$details['ship'] @endphp
+            @php $sum2 = array_sum($sum) @endphp
+      
+         
+          <p class="ml-3 text-danger"> {{$details['name']}}<span class="float-right mr-3 text-dark">Rs. {{$details['price']}}
+          </span></p>
+        
+         <hr>
+             
       
         <input type="hidden" name="product[]" value="{{$details['name']}}">
         <input type="hidden" name="pid[]" value="{{$details['pid']}}">
@@ -98,27 +93,25 @@
         <input type="hidden" name="drop_id[]" value="{{ $details['drop_id']}}">
         <input type="hidden" name="detail[]" value="{{ $details['detail']}}">
         <input type="hidden" name="color[]" value="{{ $details['color']}}">
-        <input type="text" name="vendor_id[]" value="{{ $details['vendor_id']}}">
+        <input type="hidden" name="vendor_id[]" value="{{ $details['vendor_id']}}">
         <input type="hidden" name="size[]" value="{{ $details['size']}}">
          @endforeach
         @endif
-    </div>
-    <a class="carousel-control-prev" href="#carouselslider" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselslider" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-                
-                 
         <input type="hidden" name="total" value="{{$sum2 + $total}}">
-       </div>
-      
-        <h3 class="  mt-5 py-3 px-2">Total <span class="float-right text-light">$: {{$sum2 + $total}}</span></h3>
        
+       <p class="ml-3 ">Order Summary<span class="float-right mr-3"></span></p>
+      <p class="ml-3 "> Subtotal<span class="float-right mr-3">Rs. {{$total}}</span></p>
+      <p class="ml-3 text-dark"> Shipping<span class="float-right mr-3">Rs. {{$sum2}}</span></p>
+      <div class="input-group form-header  mr-3">
+       <input type="text" name="search" class="form-control " placeholder="Enter Coupon Code"  aria-describedby="basic-addon2" >
+        <div class="input-group-append">
+         <button class="btn btn-dark coupon_btn text-light rounded" type="submit">Apply</button>
+        </div>
+      </div>
+      <p class="text-danger coupon_error" ></p>
+      <p class=" checkout2 mt-1 py-3 px-2">Total <span class="float-right ">RS. {{$sum2 + $total}}</span></p>
+      <button class=" btn btn-check btn-block mb-3  rounded py-3 text-light mb-1">Order Now</button>
+       </div> 
  	 </div>
       
   </div>

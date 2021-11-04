@@ -13,13 +13,13 @@ use App\Models\Size;
 use App\Models\Store;
 use App\Models\Stock;
 use App\Models\Stock2;
-
+use App\Http\Traits\ProductTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
 
- 
+ use ProductTrait;
  public function subCategory2($id) 
    {        
      $sub = DB::table("submenues")->where('menue_id',$id)
@@ -35,30 +35,13 @@ class ProductController extends Controller
   //function for product detail 
   function productDetail($id,$drop_id)
   {
-    $detail= Stock::
-      leftjoin('reviews','stocks.id','=','reviews.review_id')
-      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id')
-     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id')->orderBy('rating','DESC')
-        ->where('drop_id',$drop_id)
-        ->findorfail($id);
-     
-   $stock2=Stock2::where('stock_id',$id)->where('stock_status','1')->first();
-    $image=Image::where('image_id',$id)->get();
+    $detail=$this->detail($id,$drop_id);
+    $detail2=$this->detail2($id,$drop_id);
     
-    $detail2= Stock::
-     leftjoin('reviews','stocks.id','=','reviews.review_id')
-     ->select('review_id', \DB::raw('avg(rating) as rating')
-        ,'stocks.id','stocks.product','stocks.created_at','stocks.drop_id')
-        ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.drop_id')->orderBy('rating','DESC')
-         ->where('stocks.drop_id',$drop_id)
-        ->where('stocks.id',$id)->get();
-        foreach($detail2 as $dt)
-        {
-          $dt->image=Image::where('image_id',$dt->id)->take(1)->get();
-         $dt->stock2=Stock2::where('stock_id',$dt->id)
-           ->where('stock_status','1')->take(1)->get();
-        }
-
+    
+     
+      $stock2=Stock2::where('stock_id',$id)->where('stock_status','1')->first();
+      $image=Image::where('image_id',$id)->get();
         $color= Stock::
         join('colors','stocks.id','=','colors.filter_id')
         ->where('filter_id',$id)

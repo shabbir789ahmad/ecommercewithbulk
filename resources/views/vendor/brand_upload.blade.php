@@ -26,7 +26,7 @@
    </div>
  </div>
 </a>
-<a href="{{url('vendor.get-brand')}}">
+<a href="{{url('vendor/get-brand')}}">
  <div class="card shadow  p-0 mr-3 ">
     <div class="card-body text-dark">
    <i class="fas fa-trash-alt text-danger fa-lg"></i> Delete
@@ -44,10 +44,6 @@
       <form action="{{url('vendor/upload-brand')}}" method="POST" enctype="multipart/form-data">
         @csrf
     
-   
-<span class="text-danger mt-3">@error('menue_id') {{$message}} @enderror</span>
-
-<br>
 
 <label class="mt-3">Brand Name</label>  
 <div class="form-group">
@@ -61,7 +57,7 @@
   </div>                      
  </div>
 </div>
-<span class="text-danger">@error('bname') {{$bname}} @enderror</span>
+<span class="text-danger">@error('bname') {{$message}} @enderror</span>
 
 <button  class="btn btn-block btn-color text-light mt-5">Submit</button>
   </form>

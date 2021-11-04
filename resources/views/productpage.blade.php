@@ -291,14 +291,14 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Product Detail</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <h3 class="name"></h3>
-        <p class="detalis"></p>
+        <h3 class="name" style="text-transform: uppercase;"></h3>
+        <p class="detalis" style="word-wrap: break-word;"></p>
       </div>
     </div>
   </div>

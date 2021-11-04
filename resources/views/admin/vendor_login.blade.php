@@ -3,6 +3,11 @@
 @section('content')
 <div class="container login mt-5 border p-5 shadow mb-4">
       <h2 class="text-center font-weight-bold text-danger">Vendor Login </h2>
+       @if ($alert = Session::get('message'))
+    <div class="alert alert-warning">
+        {{ $alert }}
+    </div>
+@endif
     <form method="POST" action="" class="mt-4">
       @csrf
    <input id="email" type="email" class="form-control py-3 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">

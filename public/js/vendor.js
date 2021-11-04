@@ -81,4 +81,22 @@ $(document).ready(function(){
     $('.form1').css('display','none')
     $('.form2').css('display','block')
   });
+ 
+  $('.coupon').click(function(e){
+    e.preventDefault();
+    $('#modal-coupon').modal('show')
+    let id=$(this).data('id')
+    $('#id').val(id)
+    let val=$(this).data('value')
+    $('#valu').val(val)
+    let min=$(this).data('min')
+    $('#min_amnt').val(min)
+    let exp=$(this).data('exp')
+    $('#exp_dat').html(exp)
+  });
+
+ $('#check').change(function(){
+     $('.check').not(this).prop('checked', this.checked);
+    
+ });
 });

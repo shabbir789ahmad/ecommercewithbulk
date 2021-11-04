@@ -34,6 +34,10 @@
   font-size: 2vw;
   font-weight: 600;
 }
+.checkout2{
+  font-size: 2vw;
+  font-weight: 600;
+}
 .summary-bg{
   background-color: #55C0A9;
 }
@@ -69,6 +73,10 @@
 @media screen and (max-width: 766px)
 {
   .paymnt h3{
+  font-size: 4vw;
+  font-weight: 600;
+}
+.checkout2{
   font-size: 4vw;
   font-weight: 600;
 }

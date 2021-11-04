@@ -18,9 +18,12 @@ use App\Http\Traits\StoreTrait;
 class SliderController extends Controller
 {
     use StoreTrait;
+
+  
   function  women()
   {
-  
+   
+    
     $slider=Slider::latest()->take('3')->get();
     $front=Mainpage::latest()->take('1')->get();
     $dropdown=$this->dropdown();
@@ -62,7 +65,7 @@ class SliderController extends Controller
        {
         $pro->image=Image::where('Image_id',$pro->id)->get();
        }
-   //dd($product2);
+   //dd($product);
       return view('home',compact('slider','product','product2','front','dropdown','time'));
   }
 

@@ -68,14 +68,14 @@
        
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
 
-      @if($pro['discount'])
-        <a >  <p class="overlay2 ">{{ceil( ($pro['discount']/$pro['new_price'])*100)
+      @if($pro['discounts'])
+        <a >  <p class="overlay2 ">{{ceil( ($pro['discounts']/$pro['new_price'])*100)
        }}% </p></a>
        @else
        @endif
      </div>
      <div class="card-body">
-       <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['new_price'] - $pro['discount']}}<del class="text-secondary">
+       <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['new_price'] - $pro['discounts']}}<del class="text-secondary">
        <small class="text-danger">${{$pro['new_price']}}</small></del>  </span>
       </p>
        <div class="text-center">
@@ -110,7 +110,7 @@
 <div class="container-fluid ">
  <div class="owl-carousel owl-theme ml-2">
   @foreach($product as $pro)
-  @if( $pro['sponser_status']=='1' && $pro['sponser_end'] > $time)
+  @if( $pro['sponser_status']=='1' && $pro['sponser_end'] > $time && !$pro['sponser'])
    <div class="item">
     <div class="card ">
      <div class="a">

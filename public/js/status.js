@@ -174,5 +174,62 @@ $('.js-switch4').change(function () {
 
  });
 
+ $('.js-switchcp').change(function(e){
+  
+   e.preventDefault();
+   let status=$(this).prop('checked')===true? 1:0;
+   let id=$(this).data('id');
+
+   $.ajax({
+     
+      url : "/vendor/coupon-status",
+      dataType : "json",
+      type : 'GET',
+      data : {'coupon_status':status,'id':id},
+      success:function(data)
+      {
+
+      }
+ 
+   });
+
+ });
+ $('#cop').click(function(e){
+    e.preventDefault();
+    let ids=[];
+
+    $('.check:checked').each(function()
+     {
+      ids.push($(this).val())
+     });
+  
+    if(ids.length<=0)
+    {
+        alert ('Please select row...')
+    }else{
+        let check=confirm('Are sure you want to delete These')
+        if(check==true)
+        {
+          $.ajax({
+     
+                 url : "/vendor/coupon-deletea",
+                 dataType : "json",
+                 type : 'GET',
+                 data : {'id':ids},
+                 success: function (response) 
+                 {
+                    if(data['success'])
+                    {
+                      window.location.reload(); 
+                     }
+                  }
+               });
+         }
+       }
+  
+    });
+
+ 
+
 });
 

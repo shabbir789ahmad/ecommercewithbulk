@@ -23,6 +23,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\VendorSaleController;
+use App\Http\Controllers\CouponController;
 
 
 Route::get('/', function () {
@@ -196,6 +197,17 @@ Route::get('all-sale',[VendorSaleController::class,'getSale'])->name('all-sale')
 Route::get('sale-delete/{id}',[VendorSaleController::class,'deleteSale'])->name('vendor/sale-delete/{id}');
 Route::get('sale-status',[VendorSaleController::class,'statusSale'])->name('vendor/sale-status');
 Route::post('update-vendor-sale',[VendorSaleController::class,'updateSale'])->name('vendor/update-vendor-sale');
+
+
+//route for coupon 
+Route::get('new-coupon',[CouponController::class,'index'])->name('vendor/new-coupon');
+Route::post('coupon',[CouponController::class,'create'])->name('vendor/coupon');
+Route::get('show-coupons',[CouponController::class,'show'])->name('vendor/show-coupons');
+Route::get('delete-coupon/{id}',[CouponController::class,'destroy'])->name('vendor/delete-coupon/{id}');
+Route::get('coupon-update',[CouponController::class,'update'])->name('vendor/coupon-update');
+Route::get('coupon-status',[CouponController::class,'status'])->name('vendor/coupon-status');
+Route::get('coupon-deletea',[CouponController::class,'delete'])->name('vendor/coupon-deletea');
+
   });
 });
 

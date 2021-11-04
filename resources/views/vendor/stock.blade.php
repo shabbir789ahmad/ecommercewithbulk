@@ -120,7 +120,8 @@
  <span class="text-danger">@error('detail') {{$message}} @enderror</span>
 <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">   
-     <input type="text" name="detail" placeholder="Product Detail" class="form-control "  value="{{old('detail')}}" required=""><br>
+     <textarea name="detail" placeholder="Product Detail" class="form-control " value="{{old('detail')}}" required ></textarea>
+         
               
     <div class="input-group-append">
    <span class="input-group-text"><i class="fas fa-tag"></i></span>

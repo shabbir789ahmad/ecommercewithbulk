@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 use Carbon\Carbon;
 use App\Models\Stock;
+use App\Models\Stock2;
 use App\Models\Image;
 
 
@@ -141,6 +142,34 @@ function storeProduct2($id)
      }
 
 
+  function detail($id,$drop_id)
+  {
+    $detail= Stock::
+      leftjoin('reviews','stocks.id','=','reviews.review_id')
+      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id')
+     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id')->orderBy('rating','DESC')
+        ->where('drop_id',$drop_id)
+        ->findorfail($id);
+     
+     return $detail;
+   }
+   function detail2($id,$drop_id)
+   {
+    $detail2= Stock::
+     leftjoin('reviews','stocks.id','=','reviews.review_id')
+     ->select('review_id', \DB::raw('avg(rating) as rating')
+        ,'stocks.id','stocks.product','stocks.created_at','stocks.drop_id')
+        ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.drop_id')->orderBy('rating','DESC')
+         ->where('stocks.drop_id',$drop_id)
+        ->get();
+        foreach($detail2 as $dt)
+        {
+          $dt->image=Image::where('image_id',$dt->id)->take(1)->get();
+         $dt->stock2=Stock2::where('stock_id',$dt->id)
+           ->where('stock_status','1')->take(1)->get();
+        }
+        return $detail2;
+   }
 
  }
 ?>

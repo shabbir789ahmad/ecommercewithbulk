@@ -38,4 +38,9 @@ $('#signinform').click(function(e){
    $('.login_form').css('display','none')
    $('.signin_form').css('display','block')
   });
+
+$('.coupon_btn').click(function(e){
+  $('.coupon_error').html('Sorry, this voucher is not valid. Please check for any typing errors.')
+
+ });
 });
