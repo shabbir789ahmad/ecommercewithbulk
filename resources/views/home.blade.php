@@ -161,6 +161,7 @@
     <h2 class="font-weight-bold ml-3 keephome ">{{ucwords($f['c1'])}}</h2>
    @endif
    @endforeach
+
   </div>
 
 
@@ -168,7 +169,8 @@
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
 
-  @foreach($product as $pro)
+  @foreach($product->chunk(2) as $pro2)
+  @foreach($pro2 as $pro)
    @if( !$pro['sponser'])
   <div class="item">
     <div class="card ">
@@ -206,6 +208,7 @@
     </div>
   </div>
   @endif
+  @endforeach 
   @endforeach 
 </div>
 </div>

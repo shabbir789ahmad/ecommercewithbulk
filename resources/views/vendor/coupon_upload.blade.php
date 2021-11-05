@@ -55,7 +55,7 @@
         </div>
        </div>
        <span class="text-danger d-block" >@error('code') {{$message}} @enderror</span>
-       <label class="font-weight-bold" >Coupon Value </label>  
+       <label class="font-weight-bold" >Coupon Discount Price Or % </label>  
        <div class="form-group" >
         <div class="input-group clockpicker" id="clockPicker1">
          <input type="text" name="value" placeholder="200,100 150 etc" class="form-control" value="{{old('value')}}" required>
@@ -67,12 +67,12 @@
         </div>
        </div>
        <span class="text-danger d-block">@error('value') {{$message}} @enderror</span>
-       <label class="font-weight-bold">Coupon type </label>  
+       <label class="font-weight-bold">Coupon Discount type </label>  
        <div class="form-group">
         <div class="input-group clockpicker" id="clockPicker1">
          <select class="form-control" name="type" required="">
            <option disabled selected hidden>Select Type Of coupon</option>
-           <option value="%">percentage</option>
+           <option value="%">Percentage %</option>
            <option value="fixed">Fixed Amount</option>
          </select>
           <div class="input-group-append">
@@ -110,6 +110,18 @@
          </div>
         </div>
         <span class="text-danger">@error('exp_date') {{$message}} @enderror</span>
+        <label class="font-weight-bold">Coupon Usage Limit </label> <br> 
+        <div class="form-group">
+         <div class="input-group clockpicker" id="clockPicker1">
+          <input type="number" name="limit" placeholder="Coupon type" class="form-control" value="{{old('limit')}}" required="">
+           <div class="input-group-append">
+            <span class="input-group-text">
+             <i class="fab fa-product-hunt"></i>
+            </span>
+           </div>                      
+         </div>
+        </div>
+        <span class="text-danger">@error('limit') {{$message}} @enderror</span>
       </div>
     </div>
    <button  class="btn btn-block btn-color text-light mt-5">Submit</button>

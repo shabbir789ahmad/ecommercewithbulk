@@ -104,9 +104,13 @@ $sub=Category::category();
 
 <button class="btn-store ml-1" id="new" value="new">New Product</button>
 <button class="btn-store ml-1" id="top-rated" value="top">Top Rated</button>
-<button class="btn-store ml-1">Button</button>
+@foreach($products as $pro)
+@if($loop->first)
+<button class="btn-store ml-1 follow" data-id="{{Auth::user()->id}}" data-name="{{Auth::user()->name}}" data-image="{{Auth::user()->image}}" data-follow="{{$pro['user_id']}}">Follow</button>
+@endif
+@endforeach
 </div>
-
+<p id="numberOfLikes"></p>
 <div class="container-fluid mt-2 ml-2 mb-5" >
  <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
   <li class="nav-item mr-2 ml-2" id="bg">
@@ -124,7 +128,7 @@ $sub=Category::category();
    <div class="container-fluid mt-4">
     <div class="owl-carousel owl-theme ml-2">
     @foreach($products as $pro)
-  
+
     @if(!$pro['vendor_on_sale'])
      <div class="item">
       <div class="card store-card shadow">

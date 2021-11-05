@@ -39,14 +39,14 @@ class SliderController extends Controller
      ->whereNull('vendors.deleted_at')
      ->where('product_status','1')->get()
      ->shuffle();
-
+ //dd($product);
      foreach($product as $pro) 
      {
        $pro->image=Image::where('Image_id',$pro->id)->take('1')->get();
      }
    
     
-  //dd($product);
+ 
         
     $product2= Vendor::
       join('stocks','vendors.id','=','stocks.user_id')

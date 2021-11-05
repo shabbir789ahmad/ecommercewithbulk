@@ -93,6 +93,8 @@ $(document).ready(function(){
     $('#min_amnt').val(min)
     let exp=$(this).data('exp')
     $('#exp_dat').html(exp)
+    let limit=$(this).data('limit')
+    $('#limt').val(limit)
   });
 
  $('#check').change(function(){

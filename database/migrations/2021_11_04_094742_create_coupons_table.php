@@ -21,6 +21,9 @@ class CreateCouponsTable extends Migration
             $table->string('min_order_amnt');
             $table->string('coupon_status');
             $table->datetime('exp_date');
+            $table->string('limit');
+            $table->bigInteger('vendor_id')->unsigned();
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
    
      public function boot()
     {
+        
         Paginator::useBootstrap();
         View::composer('*', function($view)
         {

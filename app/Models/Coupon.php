@@ -15,6 +15,8 @@ class Coupon extends Model
      'value',
      'min_order_amnt',
      'coupon_status',
+     'limit',
+     'vendor_id',
      'exp_date',
     ];
 }

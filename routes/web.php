@@ -24,6 +24,7 @@ use App\Http\Controllers\SellController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\VendorSaleController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\FollowController;
 
 
 Route::get('/', function () {
@@ -67,6 +68,9 @@ Route::view('bcd','bcd');
 
 Route::view('checkout','checkout');
  Route::post('review',[ReviewController::class,'review']);
+ Route::post('check-coupon',[CouponController::class,'checkCoupon']);
+ Route::post('follow-this',[FollowController::class,'create']);
+ Route::get('unfollow',[FollowController::class,'unfollow']);
 
 
 

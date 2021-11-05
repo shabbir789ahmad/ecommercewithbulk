@@ -44,6 +44,7 @@
         <th >Type</th>
         <th class="col-2">Min Amount</th>
         <th >Expiry Date</th>
+        <th >Limit</th>
         <th class="col-1">Status</th>
         <th class="text-center">Actions</th>
         </tr>
@@ -58,12 +59,13 @@
     <td class="a">{{$show['type']}}</td>
     <td class="a">{{$show['min_order_amnt']}}</td>
     <td class="col-2"><span class="badge badge-success">{{$show['exp_date']}}</span></td>
+    <td class="col-2"><span class="badge badge-primary">{{$show['limit']}}</span></td>
     <td class="a " ><input type="checkbox" data-id="{{ $show['id'] }}" name="coupon_status" class="js-switchcp" 
      {{ $show->coupon_status == 1 ? 'checked' : '' }} ></td>
     
     <td>
      <div class="b d-flex justify-content-center mt-1">
-       <a href="javascript:void(0)" class="border shadow  py-2 px-3 coupon" data-id="{{$show['id']}}" data-value="{{$show['value']}}" data-min="{{$show['min_order_amnt']}}" data-exp="{{$show['exp_date']}}"><i class="fas fa-eye text-success"></i>
+       <a href="javascript:void(0)" class="border shadow  py-2 px-3 coupon" data-id="{{$show['id']}}" data-value="{{$show['value']}}" data-min="{{$show['min_order_amnt']}}" data-exp="{{$show['exp_date']}}" data-limit="{{$show['limit']}}"><i class="fas fa-eye text-success"></i>
        </a>
        <a href="{{'delete-coupon/'.$show['id']}}" class="border ml-3 py-2 px-3" onclick="return confirm('Are you sure?')">  
          <i class="fas fa-trash-alt text-danger"></i>
@@ -97,11 +99,13 @@
       <div class="modal-body">
         <form action="{{url('vendor/coupon-update')}}" method="GET">
       <input type="hidden" name="id" id="id">      
-      <label>New Coupon Price</label>
+      <label class="font-weight-bold">New Coupon Price</label>
       <input type="text" class="form-control" name="value" id="valu">
-      <label>New Minimum Order Price</label>
+      <label class="font-weight-bold">New Minimum Order Price</label>
       <input type="text" class="form-control" name="min_order_amnt" id="min_amnt"> 
-      <label>New Coupon Expiry Date</label>     
+      <label class="font-weight-bold">Coupon Usage Limit</label>
+      <input type="text" class="form-control" name="limit" id="limt">
+      <label class="font-weight-bold">New Coupon Expiry Date</label>     
       <input type="datetime-local" class="form-control" name="exp_date" required>
       <p id="exp_dat" class="text-danger"></p>
       <button class="btn btn-color text-light  float-right mt-4">Update</button>

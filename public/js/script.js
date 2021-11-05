@@ -39,8 +39,39 @@ $('#signinform').click(function(e){
    $('.signin_form').css('display','block')
   });
 
-$('.coupon_btn').click(function(e){
-  $('.coupon_error').html('Sorry, this voucher is not valid. Please check for any typing errors.')
+$('.follow').click(function(e){
+    e.preventDefault()
+   let id=$(this).data('id');
+   let name=$(this).data('name');
+   let image=$(this).data('image');
+   let follow=$(this).data('follow');
+   var token =  $('input[name="csrfToken"]').attr('value'); 
+      $.ajax({
+         
+         url : "/follow-this",
+         type : 'POST',
+         dataType : 'json',
+         data: {
+            'user_id':id,
+            'name':name,
+            'image':image,
+            'follow':follow,
+            "_token": $('#csrf-token')[0].content  
+         },
+        success:function(data)
+         {
+            window.location.reload()
+         }
+      });
+   });
 
- });
+  $(function(){
+    $.ajax({
+    url: "/unfollow",
+      }).done(function(response) {
+    var likes = response.likes;
+    $('#numberOfLikes').html(response.likes);
+});
+
+  });
 });

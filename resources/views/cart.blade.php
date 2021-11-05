@@ -43,7 +43,7 @@
 
 </div>
 <div class="col-md-1 d-sm-none d-none d-md-block">
-<p class="text-left text-md-center mt-3   ">${{ $details['price'] }}</p>
+<p class="text-left text-md-center mt-3   ">Rs. {{ $details['price'] }}</p>
 </div>
 <div class="col-md-2 col-sm-6 col-6 tr" data-th="" data-id="{{ $id }}">
   <td data-th="Quantity">
@@ -51,7 +51,7 @@
                     </td>
 </div>
 <div class="col-md-2 col-sm-6 col-6 ">
-<p class="text-left text-md-center mt-3  ">${{ (int)$details['price'] * $details['quantity'] }}</p>
+<p class="text-left text-md-center mt-3  ">Rs. {{ (int)$details['price'] * $details['quantity'] }}</p>
 </div>
 
 <div class="col-md-2 col-sm-2 col-2 text-center actions " data-th="" data-id="{{ $id }}">
@@ -82,17 +82,39 @@
     </div>
     <div class="col-md-4 ">
         <div class="mt-5 g border p-5">
-       <p class=" mt-2 ">SubTotal:<span class="float-right"> ${{ $total }}</span></p>
+       <p class=" mt-2 ">SubTotal:<span class="float-right"> Rs. {{ $total }}</span></p>
        @if(session('cart'))
        @foreach(session('cart') as $id => $details)
                @php  $sum[]=$details['ship'] @endphp
                @php $sum2 = array_sum($sum) @endphp
        <p class=" mt-2 ">Shipping:<span class="float-right"> 
-        ${{ $sum2 }} </span></p>
+        Rs. {{ $sum2 }} </span></p>
+        @if(session('coupon'))
+          <p class=" mt-2 ">Coupon:<span class="float-right"> 
+          Rs. {{session('coupon')['value']}} </span></p>
+        @endif
      <hr>
+     @if(!session()->get('coupon'))
+     <form action="{{url('check-coupon')}}" method="POST">
+      @csrf
+       <div class="input-group form-header ">
+       <input type="text" name="coupon" class="form-control " placeholder="Enter Coupon Code" id="cpn"  aria-describedby="basic-addon2" autocomplete="off">
+        <div class="input-group-append">
+         <button class="btn btn-primary text-light rounded" type="submit">Apply</button>
+        </div>
+      </div>
+     </form>
+     @endif
+     @if ($alert = Session::get('error'))
+    <div class="alert alert-danger py-2">
+        {{ $alert }}
+    </div>
+     @endif
+     @if(session('coupon'))
          <p class=" mt-2 ">Total:<span class="float-right">
-        {{ $sum2 + $total }} 
+        Rs. {{ $sum2 + $total - session('coupon')['value']}} 
           </span></p>
+          @endif
           @endforeach
           @endif
           @if(Auth::user())

@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\User;
-
+use session;
 class CartController extends Controller
 {
 
-      public function cart()
+    public function cart()
     {
-        return view('cart');
+      return view('cart');
     }
-   public function getwishlist()
+    public function getwishlist()
     {
         return view('wishlist');
     }
@@ -22,6 +22,7 @@ class CartController extends Controller
 
     public function addToCart($id,Request $req)
     {
+      
          $color="";
         if($req->get('cartcolor'))
         {
@@ -57,7 +58,7 @@ class CartController extends Controller
         }
           
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('successs', 'Product added to cart successfully!');
     }
   
    
@@ -67,7 +68,7 @@ class CartController extends Controller
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            session()->flash('success', 'Cart updated successfully');
+            session()->flash('successs', 'Cart updated successfully');
         }
     }
   
@@ -80,7 +81,7 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Product removed successfully');
+            session()->flash('successs', 'Product removed successfully');
         }
     }
 

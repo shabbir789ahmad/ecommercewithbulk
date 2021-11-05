@@ -79,7 +79,7 @@
             @php $sum2 = array_sum($sum) @endphp
       
          
-          <p class="ml-3 text-danger"> {{$details['name']}}<span class="float-right mr-3 text-dark">Rs. {{$details['price']}}
+          <p class="ml-3 text-danger"><img src="{{asset('uploads/img/'.$details['image'])}}" width="10%" class="border"><span class="ml-2">{{$details['name']}}</span><span class="float-right mr-3 text-dark">Rs. {{$details['price']}}
           </span></p>
         
          <hr>
@@ -97,19 +97,20 @@
         <input type="hidden" name="size[]" value="{{ $details['size']}}">
          @endforeach
         @endif
-        <input type="hidden" name="total" value="{{$sum2 + $total}}">
-       
+        @if(session('coupon'))
+        <input type="hidden" name="total" value="{{$sum2 + $total - session('coupon')['value']}}">
+       @endif
        <p class="ml-3 ">Order Summary<span class="float-right mr-3"></span></p>
       <p class="ml-3 "> Subtotal<span class="float-right mr-3">Rs. {{$total}}</span></p>
       <p class="ml-3 text-dark"> Shipping<span class="float-right mr-3">Rs. {{$sum2}}</span></p>
-      <div class="input-group form-header  mr-3">
-       <input type="text" name="search" class="form-control " placeholder="Enter Coupon Code"  aria-describedby="basic-addon2" >
-        <div class="input-group-append">
-         <button class="btn btn-dark coupon_btn text-light rounded" type="submit">Apply</button>
-        </div>
-      </div>
-      <p class="text-danger coupon_error" ></p>
-      <p class=" checkout2 mt-1 py-3 px-2">Total <span class="float-right ">RS. {{$sum2 + $total}}</span></p>
+      @if(session('coupon'))
+        <p class=" mt-2 ml-3">Coupon:<span class="float-right mr-3"> 
+          Rs. {{session('coupon')['value']}} </span></p>
+        @endif
+      
+      @if(session('coupon'))
+      <p class=" checkout2 mt-1 py-3 px-2">Total <span class="float-right ">RS. {{$sum2 + $total - session('coupon')['value']}}</span></p>
+      @endif
       <button class=" btn btn-check btn-block mb-3  rounded py-3 text-light mb-1">Order Now</button>
        </div> 
  	 </div>
