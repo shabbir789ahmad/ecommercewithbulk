@@ -7,20 +7,22 @@ use App\Models\Follow;
 class FollowController extends Controller
 {
     
-    public function create(Request $req)
+    public function follow(Request $req)
     {
-        $follow=Follow::where('user_id',$req->id)->get();
-        if(!$follow)
+        $foll=Follow::where('user_id',$req->id)->get();
+dd($req->id);
+        if($foll==NUll || $foll=='')
         {
-          $follow=Follow::create([
+             Follow::create([
                'name' => $req->name,
                'image' => $req->image,
                'user_id' => $req->user_id,
-               'follow' => $req->follow,
-          ]);
+               'follow_id' => $req->follow_id,
+               'follow' => '1',
+            ]);
         }else
         {
-            echo "ffdfdff";
+            echo "cannot follow";
         }
         
     }
@@ -30,7 +32,7 @@ class FollowController extends Controller
     {
         $follow=Follow::all();
 
-        return ;
+        return;
     }
 
     /**

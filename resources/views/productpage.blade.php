@@ -5,7 +5,7 @@
 
 <div class="container-fluid" style="overflow:hidden">
  <div class="row">
-  <div class="col-md-6 col-12 col-sm-12 d-flex d-sm-flex d-md-block img-overfow mt-3 mb-2" >
+  <div class="col-md-7 col-12  d-none  d-md-block img-overfow mt-3 mb-2" >
     <div class="row">
        <div class="col-md-8 order-md-4">
         <div class="cont" id="mimage">
@@ -27,9 +27,30 @@
       </div>
     </div>
   </div>
-    
+    <div class="col-12 col-md-7 d-block d-md-none " >
+     <div id="carouselslider" class="carousel slide " data-ride="carousel">
+    <div class="carousel-inner">
+      @foreach($image as $img)
+      <div class="carousel-item  @if($loop->first) active @endif caro" >
+        <div class="slider">
+        <img class="d-block w-100" src="{{asset('uploads/img/'.$img['rimage'])}}" alt="Firstlide" style="">
+       
+         </div>
+      </div>
+      @endforeach
+    </div>
+    <a class="carousel-control-prev bg-dark slider-pad" href="#carouselslider" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next bg-dark slider-pad" href="#carouselslider" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+    </div>
 
-<div class="col-md-6 mt-2 mr-0 col-sm-12 ">
+<div class="col-md-5 mt-2 mr-0 col-sm-12 ">
  <div class="row">
   <div class="col-md-12 col-6">
   
@@ -53,9 +74,9 @@
     <hr class="mt-3">
     <div class="col-md-12 col-6 ">
       
-       <h5 class=" names ml-2  ml-md-0">${{$stock2['sell_price']- $stock2['discount']}}
+       <h5 class=" names ml-2  ml-md-0">${{$detail['sell_price']- $detail['discount']}}
     <span>
-      <small class="text-danger"> <del>${{$stock2['sell_price']}}</del>
+      <small class="text-danger"> <del>${{$detail['sell_price']}}</del>
        </small>
     </span>
     <span class="float-right  mr-4 mr-5 mr-md-0 mt-3 mt-md-0"><a href="{{url('store/'.$detail['user_id'])}}"><button class="btn-sm btn btn-store rounded btn-check text-light">Visit Store</button></a></span>

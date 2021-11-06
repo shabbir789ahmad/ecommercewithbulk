@@ -44,7 +44,7 @@ $('.follow').click(function(e){
    let id=$(this).data('id');
    let name=$(this).data('name');
    let image=$(this).data('image');
-   let follow=$(this).data('follow');
+   let follow_id=$(this).data('follow');
    var token =  $('input[name="csrfToken"]').attr('value'); 
       $.ajax({
          
@@ -55,23 +55,43 @@ $('.follow').click(function(e){
             'user_id':id,
             'name':name,
             'image':image,
-            'follow':follow,
+            'follow_id':follow_id,
             "_token": $('#csrf-token')[0].content  
          },
         success:function(data)
          {
+           
             window.location.reload()
          }
       });
    });
 
-  $(function(){
-    $.ajax({
-    url: "/unfollow",
-      }).done(function(response) {
-    var likes = response.likes;
-    $('#numberOfLikes').html(response.likes);
-});
 
-  });
+  $('.get-coupon').click(function(e){
+    e.preventDefault()
+   let id=$(this).data('id');
+   let code=$(this).data('code');
+   let vendor=$(this).data('vendor');
+
+   var token =  $('input[name="csrfToken"]').attr('value'); 
+      $.ajax({
+         
+         url : "/save-token",
+         type : 'POST',
+         dataType : 'json',
+         data: {
+            'id':id,
+            'code':code,
+            'vendor_id':vendor,
+            
+            "_token": $('#csrf-token')[0].content  
+         },
+        success:function()
+         {
+           
+             
+         }
+      });
+   });
+
 });

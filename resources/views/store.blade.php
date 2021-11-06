@@ -19,14 +19,45 @@ $sub=Category::category();
 </div>
 @endforeach
 
+<div class="container coupon-show mt-5 bg-dark">
+ <div class="row">
+  @if(Auth::user())
+  @foreach($coupon as $coup)
+  <div class="col-md-4 col-12">
+    <div class="coupon">
+       <img src="{{asset('pic/TB1qraZvXP7gK0jSZFjXXc5aXXa-345-188.png')}}" width="100%" class="mt-3 mb-3">
+       @if($coup['type']=='fixed')
+         <p class="cpn-p1">Rs. {{$coup['value']}} OFF</p>
+       @else
+       <p class="cpn-p1">{{$coup['value']}}% OFF</p>
+       @endif
+       @if($coup['min_order_amnt'])
+         <p class="cpn-p2">Min {{$coup['min_order_amnt']}} Spend</p>
+       @else
+       <p class="cpn-p2">NO min Spend</p>
+       @endif
+       @foreach($savec as $c)
+       @if($c['coupon_id']==$coup['id'] && $c['user_id']==Auth::user()->id)
+        <button class="btn  btn-sm btn-dark spn-btn2" disabled>Collected</button>
+       @else
+       <button class="btn  btn-sm spn-btn get-coupon" data-id="{{$coup['id']}}" data-code="{{$coup['code']}}" data-vendor="{{$coup['vendor_id']}}">Collect</button>
+       @endif
+       @endforeach
+    </div>
+  </div>
+ @endforeach
+ @else
+ <p class="text-light mt-3 ml-3">Login to view Coupon</p>
+ @endif
+ </div>
+</div>
+
+
 <h4 class=" pro mt-5">All Products</h4>
-
-
-
  @if($vendorsale)
    @foreach($vendorsale as $sal)
     @if($sal['sale_end']>=$date)
-     <div class="card-heade border mt-5 d-inline-block rounded-top  py-3 w-100">
+     <div class="card-heade border mt-5 d-inline-block rounded-top  py-3 w-100" style="overflow:hidden">
       <div class="row">
         <div class="col-md-6">
          <div class="sale">
@@ -105,14 +136,16 @@ $sub=Category::category();
 <button class="btn-store ml-1" id="new" value="new">New Product</button>
 <button class="btn-store ml-1" id="top-rated" value="top">Top Rated</button>
 @foreach($products as $pro)
-@if($loop->first)
+@if($loop->first )
+@if(Auth::user())
 <button class="btn-store ml-1 follow" data-id="{{Auth::user()->id}}" data-name="{{Auth::user()->name}}" data-image="{{Auth::user()->image}}" data-follow="{{$pro['user_id']}}">Follow</button>
+@endif
 @endif
 @endforeach
 </div>
-<p id="numberOfLikes"></p>
-<div class="container-fluid mt-2 ml-2 mb-5" >
- <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+
+<div class="conta mt-2 ml-2 mb-5" style="overflow:hidden;" >
+ <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist" style="overflow:hidden;">
   <li class="nav-item mr-2 ml-2" id="bg">
     <a class="nav-link  active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Without Sale</a>
   </li>

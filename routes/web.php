@@ -32,6 +32,8 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::view('affiliate','affiliate');
+//all store with voucher
+Route::get('/voucher',[CouponController::class,'AllStore']);
 
 Route::get('/',[SliderController::class,'women']);
 Route::get('search',[SliderController::class,'search']);
@@ -69,8 +71,9 @@ Route::view('bcd','bcd');
 Route::view('checkout','checkout');
  Route::post('review',[ReviewController::class,'review']);
  Route::post('check-coupon',[CouponController::class,'checkCoupon']);
- Route::post('follow-this',[FollowController::class,'create']);
- Route::get('unfollow',[FollowController::class,'unfollow']);
+ Route::post('save-token',[CouponController::class,'saveCoupon']);
+ Route::post('follow-this',[FollowController::class,'follow']);
+
 
 
 

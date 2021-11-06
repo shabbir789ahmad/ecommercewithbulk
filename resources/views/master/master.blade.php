@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.css" integrity="sha512-40vN6DdyQoxRJCw0klEUwZfTTlcwkOLKpP8K8125hy9iF4fi8gPpWZp60qKC6MYAFaond8yQds7cTMVU8eMbgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 <link rel="stylesheet" type="text/css" href=" {{asset('css/home.css')}}	">
 <link rel="icon" href="{!! asset('pic/logo2.png') !!} " >
@@ -48,10 +48,8 @@
 <title></title>
 
 </head>
-<body onload="loded()">
- <div id="loading">
-       
-    </div>
+<body>
+
 	{{View::make('master.header')}}
   @yield('content')
 
@@ -161,12 +159,7 @@
       });
     </script>
    
- <script type="text/javascript">
-     function loded()
-     {
-  document.getElementById('loading').style.display="none";
-     }
- </script>  
+ 
 
 <script type="text/javascript">
     $("#click").click(function() {

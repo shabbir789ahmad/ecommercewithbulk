@@ -69,6 +69,8 @@ $sub=Category::category();
     <button class="btn btn-sm text-light btn-color mt-1">vendor</button></a> 
    <a href="{{url('affiliate')}}" class=" mt-3 ml-1">
     <button class="btn btn-sm text-light btn-color mt-1">Affiliate</button> </a>
+    <a href="{{url('/voucher')}}" class=" mt-3 ml-1">
+    <button class="btn btn-sm text-light btn-color mt-1">Vouchers</button> </a>
 </div>
 
       <div class="icn mt-3 float-right mr-3 mr-md-0">

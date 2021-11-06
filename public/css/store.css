@@ -444,13 +444,6 @@ a{
 }
 
 
-
-
-
-
-
-
-
 @keyframes animation{
     from{
         opacity: 0;
@@ -461,9 +454,6 @@ a{
         transform: translateY(0px);
     }
 }
-
-
-
 
 
 .top-nav{
@@ -513,9 +503,57 @@ color: white;
   color: white;
 }
 
+@media screen and (min-width: 900px)
+{
+  .spn-btn{
+    background-color: red;
+    color: #fff;
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    padding: 1rem 1rem !important;
+
+}
+.spn-btn2{
+    color: #fff;
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    padding: 1rem 1rem !important;
+
+}
+.coupon
+{
+   position: relative;
+
+    font-family :Roboto-Regular, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif
+
+}
+.coupon img{
+    height: 12rem;
+    
+}
+.coupon .cpn-p1
+{
+    position: absolute; 
+    top: 16%;
+    left: 10%;  
+      color: #F51C43;
+    font-size: 2.3vw;
+    font-weight: 700;
+   }
+.coupon .cpn-p2
+{
+    position: absolute; 
+    top: 70%;
+    left: 10%;
+    color: #F51C43;
+        font-size: 1.5vw;
+}
+}
 
 
-@media screen and (min-width: 600px)
+@media screen and (min-width: 900px)
 {
   .btn-store{
     background-color: #00A9A4; 
@@ -524,11 +562,66 @@ color: white;
   padding: 1rem 2rem;
   text-align: center;
   text-decoration: none;
-
   font-size: 1vw;
 }
 }
-  @media screen and (max-width: 600px)
+@media screen and (max-width: 900px)
+{
+  .btn-store{
+    background-color: #00A9A4; 
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1vw;
+}
+.coupon
+{
+   position: relative;
+
+    font-family :Roboto-Regular, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif
+
+}
+.coupon img{
+    height: 12rem;
+    
+}
+.coupon .cpn-p1
+{
+    position: absolute; 
+    top: 20%;
+    left: 10%;  
+      color: #F51C43;
+    font-size: 2.7vw;
+    font-weight: 700;
+   }
+.coupon .cpn-p2
+{
+    position: absolute; 
+    top: 80%;
+    left: 10%;
+    color: #F51C43;
+        font-size: 1.7vw;
+}
+.spn-btn{
+    background-color: red;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+
+}
+.spn-btn2{
+  
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+
+}
+}
+  @media screen and (max-width: 700px)
 {
   .btn-store{
     background-color: #00A9A4; 
@@ -545,6 +638,50 @@ color: white;
     width: 100%;
     justify-content: center;
     align-items: center;
+}
+
+
+.coupon
+{
+   position: relative;
+   font-family :Roboto-Regular, "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif
+
+}
+.coupon img{
+    height: 12rem;
+    
+}
+.coupon .cpn-p1
+{
+    position: absolute; 
+    top: 20%;
+    left: 10%;  
+      color: #F51C43;
+    font-size:7vw;
+    font-weight: 700;
+   }
+.coupon .cpn-p2
+{
+    position: absolute; 
+    top: 80%;
+    left: 10%;
+    color: #F51C43;
+    font-size: 5vw;
+}
+.spn-btn{
+    background-color: red;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+   padding: 1.5rem 1.5rem !important;
+}
+.spn-btn2{
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+   padding: 1.5rem 1.5rem !important;
 }
 }
 

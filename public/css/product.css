@@ -259,3 +259,8 @@ background-color: #073852;
   color: #ffffff;
   text-decoration: none;
 }
+.slider-pad
+{
+  height: 2rem;
+  margin-top: 40%;
+}

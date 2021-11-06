@@ -146,10 +146,12 @@ function storeProduct2($id)
   {
     $detail= Stock::
       leftjoin('reviews','stocks.id','=','reviews.review_id')
-      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id')
-     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id')->orderBy('rating','DESC')
+      ->leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
+      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount')
+     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount')->orderBy('rating','DESC')
         ->where('drop_id',$drop_id)
         ->findorfail($id);
+        
      
      return $detail;
    }

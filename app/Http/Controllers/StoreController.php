@@ -8,6 +8,8 @@ use App\Models\Image;
 use App\Models\Stock2;
 use App\Models\Sell;
 use App\Models\Sale;
+use App\Models\Coupon;
+use App\Models\CouponSave;
 use App\Models\VendorSale;
 use App\Models\Banner;
 use App\Http\Traits\StoreTrait;
@@ -29,8 +31,9 @@ class StoreController extends Controller
       $banner=$this->banner();
       $date=$this->carbon();
       $vendorsale=$this->vendorSale();
-      //dd($products);
-      return view('store',compact('products','sale','date','banner','vendorsale'));
+      $coupon=Coupon::where('vendor_id',$id)->where('exp_date','>',$date)->where('coupon_status','1')->take(3)->get();
+      $savec=CouponSave::where('vendor_id',$id)->get();
+      return view('store',compact('products','sale','date','banner','vendorsale','coupon','savec'));
      }
 
     function getStore(Request $req)
@@ -130,13 +133,15 @@ class StoreController extends Controller
           return redirect()->back()->with('success','your product is on sale');
         
     }
-     function outSale($id,Request $req)
+
+    function outSale($id,Request $req)
     {
       $sale=Sale::where('sale_id',$id)->delete();
       $req->session()->flash('success','your product is Out Sale');
      return redirect()->back();
     }
-     function vendorOutSale($id,Request $req)
+    
+    function vendorOutSale($id,Request $req)
     {
       $sale=VendorSale::where('vendor_sale_id',$id)->delete();
       $req->session()->flash('success','your product is Out Sale');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Coupon;
 use App\Models\CouponUsage;
+use App\Models\CouponSave;
+use App\Models\Vendor;
 use Auth;
 use session;
 use Carbon\Carbon;
@@ -165,6 +167,45 @@ class CouponController extends Controller
        
         }
       
+    }
+
+    function saveCoupon(Request $req)
+    {
+        $cop=CouponSave::where('coupon_id',$req->id)->where('user_id',Auth::user()->id)->first();
+        if(!$cop)
+        {
+            $save=new CouponSave;
+        $save->coupon_id=$req->id;
+        $save->code=$req->code;
+        $save->vendor_id=$req->vendor_id;
+        $save->user_id=Auth::user()->id;
+        $save->save();
+    }else
+    {
+     
+    }
+    }
+
+    function AllStore()
+    {   
+        $usid='';
+        $store=Vendor::
+        select('vendors.store_name','vendors.image','vendors.id')
+        ->paginate(20);
+
+        foreach($store as $st)
+        {
+            $st->coupon=Coupon::where('vendor_id',$st['id'])->latest()->take(1)->get();
+            $st->save=CouponSave::where('vendor_id',$st['id'])->latest()->get();
+        }
+        if(Auth::user())
+        {
+            $usid=Auth::user()->id;
+        }
+       
+
+         //dd($store);
+        return view('all_store',compact('store','usid'));
     }
    
 

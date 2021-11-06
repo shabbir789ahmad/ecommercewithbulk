@@ -13,6 +13,7 @@ use App\Models\Size;
 use App\Models\Store;
 use App\Models\Stock;
 use App\Models\Stock2;
+use App\Models\Review;
 use App\Http\Traits\ProductTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -37,29 +38,13 @@ class ProductController extends Controller
   {
     $detail=$this->detail($id,$drop_id);
     $detail2=$this->detail2($id,$drop_id);
-    
-    
-     
-      $stock2=Stock2::where('stock_id',$id)->where('stock_status','1')->first();
-      $image=Image::where('image_id',$id)->get();
-        $color= Stock::
-        join('colors','stocks.id','=','colors.filter_id')
-        ->where('filter_id',$id)
-        ->get();
-        $size= Stock::
-         join('sizes','stocks.id','=','sizes.size_id')
-         ->where('size_id',$id)
-        ->get();
-        $brand= Stock::
-         join('stores','stocks.id','=','stores.brand_id')
-         ->where('brand_id',$id)
-        ->get();
-        $review= Stock::
-         join('reviews','stocks.id','=','reviews.review_id')
-         ->where('review_id',$id)
-        ->get();
-     //dd($detail2);
-        return view('productpage',compact('detail','detail2','image','color','size','brand','review','stock2'));
+    $image=Image::where('image_id',$id)->get();
+    $color= Color::where('filter_id',$id)->get();
+    $size= Size::where('size_id',$id)->get();
+    $brand= Store::where('brand_id',$id)->get();
+    $review= Review::where('review_id',$id)->get();
+   
+        return view('productpage',compact('detail','detail2','image','color','size','brand','review'));
   }  
 
 
