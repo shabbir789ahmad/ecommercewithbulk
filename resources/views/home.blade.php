@@ -110,7 +110,7 @@
 <div class="container-fluid ">
  <div class="owl-carousel owl-theme ml-2">
   @foreach($product as $pro)
-  @if( $pro['sponser_status']=='1' && $pro['sponser_end'] > $time && !$pro['sponser'])
+  @if( !$pro['sponser_status']=='1' )
    <div class="item">
     <div class="card ">
      <div class="a">
@@ -122,7 +122,9 @@
        
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
 
-       <p class="overlay5 "><span class="far fa-flag text-light fa-lg"></span></p>
+       <p class="overlay5 ">
+         <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
+       </p>
       
         @if($pro['discount'])
         <a >  <p class="overlay2 ">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
@@ -164,7 +166,7 @@
 
   </div>
 
-
+/<!--top sell-->
 
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
@@ -241,7 +243,7 @@
     </h2>
    @endforeach
  </div>
-
+top rated
   
   <div class="container-fluid mt-4">
    <div class="owl-carousel owl-theme ml-2">
@@ -261,13 +263,11 @@
       
        <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 "><i class="far fa-heart text-danger m-2 fa-lg "></i></p></a>
         
-        @if($pro['sponser'])
-        <a > 
         <p class="overlay5 ">
-        <span class="far fa-flag text-light fa-lg"></span>
+        <img src="{{asset('pic/Sponsered-removebg-preview.png')}}" width="100%">
         </p>
-       </a>
-       @endif
+       
+       
         @if($pro['discount'])
         <a >  <p class="overlay2 text-danger">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
        }}%</p></a>
@@ -348,7 +348,7 @@
         @if($pro['sponser'])
         <a> 
         <p class="overlay5 ">
-        <span class="far fa-flag text-light fa-lg"></span>
+        <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
         </p>
        </a>
        @endif
@@ -416,7 +416,7 @@
         @if($pro['sponser'])
         <a> 
         <p class="overlay5 ">
-        <span class="far fa-flag text-light fa-lg"></span>
+        <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
         </p>
        </a>
        @endif
@@ -484,7 +484,7 @@
         @if($pro['sponser'])
         <a > 
         <p class="overlay5 ">
-        <span class="far fa-flag text-light fa-lg"></span>
+        <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
         </p>
        </a>
        @endif

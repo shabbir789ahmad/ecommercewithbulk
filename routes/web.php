@@ -32,8 +32,10 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::view('affiliate','affiliate');
+Route::get('shopping',[OrderController::class,'shopping'])->name('shopping');
 //all store with voucher
 Route::get('/voucher',[CouponController::class,'AllStore']);
+Route::get('/bcd',[UserController::class,'user']);
 
 Route::get('/',[SliderController::class,'women']);
 Route::get('search',[SliderController::class,'search']);

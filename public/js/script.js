@@ -69,11 +69,14 @@ $('.follow').click(function(e){
 
   $('.get-coupon').click(function(e){
     e.preventDefault()
+   let user=$(this).data('user');
    let id=$(this).data('id');
    let code=$(this).data('code');
    let vendor=$(this).data('vendor');
-
-   var token =  $('input[name="csrfToken"]').attr('value'); 
+   
+   if(user)
+   {
+      var token =  $('input[name="csrfToken"]').attr('value'); 
       $.ajax({
          
          url : "/save-token",
@@ -86,12 +89,22 @@ $('.follow').click(function(e){
             
             "_token": $('#csrf-token')[0].content  
          },
-        success:function()
+        success:function(data)
          {
            
-             
+              window.location.reload();
          }
       });
+    }else
+    {
+      alert ('Please login First')
+    }
+   
    });
+
+
+
+
+
 
 });

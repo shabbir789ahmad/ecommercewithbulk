@@ -78,12 +78,13 @@ a:hover,  a:active
 font-size:4vw;
 font-weight: 500;
 margin-bottom: 3px;
+margin-left: 40%;
 }
 
 .name3{
-  word-wrap: break-word;
- -webkit-line-clamp: 2;
-
+ height: 3rem;
+ overflow: hidden;
+ word-wrap: break-word;
 font-family : Arial, sans-serif;
 font-size:3vw;
 font-weight: 500;
@@ -117,7 +118,8 @@ color: #ffffff;
     margin-bottom: 3px;
    }
  .name3{
- -webkit-line-clamp: 2;
+  height: 4rem;
+ overflow: hidden;
  word-wrap: break-word;
 font-family : Arial, sans-serif !important;
 font-size:1.5vw !important;
@@ -263,4 +265,59 @@ background-color: #073852;
 {
   height: 2rem;
   margin-top: 40%;
+}
+
+
+.rating {
+    float:left;
+}
+
+
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:400%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em ;
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #28A745;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #2F6A59;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
 }

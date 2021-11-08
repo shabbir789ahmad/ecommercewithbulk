@@ -36,13 +36,15 @@ $sub=Category::category();
        @else
        <p class="cpn-p2">NO min Spend</p>
        @endif
-       @foreach($savec as $c)
-       @if($c['coupon_id']==$coup['id'] && $c['user_id']==Auth::user()->id)
-        <button class="btn  btn-sm btn-dark spn-btn2" disabled>Collected</button>
-       @else
-       <button class="btn  btn-sm spn-btn get-coupon" data-id="{{$coup['id']}}" data-code="{{$coup['code']}}" data-vendor="{{$coup['vendor_id']}}">Collect</button>
-       @endif
-       @endforeach
+       @if($coup->save)
+        @if($coup->save->coupon_id==$coup['id'] && $coup->save->user_id==$usid)
+        <button class=" spn-btn btn get-coupon bg-dark" disabled>Collected</button>
+        @else
+        <button class=" spn-btn  btn  get-coupon" data-id="{{$coup['id']}}" data-code="{{$coup['code']}}"  data-vendor="{{$coup['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif">{{$coup['value']}}</button>
+        @endif
+        @else
+          <button class=" spn-btn btn get-coupon" data-id="{{$coup['id']}}" data-code="{{$coup['code']}}"  data-vendor="{{$coup['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif">{{$coup['value']}}</button>
+        @endif
     </div>
   </div>
  @endforeach
@@ -221,8 +223,10 @@ $sub=Category::category();
         <div class="over-text2 ">
           <p class="sle2  text-danger mt-2" data-id="{{$pro['id']}}">{{ceil( ($pro['vendor_discount']/$pro['vendor_new_price'])*100)
            }}%</p>
-
-       </div>
+        </div>
+        <div class="over-text5 ">
+          <img src="{{asset('pic/On Sale.gif')}}" width="100%">
+        </div>
       <div class="card-body p-0">
        <p class="f font-weight-bold ml-1 mt-2">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['vendor_new_price'] - $pro['vendor_discounts']}}<del class="text-secondary">
        <small class="text-danger">${{$pro['vendor_new_price']}}</small></del>  </span>

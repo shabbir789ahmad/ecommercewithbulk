@@ -84,4 +84,6 @@ class UserController extends Controller
          $status->save();
 
     }
+
+   
 }

@@ -182,7 +182,7 @@ class CouponController extends Controller
         $save->save();
     }else
     {
-     
+     echo 'not done';
     }
     }
 
@@ -192,20 +192,21 @@ class CouponController extends Controller
         $store=Vendor::
         select('vendors.store_name','vendors.image','vendors.id')
         ->paginate(20);
-
-        foreach($store as $st)
-        {
-            $st->coupon=Coupon::where('vendor_id',$st['id'])->latest()->take(1)->get();
-            $st->save=CouponSave::where('vendor_id',$st['id'])->latest()->get();
-        }
-        if(Auth::user())
+         
+         if(Auth::user())
         {
             $usid=Auth::user()->id;
         }
-       
+        foreach($store as $st)
+        {
+            $st->coupon=Coupon::where('vendor_id',$st['id'])->latest()->take(1)->get();
+            
+        }
+        
+       $save=CouponSave::where('user_id',$usid)->get();
 
          //dd($store);
-        return view('all_store',compact('store','usid'));
+        return view('all_store',compact('store','usid','save'));
     }
    
 

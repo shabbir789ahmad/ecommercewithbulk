@@ -19,6 +19,10 @@ class OrderController extends Controller
 {
   use OrderTrait;
   
+   function shopping()
+   {
+    return view('shopping');
+   }
     function order(Request $req)
     {
 
@@ -79,7 +83,12 @@ class OrderController extends Controller
       $quen=Stock2::where('id',$data['product_id'])->decrement('stock');
       $req->session()->forget('cart');
     }
-          
+      try {
+                $this->orderConform($order,$data);
+            }catch (\Exception $e) {
+                return redirect()->route('shopping')->with('status', 'We Are Unable to send you Conformation mail');
+            }
+         
    });
 
      return view('shopping');

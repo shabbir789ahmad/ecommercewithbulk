@@ -137,3 +137,29 @@
   @endforeach
 </div>
 </div>
+
+
+@if($coup->save)
+        @if($coup->save->coupon_id==$coup['id'] && $coup->save->user_id==$usid)
+        <button class=" stor-btn get-coupon bg-dark" >Collected</button>
+        @else
+        <button class=" stor-btn get-coupon" data-id="{{$coup['id']}}" data-code="{{$coup['code']}}"  data-vendor="{{$coup['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif">{{$coup['value']}}</button>
+        @endif
+        @else
+          <button class=" stor-btn get-coupon" data-id="{{$coup['id']}}" data-code="{{$coup['code']}}"  data-vendor="{{$coup['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif">{{$coup['value']}}</button>
+        @endif
+
+
+
+
+
+
+
+
+        try {
+                Order::create($orderData)->save();
+                $product->user->notify(new OrderNotification($order_file));
+                return redirect()->route('home')->with('status', 'your orders has been sent successfully');
+            }catch (\Exception $e) {
+                return redirect()->back()->with('status', 'this product has already in your order list');
+            }

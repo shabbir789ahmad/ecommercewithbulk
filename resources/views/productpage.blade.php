@@ -53,40 +53,38 @@
 <div class="col-md-5 mt-2 mr-0 col-sm-12 ">
  <div class="row">
   <div class="col-md-12 col-6">
-  
-    <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}</p>
-    <p class="text-dark name3 ml-3 ml-md-0">{{ucwords($detail['detail'])}}<br>
-      <span class="float-right"><button class="btn-sm btn btn-store rounded btn-check text-light detail" data-name="{{$detail['product']}}" data-detail="{{$detail['detail']}}">Detail</button></span>
-  <span class="text-dark"  style="font-size: 1.2rem;">
-     
-  @for($i=0; $i<5; $i++)
-  @if($i<$detail['rating'])
-   <span class="fa fa-star checked fa-xs"></span>
-  @else
-   <span class="fa fa-star fa-xs"></span>
-   @endif
-   @endfor
-
-   </span>
-  </p>
+        <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}</p>
+        <p class="text-dark name3 ml-3 ml-md-0">{{ucwords($detail['detail'])}}</p>
+        <p>
+          <span class="float-right">
+            <button class="btn-sm btn btn-store rounded btn-check text-light detail" data-name="{{$detail['product']}}" data-detail="{{$detail['detail']}}">Detail
+            </button>
+          </span>
+          <span class="text-dark ml-2 ml-md-0"  style="font-size: 1.2rem;">
+            @for($i=0; $i<5; $i++)
+            @if($i<$detail['rating'])
+             <span class="fa fa-star checked fa-xs"></span>
+            @else
+             <span class="fa fa-star fa-xs"></span>
+            @endif
+            @endfor
+           </span>
+         </p>
     </div>
-    <hr class="text-dark d-none d-md-block hr" >
-    <hr class="mt-3">
+    
     <div class="col-md-12 col-6 ">
-      
-       <h5 class=" names ml-2  ml-md-0">${{$detail['sell_price']- $detail['discount']}}
-    <span>
+     <h5 class=" names">${{$detail['sell_price']- $detail['discount']}}
+      <span>
       <small class="text-danger"> <del>${{$detail['sell_price']}}</del>
        </small>
-    </span>
-    <span class="float-right  mr-4 mr-5 mr-md-0 mt-3 mt-md-0"><a href="{{url('store/'.$detail['user_id'])}}"><button class="btn-sm btn btn-store rounded btn-check text-light">Visit Store</button></a></span>
-  </h5>
- 
+      </span>
+      <span class="float-right  mr-4 mr-5 mr-md-0 mt-3 mt-md-0"><a href="{{url('store/'.$detail['user_id'])}}"><button class="btn-sm btn btn-store rounded btn-check text-light">Visit Store</button></a></span>
+    </h5>
     </div>
     
     <hr class="text-dark d-none d-md-block hr" >
  <div class="col-md-8 col-12 col-sm-12 col-lg-8">
-  <div class="col-md-12 col-6">
+  <div class="col-md-12 col-6 mt-3 mt-md-0">
     <p class=" text-dark   ml-3 ml-md-0">Color:  <br> 
    <span >
     @foreach($color as $s)
@@ -109,8 +107,8 @@
   </p>
  </div>
   <div class="col-md-12 mt-3 col-6">
-    <h5 class="ml-1 mt-0 mt-md-3 text-dark">Size:</h5>
-   <div class="d-flex mt-0 mt-md-3 mb-4">
+    <h5 class="ml-3 mt-4 mt-md-3 text-dark">Size:</h5>
+   <div class="d-flex mt-0 ml-3 ml-md-0 mt-md-3 mb-4">
     @foreach($size as $s)
      <label class="span " >
       <input type="radio" checked="" name="size" value="{{$s['size']}}" onclick="cartsize('{{$s['size']}}') ">
@@ -210,38 +208,32 @@
  <h2 class="font-weight-bold ml-3 ">Related Products</h2>
 </div>
  <!-- slider for populer categories -->
-
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
-
-
   @foreach($detail2 as $pro)
-
-  <div class="item">
-    <div class="card "> 
+  
+   <div class="item">
+    <div class="card ">
      <div class="a">
-       <a href="{{url('productpage/'.$pro['id']. '/' .$pro['drop_id']) }}"> 
-        @foreach($pro->image as $img)
+      <a href="{{'productpage/'.$pro['id']. '/' .$pro['drop_id']}}"> @foreach($pro->image as $img)
         @if($loop->first)
         <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
         @endif
        @endforeach</a>
-        <a href="{{url('productpage/'.$pro['id']. '/' .$pro['drop_id']) }}"> <p class="overlay2 ">Quick View</p></a>
-       <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 "><i class="far fa-heart text-danger m-2 fa-lg "></i></p></a>
-        @if($pro['discount'])
-        <a >  <p class="overlay4 text-light">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
-       }}%</p></a>
+       
+       <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
+
+      @if($pro['discounts'])
+        <a >  <p class="overlay2 ">{{ceil( ($pro['discounts']/$pro['new_price'])*100)
+       }}% </p></a>
        @else
        @endif
      </div>
      <div class="card-body">
-      @foreach($pro->stock2 as $st)
-      <p class="f">{{$pro['product']}}<span class="float-right ">${{$st['discount']}}<del class="text-secondary">
-       <small class="text-danger">${{$st['price']}}</small></del>  </span></p>
-       @endforeach
-       <hr>
+       <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['new_price'] - $pro['discounts']}}<del class="text-secondary">
+       <small class="text-danger">${{$pro['new_price']}}</small></del>  </span>
+      </p>
        <div class="text-center">
-        @if($pro['rating'])
         @for($i=0; $i<5; $i++)
         @if($i<$pro['rating'])
         <span class="fa fa-star checked "></span>
@@ -249,17 +241,21 @@
         <span class="fa fa-star"></span> 
         @endif
          @endfor
-        @endif
-      </div> </div>
+       </div>
+     
+      
+        </div>
     </div>
   </div>
-
+  
   @endforeach
-  
- 
-  
+
 </div>
 </div>
+
+
+            
+       
 
 
 
@@ -279,8 +275,13 @@
     
      <input type="text" name="uname" placeholder="Name" class="form-control mt-2">
      <span class="text-danger">@error ('uname') User name Required @enderror</span>
-     <input type="text" name="rating" placeholder="Your Rating" class="form-control mt-2">
-     <span class="text-danger">@error ('rating') {{$message}}@enderror</span>
+      <fieldset class="rating">
+          <input type="radio" id="star5" name="rating" value="5" /><label for="star5" >5 stars</label>
+          <input type="radio" id="star4" name="rating" value="4" /><label for="star4" >4 stars</label>
+          <input type="radio" id="star3" name="rating" value="3" /><label for="star3" >3 stars</label>
+          <input type="radio" id="star2" name="rating" value="2" /><label for="star2" >2 stars</label>
+          <input type="radio" id="star1" name="rating" value="1" /><label for="star1">1 star</label>
+      </fieldset>
      <input type="hidden" name="review_id" value="{{$detail['id']}}" class="form-control mt-2">
      <textarea class="form-control mt-2 " name="message" rows="5" placeholder="Your Message"></textarea>
      <span class="text-danger">@error ('message') {{$message}}@enderror</span><br>

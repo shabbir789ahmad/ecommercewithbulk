@@ -66,11 +66,10 @@ select{
 }
 .a .overlay5 {
   position: absolute; 
-  bottom: 82%;
-  left:3%; 
-  background: black;
+  top: 40%;
+  right:3%; 
   color: #f1f1f1; 
-  width: 15%;
+  width: 60%;
   transition: .5s ease;
   opacity:1;
   color: white;

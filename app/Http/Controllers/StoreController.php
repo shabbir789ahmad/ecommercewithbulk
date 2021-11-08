@@ -32,8 +32,18 @@ class StoreController extends Controller
       $date=$this->carbon();
       $vendorsale=$this->vendorSale();
       $coupon=Coupon::where('vendor_id',$id)->where('exp_date','>',$date)->where('coupon_status','1')->take(3)->get();
-      $savec=CouponSave::where('vendor_id',$id)->get();
-      return view('store',compact('products','sale','date','banner','vendorsale','coupon','savec'));
+      if(Auth::user())
+        {
+            $usid=Auth::user()->id;
+        }
+      foreach($coupon as $coupn)
+        {
+            
+            $coupn->save=CouponSave::where('vendor_id',$coupn['vendor_id'])->where('coupon_id',$coupn['id'])->where('user_id',$usid)->first();
+        }
+      
+        //dd($coupon);
+      return view('store',compact('products','sale','date','banner','vendorsale','coupon','usid'));
      }
 
     function getStore(Request $req)
