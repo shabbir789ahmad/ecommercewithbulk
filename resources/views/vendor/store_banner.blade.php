@@ -6,26 +6,26 @@
   <div class="c ml-3  d-flex mr-1">
 
     <a href="{{url('vendor/banner')}}">
-    <div class="card shadow border p-0 ">
+    <div class="card shadow border p-0 d-none d-md-block ">
     <div class="card-body text-dark">
    <i class="fab fa-slideshare text-success fa-lg"></i> Banner
    </div>
  </div>
 </a>
-<div class="card shadow border ml-auto w-50 p-0 ">
+<div class="card shadow border ml-auto w-md-50 w-100 p-0 ">
     <div class="card-body text-dark">
   <h4 class="text-center font-weight-bold text-color">Upload Banner</h4>
    </div>
  </div>
 <a href="{{url('vendor/get-banner')}}" class="ml-auto">
-   <div class="card shadow border ml-auto p-0 mr-2">
+   <div class="card shadow border ml-auto p-0 mr-2 d-none d-md-block">
     <div class="card-body text-dark">
    <i class="fas fa-pencil-alt text-success fa-lg"></i> Update
    </div>
  </div>
 </a>
 <a href="{{url('vendor/get-banner')}}">
- <div class="card shadow  p-0 mr-3 ">
+ <div class="card shadow  p-0 mr-3 d-none d-md-block">
     <div class="card-body text-dark">
    <i class="fas fa-trash-alt text-danger fa-lg"></i> Delete
    </div>
@@ -36,9 +36,9 @@
  
 <div class="container-fluid">
  <div class="row">
-  <div class="col-md-2 col-sm-1">
+  <div class="col-md-2 col-0">
   </div>
-  <div class="col-md-8 card col-sm-10 border border-success mt-5 p-5">
+  <div class="col-md-8 card  col-12 border border-success mt-5 p-5">
        
    <form action="{{url('vendor/upload-banner')}}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -76,7 +76,7 @@
    <button  class="btn btn-block btn-color text-light mt-5">Submit</button>
   </form>
  </div>
-    <div class="col-md-2 col-sm-1">
+    <div class="col-md-2 col-0">
     </div>
 </div>
 

@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Follow;
+use Auth;
 class FollowController extends Controller
 {
     
     public function follow(Request $req)
     {
-        $foll=Follow::where('user_id',$req->id)->get();
-dd($req->id);
-        if($foll==NUll || $foll=='')
+        $foll=Follow::where('id',$req->id)->where('user_id',$req->user_id)->where('follow_id',$req->follow_id)->first();
+  
+        if($foll==null )
         {
              Follow::create([
-               'name' => $req->name,
-               'image' => $req->image,
-               'user_id' => $req->user_id,
+               'name' => Auth::user()->name,
+               'user_id' =>  Auth::user()->id,
                'follow_id' => $req->follow_id,
                'follow' => '1',
             ]);
@@ -28,11 +28,10 @@ dd($req->id);
     }
 
     
-    public function unfollow(Request $request)
+    public function unfollow(Request $req)
     {
-        $follow=Follow::all();
-
-        return;
+        $follow=Follow::where('id',$req->id)->first();
+        $follow->delete();
     }
 
     /**

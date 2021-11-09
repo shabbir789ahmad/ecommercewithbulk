@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Stock;
@@ -23,7 +22,7 @@ class SliderController extends Controller
   function  women()
   {
    
-    
+
     $slider=Slider::latest()->take('3')->get();
     $front=Mainpage::latest()->take('1')->get();
     $dropdown=$this->dropdown();

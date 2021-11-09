@@ -9,13 +9,25 @@ $sub=Category::category();
 @foreach($banner as $bann)
 <div class="store-banner">
  <img src="{{asset('uploads/img/' .$bann['banner'])}}"  >
-
- <div class="txt">
-  <p class="dis">60% Discount</p>
-<h4 class="">{{ucfirst($bann['heading1'])}}</h4>
-<p class="best">{{ucfirst($bann['heading2'])}}</p>
- <button class="btn btn-xl btn-store text-light rounded"> Shop Now</button>
- </div>
+  <div class="follow-this">
+    @foreach($products as $pro)
+    
+    <h4 class="">Store Name</h4>
+    <p class="best"><span class="p-1 bg-dark">{{$pro->follow}}</span> Follower</p>
+    
+    <div class="message-follow  d-flex justify-content-center">
+     <p class="mr-4 "><i class="fas fa-sms fa-2x ml-3 "></i><br>Message</p>
+       @if($pro->follows==null)
+      @if($loop->first )
+     <p class=" follow ml-5" data-id="@if($pro->follows) $pro->follows->id @else 0 @endif" data-uid="{{Auth::user()->id}}"   data-follow="{{$pro['user_id']}}"><i class="far fa-user fa-2x ml-3" ></i><br>Follow</p>
+     @endif
+     @else
+ 
+     <p class=" unfollow ml-5 " data-uid="{{Auth::user()->id}}" data-id="{{$pro->follows->id}}"  data-follow="{{$pro['user_id']}}"><i class="far fa-user text-warning fa-2x ml-3" ></i><br>Following</p>
+     @endif
+     @endforeach
+    </div>
+  </div>
 </div>
 @endforeach
 
@@ -137,13 +149,7 @@ $sub=Category::category();
 
 <button class="btn-store ml-1" id="new" value="new">New Product</button>
 <button class="btn-store ml-1" id="top-rated" value="top">Top Rated</button>
-@foreach($products as $pro)
-@if($loop->first )
-@if(Auth::user())
-<button class="btn-store ml-1 follow" data-id="{{Auth::user()->id}}" data-name="{{Auth::user()->name}}" data-image="{{Auth::user()->image}}" data-follow="{{$pro['user_id']}}">Follow</button>
-@endif
-@endif
-@endforeach
+
 </div>
 
 <div class="conta mt-2 ml-2 mb-5" style="overflow:hidden;" >
@@ -252,12 +258,6 @@ $sub=Category::category();
   </div>
 </div>
  </div>
-
-
-
-
-
-
 
 
 <form id="new-form">

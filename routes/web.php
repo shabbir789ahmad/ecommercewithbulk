@@ -75,7 +75,8 @@ Route::view('checkout','checkout');
  Route::post('check-coupon',[CouponController::class,'checkCoupon']);
  Route::post('save-token',[CouponController::class,'saveCoupon']);
  Route::post('follow-this',[FollowController::class,'follow']);
-
+ Route::post('unfollow-this',[FollowController::class,'unfollow']);
+ 
 
 
 

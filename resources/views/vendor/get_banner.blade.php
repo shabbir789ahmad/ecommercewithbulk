@@ -6,26 +6,26 @@
   <div class="c ml-3  d-flex mr-1">
 
     <a href="{{url('vendor/banner')}}">
-    <div class="card shadow border p-0 ">
+    <div class="card shadow border p-0 d-none d-md-block">
     <div class="card-body text-dark">
-   <i class="fab fa-slideshare text-success fa-lg"></i> Banneer
+   <i class="fab fa-slideshare text-success fa-lg"></i> Banner
    </div>
  </div>
 </a>
-<div class="card shadow border ml-auto w-50 p-0 ">
+<div class="card shadow border ml-auto w-100 w-md-50 p-0 ">
     <div class="card-body text-dark">
   <h4 class="text-center font-weight-bold text-color">All Banner</h4>
    </div>
  </div>
 <a href="{{url('vendor/get-banner')}}" class="ml-auto">
-   <div class="card shadow border  p-0 mr-2">
+   <div class="card shadow border d-none d-md-block p-0 mr-2">
     <div class="card-body text-dark">
    <i class="fas fa-pencil-alt text-success fa-lg"></i> Update
    </div>
  </div>
 </a>
 <a href="{{url('vendor/get-banner')}}">
- <div class="card shadow  p-0 mr-3 ">
+ <div class="card shadow d-none d-md-block p-0 mr-3 ">
     <div class="card-body text-dark">
    <i class="fas fa-trash-alt text-danger fa-lg"></i> Delete
    </div>
@@ -35,26 +35,23 @@
  
  <div class="container-fluid mt-5">
   <div class="row">
-      @foreach($banner as $slid)
-   @php //dd($slid['banner']) @endphp
-      <div class="col-md-4 col-sm-4 col-12 mt-3">
+    @foreach($banner as $slid)
+     <div class="col-md-6 col-lg-4 col-sm-6 col-12 mt-3">
        <div class="card">
-         <img src="{{asset('uploads/img/'.$slid['banner'])}}" width="100%">
-          <div class="card-body">
-           <p class="text-danger font-weight-bold">{{$slid['heading1']}}</p>
-           <p>{{$slid['heading2']}}</p>
-        
-          <div class="b d-flex justify-content-center mt-3">
-      <button class="btn btn-lg btn-color text-light bann"  data-id="{{$slid['id']}}" data-h1="{{$slid['heading1']}}" data-h2="{{$slid['heading2']}}"> Update
-           </button>
+        <img src="{{asset('uploads/img/'.$slid['banner'])}}" width="100%">
+        <div class="card-body">
+          <p class="text-danger font-weight-bold">{{$slid['heading1']}}</p>
+          <p>{{$slid['heading2']}}</p>
+        <div class="b d-flex justify-content-center mt-3">
+          <button class="btn btn-lg btn-color text-light bann"  data-id="{{$slid['id']}}" data-h1="{{$slid['heading1']}}" data-h2="{{$slid['heading2']}}"> Update
+          </button>
     
-       <a href="{{'delete-banner/'.$slid['id']}}">  
-         <button class="btn btn-lg btn-danger ml-3" onclick="return confirm('Are you sure?')"> Delete
-         </button>
-       </a>
-           
-           </div>
-          </div>
+          <a href="{{'delete-banner/'.$slid['id']}}">  
+           <button class="btn btn-lg btn-danger ml-3" onclick="return confirm('Are you sure?')"> Delete
+           </button>
+          </a>
+         </div>
+        </div>
        </div>
 
     </div>

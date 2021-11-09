@@ -77,6 +77,7 @@
  <script src="{{asset('js/button.js')}}"></script> 
  <script src="{{asset('js/zoomsl.js')}}"></script> 
  <script src="{{asset('js/script.js')}}"></script> 
+ <script src="{{asset('js/ajaxdata.js')}}"></script> 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 

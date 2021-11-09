@@ -18,7 +18,6 @@ class Stocks extends Migration
             $table->string('product');
             $table->string('detail');
             $table->string('product_status');
-            $table->string('sponser');
             $table->string('size_image');
              $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('vendors')->onDelete('cascade')->onUpdate('cascade');

@@ -17,7 +17,7 @@ class CreateSalesTable extends Migration
             $table->id();
             $table->string('sell_id');
             $table->string('new_price');
-            $table->string('discount');
+            $table->string('discounts');
             $table->string('on_sale');
             $table->bigInteger('sale_id')->unsigned();
             $table->foreign('sale_id')->references('id')->on('stocks')->onUpdate('cascade')->onDelete('cascade');

@@ -9,6 +9,7 @@ use App\Models\Stock2;
 use App\Models\Sell;
 use App\Models\Sale;
 use App\Models\Coupon;
+use App\Models\Follow;
 use App\Models\CouponSave;
 use App\Models\VendorSale;
 use App\Models\Banner;
@@ -25,7 +26,7 @@ class StoreController extends Controller
     
     function showStore($id)
     {
-       
+       $usid='';
       $products=$this->storeProduct2($id);
       $sale=$this->sale();
       $banner=$this->banner();
@@ -41,8 +42,7 @@ class StoreController extends Controller
             
             $coupn->save=CouponSave::where('vendor_id',$coupn['vendor_id'])->where('coupon_id',$coupn['id'])->where('user_id',$usid)->first();
         }
-      
-        //dd($coupon);
+      //dd($products);
       return view('store',compact('products','sale','date','banner','vendorsale','coupon','usid'));
      }
 

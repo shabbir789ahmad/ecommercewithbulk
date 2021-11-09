@@ -23,7 +23,7 @@ $sub=Category::category();
 @foreach($sale as $sl)
   <p class="text-center">Put Your Product In <span class="text-danger font-weight-bold">{{ucwords($sl['sell_name'])}}<span></p>
   @endforeach
-
+<br>
 <h6 class="font-weight-bold ml-1 ml-md-3 pro2">Sale By Admin</h6>
   @if($sale)
   @foreach($sale as $sal)
@@ -54,7 +54,7 @@ $sub=Category::category();
   @endif
   @endforeach
   @endif
-
+<br>
 <h6 class="font-weight-bold ml-1 ml-md-3 mt-3 pro2">Your Sale</h6>
 @if($vendorsale)
    @foreach($vendorsale as $sal)
@@ -92,21 +92,21 @@ $sub=Category::category();
       <ul>
        <li class="nav-link fhg" style="--i: .85s">
         <a href="#">Category<i class="fas fa-caret-down"></i></a>
-         <div class="dropdown">
+         <div class="dropdown2">
           <ul>
             @foreach($sub as $cat)
-            <li class="dropdown-link" >
+            <li class="dropdown2-link" >
              <a href="#">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
-              <div class="dropdown second">
+              <div class="dropdown2 second">
                <ul>
                 @foreach($cat['subcat'] as $subc)
-                <li class="dropdown-link">
+                <li class="dropdown2-link">
                  <a href="#">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
-                 <div class="dropdown second">
+                 <div class="dropdown2 second">
                  <ul>
                   @foreach($cat['drop'] as $drp)
                   @if($subc['id']==$drp['dropdown_id'] )
-                  <li class="dropdown-link  store-drop"  value="{{$drp['id']}}">
+                  <li class="dropdown2-link  store-drop"  value="{{$drp['id']}}">
                    <a href="javascript:void(0)">{{ucwords($drp['name'])}}</a>
                   </li>
                    @endif

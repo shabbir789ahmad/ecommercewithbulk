@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
         $req->validate([
          'menue_id'=>'required',
-         'smenue'=>'required'
+         'smenue'=>'required|alpha'
         ]);
 
         $smenue=new Submenue;

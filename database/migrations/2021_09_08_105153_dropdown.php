@@ -16,6 +16,7 @@ class Dropdown extends Migration
          Schema::create('dropdowns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('drop_image');
             
             $table->bigInteger('dropdown_id')->unsigned();
             $table->foreign('dropdown_id')->references('id')->on('submenues')->onUpdate('cascade')->onDelete('cascade');

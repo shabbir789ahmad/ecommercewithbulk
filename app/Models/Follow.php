@@ -11,7 +11,6 @@ class Follow extends Model
     protected $fillable=[
  
       'name',
-      'image',
       'user_id',
       'follow_id',
       'follow',

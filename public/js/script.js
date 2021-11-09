@@ -39,32 +39,6 @@ $('#signinform').click(function(e){
    $('.signin_form').css('display','block')
   });
 
-$('.follow').click(function(e){
-    e.preventDefault()
-   let id=$(this).data('id');
-   let name=$(this).data('name');
-   let image=$(this).data('image');
-   let follow_id=$(this).data('follow');
-   var token =  $('input[name="csrfToken"]').attr('value'); 
-      $.ajax({
-         
-         url : "/follow-this",
-         type : 'POST',
-         dataType : 'json',
-         data: {
-            'user_id':id,
-            'name':name,
-            'image':image,
-            'follow_id':follow_id,
-            "_token": $('#csrf-token')[0].content  
-         },
-        success:function(data)
-         {
-           
-            window.location.reload()
-         }
-      });
-   });
 
 
   $('.get-coupon').click(function(e){

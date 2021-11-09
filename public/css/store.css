@@ -1,7 +1,4 @@
-::placeholder {
-  color: red;
-  opacity: 1; 
-}
+
 .n2{
 	opacity: 1 !important;
    color: #ffffff;
@@ -91,10 +88,19 @@
     position:relative;
     display:inline-block;
   }
-  .pro2 
+ 
+.text2
+  {
+    font-size: 1vw;
+	  font-family : Montserrat, Arial, sans-serif;
+	  margin-left: 3%;
+  }
+@media screen and (max-width: 600px)
+{
+     .pro2 
  {
     font-family : Montserrat, Arial, sans-serif;
-    font-size: 2vw; 
+    font-size:4vw; 
     font-weight: 700;
     color: #166387;
     margin-left: 40%;
@@ -111,14 +117,6 @@
     height:.2rem;
     background:#ED7632;
   }
-.text2
-  {
-    font-size: 1vw;
-	  font-family : Montserrat, Arial, sans-serif;
-	  margin-left: 3%;
-  }
-@media screen and (max-width: 600px)
-{
     
 .stor-text
  {
@@ -291,6 +289,26 @@ a{
 }
 @media screen and (min-width: 1500px)
 {
+ .pro2 
+ {
+    font-family : Montserrat, Arial, sans-serif;
+    font-size: 2vw; 
+    font-weight: 700;
+    color: #166387;
+    margin-left: 40%;
+    position:relative;
+    display:inline-block;
+  }
+.pro:after,.pro2:after
+  {
+    content:'';
+    position:absolute;
+    left:0;right:10;
+    top:100%;
+    width:30%;
+    height:.2rem;
+    background:#ED7632;
+  }
 
 .nav-link > a{
     line-height: 3rem;
@@ -306,10 +324,64 @@ a{
 }
 
 }
-
+.message-follow
+{
+    cursor: pointer;
+}
+.message-follow p:hover
+{
+ color: red;
+}
 @media screen and (max-width: 1500px)
 {
-
+     .pro2 
+ {
+    font-family : Montserrat, Arial, sans-serif;
+    font-size: 2vw; 
+    font-weight: 700;
+    color: #166387;
+    margin-left: 40%;
+    position:relative;
+    display:inline-block;
+  }
+.pro:after,.pro2:after
+  {
+    content:'';
+    position:absolute;
+    left:0;right:10;
+    top:100%;
+    width:30%;
+    height:.2rem;
+    background:#ED7632;
+  }
+.follow-this
+   {
+        background-color: #00A9A4;
+        position: absolute;
+        top: 20%;
+        left: 60%;
+        right: 10%;
+        width: 23%;
+        height: 15rem;
+        border-radius: 2%;
+    }
+.follow-this h4
+    {
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: font-family : Montserrat, Arial, sans-serif;
+      margin-top: 4%;
+      margin-left: 4%;
+      color: #ffffff;
+    }
+.follow-this p
+    {
+      font-size: 1.1rem;
+      font-family: font-family : Montserrat, Arial, sans-serif;
+      margin-top: 4%;
+      margin-left: 4%;
+      color: #ffffff;
+    }
  
 .nav-link > a{
     line-height: 3rem;
@@ -360,7 +432,7 @@ a{
     transform: scale(1.1);
 }
 
-.dropdown{
+.dropdown2{
     position: absolute;
     top: 100%;
     left: 0;
@@ -372,11 +444,11 @@ a{
     transition: .5s;
 }
 
-.dropdown ul{
+.dropdown2 ul{
     position: relative;
 }
 
-.dropdown-link > a{
+.dropdown2-link > a{
     display: flex;
     background-color: #000;
     color: #fff;
@@ -386,7 +458,7 @@ a{
     justify-content: space-between;
     transition: .3s;
 }
-.dropdown-link2 > a{
+.dropdown2-link2 > a{
     display: flex;
     background-color: #fff;
     color: black;
@@ -397,16 +469,16 @@ a{
     transition: .3s;
 }
 
-.dropdown-link:hover > a{
+.dropdown2-link:hover > a{
     background-color: #131921;
     color: #fff;
 }
 
-.dropdown-link:not(:nth-last-child(2)){
+.dropdown2-link:not(:nth-last-child(2)){
     border-bottom: 1px solid #efefef;
 }
 
-.dropdown-link i{
+.dropdown2-link i{
     transform: rotate(-90deg);
 }
 
@@ -423,15 +495,15 @@ a{
     z-index: -1;
 }
 
-.dropdown-link:first-child:hover ~ .arrow{
+.dropdown2-link:first-child:hover ~ .arrow{
     background-color: #3498db;
 }
 
-.dropdown-link{
+.dropdown2-link{
     position: relative;
 }
 
-.dropdown.second{
+.dropdown2.second{
     top: 0;
     left: 100%;
     padding-left: .8rem;
@@ -439,13 +511,13 @@ a{
     transform: translateX(10px);
 }
 
-.dropdown.second .arrow{
+.dropdown2.second .arrow{
     top: 10px;
     left: -5.5px;
 }
 
-.nav-link:hover > .dropdown,
-.dropdown-link:hover > .dropdown{
+.nav-link:hover > .dropdown2,
+.dropdown2-link:hover > .dropdown2{
     transform: translate(0, 0);
     opacity: 1;
     pointer-events: auto;
@@ -500,19 +572,47 @@ a{
   text-decoration: none;
 }
 
-.dorpdown-text .dropdown-item{
+.dorpdown-text .dropdown2-item{
 font-family :Montserrat,  sans-serif;  
 
 color: white;
 
 }
-.dorpdown-text .dropdown-item:hover{
+.dorpdown-text .dropdown2-item:hover{
   background-color: #55C0A9;
   color: white;
 }
 
 @media screen and (min-width: 900px)
 {
+    .follow-this
+   {
+        background-color: #00A9A4;
+        position: absolute;
+        top: 20%;
+        left: 60%;
+        right: 10%;
+        width: 23%;
+        height: 15rem;
+        border-radius: 2%;
+    }
+.follow-this h4
+    {
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-family: font-family : Montserrat, Arial, sans-serif;
+      margin-top: 4%;
+      margin-left: 4%;
+      color: #ffffff;
+    }
+.follow-this p
+    {
+      font-size: 1rem;
+      font-family: font-family : Montserrat, Arial, sans-serif;
+      margin-top: 4%;
+      margin-left: 4%;
+      color: #ffffff;
+    }
   .spn-btn{
     background-color: red;
     color: #fff;
@@ -558,11 +658,7 @@ color: white;
     color: #F51C43;
         font-size: 1.5vw;
 }
-}
 
-
-@media screen and (min-width: 900px)
-{
   .btn-store{
     background-color: #00A9A4; 
   border: none;
@@ -575,6 +671,34 @@ color: white;
 }
 @media screen and (max-width: 900px)
 {
+    .follow-this
+   {
+        background-color: #00A9A4;
+        position: absolute;
+        top: 20%;
+        left: 45%;
+        right: 10%;
+        width: 50%;
+        height: 12rem;
+        border-radius: 2%;
+    }
+.follow-this h4
+    {
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-family: font-family : Montserrat, Arial, sans-serif;
+      margin-top: 4%;
+      margin-left: 4%;
+      color: #ffffff;
+    }
+.follow-this p
+    {
+      font-size: 1rem;
+      font-family: font-family : Montserrat, Arial, sans-serif;
+      margin-top: 4%;
+      margin-left: 4%;
+      color: #ffffff;
+    }
   .btn-store{
     background-color: #00A9A4; 
   border: none;
@@ -631,6 +755,35 @@ color: white;
 }
   @media screen and (max-width: 700px)
 {
+
+    .follow-this
+   {
+        background-color: #00A9A4;
+        position: absolute;
+        top: 10%;
+        left: 40%;
+        right: 10%;
+        width: 58%;
+        height: 12rem;
+        border-radius: 2%;
+    }
+.follow-this h4
+    {
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-family: font-family : Montserrat, Arial, sans-serif;
+      margin-top: 4%;
+      margin-left: 4%;
+      color: #ffffff;
+    }
+.follow-this p
+    {
+      font-size: 1rem;
+      font-family: font-family : Montserrat, Arial, sans-serif;
+      margin-top: 4%;
+      margin-left: 4%;
+      color: #ffffff;
+    }
   .btn-store{
     background-color: #00A9A4; 
   border: none;
@@ -662,7 +815,7 @@ color: white;
 .coupon .cpn-p1
 {
     position: absolute; 
-    top: 20%;
+    top: 15%;
     left: 10%;  
       color: #F51C43;
     font-size:7vw;
@@ -671,7 +824,7 @@ color: white;
 .coupon .cpn-p2
 {
     position: absolute; 
-    top: 80%;
+    top: 70%;
     left: 10%;
     color: #F51C43;
     font-size: 5vw;
@@ -680,7 +833,7 @@ color: white;
     background-color: red;
     color: #fff;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 60%;
    padding: 1.5rem 1.5rem !important;
 }

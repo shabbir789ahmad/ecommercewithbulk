@@ -1,7 +1,7 @@
 @extends('master.master')
-
 @section('content')
-<div class="container login mt-5 border p-5 shadow mb-4">
+<div class="bg-dark p-5  ">
+<div class="container login  border bg-light p-5 shadow mb-4">
       <h2 class="text-center font-weight-bold">Login Here</h2>
     <form method="POST" action="{{ route('login') }}" class="mt-4">
       @csrf
@@ -43,5 +43,6 @@
           </a>                
                     </form>
                 
+</div>
 </div>
 @endsection

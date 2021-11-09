@@ -51,7 +51,6 @@
  </div>
 @endif
 
-
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
   @foreach($product2 as $pro)
@@ -75,23 +74,22 @@
        @endif
      </div>
      <div class="card-body">
-       <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['new_price'] - $pro['discounts']}}<del class="text-secondary">
-       <small class="text-danger">${{$pro['new_price']}}</small></del>  </span>
-      </p>
-       <div class="text-center">
-        @for($i=0; $i<5; $i++)
-        @if($i<$pro['rating'])
-        <span class="fa fa-star checked "></span>
-        @else
-        <span class="fa fa-star"></span> 
-        @endif
+        <p class="f">{{ucwords($pro['product'])}}<span class="float-right ">${{$pro['new_price'] - $pro['discounts']}}
+          <del class="text-secondary">
+          <small class="text-danger">${{$pro['new_price']}}</small></del>  </span>
+        </p>
+        <div class="text-center">
+         @for($i=0; $i<5; $i++)
+         @if($i<$pro['rating'])
+          <span class="fa fa-star checked "></span>
+         @else
+          <span class="fa fa-star"></span> 
+         @endif
          @endfor
-       </div>
-     
-      
         </div>
+      </div>
     </div>
-  </div>
+   </div>
   @endif
   @endforeach
   @endforeach
@@ -110,7 +108,7 @@
 <div class="container-fluid ">
  <div class="owl-carousel owl-theme ml-2">
   @foreach($product as $pro)
-  @if( !$pro['sponser_status']=='1' )
+  @if( $pro['sponser_status']=='1' )
    <div class="item">
     <div class="card ">
      <div class="a">

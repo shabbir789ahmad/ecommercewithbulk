@@ -5,7 +5,8 @@ use Carbon\Carbon;
 use App\Models\Stock;
 use App\Models\Stock2;
 use App\Models\Image;
-
+use App\Models\Follow;
+use Auth;
 
 trait ProductTrait
  {
@@ -103,7 +104,6 @@ function storeProduct2($id)
        
        $query= Stock::
          join('stock2s','stocks.id','=','stock2s.stock_id')
-         
          ->leftjoin('vendor_sales','stocks.id','=','vendor_sales.vendor_sale_id')
         ->leftjoin('reviews','stocks.id','=','reviews.review_id')
         ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.ship','stock2s.stock_status','vendor_sales.vendor_on_sale','vendor_sales.vendor_new_price','vendor_sales.vendor_discount')
@@ -136,6 +136,8 @@ function storeProduct2($id)
         foreach($product as $st)
         {
          $st->image=Image::where('image_id',$st['id'])->take(1)->get();
+         $st->follow=Follow::where('follow_id',$st['user_id'])->count();
+         $st->follows=Follow::where('follow_id',$st['user_id'])->where('user_id',Auth::user()->id)->first();
         
        }
        return $product;

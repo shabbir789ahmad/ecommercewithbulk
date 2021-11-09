@@ -1,165 +1,270 @@
-<div class="container mt-0 mt-sm-0 mt-md-5" >
- <ul class="nav nav-pills  bg-store p-3" id="pills-tab" role="tablist">
-  <li class="nav-item n1">
-    <a class="nav-link n2 active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Without Sale</a>
-  </li>
-  <li class="nav-item n1">
-    <a class="nav-link n2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">On Sale</a>
-  </li>
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Login and Registration Form in HTML | CodingNepal</title>
+      <link rel="stylesheet" href="style.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style type="text/css">
+         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
  
-</ul>
-<div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-     <!-- top rated-->
-     <div class="swiper mySwiper">
-  <div class="swiper-wrapper">
-   @foreach($product as $st)
-   @foreach($st->stock as $stock)
-   @if(!$stock['on_sale'])
-   <div class="swiper-slide">
-   
-   </div>
-   @endif
-   @endforeach
-   @endforeach
-  </div>
-    <div class="swiper-pagination"></div>
- </div>
-        
-    </div>
-
-  </div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-    <!-- New Product-->
-  <div class="row mt-3">
-    @foreach($product as $st)
-      @foreach($st->stock as $stock)
-      @if($stock['on_sale'])
-     <div class="col-md-4 col-sm-6 col-lg-4 ">
-      <div class="card store-card shadow">
-       
-       <div class="card-body p-0">
-       <p class="stor-text text-danger">{{ucfirst($st['product'])}}</p>
-       <div class="d-flex">
-        <p class="text2">{{ucfirst($st['detail'])}} </p>
-        @foreach($st->stock as $stock)
-        <p class="ml-auto mr-2 text2">${{$stock['sell_price']-$stock['discount']}} 
-          <del class="text-danger">@if($stock['discount']) ${{$stock['sell_price']}} @else @endif</del></p>
-        @endforeach
-       </div>
-      </div>
-      <div class="card-footer">
-         <div class="text-center rating">
-        
-        @for($i=0; $i<5; $i++)
-        @if($i<$st['rating'])
-        <span class="fa fa-star checked "></span>
-        @else
-        <span class="fa fa-star"></span> 
-        @endif
-         @endfor
-       
-          </div>
-       </div>
-      </div>
-   </div>
-     @endif
-   @endforeach
-   @endforeach
-  </div>
-  </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- without sale product slider-->
-   <div class="container-fluid mt-4">
-    <div class="owl-carousel2 owl-theme ml-2">
-    @foreach($product as $pro)
-    @foreach($pro->stock as $stock)
-    @if($stock['on_sale'])
-     <div class="item">
-      <div class="card store-card shadow">
-       <div class="overly">
-        <a href="{{url('vendor/stock-detail/' .$pro['id'])}}">
-          @foreach($pro->image as $img)
-           <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
-          @endforeach
-        </a>
-        @foreach($pro->stock as $stock)
-        @foreach($sale as $sl)
-        @if($sl['end_time']>= $date)
-         <div class="over-text">
-          <p class="sle mt-2" data-id="{{$stock['id']}}">Apply Sale </p>
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.wrapper2-login{
+  display: grid;
+  height: 50rem;
+  width: 100%;
+  place-items: center;
+  background: -webkit-linear-gradient(left, #1f4037, #99f2c8);
+}
+::selection{
+  background: #fa4299;
+  color: #fff;
+}
+.wrapper2{
+  overflow: hidden;
+  max-width: 390px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+}
+.wrapper2 .title-text{
+  display: flex;
+  width: 200%;
+}
+.wrapper2 .title{
+  width: 50%;
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.wrapper2 .slide-controls{
+  position: relative;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0 10px 0;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+.slide-controls .slide{
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 48px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.6s ease;
+}
+.slide-controls label.signup{
+  color: #000;
+}
+.slide-controls .slider-tab{
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  z-index: 0;
+  border-radius: 5px;
+  background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+input[type="radio"]{
+  display: none;
+}
+#signup:checked ~ .slider-tab{
+  left: 50%;
+}
+#signup:checked ~ label.signup{
+  color: #fff;
+  cursor: default;
+  user-select: none;
+}
+#signup:checked ~ label.login{
+  color: #000;
+}
+#login:checked ~ label.signup{
+  color: #000;
+}
+#login:checked ~ label.login{
+  cursor: default;
+  user-select: none;
+}
+.wrapper2 .form-container{
+  width: 100%;
+  overflow: hidden;
+}
+.form-container .form-inner{
+  display: flex;
+  width: 200%;
+}
+.form-container .form-inner form{
+  width: 50%;
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.form-inner form .field{
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+}
+.form-inner form .field input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 15px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  border-bottom-width: 2px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
+.form-inner form .field input:focus{
+  border-color: #fc83bb;
+  /* box-shadow: inset 0 0 3px #fb6aae; */
+}
+.form-inner form .field input::placeholder{
+  color: #999;
+  transition: all 0.3s ease;
+}
+form .field input:focus::placeholder{
+  color: #b3b3b3;
+}
+.form-inner form .pass-link{
+  margin-top: 5px;
+}
+.form-inner form .signup-link{
+  text-align: center;
+  margin-top: 30px;
+}
+.form-inner form .pass-link a,
+.form-inner form .signup-link a{
+  color: #fa4299;
+  text-decoration: none;
+}
+.form-inner form .pass-link a:hover,
+.form-inner form .signup-link a:hover{
+  text-decoration: underline;
+}
+form .btn{
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+form .btn .btn-layer{
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: -webkit-linear-gradient(right, #a445b2, #fa4299, #a445b2, #fa4299);
+  border-radius: 5px;
+  transition: all 0.4s ease;;
+}
+form .btn:hover .btn-layer{
+  left: 0;
+}
+form .btn input[type="submit"]{
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  background: none;
+  border: none;
+  color: #fff;
+  padding-left: 0;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+      </style>
+   </head>
+   <body>
+      <div class="wrapper2-login">
+      <div class="wrapper2">
+         <div class="title-text">
+            <div class="title login">
+               Login Here
+            </div>
+            <div class="title signup">
+               Signup Here
+            </div>
          </div>
-        @endif
-        @endforeach
-        <div class="over-text2">
-          <p class="sle2 text-danger mt-2" data-id="{{$stock['id']}}">{{ceil( ($stock['discount']/$stock['sell_price'])*100)
-           }}%</p>
-        </div>
-        @endforeach
-       </div>
-      <div class="card-body p-0">
-       <p class="stor-text text-danger">{{ucfirst($pro['product'])}}</p>
-       <div class="d-flex">
-        <p class="ml-auto mr-2 text2">${{$pro['sell_price']-$pro['discount']}} 
-        <del class="text-danger">@if($pro['discount']) ${{$pro['sell_price']}} @else @endif</del></p>
-       </div>
+         <div class="form-container">
+            <div class="slide-controls">
+               <input type="radio" name="slide" id="login" checked>
+               <input type="radio" name="slide" id="signup">
+               <label for="login" class="slide login">Login</label>
+               <label for="signup" class="slide signup">Signup</label>
+               <div class="slider-tab"></div>
+            </div>
+            <div class="form-inner">
+               <form action="#" class="login">
+                  <div class="field">
+                     <input type="text" placeholder="Email Address" required>
+                  </div>
+                  <div class="field">
+                     <input type="password" placeholder="Password" required>
+                  </div>
+                  <div class="pass-link">
+                     <a href="#">Forgot password?</a>
+                  </div>
+                  <div class="field btn">
+                     <div class="btn-layer"></div>
+                     <input type="submit" value="Login">
+                  </div>
+                  <div class="signup-link">
+                     Not a member? <a href="">Signup now</a>
+                  </div>
+               </form>
+               <form action="#" class="signup">
+                  <div class="field">
+                     <input type="text" placeholder="Email Address" required>
+                  </div>
+                  <div class="field">
+                     <input type="password" placeholder="Password" required>
+                  </div>
+                  <div class="field">
+                     <input type="password" placeholder="Confirm password" required>
+                  </div>
+                  <div class="field btn">
+                     <div class="btn-layer"></div>
+                     <input type="submit" value="Signup">
+                  </div>
+               </form>
+            </div>
+         </div>
       </div>
-      <div class="card-footer">
-       <div class="text-center rating">
-        @for($i=0; $i<5; $i++)
-        @if($i<$pro['rating'])
-         <span class="fa fa-star checked "></span>
-        @else
-         <span class="fa fa-star"></span> 
-        @endif
-        @endfor
-       </div>
       </div>
-    </div>
-  </div>
-  @endif
-  @endforeach
-  @endforeach
-</div>
-</div>
-
-
-@if($coup->save)
-        @if($coup->save->coupon_id==$coup['id'] && $coup->save->user_id==$usid)
-        <button class=" stor-btn get-coupon bg-dark" >Collected</button>
-        @else
-        <button class=" stor-btn get-coupon" data-id="{{$coup['id']}}" data-code="{{$coup['code']}}"  data-vendor="{{$coup['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif">{{$coup['value']}}</button>
-        @endif
-        @else
-          <button class=" stor-btn get-coupon" data-id="{{$coup['id']}}" data-code="{{$coup['code']}}"  data-vendor="{{$coup['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif">{{$coup['value']}}</button>
-        @endif
-
-
-
-
-
-
-
-
-        try {
-                Order::create($orderData)->save();
-                $product->user->notify(new OrderNotification($order_file));
-                return redirect()->route('home')->with('status', 'your orders has been sent successfully');
-            }catch (\Exception $e) {
-                return redirect()->back()->with('status', 'this product has already in your order list');
-            }
+      <script>
+         const loginText = document.querySelector(".title-text .login");
+         const loginForm = document.querySelector("form.login");
+         const loginBtn = document.querySelector("label.login");
+         const signupBtn = document.querySelector("label.signup");
+         const signupLink = document.querySelector("form .signup-link a");
+         signupBtn.onclick = (()=>{
+           loginForm.style.marginLeft = "-50%";
+           loginText.style.marginLeft = "-50%";
+         });
+         loginBtn.onclick = (()=>{
+           loginForm.style.marginLeft = "0%";
+           loginText.style.marginLeft = "0%";
+         });
+         signupLink.onclick = (()=>{
+           signupBtn.click();
+           return false;
+         });
+      </script>
+   </body>
+</html>
