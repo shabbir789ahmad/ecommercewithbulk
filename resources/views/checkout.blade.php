@@ -87,6 +87,7 @@
       
         <input type="hidden" name="product[]" value="{{$details['name']}}">
         <input type="hidden" name="pid[]" value="{{$details['pid']}}">
+        <input type="hidden" name="ship[]" value="{{$details['ship']}}">
         <input type="hidden" name="quentity[]" value="{{$details['quantity']}}">
        <input type="hidden" name="price[]" value="{{$details['price']}}">
         <input type="hidden" name="image[]" value="{{ $details['image']}}">

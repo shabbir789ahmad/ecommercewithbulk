@@ -19,7 +19,9 @@ class Detail extends Model
      'total',
      'color',
      'size',
+     'ship',
      'product_id',
+     'vendor_id',
      'drop_id',
      'order_status',
      'order_id'

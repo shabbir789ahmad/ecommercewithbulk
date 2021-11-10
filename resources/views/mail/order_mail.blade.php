@@ -101,7 +101,7 @@ img {
 
 
 <div class="card">
-  <img src="img_avatar2.png" alt="Avatar" style="width:100%">
+  <img src="https://img.icons8.com/ios-filled/100/000000/create-order--v2.png"/>
   <div class="container">
     <h4><b>Your Order is On Its Way</b></h4> 
       <a href="{{url('user_dashborad')}}"><button class="btn">Track Your Order</button></a>
@@ -109,7 +109,7 @@ img {
       <div class="row">
       <div class="col-md-6">
          <p class="summ text=left">SUMMARY</p>
-         <p class="summ2">Order #: <span class="ml-4 span">{{$order->id}}</span></p> 
+         <p class="summ2">Order #: <span class="ml-4 span"></span></p> 
          <p class="summ2">Order Date: <span class="ml-4 span">{{$order->created_at}}</span></p> 
          <p class="summ2">Order Payment: <span class="ml-4 span">{{$order->payment}}</span></p> 
          <p class="summ2">Order Total: <span class="ml-4 span">{{$detail['total']}}</span></p> 

@@ -63,7 +63,7 @@ jQuery(document).ready(function ()
      {
       $.ajax({
         
-         url : "/admin/stock-cat/" +id,
+         url : "/vendor/stock-cat/" +id,
          type : "GET",
          dataType : "json",
 
@@ -85,6 +85,7 @@ jQuery(document).ready(function ()
 
   });
 
+
    $('#stock_sub').change(function(){
      
       var id=$(this).val();
@@ -93,7 +94,7 @@ jQuery(document).ready(function ()
       {
         $.ajax({
        
-         url : "/admin/stock-drop/" +id,
+         url : "/vendor/stock-drop/" +id,
          type : "GET",
          dataType : "json",
      

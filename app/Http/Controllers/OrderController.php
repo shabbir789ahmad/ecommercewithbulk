@@ -9,20 +9,19 @@ use App\Models\Dropdown;
 use App\Models\Stock;
 use App\Models\Stock2;
 use App\Models\Category;
+use App\jobs\OrderJob;
 use App\Mail\OrderMail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Auth;
+
 use App\Http\Traits\OrderTrait;
 use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
   use OrderTrait;
   
-   function shopping()
-   {
-    return view('shopping');
-   }
+   
     function order(Request $req)
     {
 
@@ -59,7 +58,7 @@ class OrderController extends Controller
        $count=sizeof($req->product);
        for($i=0; $i < $count; $i++)
        {
-
+   
         $data=Detail::create([
           'product'=> $req->product[$i],
           'image'=> $req->image[$i],
@@ -70,6 +69,7 @@ class OrderController extends Controller
           'size' =>  $req->size[$i],
           'product_id' =>  $req->pid[$i],
           'vendor_id'=> $req->vendor_id[$i],
+          'ship'=> $req->ship[$i],
           'drop_id'=> $req->drop_id[$i],
           'order_status'=> 'Pending',
           'order_id'=> $order->id,
@@ -77,31 +77,29 @@ class OrderController extends Controller
         ]);
        }
 
-    if($data)
-    {
-      $quen=Stock2::where('id',$data['product_id'])->increment('sold_stock');
-      $quen=Stock2::where('id',$data['product_id'])->decrement('stock');
-      $req->session()->forget('cart');
-    }
-      try {
-                $this->orderConform($order,$data);
-            }catch (\Exception $e) {
-                return redirect()->route('shopping')->with('status', 'We Are Unable to send you Conformation mail');
-            }
-         
-   });
+       if($data)
+       {
+         $quen=Stock2::where('id',$data['product_id'])->increment('sold_stock');
+         $quen=Stock2::where('id',$data['product_id'])->decrement('stock');
+         $req->session()->forget('cart');
+        }
+          $mail=$order->email;
+          $this->orderConform($mail,$order,$data);
+                
+     });
 
-     return view('shopping');
+        return view('shopping');
     }else{
         return redirect()->route('login')->with('message','Please Login First');
       }
       
     }
-
-    function orderConform($order, $detail)
+     
+     public function orderConform($mail,$order,$detail)
     {
-      Mail::to($order->email)->send(new OrderMail($order,$detail));
+      dispatch(new OrderJob(Mail::to($mail)->send(new OrderMail($order,$detail))));
     }
+   
 
     function getOrder(Request $req)
     {

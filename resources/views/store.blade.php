@@ -13,7 +13,7 @@ $sub=Category::category();
     @foreach($products as $pro)
     
     <h4 class="">Store Name</h4>
-    <p class="best"><span class="p-1 bg-dark">{{$pro->follow}}</span> Follower</p>
+    <p class="best"><span class="p-1 ">{{$pro->follow}}</span> Follower</p>
     
     <div class="message-follow  d-flex justify-content-center">
      <p class="mr-4 "><i class="fas fa-sms fa-2x ml-3 "></i><br>Message</p>
@@ -174,7 +174,7 @@ $sub=Category::category();
      <div class="item">
       <div class="card store-card shadow">
        <div class="overly">
-        <a href="{{url('vendor/pro-detail/' .$pro['id'])}}">
+        <a href="{{url('productpage/'.$pro['id']. '/' .$pro['drop_id'])}}">
           @foreach($pro->image as $img)
            <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
           @endforeach
@@ -214,12 +214,11 @@ $sub=Category::category();
    <div class="container-fluid mt-4">
     <div class="owl-carousel owl-theme ml-2">
     @foreach($products as $pro)
-
     @if($pro['vendor_on_sale'])
      <div class="item">
       <div class="card store-card shadow">
        <div class="overly">
-        <a href="{{url('vendor/pro-detail/' .$pro['id'])}}">
+        <a href="{{url('productpage/'.$pro['id']. '/' .$pro['drop_id'])}}">
           @foreach($pro->image as $img)
            <img src="{{asset('uploads/img/' .$img['rimage'])}}" width="100%" height="300rem" class="store-img">
           @endforeach

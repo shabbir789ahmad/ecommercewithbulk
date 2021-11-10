@@ -31,8 +31,13 @@ Route::get('/', function () {
     return view('home');
 });
 Auth::routes();
+Route::get('mail',[RegisterController::class,'welcome']);
+
+
 Route::view('affiliate','affiliate');
-Route::get('shopping',[OrderController::class,'shopping'])->name('shopping');
+Route::view('shopping','shopping');
+
+
 //all store with voucher
 Route::get('/voucher',[CouponController::class,'AllStore']);
 Route::get('/bcd',[UserController::class,'user']);
@@ -105,6 +110,7 @@ Route::post('login',[VendorController::class,'Signin'])->name('vendor.login');
 Route::view('register','admin.vendor_signin')->name('vendor.register');
 Route::post('register2',[VendorController::class,'vendorSign'])->name('vendor.register2');
 
+
  });
 
 
@@ -119,6 +125,8 @@ Route::get('dashboard',[CountController::class,'count'])->name('vendor.dashboard
   Route::post('new-stock',[StockController::class,'newStock'])->name('vendor.new-stock');
 Route::post('bulk-stock',[StockController::class,'bulkStock'])->name('vendor.bulk-stock');
 Route::get('stock-show',[StockController::class,'getStock'])->name('vendor.stock-show');
+Route::get('stock-cat/{id}',[SubCategoryController::class,'subCategory2'])->name('vendor/stock-cat/{id}');
+Route::get('stock-drop/{id}',[SubCategoryController::class,'stockDrop'])->name('vendor/stock-drop/{id}');
 
 Route::get('stock-detail/{id}',[StockController::class,'stockDetail'])->name('vendor/stock-detail/{id}');
 
@@ -274,7 +282,7 @@ Route::get('product2/{id}',[ProductController::class,
 
 Route::get('stock-cat/{id}',[SubCategoryController::class,'subCategory2'])->name('admin/stock-cat/{id}');
 
-Route::get('stock-drop/{id}',[SubCategoryController::class,'stockDrop'])->name('admin/stock-drop/{id}');
+
 Route::get('search-product',[StockController::class,'searchStock'])->name('admin/search-product');
 
 

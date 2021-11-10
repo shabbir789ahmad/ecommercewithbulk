@@ -5,26 +5,36 @@
 
  
     
-<div class="card shadow d-flex border  p-0 ">
-  <div class="card-body text-dark">
-    <div class="row">
-      <div class="col-md-2">
-       <a class="btn shadow border" href="{{url('admin/orders')}}">
-       <i class="fab fa-product-hunt text-success text-center fa-2x mt-2"></i></a>
-      </div>
-    <div class="col-md-8">
-     <h4 class="text-center font-weight-bold mt-3 text-color">All Product</h4>
-    </div>
-    <div class="col-md-1">
-     <a class="btn shadow border" href="{{url('vendor/stock-show')}}">
-    <i class="fas fa-pencil-alt text-success fa-lg"></i></a>
-    </div>
-    <div class="col-md-1">
-     <a class="btn shadow border" href="{{url('vendor/stock-show')}}">
-     <i class="fas fa-trash-alt text-danger fa-lg"></i></a>
-    </div>
-  </div>
+<div class="c ml-  d-flex mr-1">
+
+    <a href="{{url('vendor/dashboard')}}">
+    <div class="card shadow border p-0 d-none d-md-block">
+    <div class="card-body text-dark">
+   <i class="fab fa-slideshare text-success fa-lg"></i> Dashboard
+   </div>
  </div>
+</a>
+    
+    <div class="card shadow border ml-auto w-100 w-md-50 p-0 ">
+    <div class="card-body text-dark">
+  <h4 class="text-center font-weight-bold text-color">All Product</h4>
+   </div>
+ </div>
+
+<a href="{{url('vendor/stock-show')}}" class="ml-auto">
+   <div class="card shadow border ml-auto p-0 mr-2 d-none d-md-block">
+    <div class="card-body text-dark">
+   <i class="fas fa-pencil-alt text-success fa-lg"></i> Update
+   </div>
+ </div>
+</a>
+<a href="{{url('vendor/stock-show')}}">
+ <div class="card shadow  p-0 mr-3 d-none d-md-block ">
+    <div class="card-body text-dark">
+   <i class="fas fa-trash-alt text-danger fa-lg"></i> Delete
+   </div>
+ </div>
+</a>
 </div>
 
 
@@ -115,27 +125,27 @@
 
    @foreach($stock as $show)
    <tr>
-    <td class="a col-1">
+    <td class=" col-1">
       @foreach($show->image as $img)
       <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
       @endforeach
     </td>
-    <td class="a col-2">{{$show->product}}</td>
-    <td class="a " ><input type="checkbox" data-id="{{ $show['id'] }}" name="product_status" class="js-switch" 
+    <td class=" col-2">{{$show->product}}</td>
+    <td class=" " ><input type="checkbox" data-id="{{ $show['id'] }}" name="product_status" class="js-switch" 
      {{ $show->product_status == 1 ? 'checked' : '' }} ></td>
     
     
-    <td class="a">{{$show['price']}}</td>
-    <td class="a col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span>
+    <td class="">{{$show['price']}}</td>
+    <td class=" col-2"><span class="bag ">  {{ucfirst($show['sell_price'])}}</span>
      
     </td>
-    <td class="a col-2"><span class="bag ">
+    <td class="col-2"><span class="bag ">
     @if($show['discount'] > '1')
   {{$show['discount']}}@else 0 @endif</span>
     </td>
    
-    <td class="a col-2">{{$show->stock}}</td>
-    <td class="a col-2">{{$show['stock'] - $show['sold_stock']}}</td>
+    <td class=" col-2">{{$show->stock}}</td>
+    <td class=" col-2">{{$show['stock'] - $show['sold_stock']}}</td>
     <td>
      <div class="b d-flex justify-content-center mt-1">
       

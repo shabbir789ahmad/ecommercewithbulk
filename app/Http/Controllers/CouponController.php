@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Coupon;
 use App\Models\CouponUsage;
 use App\Models\CouponSave;
+use App\Models\User;
 use App\Models\Vendor;
+use App\jobs\OrderJob;
+use App\Mail\CouponMail;
 use Auth;
 use session;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 class CouponController extends Controller
 {
@@ -31,25 +35,40 @@ class CouponController extends Controller
 
         ]);
 
-        $coupon=new Coupon;
-        $coupon->code=$req->code;
-        $coupon->value=$req->value;
-        $coupon->type=$req->type;
-        $coupon->min_order_amnt=$req->min_order_amnt;
-        $coupon->exp_date=$req->exp_date;
-        $coupon->limit=$req->limit;
-        $coupon->coupon_status='1';
-        $coupon->vendor_id=Auth::user()->id;
+        $coupon=Coupon::create([
+          
+           'code' => $req->code,
+           'value' => $req->value,
+           'type' => $req->type,
+           'min_order_amnt' => $req->min_order_amnt,
+           'exp_date' => $req->exp_date,
+           'limit' => $req->limit,
+           'coupon_status' => '1',
+           'vendor_id' => Auth::user()->id,
+        ]);
 
-        $coupon->save();
-
-        return redirect()->back()->with('success','Coupon Created');
+     
+         $this->couponMail($coupon);
+        
+        return redirect()->back();
     }
 
    
-    public function store(Request $request)
+    public function couponMail($coupon)
     {
-        //
+        $email=User::
+        join('follows','users.id','=','follows.user_id')->where('follow_id',$coupon->vendor_id)->get();
+
+         try{
+           foreach($email as $mail)
+          {
+           dispatch(new OrderJob(Mail::to($mail)->send(new CouponMail($coupon)))); 
+          }
+         }catch(\Exception $e){
+         return redirect()->back()->with('success','Unable To Send Email  ');
+         }
+        
+        
     }
 
    

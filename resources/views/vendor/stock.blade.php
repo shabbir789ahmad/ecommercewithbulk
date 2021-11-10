@@ -6,28 +6,28 @@
   <div class="c ml-  d-flex mr-1">
 
     <a href="{{url('vendor/dashboard')}}">
-    <div class="card shadow border p-0 ">
+    <div class="card shadow border p-0 d-none d-md-block">
     <div class="card-body text-dark">
    <i class="fab fa-slideshare text-success fa-lg"></i> Dashboard
    </div>
  </div>
 </a>
     
-    <div class="card shadow border ml-auto w-50 p-0 ">
+    <div class="card shadow border ml-auto w-100 w-md-50 p-0 ">
     <div class="card-body text-dark">
-  <h4 class="text-center font-weight-bold text-color">Upload Stock</h4>
+  <h4 class="text-center font-weight-bold text-color">Upload Product</h4>
    </div>
  </div>
 
 <a href="{{url('vendor/stock-show')}}" class="ml-auto">
-   <div class="card shadow border ml-auto p-0 mr-2">
+   <div class="card shadow border ml-auto p-0 mr-2 d-none d-md-block">
     <div class="card-body text-dark">
    <i class="fas fa-pencil-alt text-success fa-lg"></i> Update
    </div>
  </div>
 </a>
 <a href="{{url('vendor/stock-show')}}">
- <div class="card shadow  p-0 mr-3 ">
+ <div class="card shadow  p-0 mr-3 d-none d-md-block ">
     <div class="card-body text-dark">
    <i class="fas fa-trash-alt text-danger fa-lg"></i> Delete
    </div>
@@ -166,12 +166,8 @@
 </div>
 
 <div class="col-md-6">
-
-
-   <p ><span class="float-right  supply btn-color text-light" data-toggle="modal" data-target="#supply" >Add Supplier</span><span class="float-right mr-2 supply mb-3 btn-color text-light" data-toggle="modal" data-target="#brand" >Add Brand</span></p>  
-
-       
- <div class="form-group">
+  <p class="d-none d-md-block"><span class="float-right  supply btn-color text-light" data-toggle="modal" data-target="#supply" >Add Supplier</span><span class="float-right mr-2 supply mb-3 btn-color text-light" data-toggle="modal" data-target="#brand" >Add Brand</span></p>  
+  <div class="form-group">
    <div class="input-group clockpicker" id="clockPicker1">   
      <select class="form-control" name="supply_id" >
       <option disabled selected hidden="">Select Supplier</option>
