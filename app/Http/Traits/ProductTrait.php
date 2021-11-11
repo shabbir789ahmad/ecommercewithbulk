@@ -6,6 +6,7 @@ use App\Models\Stock;
 use App\Models\Stock2;
 use App\Models\Image;
 use App\Models\Follow;
+use App\Models\Coupon;
 use Auth;
 
 trait ProductTrait
@@ -149,12 +150,12 @@ function storeProduct2($id)
     $detail= Stock::
       leftjoin('reviews','stocks.id','=','reviews.review_id')
       ->leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
-      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount')
-     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount')->orderBy('rating','DESC')
+      ->leftjoin('images','stocks.id','=','images.image_id')
+      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount','images.rimage')
+     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount','images.rimage')->orderBy('rating','DESC')
         ->where('drop_id',$drop_id)
         ->findorfail($id);
         
-     
      return $detail;
    }
    function detail2($id,$drop_id)

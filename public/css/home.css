@@ -1,6 +1,6 @@
-body{
+body,.container-fluid,.owl-carousel,.bg{
   font-family:  Montserrat,  Arial, sans-serif;
-  
+/*background: #D9E6EE;*/
 }
 .nav-item{
 	margin-left: 6%;
@@ -35,54 +35,27 @@ select{
   border-radius: 4px;
   background-color: #f1f1f1;
 }
-.item{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-.a .overlay2 {
-   position: absolute; 
-  bottom: 72%;
-  right:3%; 
-  background: #000000;
-  color: #CE2224; 
-  width: 15%;
-  transition: .5s ease;
-  opacity:1;
-  padding: 2%;
-  text-align: center;
+
+
+.product-image .overlay5 {
+  position: absolute; 
+  top: 30%;
+  right:3%;  
+  width: 90%;
+  height: 1rem;
+  
 }
 
-.a .overlay3 {
-  position: absolute; 
-  bottom: 82%;
-  right:3%; 
-  background: black;
-  color: #f1f1f1; 
-  width: 15%;
-  transition: .5s ease;
-  opacity:1;
-  color: white;
-  padding: 2%;
-  text-align: center;
-}
-.a .overlay5 {
-  position: absolute; 
-  top: 40%;
-  right:3%; 
-  color: #f1f1f1; 
-  width: 60%;
-  transition: .5s ease;
-  opacity:1;
-  color: white;
-  padding: 3%;
-  text-align: center;
-}
-
-.card-img-top{
-  display: block;
+.product-image{
   width: 100%;
-  object-fit: contain;
-  height: 20rem;
-  object-fit: cover;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
+  
+}
+.product-image img{
+  width: 100%;
+  height: 23rem;
 }
 
 
@@ -106,11 +79,42 @@ color:#5E473E  ;
 }
 
 .footer-color{
-  background-color: #41B3A3;
+  background-color: #052638;
 }
 
 @media screen and (min-width: 1500px)
 {
+  .product-name2{
+  font-family:  Roboto,sans-serif;
+  font-size: 1.1vw;
+  font-weight: 900;
+  }
+  .product-image .overlay2 {
+   position: absolute; 
+  bottom: 72%;
+  right:5%; 
+  background: #000000;
+  color: #CE2224; 
+  width: 18%;
+  transition: .5s ease;
+  opacity:1;
+  padding: 2%;
+  text-align: center;
+}
+
+.product-image .overlay3 {
+  position: absolute; 
+  bottom: 82%;
+  right:5%; 
+  background: #052638;
+  color: #f1f1f1; 
+  width: 18%;
+  transition: .5s ease;
+  opacity:1;
+  color: white;
+  padding: 1.6%;
+
+}
   .f{
     font-size: 1.4vw !important;
     font-weight: 500;
@@ -121,9 +125,7 @@ color:#5E473E  ;
     color: #000000;
     font-family: Barlow;
   }
-.keephome{
-     font-size: 2vw;
-  }
+
   .slider{
     position: relative;
     height:60rem
@@ -131,6 +133,37 @@ color:#5E473E  ;
 }
 @media screen and (min-width: 900px)
 {
+  .product-image .overlay2 {
+   position: absolute; 
+  bottom: 72%;
+  right:5%; 
+  background: #000000;
+  color: #CE2224; 
+  width: 18%;
+  transition: .5s ease;
+  opacity:1;
+  padding: 2%;
+  text-align: center;
+}
+
+.product-image .overlay3 {
+  position: absolute; 
+  bottom: 82%;
+  right:5%; 
+  background: #052638;
+  color: #f1f1f1; 
+  width: 18%;
+  transition: .5s ease;
+  opacity:1;
+  color: white;
+  padding: 1.6%;
+
+}
+  .product-name2{
+  font-family:  Roboto,sans-serif;
+  font-size: 1.1vw;
+  font-weight: 900;
+  }
   .f{
     font-size: 1.2vw !important;
     font-weight: 500;
@@ -144,7 +177,7 @@ color:#5E473E  ;
     color: #fff;
   }
   .bg-cate{
-  background-color: #417CB8;
+  background-color: #052638;
   overflow: hidden;
   padding-bottom: 4%;
   }
@@ -159,9 +192,7 @@ color:#5E473E  ;
     font-weight: 700;
     color: #000000;
   }
-.keephome{
-  font-size: 2vw;
-}
+
 .slider{
     position: relative;
     height:30rem
@@ -282,6 +313,35 @@ padding: 0% 3rem;
 
 @media screen and (max-width: 600px)
 {
+  .product-image .overlay2 {
+   position: absolute; 
+  bottom: 70%;
+  right:5%; 
+  background: #000000;
+  color: #CE2224; 
+  width: 18%;
+  transition: .5s ease;
+  opacity:1;
+  padding: 2%;
+  text-align: center;
+}
+
+.product-image .overlay3 {
+  position: absolute; 
+  bottom: 82%;
+  right:5%; 
+  background: #052638; 
+  width: 18%;
+  transition: .5s ease;
+  opacity:1;
+  padding: 2%;
+
+}
+  .product-name2{
+  font-family:  Roboto,sans-serif;
+  font-size: 3vw;
+  font-weight: 900;
+}
   .add-txt{
   font-size: 4vw;
   font-weight: 400;

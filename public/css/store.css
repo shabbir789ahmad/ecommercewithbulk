@@ -51,7 +51,7 @@
     font-style: italic;
 }
 .txt .btn-store{
-	background-color:#00A9A4;
+	background-color:#ED7632;
 
 }
 .stor-text{
@@ -76,7 +76,7 @@
 }
 .store-nav-color{
     height: 4rem;
-     background: #166387;
+     background: #052638;
 }
 .pro 
  {
@@ -178,7 +178,7 @@
   }
 .txt .btn-store
   {
-    background-color: #00A9A4;
+    background-color: #ED7632;
     
   }
 .n2
@@ -245,7 +245,7 @@
 *{
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
+
  
 }
 
@@ -660,7 +660,7 @@ color: white;
 }
 
   .btn-store{
-    background-color: #00A9A4; 
+    background-color: #ED7632; 
   border: none;
   color: white;
   padding: 1rem 2rem;
@@ -700,7 +700,7 @@ color: white;
       color: #ffffff;
     }
   .btn-store{
-    background-color: #00A9A4; 
+    background-color: #ED7632; 
   border: none;
   color: white;
   padding: 1rem 2rem;

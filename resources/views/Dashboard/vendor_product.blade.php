@@ -72,7 +72,7 @@
     <div class="row mt-4 ml-2 mr-2">
      
   <div class="col-md-4">
-   <select class="form-control"  id="stock_cat">
+   <select class="form-control"  id="stock_cat2">
     <option selected="" disabled hidden="" >Main Category</option>
 
     @foreach($main as $m)
@@ -82,14 +82,14 @@
 
   </div>
   <div class="col-md-4">
-   <select class="form-control"  id="stock_sub">
+   <select class="form-control"  id="stock_sub2">
    
    
 </select>
 
   </div>
   <div class="col-md-4">
-     <select class="form-control"  id="stock_drop">
+     <select class="form-control"  id="stock_drop2">
     
      </select>
   </div>

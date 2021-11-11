@@ -31,6 +31,45 @@ overflow: auto;
 
 }
 
+.dropdowns{
+  position: relative;
+  display: inline-block;
+}
+.coupon-dropbtn{
+   cursor: pointer;
+   background-color: #ED7632;
+   padding: .5rem 6rem;
+   color: #ffffff;
+   border: none;
+}
+.coupon-content
+{
+  display: none;
+  position: absolute;
+  right: 0;
+
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 12px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.coupon-content .cop{
+  display: block;
+  background-color: #ffffff;
+  width: 20rem;
+}
+.cop .p1{
+  font-size: 1.8rem;
+  font-family: Roboto,sans-serif;
+  font-weight: 600;
+margin-bottom: 0;
+}
+.cop .p2{
+  font-size: 1rem;
+  font-family: Roboto,sans-serif;
+  margin: 0;
+
+}
 
 
 .name2{
@@ -44,12 +83,14 @@ font-weight: 700;
   text-align: center;
   color: white;
 }
-.img-overfow{
-  overflow: auto;
-  
-
+.img-shadow{
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+  width: 90%;
+  height: 35rem;
 }
-
+.imgs{
+    width: 100%; height: 40rem; overflow: hidden;
+  }
 
 
 a:hover, a:visited, a:link, 
@@ -61,35 +102,13 @@ a:hover,  a:active
 {
     color: #17A2B8;
 }
-.btn-pro{
-  background-color: #166387;
-}
+
 @media screen and (max-width: 600px)
 {
   .pre{
   display: none;
 }
 
-  .imgs{
-    width: 100%; height: 20rem; overflow: hidden;
-  }
-  .names{
- font-family : Arial, sans-serif;
-font-size:4vw;
-font-weight: 500;
-margin-bottom: 3px;
-margin-left: 40%;
-}
-
-.name3{
- height: 3rem;
- overflow: hidden;
- word-wrap: break-word;
-font-family : Arial, sans-serif;
-font-size:3vw;
-font-weight: 500;
-
-}
 .review-mesage{
   font-weight: 500;
 font-size: 3vw;
@@ -100,39 +119,80 @@ color: #ffffff;
 .n,.review-mesage{
   margin-bottom: 2% !important;
 }
-.details-images{
-  width: 100%;
-  overflow-x: auto;
+.product-name
+{
+  font-size: 1.4rem;
+  font-family: Roboto,sans-serif;
+  font-weight: 600;
 }
 
+.btn-pro{
+  font-size: 3vw !important;
+  font-weight: 600;
+  background-color: #062233;
+
+ }
+.product-detail,.product-detail3{
+  font-family : Roboto, sans-serif !important;
+ }
+ .product-detail3{
+   color: #007F9A;
+   font-size: 3vw;
+   font-weight: 600;
+   margin-top: 0;
+  }
+ .product-detail{
+  font-size:3vw !important;
+   height: 5rem;
+  overflow: hidden;
+  word-wrap: break-word;
+  color: #6e7076;
+  font-weight: normal;
+ }
+ .product-detail2{
+  color: #000000;
+  font-family : Roboto, sans-serif !important;
+  font-size:4vw !important;
+  font-weight: 600;
+ }
 }
+
+
 @media screen and (min-width: 900px)
 {
 .imgs{
     width: 100%; height: 35rem; overflow: hidden;
   }
-.names{
-    font-family : Arial, sans-serif;
-    font-size:1.8vw;
-    font-weight: 500;
-    margin-bottom: 3px;
-   }
- .name3{
-  height: 4rem;
- overflow: hidden;
- word-wrap: break-word;
-font-family : Arial, sans-serif !important;
-font-size:1.5vw !important;
-font-weight: normal;
-
+.product-name
+{
+  font-size: 2rem;
+  font-family: Roboto,sans-serif;
+  font-weight: 600;
 }
-.name4{ 
-font-family : Arial, sans-serif;
-color: #CCCCCC;
-font-size:.9;
-font-weight: 500;
+.product-detail,.product-detail3{
+  font-family : Roboto, sans-serif !important;
+ }
+ .product-detail3{
+   color: #007F9A;
+   font-size: 1vw;
+   font-weight: 600;
+   margin-top: 0;
+  }
+ .product-detail{
+  font-size:1.2vw !important;
+   height: 5rem;
+  overflow: hidden;
+  word-wrap: break-word;
+  color: #6e7076;
+  font-weight: normal;
+ }
+ .product-detail2{
+  color: #000000;
+  font-family : Roboto, sans-serif !important;
+  font-size:2vw !important;
+  font-weight: 600;
+ }
 
-}
 
 .review-mesage{
   font-weight: 500;
@@ -163,13 +223,13 @@ font-family: Montserrat;
 .rt{
    direction: ltr;
 }
-.details-images{
-  height: 35rem;
-  overflow-y: auto;
-}
+
 .btn-pro{
-  font-size: 1.4vw !important;
-}
+  font-size: 1vw !important;
+  font-weight: 600;
+  background-color: #062233;
+
+ }
 }
 .hr{
   border: 0;clear:both;

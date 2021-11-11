@@ -125,8 +125,7 @@ Route::get('dashboard',[CountController::class,'count'])->name('vendor.dashboard
   Route::post('new-stock',[StockController::class,'newStock'])->name('vendor.new-stock');
 Route::post('bulk-stock',[StockController::class,'bulkStock'])->name('vendor.bulk-stock');
 Route::get('stock-show',[StockController::class,'getStock'])->name('vendor.stock-show');
-Route::get('stock-cat/{id}',[SubCategoryController::class,'subCategory2'])->name('vendor/stock-cat/{id}');
-Route::get('stock-drop/{id}',[SubCategoryController::class,'stockDrop'])->name('vendor/stock-drop/{id}');
+
 
 Route::get('stock-detail/{id}',[StockController::class,'stockDetail'])->name('vendor/stock-detail/{id}');
 
@@ -217,6 +216,16 @@ Route::get('sale-status',[VendorSaleController::class,'statusSale'])->name('vend
 Route::post('update-vendor-sale',[VendorSaleController::class,'updateSale'])->name('vendor/update-vendor-sale');
 
 
+//route for categrory from main
+Route::get('product/{id}',[SubCategoryController::class,'subCategory2'])->name('admin.product/{id}');
+Route::get('product2/{id}',[SubCategoryController::class,'stockDrop'])->name('vendor.product2/{id}');
+Route::get('stock-cat/{id}',[SubCategoryController::class,'subCategory2'])->name('vendor/stock-cat/{id}');
+Route::get('stock-drop/{id}',[SubCategoryController::class,'stockDrop'])->name('vendor/stock-drop/{id}');
+
+
+
+
+
 //route for coupon 
 Route::get('new-coupon',[CouponController::class,'index'])->name('vendor/new-coupon');
 Route::post('coupon',[CouponController::class,'create'])->name('vendor/coupon');
@@ -270,10 +279,8 @@ Route::post('update-main2',[MainController::class,'updateMain2'])->name('admin.u
 //route for product
 
 
-Route::get('product/{id}',[ProductController::class,
-    'subCategory2'])->name('admin.product/{id}');
-Route::get('product2/{id}',[ProductController::class,
-    'dropCat'])->name('admin.product2/{id}');
+Route::get('stock-cat/{id}',[SubCategoryController::class,'subCategory2'])->name('admin/stock-cat/{id}');
+Route::get('stock-drop/{id}',[SubCategoryController::class,'stockDrop'])->name('admin/stock-drop/{id}');
 
 
 
@@ -281,20 +288,9 @@ Route::get('product2/{id}',[ProductController::class,
 
 
 Route::get('stock-cat/{id}',[SubCategoryController::class,'subCategory2'])->name('admin/stock-cat/{id}');
-
-
 Route::get('search-product',[StockController::class,'searchStock'])->name('admin/search-product');
-
-
-
-
 Route::view('test','Dashboard.test')->name('admin.test');
 Route::get('delete-product/{id}',[ProductController::class,'deleteProduct'])->name('admin.delete-product/{id}');
-
-
-
-
-
 Route::post('status-up',[OrderController::class,'statusUp'])->name('admin.status-up');
 
 
@@ -302,24 +298,20 @@ Route::post('status-up',[OrderController::class,'statusUp'])->name('admin.status
 Route::view('get-cat','Dashboard.category_uploads')->name('admin.get-cat');
 Route::get('get-cat',[CategoryController::class,'getCat'])->name('admin.get-cat');
 Route::post('upload-category',[CategoryController::class,'uploadCat'])->name('admin.upload-category');
-
 Route::get('show-category',[CategoryController::class,'showCat'])->name('admin.show-category');
 Route::get('delete-category/{id}',[CategoryController::class,'deleteCat'])->name('admin.delete-category/{id}');
 Route::get('get-category/{id}',[CategoryController::class,'getCategory2'])->name('admin.get-category/{id}');
 Route::post('update-category',[CategoryController::class,'updateCat'])->name('admin.update-category');
 
-
+//sub cat 
 Route::view('get-sub-category','Dashboard.subcategory_uploads')->name('admin.get-sub-category');
-
 Route::get('get-sub-category',[SubCategoryController::class,'subCategory'])->name('admin.get-sub-category');
 
 Route::get('get-sub-category/{id}',[SubCategoryController::class,
     'subCategory2'])->name('admin.get-sub-category/{id}');
 Route::post('upload-sub-category',[SubCategoryController::class,
     'uploadSubCategory'])->name('admin.upload-sub-category');
-
 Route::get('show-sub-category',[SubCategoryController::class,'showSubCategory'])->name('admin.show-sub-category');
-
 Route::get('delete-sub-category/{id}',[SubCategoryController::class,'deleteSubCategory'])->name('admin.delete-sub-category/{id}');
 Route::get('update-sub-category/{id}',[SubCategoryController::class,'updateSubCategory'])->name('admin.update-sub-category/{id}');
 Route::post('update2-sub-category',[SubCategoryController::class,'updateSubCategory2'])->name('admin.update2-sub-category');
@@ -338,13 +330,9 @@ Route::post('update-social-link',[SocialController::class,'updateLink2'])->name(
 //route for logo upload
 Route::view('logo','Dashboard.logo_upload')->name('admin.logo');
 Route::post('upload-logo',[SliderController::class,'Logo'])->name('admin.upload-logo');
-
 Route::get('get-logo',[SliderController::class,'getLogo'])->name('admin.get-logo');
-
 Route::get('delete-logo/{id}',[SliderController::class,'deleteLogo'])->name('admin.delete-logo/{id}');
-
 Route::get('update-logo/{id}',[SliderController::class,'updateLogo'])->name('admin.update-logo/{id}');
-
 Route::post('update-logo2',[SliderController::class,'updateLogo2'])->name('admin.update-logo2');
 
 

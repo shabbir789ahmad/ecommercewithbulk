@@ -16,7 +16,7 @@ class Stocks extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->string('product');
-            $table->string('detail');
+            $table->longtext('detail');
             $table->string('product_status');
             $table->string('size_image');
              $table->bigInteger('user_id')->unsigned();

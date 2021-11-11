@@ -37,7 +37,7 @@ jQuery(document).ready(function ()
       {
         $.ajax({
        
-         url : "/admin/order-cat/" +id,
+         url : "/vendor/order-cat/" +id,
          type : "GET",
          dataType : "json",
      
@@ -143,7 +143,31 @@ $('#stock_cat2').change(function(){
 
   });
 
-   
+  $('#stock_cat2').change(function(){
+     
+      var id=$(this).val();
+      //alert (id)
+      if(id)
+      {
+        $.ajax({
+       
+         url : "/admin/stock-drop/" +id,
+         type : "GET",
+         dataType : "json",
+     
+       success:function(sub)
+       {
+        $('#stock_drop2').empty();
+        $.each(sub, function(key,value){
+          $('#stock_drop2').append('<option disabled hidden selected>Select Category</option>')
+          $('#stock_drop2').append('<option value="' + key + '">'+ value +' </option>');
+
+        });
+       }
+        });
+
+      }
+    }); 
 
 
 });

@@ -20,7 +20,7 @@ a{
 header{
     position: sticky;
     top: 0px;
-    background-color: #166387;
+    background-color: #052638;
     width: 100%;
     z-index: 1000;
     height: 4rem;
@@ -176,7 +176,7 @@ section{
     position: absolute;
     top: 100%;
     left: 0;
-    width: 10rem;
+    width: 13rem;
     transform: translateY(10px);
     opacity: 0;
     pointer-events: none;
@@ -209,7 +209,7 @@ section{
 }
 
 .dropdown-link:hover > a{
-    background-color: #131921;
+    background-color: #ED7632;
     color: #fff;
 }
 

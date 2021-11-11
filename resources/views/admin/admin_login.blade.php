@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('content')
-<div class="container w-100  mt-5 border p-5 shadow mb-4">
+<div class="container w-100 bg-light  mt-5 border p-5 shadow mb-4">
       <h2 class="text-center font-weight-bold">Login Here</h2>
       @if ($alert = Session::get('message'))
     <div class="alert alert-warning">

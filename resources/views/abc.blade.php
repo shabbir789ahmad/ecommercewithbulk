@@ -161,3 +161,141 @@
 </body>
 
 </html>
+
+
+
+<div class="row">
+     <div class="col-md-12 col-6">
+        <p class=" names ml-3 ml-md-0 mt-1 mt-md-3" > {{ucwords($detail['product'])}}</p>
+        <p class="text-dark name3 ml-3 ml-md-0">{{ucwords($detail['detail'])}}</p>
+        <p><span class="float-right">
+          <button class="btn-sm btn btn-store rounded btn-check text-light detail" data-name="{{$detail['product']}}" data-detail="{{$detail['detail']}}">Detail
+            </button>
+          </span>
+          
+        </p>
+      </div>
+    
+      <div class="col-md-12 col-6 ">
+        <h5 class=" names">${{$detail['sell_price']- $detail['discount']}}
+        <span>
+          <small class="text-danger"> <del>${{$detail['sell_price']}}</del>
+          </small>
+        </span>
+        <span class="float-right  mr-4 mr-5 mr-md-0 mt-3 mt-md-0"><a href="{{url('store/'.$detail['user_id'])}}"><button class="btn-sm btn btn-store rounded btn-check text-light">Visit Store</button></a></span>
+       </h5>
+      </div>
+    
+     <hr class="text-dark d-none d-md-block hr" >
+    <div class="col-md-8 col-12 col-sm-12 col-lg-8">
+  <div class="col-md-12 col-6 mt-3 mt-md-0">
+    <p class=" text-dark   ml-3 ml-md-0">Color:  <br> 
+   <span >
+    @foreach($color as $s)
+    <label class="containers " onclick="cartcolor('{{$s['color']}}') ">
+     <input type="radio" checked="" name="radio"  >
+     <span class="checkmark" style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 2.3rem;
+      width: 2.3rem;
+      padding: 11% 0;
+      text-align: center;
+      background-color:{{$s['color']}};
+      border-radius: 5%;" >
+      </span>
+     </label>
+    @endforeach
+    </span>
+  </p>
+ </div>
+
+
+
+
+  
+ </div>
+  <div class="col-md-4 col-0 d-none d-md-block col-sm-0 col-lg-4">
+    <div class="pre" id="mo-img">
+     <img src="{{asset('uploads/img/' .$detail['size_image'])}}" width="95%" height="200rem" class="mr-5 image-preview" id="myImg">
+      <div class="middle">
+       <div class="preview">preview</div>
+      </div>
+    </div>
+   </div>
+
+  </div> 
+
+
+  <div class="col-md-12 mt-3 col-6">
+    <h5 class="ml-3 mt-4 mt-md-3 text-dark">Size:</h5>
+   <div class="d-flex mt-0 ml-3 ml-md-0 mt-md-3 mb-4">
+    @foreach($size as $s)
+     <label class="span " >
+      <input type="radio" checked="" name="size" value="{{$s['size']}}" onclick="cartsize('{{$s['size']}}') ">
+      <span class="checkmark" style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 11% 0;
+      height: 2.3rem;
+      width: 2.3rem;
+      border: 1px solid #1F2833;
+      border-radius: 5%;
+      text-align: center;">{{$s['size']}}</span>
+     </label>
+    @endforeach
+   </div>
+  </div>
+
+  <p class="text-danger" id="message"></p>
+   <button class="btn btn-pro btn-block add-to-cart py-3 text-light mt-2 mt-md-3 rounded"  data-id="{{$detail['id']}}" data-color="" data-size="" id="carts">Add To Cart</button>
+
+
+
+    <hr>
+
+<div class="row">
+ <div class="col-md-6">
+  <i class="fas fa-shipping-fast ml-2 ml-md-0"><span class="text-secondary ml-3">Fast Delivery</span></i>
+    </div>
+     <div class="col-md-6">
+      <i class="fas fa-sync ml-2 ml-md-0"><span class="text-secondary ml-3">Free Exchange</span></i>
+      
+    </div>
+    <div class="col-md-6 mt-3 mb-4">
+      <i class="fas fa-warehouse ml-2 ml-md-0"><span class="text-secondary ml-3">100% Genuine Brand</span></i>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="col-12 col-md-6 d-block d-md-none " >
+    <div id="carouselslider" class="carousel slide " data-ride="carousel">
+     <div class="carousel-inner">
+       @foreach($image as $img)
+        <div class="carousel-item  @if($loop->first) active @endif caro" >
+         <div class="slider">
+           <img class="d-block w-100" src="{{asset('uploads/img/'.$img['rimage'])}}" alt="Firstlide" style="">
+         </div>
+        </div>
+       @endforeach
+     </div>
+     <a class="carousel-control-prev bg-dark slider-pad" href="#carouselslider" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+     </a>
+     <a class="carousel-control-next bg-dark slider-pad" href="#carouselslider" role="button" data-slide="next">
+       <span class="carousel-control-next-icon" aria-hidden="true"></span>
+       <span class="sr-only">Next</span>
+     </a>
+    </div>
+   </div>

@@ -268,39 +268,40 @@ $sub=Category::category();
  <div class="row mr-2">
    @foreach($product as $pro)
    <div class="col-sm-4 col-12 col-md-4 col-lg-4  mt-2">
-    <div class="card ">
-     <div class="a">
-       <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">
-        @foreach($pro->image as $img)
-         @if($loop->first)
-         <img  src="{{asset('uploads/img/'.$img->rimage)}}" class="card-img-top" alt="...">
-         @endif
+    <div class="item">
+     <div class="product-image">
+      <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
+         <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
         @endforeach
-       </a>
-       <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
+      </a>
 
-       @if($pro['discounts'])
-        <p class="overlay2 ">{{ceil( ($pro['discounts']/$pro['new_price'])*100)}}% </p>
+      <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
+       @if($pro['discount'])
+        <a > <p class="overlay2 text-danger">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
+       }}%</p></a>
        @else
-
        @endif
+       @if($pro['rating']>4)
+       <p class="overlay5 ">
+        <img src="{{asset('pic/Sponsered-removebg-preview.png')}}" width="100%" height="10rem">
+        </p>
+        @else
+
+        @endif
      </div>
-     <div class="card-body">
-       <p class="f">{{ucwords($pro['product'])}}
-        <span class="float-right ">${{$pro['new_price'] -   $pro['discounts']}}<del class="text-secondary">
-         <small class="text-danger">${{$pro['new_price']}}</small></del> 
-        </span>
-       </p>
-       <div class="text-center rating">
-          @for($i=0; $i<5; $i++)
-          @if($i<$pro['rating'])
-          <span class="fa fa-star checked "></span>
-          @else
-          <span class="fa fa-star"></span> 
-          @endif
-          @endfor
-        </div>
-      </div>
+     <div class="product-text d-flex mt-2">
+      <p class="product-name2">{{ucwords($pro['product'])}}</p>
+      <p class="ml-auto product-name2">Rs. {{$pro['sell_price']-$pro['discount']}}</p>
+     </div>
+     <div class="text-center">
+        @for($i=0; $i<5; $i++)
+        @if($i<$pro['rating'])
+        <span class="fa fa-star checked "></span>
+        @else
+        <span class="fa fa-star"></span> 
+        @endif
+         @endfor
+       </div>
     </div>
    </div>
    @endforeach

@@ -12,8 +12,8 @@ use App\Models\Color;
 use App\Models\Size;
 use App\Models\Store;
 use App\Models\Stock;
-use App\Models\Stock2;
 use App\Models\Review;
+use App\Models\Coupon;
 use App\Http\Traits\ProductTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -21,17 +21,7 @@ class ProductController extends Controller
 {
 
  use ProductTrait;
- public function subCategory2($id) 
-   {        
-     $sub = DB::table("submenues")->where('menue_id',$id)
-     ->pluck("smenue","id");
-     return response()->json($sub);
-   }
-  public function dropCat($id) 
-   {        
-      $drop = DB::table("dropdowns")->where('dropdown_id',$id)->pluck("name","id");
-     return response()->json($drop);
-    }
+
 
   //function for product detail 
   function productDetail($id,$drop_id)
@@ -43,8 +33,9 @@ class ProductController extends Controller
     $size= Size::where('size_id',$id)->get();
     $brand= Store::where('brand_id',$id)->get();
     $review= Review::where('review_id',$id)->get();
-   
-        return view('productpage',compact('detail','detail2','image','color','size','brand','review'));
+    $coupon=Coupon::where('vendor_id',$detail->user_id)->latest()->take('2')->get();
+    //dd($coupon);
+    return view('productpage',compact('detail','detail2','image','color','size','brand','review','coupon'));
   }  
 
 
@@ -87,43 +78,42 @@ class ProductController extends Controller
         $price=$req->get('price');
     }
    
-  //echo $drop;
-     $query= Stock::
-        leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
-        ->leftjoin('sales','stocks.id','=','sales.sale_id')
-        ->leftjoin('reviews','stocks.id','=','reviews.review_id')
-        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','sales.on_sale')
-       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','sales.on_sale')->orderBy('rating','DESC');
-     if($req->get('color2') !== Null)
-       {
-        $query=$query->join('colors','stocks.id','=','colors.filter_id');
-        $query=$query->where('colors.color',$req->get('color2'));
-        }
+  
+    $query= Stock::
+    leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
+    ->leftjoin('sales','stocks.id','=','sales.sale_id')
+    ->leftjoin('reviews','stocks.id','=','reviews.review_id')
+    ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','sales.on_sale')
+    ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','sales.on_sale')->orderBy('rating','DESC');
+    if($req->get('color2') !== Null)
+      {
+      $query=$query->join('colors','stocks.id','=','colors.filter_id');
+      $query=$query->where('colors.color',$req->get('color2'));
+      }
 
-     if($req->get('brand2') !== Null)
-       {
-          $query=$query->join('stores','stocks.id','=','stores.brand_id');
+    if($req->get('brand2') !== Null)
+      {
+        $query=$query->join('stores','stocks.id','=','stores.brand_id');
         $query=$query->where('brand',$req->get('brand2'));
-        }
+      }
 
-     if($req->get('size2') !== Null)
-        {
-            $query=$query->join('sizes','stocks.id','=','sizes.size_id');
+    if($req->get('size2') !== Null)
+      {
+        $query=$query->join('sizes','stocks.id','=','sizes.size_id');
         $query=$query->where('size',$req->get('size2'));
-        }
+      }
 
-       
-        if($rate)
-        {
-            $query=$query->where('rating',$rate);
-        }
+    if($rate)
+      {
+        $query=$query->where('rating',$rate);
+       }
         
-         if($sort=='new')
-        {
-           $start = $now->startOfWeek()->format('Y-m-d H:i');
-           $end = $now->endOfWeek()->format('Y-m-d H:i');
-           $query=$query->whereBetween('stocks.created_at',[$start,$end]);
-        }
+    if($sort=='new')
+      {
+         $start = $now->startOfWeek()->format('Y-m-d H:i');
+         $end = $now->endOfWeek()->format('Y-m-d H:i');
+        $query=$query->whereBetween('stocks.created_at',[$start,$end]);
+       }
         if($sort=='top')
         {
             $query=$query->where('rating','>=','4');

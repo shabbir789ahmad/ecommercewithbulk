@@ -7,7 +7,7 @@ $(document).ready(function()
       {
          $.ajax({
            
-           url : '/admin/product/' +id,
+           url : '/vendor/product/' +id,
            type : "GET",
            dataType :"json",
 
@@ -33,7 +33,7 @@ $(document).ready(function()
       {
          $.ajax({
            
-           url : '/admin/product2/' +id,
+           url : '/vendor/product2/' +id,
            type : "GET",
            dataType :"json",
 

@@ -54,8 +54,9 @@ margin-top: 0 !important;
 
 }
 
-.btn-color{
-	background-color: #166387;
+.btn-color:hover{
+	background-color: #ED7632;
+	border: none !important;
 }
 
 .slider_height img{
@@ -96,7 +97,7 @@ margin-top: 0 !important;
   right: 4%;
 }
 .stor-btn:hover{
-	background-color: #166387;
+	background-color: #ED7632;
 }
 @media screen and (min-width: 900px)
 {

@@ -71,7 +71,7 @@ class SliderController extends Controller
   function uploadSlider(Request $req)
   {
     $req->validate([
-   'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048|dimensions:min_width=500,min_height=1000',
+   'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:6048',
      'heading'=>'required|min:22|max:40',
     
     ]);
