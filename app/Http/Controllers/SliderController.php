@@ -213,9 +213,13 @@ class SliderController extends Controller
   {
      try {
         $search=$req->search;
-    $search2=Stock::join('images','stocks.id','=','images.image_id')
+    $search2=Stock::join('stock2s','stocks.id','=','stock2s.stock_id')
     ->where('product','LIKE',"%{$search}%")->get();
-
+    foreach($search2 as $search)
+     {
+      $search->image=Image::where('image_id',$search['id'])->take(1)->get();
+      
+     }
     } catch (\Exception $e) {
         return redirect()->back()->withError('Not data Found for Search ' . $request->input('search'))->withInput();
     }

@@ -1,0 +1,32 @@
+
+.user-card-hover:hover{
+	background-color: #F0F0F0;
+  }
+
+.order-user{
+    color: #000000;
+    font-size: 1.5vw !important;
+    font-weight: 600;
+
+  }
+  .banner-user{
+  	position: relative;
+  }
+  .round-image{
+  	position: absolute;
+  	bottom: 10%;
+  	left: 20;
+  }
+@media screen and (max-width: 900px)
+{
+ .order-user{
+    color: #000000;
+    font-size: 4vw !important;
+    font-weight: 600;
+
+  }
+ 
+  .text-user{
+  	margin-top: 10% ;
+  }
+}

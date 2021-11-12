@@ -23,6 +23,7 @@
 
 <link rel="stylesheet" type="text/css" href=" {{asset('css/homeproductround.css')}} ">
 <link rel="stylesheet" type="text/css" href=" {{asset('css/about.css')}} ">
+<link rel="stylesheet" type="text/css" href=" {{asset('css/user.css')}} ">
 <link rel="stylesheet" type="text/css" href=" {{asset('css/store.css')}} ">
 
 <link rel="stylesheet" type="text/css" href=" {{asset('css/cart.css')}} ">

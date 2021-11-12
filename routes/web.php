@@ -38,6 +38,7 @@ Route::view('affiliate','affiliate');
 Route::view('shopping','shopping');
 
 
+
 //all store with voucher
 Route::get('/voucher',[CouponController::class,'AllStore']);
 Route::get('/bcd',[UserController::class,'user']);
@@ -96,6 +97,9 @@ Route::group(['middleware'=>'auth'],function(){
  Route::get('user_dashborad',[Usercontroller::class,'order']);
  Route::get('order-track/{id}',[Usercontroller::class,'track']);
  Route::post('chechout2',[OrderController::class,'order']);
+ Route::view('account','User.account');
+ Route::view('login-and-securty','User.login_and_securty');
+ Route::view('user_profile','User.user_profile');
 });
 
 
