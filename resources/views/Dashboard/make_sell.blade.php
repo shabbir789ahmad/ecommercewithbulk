@@ -74,6 +74,17 @@
       </div>
      </div>
      <span class="text-danger mt-3">@error('end_time') {{$message}} @enderror</span>
+     <label class="text-dark">Sale Image</label> 
+     <div class="form-group">
+      <div class="input-group clockpicker" id="clockPicker1">  
+       <input type="file" name="image" placeholder="Sell End Time" class="form-control "  value="{{old('image')}}" required="">
+       <br>
+       <div class="input-group-append">
+        <span class="input-group-text"><i class="fas fa-images"></i></span>
+       </div>                      
+      </div>
+     </div>
+     <span class="text-danger mt-3">@error('image') {{$message}} @enderror</span>
     <button  class="btn btn-block btn-color text-light mt-5">Submit</button>
     </form>
    </div>

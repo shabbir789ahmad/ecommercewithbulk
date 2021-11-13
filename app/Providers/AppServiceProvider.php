@@ -37,10 +37,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         View::composer('*', function($view)
         {
-             $sells=$this->sale();
+             
               $link=Social::latest()->take(1)->get();
               $logo=Logo::latest()->take(1)->get();
-            $view->with('link', $link)->with('logo', $logo)->with('sells',$sells);
+            $view->with('link', $link)->with('logo', $logo);
         });
 
       

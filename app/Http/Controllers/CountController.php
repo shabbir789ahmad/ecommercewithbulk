@@ -152,7 +152,8 @@ class CountController extends Controller
       }
      
     $date=Carbon::now();
-    return view('vendor.vendorcount',$arr,compact('comp','com','order','or','sale','sl','earn','en','message','today','date'));
+     $sells=$this->sale();
+    return view('vendor.vendorcount',$arr,compact('comp','com','order','or','sale','sl','earn','en','message','today','date','sells'));
     }
 
     function count2()

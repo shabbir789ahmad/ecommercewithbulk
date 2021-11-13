@@ -19,6 +19,7 @@ class CreateSellsTable extends Migration
             $table->datetime('start_time');
             $table->datetime('end_time');
             $table->string('sell_status');
+            $table->string('sale_image');
             $table->timestamps();
         });
     }

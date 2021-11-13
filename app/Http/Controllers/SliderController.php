@@ -14,9 +14,11 @@ use App\Models\Dropdown;
 use App\Models\Image;
 use Carbon\Carbon;
 use App\Http\Traits\StoreTrait;
+use App\Http\Traits\CouponTrait;
 class SliderController extends Controller
 {
     use StoreTrait;
+    use CouponTrait;
 
   
   function  women()
@@ -26,7 +28,11 @@ class SliderController extends Controller
     $slider=Slider::latest()->take('3')->get();
     $front=Mainpage::latest()->take('1')->get();
     $dropdown=$this->dropdown();
+    $sells=$this->sale();
+    $sell=$this->sale2();
+    //dd($sells);
     $time=$this->carbon();
+    $store=$this->getCoupon();
     $product= Vendor::
      join('stocks','vendors.id','=','stocks.user_id')
      ->join('stock2s','stocks.id','=','stock2s.stock_id')
@@ -65,15 +71,13 @@ class SliderController extends Controller
         $pro->image=Image::where('Image_id',$pro->id)->get();
        }
    //dd($product);
-      return view('home',compact('slider','product','product2','front','dropdown','time'));
+      return view('home',compact('slider','product','product2','front','dropdown','time','sells','sell','store'));
   }
 
   function uploadSlider(Request $req)
   {
     $req->validate([
    'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:6048',
-     'heading'=>'required|min:22|max:40',
-    
     ]);
     if($req->hasfile('image'))
     {
@@ -84,7 +88,6 @@ class SliderController extends Controller
             $file->move('uploads/img/', $filename);
             $slider->image=$filename;
     }
-     $slider->heading=$req->heading;
     $slider->save();
     return redirect()->back()->with('success','Slider has been Uploaded');
   }

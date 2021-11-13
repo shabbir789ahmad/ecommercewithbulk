@@ -98,8 +98,11 @@ Route::group(['middleware'=>'auth'],function(){
  Route::get('order-track/{id}',[Usercontroller::class,'track']);
  Route::post('chechout2',[OrderController::class,'order']);
  Route::view('account','User.account');
- Route::view('login-and-securty','User.login_and_securty');
- Route::view('user_profile','User.user_profile');
+ Route::get('login-and-securty',[UserController::class,'userDetail']);
+ Route::post('update-user',[UserController::class,'updateUser']);
+Route::get('user_profile',[UserController::class,'userprofile']);
+Route::post('cover-image',[UserController::class,'coverImage']);
+ Route::view('user_message','User.user_message');
 });
 
 

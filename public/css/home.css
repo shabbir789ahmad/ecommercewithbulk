@@ -1,6 +1,6 @@
-body,.container-fluid,.owl-carousel,.bg{
+body,.container-fluid,.bg{
   font-family:  Montserrat,  Arial, sans-serif;
-/*background: #D9E6EE;*/
+background: #EAEDED;
 }
 .nav-item{
 	margin-left: 6%;
@@ -127,8 +127,7 @@ color:#5E473E  ;
   }
 
   .slider{
-    position: relative;
-    height:60rem
+     height:60rem
   }
 }
 @media screen and (min-width: 900px)
@@ -194,33 +193,7 @@ color:#5E473E  ;
   }
 
 .slider{
-    position: relative;
     height:30rem
-  }
-
-  .slider-colo{
-     position: absolute;
-       top: .1%;
-       background: rgba(0, 0, 0, 0.3); 
-       padding: 17% 60%;
-       height: auto;
-      
-  }
-.slider-text{
-    position: absolute;
-    top: 30%;
-    left:12%;
-    width: 40rem;
-    color: #000;
-
-  }
-
-.slider-text p{
-      font-size: 4vw;
-      font-family: sans-serif;
-      font-weight: 600;
-      line-height: 5vw;
-      color: #F0F0F0;
   }
 }
 
@@ -361,32 +334,11 @@ padding: 0% 3rem;
   border: none;
   margin-top: 2%;
 }
-.slider-colo{
-     position: absolute;
-       top: .1%;
-       background: rgba(0, 0, 0, 0.5); 
-       padding: 28% 60%;
-       height: auto;
-      
-  }
-.slider-text{
-  
-position: absolute;
-  top: 15%;
-  left:10%;
-  width: 40%;
-  color: #000;
-}
 
-.slider-text p{
-  font-size: 5vw;
-  font-family: sans-serif;
-  font-weight: 600;
-  line-height: 6vw;
-  color: #fff;
-}
+
+
+
 . .slider{
-    position: relative;
     height:40rem
   }
 }

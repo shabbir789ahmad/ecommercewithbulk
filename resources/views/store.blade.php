@@ -11,10 +11,10 @@ $sub=Category::category();
  <img src="{{asset('uploads/img/' .$bann['banner'])}}"  >
   <div class="follow-this">
     @foreach($products as $pro)
-    
+    @if($loop->first)
     <h4 class="">Store Name</h4>
     <p class="best"><span class="p-1 ">{{$pro->follow}}</span> Follower</p>
-    
+   
     <div class="message-follow  d-flex justify-content-center">
      <p class="mr-4 "><i class="fas fa-sms fa-2x ml-3 "></i><br>Message</p>
        @if($pro->follows==null)
@@ -25,15 +25,18 @@ $sub=Category::category();
  
      <p class=" unfollow ml-5 " data-uid="{{Auth::user()->id}}" data-id="{{$pro->follows->id}}"  data-follow="{{$pro['user_id']}}"><i class="far fa-user text-warning fa-2x ml-3" ></i><br>Following</p>
      @endif
+      @endif
      @endforeach
     </div>
+
   </div>
 </div>
+
 @endforeach
 
 <div class="container coupon-show mt-5 bg-dark">
  <div class="row">
-  @if(Auth::user())
+  @Auth
   @foreach($coupon as $coup)
   <div class="col-md-4 col-12">
     <div class="coupon">
@@ -62,7 +65,7 @@ $sub=Category::category();
  @endforeach
  @else
  <p class="text-light mt-3 ml-3">Login to view Coupon</p>
- @endif
+ @endAuth
  </div>
 </div>
 

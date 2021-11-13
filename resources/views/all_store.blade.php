@@ -17,26 +17,21 @@
        <div class="stor-name">
         <p class="">{{$st['store_name']}}</p>
        </div>
-       <div class="stor-name2">
-       </div></a>
+       <div class="stor-name2"></div></a>
 
        @foreach($st->coupon as $coun)
-
        @if($save->isEmpty())
-      
-          <button class=" stor-btn get-coupon" data-id="{{$coun['id']}}" data-code="{{$coun['code']}}"  data-vendor="{{$coun['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif">{{$coun['value']}}</button>
-          @else
-        @foreach($save as $sv)
-          @if($sv['coupon_id']==$coun['id'] &&  $sv['vendor_id']==$coun['vendor_id'])
-             <button class=" stor-btn get-coupon bg-dark" >Collected</button>
+         <button class=" stor-btn get-coupon" data-id="{{$coun['id']}}" data-code="{{$coun['code']}}"  data-vendor="{{$coun['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif">{{$coun['value']}}</button>
+       @else
+       @foreach($save as $sv)
+         @if($sv['coupon_id']==$coun['id'] &&  $sv['vendor_id']==$coun['vendor_id'])
+          <button class=" stor-btn get-coupon bg-dark" >Collected</button>
             @else
-             <button class=" stor-btn get-coupon" data-id="{{$coun['id']}}" data-code="{{$coun['code']}}"  data-vendor="{{$coun['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif"> {{$coun['value']}}</button>
-            @endif
-           @endforeach
-         
+          <button class=" stor-btn get-coupon" data-id="{{$coun['id']}}" data-code="{{$coun['code']}}"  data-vendor="{{$coun['vendor_id']}}" data-user="@if(Auth::user()) Auth::user()->id @endif"> {{$coun['value']}}</button>
          @endif
-          
+         @endforeach
          
+        @endif
        @endforeach
      </div>
    </div>

@@ -34,7 +34,7 @@
      </a>
     </div>
     <div class="col-md-4 col-12">
-   <a href="{{url('user/user_dashborad')}}"style="text-decoration:none;">
+   <a href="{{url('user_profile')}}"style="text-decoration:none;">
      <div class="card shadow user-card-hover">
       <div class="card-body">
         <div class="d-flex">
@@ -49,7 +49,7 @@
      </a>
     </div>
     <div class="col-md-4 col-12 mt-4">
-    <a href="{{url('user/user_dashborad')}}"style="text-decoration:none;">
+    <a href="{{url('user_message')}}"style="text-decoration:none;">
      <div class="card shadow user-card-hover">
       <div class="card-body">
         <div class="d-flex">
@@ -64,13 +64,13 @@
     </a>
     </div>
     <div class="col-md-4 col-12 mt-4">
-   <a href="{{url('user/user_dashborad')}}"style="text-decoration:none;">
+   <a href="{{url('get-wishlist')}}"style="text-decoration:none;">
      <div class="card shadow user-card-hover">
       <div class="card-body">
         <div class="d-flex">
           <img src="{{asset('pic/10_archived_orders._CB654640573_.png')}}" width="25%">
           <div class="text-user ml-3">
-           <h6 class="order-user">Your Wishlists</h6>
+           <h6 class="order-user">Your Wishlist</h6>
            <p class="product-detail3">View,Manage Your Wishlist</p>
           </div>
         </div>
@@ -79,13 +79,13 @@
      </a>
     </div>
     <div class="col-md-4 col-12 mt-4">
-   <a href="{{url('user/user_dashborad')}}"style="text-decoration:none;"> 
+   <a href="{{url('cart')}}"style="text-decoration:none;"> 
      <div class="card shadow user-card-hover">
       <div class="card-body">
         <div class="d-flex">
           <img src="{{asset('pic/order._CB660668735_.png')}}" width="25%">
           <div class="text-user ml-3">
-           <h6 class="order-user">Your order</h6>
+           <h6 class="order-user">Your Cart</h6>
            <p class="product-detail3">track,return or buy Again</p>
           </div>
         </div>

@@ -1,34 +1,28 @@
 @extends('master.master')
 @section("content")
 <title>Home</title>
-
-  <div id="carouselslider" class="carousel slide " data-ride="carousel">
-    <div class="carousel-inner">
-      @foreach($slider as $slide)
-      <div class="carousel-item  @if($loop->first) active @endif caro" >
-         
-        <div class="slider">
-        <img class="d-block w-100" src="{{asset('uploads/img/' .$slide['image'])}}" alt="Firstlide" style="">
-        <div class="slider-colo">
-         <div class="slider-text">
-           <p>{{$slide['heading']}}</p>
-           <button class="btn btn-sm btn-md-lg rounded btn-check text-light py-sm-0 py-md-3">Shop Now</button>
-         </div>
-      </div>
+<!-- slider text-->
+<div id="carouselslider" class="carousel slide " data-ride="carousel">
+  <div class="carousel-inner">
+    @foreach($slider as $slide)
+    <div class="carousel-item  @if($loop->first) active @endif caro" >
+     <div class="slider">
+      <img class="d-block w-100" src="{{asset('uploads/img/' .$slide['image'])}}" alt="Firstlide" style="">
+     </div>
     </div>
-      </div>
-      @endforeach
-    </div>
-    <a class="carousel-control-prev" href="#carouselslider" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselslider" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+    @endforeach
   </div>
+  <a class="carousel-control-prev" href="#carouselslider" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselslider" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
+<!-- sale design -->
 @if($sells )
  <div class="container-fluid mt-5 d-inline-block">
   <div class="sale">
@@ -97,54 +91,191 @@
 
 </div>
 </div>
-
- <div class="container-fluid mt-5 d-inline-block">
-  <div class="sale">
-   <h2 class="font-weight-bold ml-3 product-detail2">Sponsered</h2>
+<!-- Deals on Store-->
+<div class="container-fluid " style="background-color:#EAEDED">
+ <div class="row ml-2 mr-2">
+  <div class="col-md-3 col-12">
+   <div class="card shadow" style="width: 100%; height:20rem">
+    <p class="order-user ml-3 mt-3">Upcomming Sale</p>
+    <div class="row ml-1 mr-1">
+      @foreach($sell as $sale)
+     <div class="col-md-6 col-6 ">
+       <img src="{{asset('uploads/img/' .$sale['image'])}}" width="100%" height="80rem" class="">
+       <p class="product-detail3 ml-3">{{ucwords($sale['sell_name'])}}</p>
+     </div>
+      @endforeach
+     
+    </div>
+   </div>
+  </div>
+  <div class="col-md-3 col-12">
+   <div class="card shadow" style="width: 100%; height:20rem">
+     @foreach($sells as $sale)
+    <p class="order-user ml-3 mt-3">{{$sale['sell_name']}}</p>
+    <div class="row ">
+     <div class="col-md-12 col-12">
+       <img src="{{asset('uploads/img/' .$sale['image'])}}" width="90%" height="215rem" class="ml-3">
+      <a href="{{url('all-product-sale')}}"><p class="product-detail3 ml-3 mt-3">shop now</p></a> 
+     </div>
+    </div>
+    @endforeach
+   </div>
+  </div>
+  <div class="col-md-3 col-12">
+   <div class="card shadow" style="width: 100%; height:20rem">
+    <p class="order-user ml-3 mt-3">Stores With Sale</p>
+    <div class="row ">
+      @foreach($store as $str)
+     <div class="col-md-6 col-6">
+       <a href="{{url('store/'.$str['id'])}}">
+       <img src="{{asset('uploads/img/' .$str['image'])}}" width="90%" class="ml-3" height="80rem"></a>
+       <a href="{{url('voucher')}}"><p class="product-detail3 ml-3">See All</p></a>
+     </div>
+     @endforeach
+     
+    </div>
+   </div>
+  </div>
+  <div class="col-md-3 col-12">
+   <div class="card shadow" style="width: 100%; height:20rem">
+    @foreach($dropdown as $drop)
+    @if($loop->first)
+    <p class="order-user ml-3 mt-3">{{ucwords($drop['name'])}}</p>
+    <div class="row ">
+     <div class="col-md-12 col-12">
+       <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="90%" height="215rem" class="ml-3">
+      <a href="{{url('product/' .$drop['id'])}}"><p class="product-detail3 ml-3 mt-3">shop now</p></a> 
+     </div>
+    </div>
+    @endif
+    @endforeach
+   </div>
   </div>
  </div>
-
-
-
-<div class="container-fluid ">
- <div class="owl-carousel owl-theme ml-2">
-  @foreach($product as $pro)
-  @if( $pro['sponser_status']=='1' )
-  <div class="item">
-     <div class="product-image">
-      <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
-         <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
-        @endforeach
-      </a>
-
-      <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
-       @if($pro['discount'])
-        <a > <p class="overlay2 text-danger">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
-       }}%</p></a>
-       @else
-       @endif
-       <p class="overlay5 ">
-         <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
-       </p>
+ <!-- secon row code here-->
+  <div class="row ml-2 mr-2 mt-4">
+  <div class="col-md-3 col-12">
+   <div class="card shadow" style="width: 100%; height:20rem">
+    <p class="order-user ml-3 mt-3">Shop by Category</p>
+    <div class="row ml-2 mr-2">
+      @foreach($dropdown->slice(0, 4) as $drop)
+      
+     <div class="col-md-6 col-6">
+       <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="100%" height="80rem" >
+       <p class="product-detail3 ml-3">{{$drop['name']}}</p>
      </div>
-     <div class="product-text d-flex mt-2">
-      <p class="product-name2 ml-2">{{ucwords($pro['product'])}}</p>
-      <p class="ml-auto product-name2 mr-2">Rs. {{$pro['sell_price']-$pro['discount']}}</p>
-     </div>
-     <div class="text-center">
-        @for($i=0; $i<5; $i++)
-        @if($i<$pro['rating'])
-        <span class="fa fa-star checked "></span>
-        @else
-        <span class="fa fa-star"></span> 
-        @endif
-         @endfor
-       </div>
+ 
+     @endforeach
     </div>
-  @endif
- @endforeach
+   </div>
+  </div>
+  <div class="col-md-3 col-12">
+   <div class="card shadow" style="width: 100%; height:20rem">
+    @foreach($dropdown as $drop)
+    @if($loop->last)
+    <p class="order-user ml-3 mt-3">{{$drop['name']}}</p>
+    <div class="row ">
+     <div class="col-md-12 col-12">
+       <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="90%" height="215rem" class="ml-3">
+      <a href="{{url('product/' .$drop['id'])}}"><p class="product-detail3 ml-3 mt-3">shop now</p></a> 
+     </div>
+    </div>
+    @endif
+    @endforeach
+   </div>
+  </div>
+  <div class="col-md-3 col-12">
+   <div class="card shadow" style="width: 100%; height:20rem">
+    <p class="order-user ml-3 mt-3">Your Acount</p>
+    <div class="row ">
+     <div class="col-md-6 col-6">
+       <img src="{{asset('pic/Fuji_Dash_GGquad_1X._SY116_CB654300275_.jpg')}}" width="90%" class="ml-3">
+       <p class="product-detail3 ml-3">Hot deals</p>
+     </div>
+     <div class="col-md-6 col-6">
+       <img src="{{asset('pic/Fuji_Dash_GGquad2_1X._SY116_CB654300275_.jpg')}}" width="90%" class="mr-3">
+       <p class="product-detail3">Hot deals</p>
+     </div>
+    </div>
+    <div class="row mt-2">
+     <div class="col-md-6 col-6">
+       <img src="{{asset('pic/Fuji_Dash_GGquad_1X._SY116_CB654300275_.jpg')}}" width="90%" class="ml-3">
+       <p class="product-detail3 ml-3">Hot deals</p>
+     </div>
+     <div class="col-md-6 col-6">
+       <img src="{{asset('pic/Fuji_Dash_GGquad2_1X._SY116_CB654300275_.jpg')}}" width="90%" class="mr-3">
+       <p class="product-detail3">Hot deals</p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="col-md-3 col-12">
+   <div class="card shadow" style="width: 100%; height:20rem">
+    @foreach($dropdown as $drop)
+    @if($loop->index)
+    <p class="order-user ml-3 mt-3">{{$drop['name']}}</p>
+    <div class="row ">
+     <div class="col-md-12 col-12">
+       <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="90%" height="215rem" class="ml-3">
+      <a href="{{url('product/' .$drop['id'])}}"><p class="product-detail3 ml-3 mt-3">shopg now</p></a> 
+     </div>
+    </div>
+    @endif
+    @endforeach
+   </div>
+  </div>
+ </div>
 </div>
+<!--s sponser product design -->
+
+
+ <div class="container-fluid mt-5 d-inline-block">
+   <div  class="card ml-3 mr-3">
+    <div class="card-body">
+      <div class="sale">
+        <h2 class="font-weight-bold ml-3 order-user">Sponsered</h2>
+      </div>
+      
+      <div class="owl-carousel owl-theme ml-2">
+       @foreach($product as $pro)
+       @if( !$pro['sponser_status']=='1' )
+        <div class="item">
+         <div class="product-image">
+           <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
+             <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
+             @endforeach
+            </a>
+            <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
+           @if($pro['discount'])
+            <p class="overlay2 text-danger">{{ceil( ($pro['discount']/$pro['sell_price'])*100)}}%</p>
+           @else
+           @endif
+            <p class="overlay5 ">
+             <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
+            </p>
+         </div>
+         <div class="product-text d-flex mt-2">
+          <p class="product-name2 ml-2">{{ucwords($pro['product'])}}</p>
+          <p class="ml-auto product-name2 mr-2">Rs. {{$pro['sell_price']-$pro['discount']}}</p>
+         </div>
+         <div class="text-center">
+           @for($i=0; $i<5; $i++)
+           @if($i<$pro['rating'])
+           <span class="fa fa-star checked "></span>
+           @else
+           <span class="fa fa-star"></span> 
+           @endif
+           @endfor
+         </div>
+        </div>
+       @endif
+       @endforeach
+      </div>
+    </div>
+  </div>
 </div>
+
+
 
 
  <div class="container-fluid mt-5 bg">
@@ -205,7 +336,7 @@
        <a href="{{url('product/' .$drop['id'])}}"> 
        <div class="swiper-slide ">
         <div class="round-img" >
-          <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" class="cat">
+          <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" class="cat" >
           <p class="textc">{{$drop['name']}}</p>
         </div>
        </div>

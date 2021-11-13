@@ -3,21 +3,66 @@
 	background-color: #F0F0F0;
   }
 
-.order-user{
+.order-user,.about-user1{
     color: #000000;
-    font-size: 1.5vw !important;
+    font-size: 1.5vw ;
     font-weight: 600;
 
   }
+  .about-user1{
+   margin-bottom: 1%;
+   font-size: 1.2vw ;
+  }
+  .about-user{
+    color: #000000;
+    font-size: 1vw ;
+    font-weight: 500;
+    color: #166387;
+  }
+  .about-user:hover{
+   color: #ED7632;
+  }
   .banner-user{
   	position: relative;
+   width: 100%;
+
   }
-  .round-image{
+  
+  .round-image,.user-camera,.user-editpencil{
   	position: absolute;
-  	bottom: 10%;
-  	left: 20;
+   top: 70%;
+  	left: 2%;
+   border-radius: 50%;
+   border: 2px solid #ffffff;
   }
-@media screen and (max-width: 900px)
+  .user-camera{
+   left: 95%;
+   top: 84%;
+   border: none;
+   border-radius: unset;
+  }
+  .user-editpencil{
+   left: 39%;
+   top: 104%;
+   border: none;
+   border-radius: unset;
+  }
+  .user-name,.user-country{
+   position: absolute;
+   top: 102%;
+   left: 18%;
+   font-weight: 700;
+   font-size: 1.6vw;
+  }
+  .user-country{
+   font-size: 1vw !important;
+   top: 118%;
+   font-weight: normal;
+  }
+  .user-edit{
+   margin-top: 12%;
+  }
+@media screen and (max-width: 600px)
 {
  .order-user{
     color: #000000;
@@ -28,5 +73,25 @@
  
   .text-user{
   	margin-top: 10% ;
+  }
+
+   .user-name,.user-country{
+   position: absolute;
+   top: 102%;
+   left: 18%;
+   font-weight: 700;
+   font-size: 3vw;
+  }
+  .user-country{
+   font-size: 2.5vw !important;
+   top: 118%;
+   font-weight: normal;
+  }
+   .user-editpencil{
+   left: 47%;
+   top: 108%;
+   width: 4% !important;
+   border: none;
+   border-radius: unset;
   }
 }

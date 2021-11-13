@@ -92,7 +92,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap16"
           aria-expanded="true" aria-controls="collapseBootstrap">
          <i class="fas fa-window-maximize text-light"></i>
-          <span>Make Sale</span>
+          <span>New Sale</span>
         </a>
         <div id="collapseBootstrap16" class="collapse @if(request()->is('admin/sell')) show
          @elseif(request()->is('admin/show-sale'))

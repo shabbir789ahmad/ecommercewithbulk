@@ -13,10 +13,11 @@ use App\Mail\CouponMail;
 use Auth;
 use session;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Traits\CouponTrait;
 use Carbon\Carbon;
 class CouponController extends Controller
 {
-    
+    use CouponTrait;
     public function index()
     {
         return view('vendor.coupon_upload');
@@ -208,20 +209,14 @@ class CouponController extends Controller
     function AllStore()
     {   
         $usid='';
-        $store=Vendor::
-        select('vendors.store_name','vendors.image','vendors.id')
-        ->paginate(20);
+        
          
          if(Auth::user())
         {
             $usid=Auth::user()->id;
         }
-        foreach($store as $st)
-        {
-            $st->coupon=Coupon::where('vendor_id',$st['id'])->latest()->take(1)->get();
-            
-        }
         
+        $store=$this->getCoupon();
        $save=CouponSave::where('user_id',$usid)->get();
 
          //dd($store);

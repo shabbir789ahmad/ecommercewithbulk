@@ -65,6 +65,7 @@
 <table class="table align-items-center table-flush" id="dataTable">
    <thead class="thead-light">
    <tr>
+    <th>Image</th>
     <th>Sale Name</th>
     <th >Sale Start Time</th>
     <th >Sale End Time</th>
@@ -77,6 +78,7 @@
    @foreach($sale as $show)
    
   <tr>
+    <td class="a col-2"><img src="{{asset('uploads/img/' .$show['image'])}}" width="100%"></td>
     <td class="a">{{ucfirst($show['sell_name'])}}</td>
     <td class="a">{{ucfirst($show['start_time'])}}</td>
     <td class="a">{{ucfirst($show['end_time'])}}</td>

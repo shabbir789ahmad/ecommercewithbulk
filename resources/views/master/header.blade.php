@@ -87,7 +87,7 @@ $sub=Category::category();
           <div class="dropdownlog float-right pb-3" >
   <button class="dropbtnlog ">{{ucfirst(substr(Auth::user()->name,0,1))}}</button>
   <div class="dropdown-contentlog">
-  <a href="{{url('user_dashborad')}}">Dashboard</a>
+  <a href="{{url('account')}}">Dashboard</a>
   <a href="{{ route('logout') }}"
  onclick="event.preventDefault();
  document.getElementById('logout-form').submit();">Log out

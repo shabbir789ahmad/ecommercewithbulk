@@ -12,6 +12,7 @@ class Sell extends Model
        'sell_name',
        'start_time',
        'end_time',
-       'sell_status'
+       'sell_status',
+       'image'
     ];
 }

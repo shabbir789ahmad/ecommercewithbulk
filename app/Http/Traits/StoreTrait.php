@@ -22,7 +22,7 @@ use Auth;
      }
      public function dropdown()
      {
-       $drop=Dropdown::all();
+       $drop=Dropdown::all()->shuffle();
        return $drop;
      }
      public function category()

@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Vendor;
 use App\Models\User;
+use App\Models\Cover;
+use App\Http\Traits\UserTrait;
+use App\Http\Traits\ImageTrait;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 class UserController extends Controller
 {
+    use UserTrait;
+    use ImageTrait;
     function order()
     {
         $order=Order::join('details','orders.id','=','details.order_id')
@@ -57,7 +63,7 @@ class UserController extends Controller
     }
      function getUser()
     {
-        $user=User::all();
+        
         return view('Dashboard.all_user',compact('user'));
     }
      function blockuser()
@@ -67,7 +73,7 @@ class UserController extends Controller
     }
      function deleteuser($id)
     {
-        $user=User::findorfail($id);
+        $user=$this->user($id);
         $user->delete();
         return redirect()->back()->with('success','This vendor is Blocked');
     }
@@ -85,5 +91,45 @@ class UserController extends Controller
 
     }
 
-   
+     function userDetail()
+    {
+        $user=$this->user(Auth::id());
+         //dd($user);
+        return view('User.login_and_securty',compact('user'));
+    }
+    function userprofile()
+    {
+        $user=$this->user(Auth::id());
+        $cover=Cover::latest()->take(1)->get();
+         //dd($user);
+        return view('User.user_profile',compact('user','cover'));
+    }
+
+   function updateUser(Request $req)
+    {
+        $req->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'image' => 'required',
+         ]);
+        
+        $user=$this->user($req->id);
+        $user->name=$req->name;
+        $user->email=$req->email;
+        $user->phone=$req->phone;
+        $user->image=$this->getimage();
+        $user->password=Hash::make($req->password);
+      
+        $user->save();
+        return back()->with('success','Your Account updated');
+    }
+
+    function coverImage()
+    {
+        $cover=new Cover;
+        $cover->image=$this->getimage();
+        $cover->save();
+        return back();
+    }
 }

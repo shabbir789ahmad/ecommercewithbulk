@@ -6,20 +6,25 @@ use Illuminate\Http\Request;
 use App\Models\Sell;
 use Exception;
 use Carbon\Carbon;
+use App\Http\Traits\ImageTrait;
 class SellController extends Controller
 {
+   use ImageTrait;
     function Sell(Request $req)
     {
          $req->validate([
             'sell_name' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
+            'image' => 'required',
          ]);
+         $image=$this->getimage();
         $sell=Sell::create([
          'sell_name' =>$req->sell_name,
          'start_time' =>$req->start_time,
          'end_time' =>$req->end_time,
-         'sell_status' =>'0',
+         'sell_status' =>'1',
+         'image' =>$image,
         ]);
         return redirect()->back()->with('success','Sale Added');
     }
