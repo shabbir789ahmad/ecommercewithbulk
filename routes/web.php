@@ -25,6 +25,7 @@ use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\VendorSaleController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\DealController;
 
 
 Route::get('/', function () {
@@ -103,6 +104,8 @@ Route::group(['middleware'=>'auth'],function(){
 Route::get('user_profile',[UserController::class,'userprofile']);
 Route::post('cover-image',[UserController::class,'coverImage']);
  Route::view('user_message','User.user_message');
+ //about route user
+ Route::post('about-user',[UserController::class,'aboutUser']);
 });
 
 
@@ -178,7 +181,14 @@ Route::get('deleted-order',[OrderController::class,'deletedOrder'])->name('vendo
 Route::get('restore-order/{id}',[OrderController::class,'restoreOrder'])->name('vendor/restore-order/{id}');
 Route::get('delivered',[OrderController::class,'delivered'])->name('vendor.delivered');
 
-
+ //route for deals
+Route::get('new-deals',[DealController::class,'index'])->name('vendor.new-deals');
+Route::post('deals',[DealController::class,'create'])->name('vendor.deals');
+//Route::get('get/{id}',[DealController::class,'get'])->name('vendor.get/{id}');
+Route::get('all-deals',[DealController::class,'show'])->name('vendor/all-deals');
+Route::get('deleted-order',[OrderController::class,'deletedOrder'])->name('vendor/deleted-order');
+Route::get('restore-order/{id}',[OrderController::class,'restoreOrder'])->name('vendor/restore-order/{id}');
+Route::get('delivered',[OrderController::class,'delivered'])->name('vendor.delivered');
 //route for brand upload, update and delete
 
 Route::view('brand','vendor.brand_upload')->name('vendor.brand');

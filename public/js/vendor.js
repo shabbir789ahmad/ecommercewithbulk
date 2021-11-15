@@ -101,4 +101,37 @@ $(document).ready(function(){
      $('.check').not(this).prop('checked', this.checked);
     
  });
+
+
+$('#deal').on('change',function(){
+       var id = $(this).val();
+   
+        if(id)
+       {
+         $.ajax({
+             
+              url : '/vendor/get/' +id,
+              type : "GET",
+              dataType : "json",
+                
+             success:function(data)
+             {
+             
+             $.each(data,function(index,value){
+                    
+                    $("#product").append('<input type="checkbox" value="'+value.id+'" name="id[]"  > ');
+                    $("#product").append('<p class="text-danger ml-5">'+value.product+'<p>');
+                    $("#product").append('<p class="text-danger ml-5">'+value.sell_price+'<p>');
+                    $("#product").append('<input type="text" value="'+value.discount+'" name="id[]"  > ');
+                    
+                });
+            }
+
+          });
+       }
+                      
+   });
+
+
+
 });

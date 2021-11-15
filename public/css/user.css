@@ -1,4 +1,6 @@
-
+.round-image2{
+    height: 20rem;
+}
 .user-card-hover:hover{
 	background-color: #F0F0F0;
   }
@@ -30,10 +32,10 @@
   
   .round-image,.user-camera,.user-editpencil{
   	position: absolute;
-   top: 70%;
+   top: 80%;
   	left: 2%;
    border-radius: 50%;
-   border: 2px solid #ffffff;
+   border: 2px solid #351B29;
   }
   .user-camera{
    left: 95%;

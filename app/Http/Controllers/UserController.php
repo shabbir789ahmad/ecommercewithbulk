@@ -7,10 +7,12 @@ use App\Models\Order;
 use App\Models\Vendor;
 use App\Models\User;
 use App\Models\Cover;
+use App\Models\About;
 use App\Http\Traits\UserTrait;
 use App\Http\Traits\ImageTrait;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Support\Str;
 class UserController extends Controller
 {
     use UserTrait;
@@ -93,16 +95,20 @@ class UserController extends Controller
 
      function userDetail()
     {
+
         $user=$this->user(Auth::id());
-         //dd($user);
+          $slug = Str::slug($user->name, '-');
+        echo $slug;
         return view('User.login_and_securty',compact('user'));
     }
     function userprofile()
     {
+
         $user=$this->user(Auth::id());
         $cover=Cover::latest()->take(1)->get();
-         //dd($user);
-        return view('User.user_profile',compact('user','cover'));
+        $about=About::where('user_id',Auth::id())->first();
+         //dd($about);
+        return view('User.user_profile',compact('user','cover','about'));
     }
 
    function updateUser(Request $req)
@@ -128,8 +134,24 @@ class UserController extends Controller
     function coverImage()
     {
         $cover=new Cover;
-        $cover->image=$this->getimage();
+        $cover->cover_image=$this->getimage();
+        $cover->user_id=Auth::id();
         $cover->save();
-        return back();
+        return back()->with('cover','cover Photo Changed');
+    }
+
+    //user about 
+    function aboutUser(Request $req)
+    {
+        $req->validate([
+            'about' => 'required',
+           
+         ]);
+        
+       $user = About::updateOrCreate(['user_id' => Auth::id()], [ 
+       'about' => request()->about,
+        ]);
+          
+        return back()->with('cover','Your Account updated');
     }
 }

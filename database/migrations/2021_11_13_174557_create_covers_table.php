@@ -16,8 +16,8 @@ class CreateCoversTable extends Migration
         Schema::create('covers', function (Blueprint $table) {
             $table->id();
             $table->string('cover_image');
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+         
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

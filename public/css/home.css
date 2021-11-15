@@ -85,7 +85,7 @@ color:#5E473E  ;
 @media screen and (min-width: 1500px)
 {
   .product-name2{
-  font-family:  Roboto,sans-serif;
+  font-family:  Segoe UI,sans-serif;
   font-size: 1.1vw;
   font-weight: 900;
   }
@@ -159,9 +159,10 @@ color:#5E473E  ;
 
 }
   .product-name2{
-  font-family:  Roboto,sans-serif;
+  font-family:  Segoe UI,sans-serif;
   font-size: 1.1vw;
-  font-weight: 900;
+  font-weight: 700;
+  color: #000000;
   }
   .f{
     font-size: 1.2vw !important;

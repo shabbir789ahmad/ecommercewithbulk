@@ -132,12 +132,30 @@
    </div>
  </div>
 </li>
-  
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap15"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+      <i class="fas fa-bold text-light"></i>
+          <span>Make Deals</span>
+        </a>
+        <div id="collapseBootstrap15" class="collapse @if(request()->is('vendor/show-supplier')) show
+         @elseif(request()->is('vendor/add-supplier'))
+          show
+         @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class=" py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{url('vendor/all-deals')}}">All Deals</a>
+         
+           <div class="dropdown-divider"></div>
+            <a class="collapse-item" href="{{url('vendor/new-deals')}}">New Deal</a>
+          
+          </div>
+        </div>
+      </li>
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap16"
           aria-expanded="true" aria-controls="collapseBootstrap">
      <i class="fas fa-bold text-light"></i>
-        <span>Coupons</span>
+        <span>Make Coupons</span>
     </a>
     <div id="collapseBootstrap16" class="collapse @if(request()->is('vendor/show-coupons')) show
          @elseif(request()->is('vendor/new-coupon'))
@@ -170,25 +188,7 @@
           </div>
         </div>
       </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap15"
-          aria-expanded="true" aria-controls="collapseBootstrap">
-      <i class="fas fa-bold text-light"></i>
-          <span>Make Sale</span>
-        </a>
-        <div id="collapseBootstrap15" class="collapse @if(request()->is('vendor/show-supplier')) show
-         @elseif(request()->is('vendor/add-supplier'))
-          show
-         @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class=" py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('vendor/all-sale')}}">All Sale</a>
-         
-           <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('vendor/new-sale')}}">New Sale</a>
-          
-          </div>
-        </div>
-      </li>
+  
    
          <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap2"

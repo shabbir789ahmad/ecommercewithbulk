@@ -7,7 +7,7 @@
   	<div class="col-md-10 border">
   	 <div class="banner-user">
        @forelse($cover as $cov)
-         <img src="{{asset('uploads/img/' .$cov['cover-image'])}}" alt="profile image" width="100%" class="round-image2">
+         <img src="{{asset('uploads/img/' .$cov['cover_image'])}}" alt="profile image" width="100%" class="round-image2">
        @empty
   	   <img src="{{asset('pic/default.png')}}" alt="profile image" width="100%" class="round-image2">
        @endforelse
@@ -26,13 +26,19 @@
     </div>
     <div class="col-md-1"></div>
   </div>
+  
+  @if ($alert = Session::get('cover'))
+    <div class="alert alert-success">
+        {{ $alert }}
+    </div>
+   @endif
   <div class="row mt-4">
     <div class="col-md-1"></div>
     <div class="col-md-4">
      <div class="card user-card-hover shadow">
       <div class="card-body">
-       <p class="about-user1">About</p>
-       <p class="about-user">Add a couple of words about who you are</p>
+       <p class="about-user1">About <span class="float-right"><button class="btn btn-check text-light" data-toggle="modal" data-target="#aboutModal">add</button></span></p>
+       <p class="about-user">{{$about->about}}</p>
       </div>
      </div>
      <div class="card mt-2 user-card-hover shadow">
@@ -44,7 +50,8 @@
      <div class="card mt-2 user-card-hover shadow">
       <div class="card-body">
        <p class="about-user1">Account</p>
-       <p class="about-user">Check orders, add payments options, manage your password and more</p>
+       <a href="{{url('account')}}"><p class="about-user">Check orders, add payments options, manage your password and more</p></a>
+
       </div>
      </div>
     </div>
@@ -103,4 +110,26 @@
   </div>
 </div>
 
+
+<!--about Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Somthing About Yourself</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url('about-user')}}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <textarea class="form-control" name="about" rows="4" cols="12" placeholder="something about yourself....."></textarea>
+          <button  class="btn btn-check text-light float-right mt-4">Save</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
 @endsection

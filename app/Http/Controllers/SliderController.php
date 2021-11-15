@@ -34,7 +34,7 @@ class SliderController extends Controller
     $time=$this->carbon();
     $store=$this->getCoupon();
     $product= Vendor::
-     join('stocks','vendors.id','=','stocks.user_id')
+     join('stocks','vendors.id','=','stocks.vendor_id')
      ->join('stock2s','stocks.id','=','stock2s.stock_id')
      ->leftjoin('sponsers','stocks.id','=','sponsers.sponser_id')
      ->leftjoin('reviews','stocks.id','=','reviews.review_id')
@@ -54,7 +54,7 @@ class SliderController extends Controller
  
         
     $product2= Vendor::
-      join('stocks','vendors.id','=','stocks.user_id')
+      join('stocks','vendors.id','=','stocks.vendor_id')
       ->join('stock2s','stocks.id','=','stock2s.stock_id')
       ->leftjoin('sales','stocks.id','=','sales.sale_id')
       ->leftjoin('reviews','stocks.id','=','reviews.review_id')
