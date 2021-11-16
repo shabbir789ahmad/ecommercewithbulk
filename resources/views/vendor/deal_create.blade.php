@@ -48,7 +48,7 @@
     <label class="font-weight-bold text-color">Deal Name</label>
     <div class="form-group mb-1">
      <div class="input-group clockpicker" id="clockPicker1">   
-      <input type="text" name="deal_name" placeholder="Pack Of 3 - 1 Wax Heater, 100grm Beans And 5 Sticks.." class="form-control "  value="{{old('deal_name')}}" required><br>
+      <input type="text" name="deal_name" placeholder="Pack Of 3 - 1 Wax Heater....." class="form-control "  value="{{old('deal_name')}}" required><br>
       <div class="input-group-append">
        <span class="input-group-text"><i class="fas fa-tag"></i></span>
       </div>                      
@@ -58,7 +58,7 @@
     <label class="font-weight-bold text-color">Deal Details</label>
     <div class="form-group mb-1">
     <div class="input-group clockpicker" id="clockPicker1">   
-     <textarea name="deal_detail" placeholder="Pack Of 3 - 1 Wax Heater, 100grm Beans And 5 Sticks.." class="form-control " value="{{old('deal_detail')}}" required ></textarea>
+     <textarea name="deal_detail" placeholder="Deal detail....." class="form-control " value="{{old('deal_detail')}}" required ></textarea>
      <div class="input-group-append">
       <span class="input-group-text"><i class="fas fa-tag"></i></span>
      </div>                      
@@ -68,7 +68,7 @@
    <label class="font-weight-bold text-color">Deal Price</label>
    <div class="form-group mb-1">
     <div class="input-group clockpicker" id="clockPicker1">   
-     <input type="text" name="deal_price" placeholder="5000" class="form-control "  value="{{old('deal_price')}}" required=""><br>
+     <input type="text" name="deal_price" placeholder="price like 5000 ....." class="form-control "  value="{{old('deal_price')}}" required=""><br>
      <div class="input-group-append">
       <span class="input-group-text"><i class="fas fa-tag"></i></span>
      </div>                      
@@ -86,16 +86,7 @@
    </div> 
   </div>
   <div class="col-md-6">
-    <label class="font-weight-bold text-color">Deal Start Date</label>
-   <div class="form-group mb-1">
-    <div class="input-group clockpicker" id="clockPicker1">
-      <input type="datetime-local" name="deal_start_date" placeholder=" Deal Start Date" class="form-control " value="{{old('deal_start_date')}}" required="">
-      <div class="input-group-append">
-       <span class="input-group-text px-3"><i class="fas fa-info"></i></span>
-      </div>                      
-    </div>
-   </div>
-   <span class="text-danger">@error('deal_start_date') {{$message}} @enderror</span>
+    
    <label class="font-weight-bold text-color">Deal End Date</label>
    <div class="form-group mb-1">
     <div class="input-group clockpicker" id="clockPicker1">
@@ -106,14 +97,14 @@
     </div>
    </div>
    <span class="text-danger">@error('deal_end_date') {{$message}} @enderror</span>
-   <label>Select Products</label>
+   <label class="font-weight-bold text-color">Select Main Category</label>
    
    <div class="form-group">
     <div class="input-group clockpicker" id="clockPicker1">
-      <select class="form-control" id="deal" name="product_id[]" multiple>
-        <option disabled selected hidden>select product</option>
+      <select class="form-control maincat"  name="" >
+        <option disabled selected hidden>select Category</option>
         @foreach($product as $pro)
-        <option value="{{$pro['id']}}">{{$pro['product']}}</option>
+        <option value="{{$pro['id']}}">{{$pro['category']}}</option>
         @endforeach
       </select>
       <div class="input-group-append">
@@ -121,7 +112,30 @@
       </div>                      
     </div>
    </div>
-   <span class="text-danger">@error('deal_end_date') {{$message}} @enderror</span>
+   <span class="text-danger">@error('product-id') {{$message}} @enderror</span>
+   <label class="font-weight-bold text-color">Select Products</label>
+   
+   <div class="form-group">
+    <div class="input-group clockpicker" id="clockPicker1">
+      <select class="form-control deal" id="deal" name="" >
+        
+      </select>
+      <div class="input-group-append">
+       <span class="input-group-text px-3"><i class="fas fa-info"></i></span>
+      </div>                      
+    </div>
+   </div>
+   <span class="text-danger">@error('product-id') {{$message}} @enderror</span>
+    
+    <table id="records_table" class="table align-items-center table-flush records_table" >
+    <tr>
+        <th>Name</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Discount</th>
+    </tr>
+   </table>
+    </div>
   </div>
  </div>
 
@@ -139,64 +153,6 @@
 
 
  </form>
-<div class="modal fade" id="supply" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Selling Price</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{url('vendor/add-supplier')}}" method="POST">
-          @csrf
-      
-      <label>Name</label>
-      <input type="text" name="supplier_name" placeholder="name" class="form-control" >
-      <span class="text-danger">@error ('supplier_name'){{$message}}@enderror</span>
-      <label>Address </label>
-      <input type="text" name="address" placeholder="Address" class="form-control" >
-      <span class="text-danger">@error ('address'){{$message}}@enderror</span>
-     <label>Phone </label>
-      <input type="text" name="phone" placeholder="Phone" class="form-control" >
-      <span class="text-danger">@error ('phone'){{$message}}@enderror</span>
-     
-      
-      <button class="btn btn-color btn-lg float-right text-light  mt-4">Update</button>
-    </form>
-      </div>
-      
-    </div>
-  </div>
-</div>
 
-
-<div class="modal fade" id="brand" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Selling Price</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{url('vendor/upload-brand')}}" method="POST">
-          @csrf
-      
-      <label>Name</label>
-      <input type="text" name="bname" placeholder="Brand Name" class="form-control" />
-      <span class="text-danger">@error ('bname'){{$message}}@enderror</span>
-     
-    
-     
-      
-      <button class="btn btn-color btn-lg float-right text-light  mt-4">Update</button>
-    </form>
-      </div>
-      
-    </div>
-  </div>
 </div>
 @endsection

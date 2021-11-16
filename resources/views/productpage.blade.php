@@ -72,12 +72,12 @@
            {{$detail['sell_price']}}
           @endif
         </span></p>
+        @if(!$coupon->isEmpty())
         <div class="dropdowns " style="float:left;">
-            <button class="coupon-dropbtn" onclick="show()">Get Coupon For Discount <i class="fas fa-sort-down "></i></button>
-            <div class="coupon-content" id="sh" style="left:0;">
-              @if($coupon)
-              @foreach($coupon as $coup)
-              @if($coup['vendor_id']==$detail->user_id)
+          <button class="coupon-dropbtn" onclick="show()">Get Coupon For Discount <i class="fas fa-sort-down "></i></button>
+          <div class="coupon-content" id="sh" style="left:0;">
+            @foreach($coupon as $coup)
+            @if($coup['vendor_id']==$detail->user_id)
              <div class="cop">
               <p class="ml-2 p1">Rs. {{$coup['value']}}</p> 
                <p class="p2 ml-2 ">Minimum Spend {{$coup['min_order_amnt']}}</p> 
@@ -89,10 +89,11 @@
               <hr>
               @endif
              @endforeach
-             @endif
+             
              </div>
          </div>
-
+         @else
+         @endif
         <hr class="bg-dark " style="margin-top: 10%;">
      </div>
      <div class="col-md-12">
@@ -142,10 +143,12 @@
         <button class="btn btn-pro btn-block add-to-cart py-3 text-light mt-2 mt-md-3 rounded"  data-id="{{$detail['id']}}" data-color="" data-size="" id="carts">Add To Cart</button>
      </div>
      <div class="col-md-12">
-       <p  class="product-detail2 mt-3 ml-3 ml-md-0">Details</p>
-       <p class="product-detail ml-3 ml-md-0">{{ucwords($detail['detail'])}}<span class="float-right">
+       <p  class="product-detail2 mt-3 ml-3 ml-md-0">Details
+        <span class="float-right">
          <button class="btn-sm btn btn-store rounded btn-check text-light detail" data-name="{{$detail['product']}}" data-detail="{{$detail['detail']}}">Detail </button>
        </span></p>
+       <p class="product-detail ml-3 ml-md-0">{{ucwords($detail['detail'])}}<span class="float-right">
+        </span></p>
      </div>
     </div>
    </div>

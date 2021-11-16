@@ -183,12 +183,15 @@ Route::get('delivered',[OrderController::class,'delivered'])->name('vendor.deliv
 
  //route for deals
 Route::get('new-deals',[DealController::class,'index'])->name('vendor.new-deals');
+Route::get('new-deals2/{id}',[DealController::class,'catOrder'])->name('vendor.new-deals2/{id}');
 Route::post('deals',[DealController::class,'create'])->name('vendor.deals');
-//Route::get('get/{id}',[DealController::class,'get'])->name('vendor.get/{id}');
+Route::get('get/{id}',[DealController::class,'get'])->name('vendor.get/{id}');
 Route::get('all-deals',[DealController::class,'show'])->name('vendor/all-deals');
-Route::get('deleted-order',[OrderController::class,'deletedOrder'])->name('vendor/deleted-order');
-Route::get('restore-order/{id}',[OrderController::class,'restoreOrder'])->name('vendor/restore-order/{id}');
-Route::get('delivered',[OrderController::class,'delivered'])->name('vendor.delivered');
+Route::get('deal-detail/{id}',[DealController::class,'detail'])->name('vendor.deal-detail2/{id}');
+Route::get('delete-deal-product/{id}/{deal_id}',[DealController::class,'destroy'])->name('vendor/delete-deal-product{id}/{deal_id}');
+Route::post('add-deal-product',[DealController::class,'update'])->name('vendor/add-deal-product');
+Route::post('update-deal',[DealController::class,'updateDeal'])->name('vendor/update-deal');
+
 //route for brand upload, update and delete
 
 Route::view('brand','vendor.brand_upload')->name('vendor.brand');

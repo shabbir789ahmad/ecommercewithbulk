@@ -71,9 +71,9 @@ use Auth;
 
         $storenew= Stock::
        leftjoin('reviews','stocks.id','=','reviews.review_id')
-       ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id')
-       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id')->orderBy('rating','DESC')
-       ->where('stocks.user_id',Auth::user()->id)
+       ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.vendor_id')
+       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.vendor_id')->orderBy('rating','DESC')
+       ->where('stocks.vendor_id',Auth::user()->id)
        ->whereMonth('stocks.created_at',date('m'))->get();
       foreach($storenew as $st)
       {
@@ -107,7 +107,7 @@ use Auth;
          //echo $stock2;
        $query=Stock::
          join('stock2s','stocks.id','=','stock2s.stock_id')
-        ->select('stocks.product','stocks.detail','stocks.drop_id','stocks.product_status','stocks.id','stocks.user_id','stock2s.supply_id','stock2s.stock','stock2s.sell_price','stock2s.discount','stock2s.price','stock2s.sold_stock');
+        ->select('stocks.product','stocks.detail','stocks.drop_id','stocks.product_status','stocks.id','stocks.vendor_id','stock2s.supply_id','stock2s.stock','stock2s.sell_price','stock2s.discount','stock2s.price','stock2s.sold_stock');
 
          if($supply2)
          {
@@ -159,7 +159,7 @@ use Auth;
         
         if($id)
         {
-          $query=$query->where('user_id',$id);
+          $query=$query->where('vendor_id',$id);
         }
         $query=$query->paginate(10);
         $stock=$query;

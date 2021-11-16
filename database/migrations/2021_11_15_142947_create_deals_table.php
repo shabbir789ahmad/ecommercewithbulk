@@ -17,7 +17,6 @@ class CreateDealsTable extends Migration
             $table->id();
             $table->string('deal_name');
             $table->longtext('deal_detail');
-            $table->string('deal_price');
             $table->string('deal_image');
             $table->string('deal_end_date');
             $table->string('deal_vendor_id');

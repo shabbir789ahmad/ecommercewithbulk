@@ -15,6 +15,7 @@ class CreateDiscountsTable extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
+            $table->string('product_discount');
             $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('stocks')->onUpdate('cascade')->onDelete('cascade');
             $table->bigInteger('deal_id')->unsigned();

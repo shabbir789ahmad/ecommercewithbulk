@@ -26,8 +26,9 @@ class ProductController extends Controller
   //function for product detail 
   function productDetail($id,$drop_id)
   {
+     $vid='';
     $detail=$this->detail($id,$drop_id);
-    $detail2=$this->detail2($id,$drop_id);
+    $detail2=$this->detail2($id,$drop_id,$vid);
     $image=Image::where('image_id',$id)->get();
     $color= Color::where('filter_id',$id)->get();
     $size= Size::where('size_id',$id)->get();

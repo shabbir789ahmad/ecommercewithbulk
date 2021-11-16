@@ -25,9 +25,23 @@ $(document).ready(function(){
       $('#discounter2').val(desco);
     }
     
-  })
+  });
 
-  
+  $('.deal').click(function(e){
+    e.preventDefault();
+    $('#dealupdate').modal('show')
+    let id=$(this).data('id')
+    $('#did').val(id);
+    let name=$(this).data('name')
+    $('#dname').val(name);
+    let detail=$(this).data('detail')
+    $('#ddetail').val(detail);
+     let image=$(this).data('image')
+
+    $('#dimage').attr('src',image);
+    
+    
+  })
 
    $('#sale_count').change(function(e){
     e.preventDefault();
@@ -102,8 +116,31 @@ $(document).ready(function(){
     
  });
 
+$('.maincat').on('change',function(){
+      let id=$(this).val()
+      if(id)
+      {
+         $.ajax({
+           
+           url : '/vendor/product/' +id,
+           type : "GET",
+           dataType :"json",
 
-$('#deal').on('change',function(){
+           success:function(sub)
+           {
+            $('.deal').empty()
+            $('.deal').append('<option hidden disabled selected> Select Category</option>')
+            $.each(sub,function(key,value){
+             $('.deal').append('<option value="'+ key +'">'+ value +'</option>')
+               $('.deal').css('textTransform', 'capitalize');
+            });
+           }
+
+         });
+      }
+   
+   });
+$('.deal').on('change',function(){
        var id = $(this).val();
    
         if(id)
@@ -117,14 +154,12 @@ $('#deal').on('change',function(){
              success:function(data)
              {
              
-             $.each(data,function(index,value){
-                    
-                    $("#product").append('<input type="checkbox" value="'+value.id+'" name="id[]"  > ');
-                    $("#product").append('<p class="text-danger ml-5">'+value.product+'<p>');
-                    $("#product").append('<p class="text-danger ml-5">'+value.sell_price+'<p>');
-                    $("#product").append('<input type="text" value="'+value.discount+'" name="id[]"  > ');
-                    
-                });
+             
+             var trHTML = '';
+        $.each(data, function (i, item) {
+            trHTML += '<tr><td><input type="checkbox" name="product_id[]" value="'+item.id+'"> </td><td>' + item.product + '</td><td>' + item.sell_price + '</td><td><input type="text" name="product_discount[]" value="'+item.discount+'">  </td></tr>';
+        });
+        $('.records_table').append(trHTML);
             }
 
           });

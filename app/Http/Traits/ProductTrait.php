@@ -43,8 +43,8 @@ function storeProduct($id)
          ->leftjoin('sales','stocks.id','=','sales.sale_id')
          ->leftjoin('vendor_sales','stocks.id','=','vendor_sales.vendor_sale_id')
         ->leftjoin('reviews','stocks.id','=','reviews.review_id')
-        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.ship','stock2s.stock_status','sponsers.sponser','sponsers.sponser_start','sponsers.sponser_end','sales.on_sale','sales.new_price','sales.discounts','vendor_sales.vendor_on_sale','vendor_sales.vendor_new_price','vendor_sales.vendor_discount')
-       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.ship','stock2s.stock_status','sponsers.sponser','sponsers.sponser_start','sponsers.sponser_end','sales.on_sale','sales.new_price','sales.discounts','vendor_sales.vendor_on_sale','vendor_sales.vendor_new_price','vendor_sales.vendor_discount')->orderBy('rating','DESC');
+        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.vendor_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.ship','stock2s.stock_status','sponsers.sponser','sponsers.sponser_start','sponsers.sponser_end','sales.on_sale','sales.new_price','sales.discounts','vendor_sales.vendor_on_sale','vendor_sales.vendor_new_price','vendor_sales.vendor_discount')
+       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.vendor_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.ship','stock2s.stock_status','sponsers.sponser','sponsers.sponser_start','sponsers.sponser_end','sales.on_sale','sales.new_price','sales.discounts','vendor_sales.vendor_on_sale','vendor_sales.vendor_new_price','vendor_sales.vendor_discount')->orderBy('rating','DESC');
       
        if($new=='new')
         {
@@ -60,7 +60,7 @@ function storeProduct($id)
        }
        if($id)
        {
-        $query=$query->where('stocks.user_id',$id);
+        $query=$query->where('stocks.vendor_id',$id);
        }
        if($promote=='prom')
        {
@@ -107,8 +107,8 @@ function storeProduct2($id)
          join('stock2s','stocks.id','=','stock2s.stock_id')
          ->leftjoin('vendor_sales','stocks.id','=','vendor_sales.vendor_sale_id')
         ->leftjoin('reviews','stocks.id','=','reviews.review_id')
-        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.ship','stock2s.stock_status','vendor_sales.vendor_on_sale','vendor_sales.vendor_new_price','vendor_sales.vendor_discount')
-       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.ship','stock2s.stock_status','vendor_sales.vendor_on_sale','vendor_sales.vendor_new_price','vendor_sales.vendor_discount')->orderBy('rating','DESC');
+        ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.vendor_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.ship','stock2s.stock_status','vendor_sales.vendor_on_sale','vendor_sales.vendor_new_price','vendor_sales.vendor_discount')
+       ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image' ,'stocks.vendor_id','stocks.drop_id','stock2s.sell_price','stock2s.discount','stock2s.ship','stock2s.stock_status','vendor_sales.vendor_on_sale','vendor_sales.vendor_new_price','vendor_sales.vendor_discount')->orderBy('rating','DESC');
       
        if($new=='new')
         {
@@ -124,7 +124,7 @@ function storeProduct2($id)
        }
        if($id)
        {
-        $query=$query->where('stocks.user_id',$id);
+        $query=$query->where('stocks.vendor_id',$id);
        }
        if($promote=='prom')
        {
@@ -137,8 +137,8 @@ function storeProduct2($id)
         foreach($product as $st)
         {
          $st->image=Image::where('image_id',$st['id'])->take(1)->get();
-         $st->follow=Follow::where('follow_id',$st['user_id'])->count();
-         $st->follows=Follow::where('follow_id',$st['user_id'])->where('user_id',Auth::user()->id)->first();
+         $st->follow=Follow::where('follow_id',$st['vendor_id'])->count();
+         $st->follows=Follow::where('follow_id',$st['vendor_id'])->where('user_id',Auth::user()->id)->first();
         
        }
        return $product;
@@ -151,22 +151,29 @@ function storeProduct2($id)
       leftjoin('reviews','stocks.id','=','reviews.review_id')
       ->leftjoin('stock2s','stocks.id','=','stock2s.stock_id')
       ->leftjoin('images','stocks.id','=','images.image_id')
-      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount','images.rimage')
-     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.user_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount','images.rimage')->orderBy('rating','DESC')
-        ->where('drop_id',$drop_id)
-        ->findorfail($id);
+      ->select('review_id', \DB::raw('avg(rating) as rating'),'stocks.id','stocks.product','stocks.created_at','stocks.detail','stocks.size_image','stocks.vendor_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount','images.rimage')
+     ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.detail','stocks.size_image','stocks.vendor_id','stocks.drop_id','stock2s.sell_price','stock2s.ship','stock2s.discount','images.rimage')->orderBy('rating','DESC')
+       ->where('drop_id',$drop_id)->findorfail($id);
         
-     return $detail;
+        return $detail;
    }
-   function detail2($id,$drop_id)
+   function detail2($id,$drop_id,$vid)
    {
-    $detail2= Stock::
+    $query= Stock::
      leftjoin('reviews','stocks.id','=','reviews.review_id')
      ->select('review_id', \DB::raw('avg(rating) as rating')
         ,'stocks.id','stocks.product','stocks.created_at','stocks.drop_id')
-        ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.drop_id')->orderBy('rating','DESC')
-         ->where('stocks.drop_id',$drop_id)
-        ->get();
+        ->groupBy('review_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','stocks.drop_id')->orderBy('rating','DESC');
+         if($drop_id)
+         {
+           $query=$query->where('stocks.drop_id',$drop_id);
+         }
+         if($vid)
+         {
+           $query=$query->where('stocks.vendor_id',$vid);
+         }
+         
+        $detail2=$query->get();
         foreach($detail2 as $dt)
         {
           $dt->image=Image::where('image_id',$dt->id)->take(1)->get();
