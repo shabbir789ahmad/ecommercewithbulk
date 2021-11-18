@@ -7,7 +7,7 @@
     @foreach($slider as $slide)
     <div class="carousel-item  @if($loop->first) active @endif caro" >
      <div class="slider">
-      <img class="d-block w-100" src="{{asset('uploads/img/' .$slide['image'])}}" alt="Firstlide" style="">
+      <img class="d-block w-100" loading="lazy" src="{{asset('uploads/img/' .$slide['image'])}}" alt="Firstlide" style="">
      </div>
     </div>
     @endforeach
@@ -47,13 +47,13 @@
 
 <div class="container-fluid mt-4">
  <div class="owl-carousel owl-theme ml-2">
-  @foreach($product2 as $pro)
+  @foreach($product as $pro)
   @foreach($sells as $sal)
    @if(!$pro['on_sale'] && $sal['id']==$pro['sell_id'])
    <div class="item">
      <div class="product-image">
       <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
-         <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
+         <img  loading="lazy" src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
         @endforeach
       </a>
 
@@ -66,7 +66,7 @@
        @if($pro['sponser'])
         <a> 
         <p class="overlay5 ">
-        <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
+        <img loading="lazy" src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
         </p>
        </a>
        @endif
@@ -100,7 +100,7 @@
     <div class="row ml-1 mr-1">
       @foreach($sell as $sale)
      <div class="col-md-6 col-6 ">
-       <img src="{{asset('uploads/img/' .$sale['image'])}}" width="100%" height="80rem" class="">
+       <img loading="lazy" src="{{asset('uploads/img/' .$sale['image'])}}" width="100%" height="80rem" class="">
        <p class="product-detail3 ml-3">{{ucwords($sale['sell_name'])}}</p>
      </div>
       @endforeach
@@ -114,7 +114,7 @@
     <p class="order-user ml-3 mt-3">{{$sale['sell_name']}}</p>
     <div class="row ">
      <div class="col-md-12 col-12">
-       <img src="{{asset('uploads/img/' .$sale['image'])}}" width="90%" height="215rem" class="ml-3">
+       <img loading="lazy" src="{{asset('uploads/img/' .$sale['image'])}}" width="90%" height="215rem" class="ml-3">
       <a href="{{url('all-product-sale')}}"><p class="product-detail3 ml-3 mt-3">shop now</p></a> 
      </div>
     </div>
@@ -128,7 +128,7 @@
       @foreach($store as $str)
      <div class="col-md-6 col-6">
        <a href="{{url('store/'.$str['id'])}}">
-       <img src="{{asset('uploads/img/' .$str['image'])}}" width="90%" class="ml-3" height="80rem"></a>
+       <img loading="lazy" src="{{asset('uploads/img/' .$str['image'])}}" width="90%" class="ml-3" height="80rem"></a>
        <a href="{{url('voucher')}}"><p class="product-detail3 ml-3">See All</p></a>
      </div>
      @endforeach
@@ -143,7 +143,7 @@
     <p class="order-user ml-3 mt-3">{{ucwords($drop['name'])}}</p>
     <div class="row ">
      <div class="col-md-12 col-12">
-       <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="90%" height="215rem" class="ml-3">
+       <img loading="lazy" src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="90%" height="215rem" class="ml-3">
       <a href="{{url('product/' .$drop['id'])}}"><p class="product-detail3 ml-3 mt-3">shop now</p></a> 
      </div>
     </div>
@@ -161,7 +161,7 @@
       @foreach($dropdown->slice(0, 4) as $drop)
       
      <div class="col-md-6 col-6">
-       <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="100%" height="80rem" >
+       <img loading="lazy" src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="100%" height="80rem" >
        <p class="product-detail3 ml-3">{{$drop['name']}}</p>
      </div>
  
@@ -176,7 +176,7 @@
     <p class="order-user ml-3 mt-3">{{$drop['name']}}</p>
     <div class="row ">
      <div class="col-md-12 col-12">
-       <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="90%" height="215rem" class="ml-3">
+       <img loading="lazy" src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="90%" height="215rem" class="ml-3">
       <a href="{{url('product/' .$drop['id'])}}"><p class="product-detail3 ml-3 mt-3">shop now</p></a> 
      </div>
     </div>
@@ -186,25 +186,13 @@
   </div>
   <div class="col-md-3 col-12">
    <div class="card shadow" style="width: 100%; height:20rem">
-    <p class="order-user ml-3 mt-3">Your Acount</p>
+    
+    <p class="order-user ml-3 mt-3">View Deals</p>
     <div class="row ">
-     <div class="col-md-6 col-6">
-       <img src="{{asset('pic/Fuji_Dash_GGquad_1X._SY116_CB654300275_.jpg')}}" width="90%" class="ml-3">
-       <p class="product-detail3 ml-3">Hot deals</p>
-     </div>
-     <div class="col-md-6 col-6">
-       <img src="{{asset('pic/Fuji_Dash_GGquad2_1X._SY116_CB654300275_.jpg')}}" width="90%" class="mr-3">
-       <p class="product-detail3">Hot deals</p>
-     </div>
-    </div>
-    <div class="row mt-2">
-     <div class="col-md-6 col-6">
-       <img src="{{asset('pic/Fuji_Dash_GGquad_1X._SY116_CB654300275_.jpg')}}" width="90%" class="ml-3">
-       <p class="product-detail3 ml-3">Hot deals</p>
-     </div>
-     <div class="col-md-6 col-6">
-       <img src="{{asset('pic/Fuji_Dash_GGquad2_1X._SY116_CB654300275_.jpg')}}" width="90%" class="mr-3">
-       <p class="product-detail3">Hot deals</p>
+     <div class="col-md-12 col-12">
+      <a href="{{url('all-deals')}}">
+       <img loading="lazy" src="{{asset('pic/Fuji_Dash_Deals_1x._SY304_CB430401028_.jpg')}}" width="90%" height="215rem" class="ml-3">
+      <p class="product-detail3 ml-3 mt-3">Shop now</p></a> 
      </div>
     </div>
    </div>
@@ -216,7 +204,7 @@
     <p class="order-user ml-3 mt-3">{{$drop['name']}}</p>
     <div class="row ">
      <div class="col-md-12 col-12">
-       <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="90%" height="215rem" class="ml-3">
+       <img loading="lazy" src="{{asset('uploads/img/' .$drop['drop_image'])}}" width="90%" height="215rem" class="ml-3">
       <a href="{{url('product/' .$drop['id'])}}"><p class="product-detail3 ml-3 mt-3">shopg now</p></a> 
      </div>
     </div>
@@ -242,7 +230,7 @@
         <div class="item">
          <div class="product-image">
            <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
-             <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
+             <img  loading="lazy" src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
              @endforeach
             </a>
             <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
@@ -251,11 +239,11 @@
            @else
            @endif
             <p class="overlay5 ">
-             <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
+             <img loading="lazy" src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
             </p>
          </div>
          <div class="product-text d-flex mt-2">
-          <p class="product-name2 ml-2">{{ucwords($pro['product'])}}</p>
+          <p class="product-detail3 ml-2">{{ucwords($pro['product'])}}</p>
           <p class="ml-auto product-name2 mr-2">Rs. {{$pro['sell_price']-$pro['discount']}}</p>
          </div>
          <div class="text-center">
@@ -297,7 +285,7 @@
    <div class="item">
      <div class="product-image">
       <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
-         <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
+         <img  loading="lazy" src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
         @endforeach
       </a>
 
@@ -336,7 +324,7 @@
        <a href="{{url('product/' .$drop['id'])}}"> 
        <div class="swiper-slide ">
         <div class="round-img" >
-          <img src="{{asset('uploads/img/' .$drop['drop_image'])}}" class="cat" >
+          <img loading="lazy" src="{{asset('uploads/img/' .$drop['drop_image'])}}" class="cat" >
           <p class="textc">{{$drop['name']}}</p>
         </div>
        </div>
@@ -364,7 +352,7 @@
      <div class="item">
      <div class="product-image">
       <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
-         <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
+         <img  loading="lazy" src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
         @endforeach
       </a>
 
@@ -375,7 +363,7 @@
        @else
        @endif
        <p class="overlay5 ">
-        <img src="{{asset('pic/Sponsered-removebg-preview.png')}}" width="100%" height="10rem">
+        <img loading="lazy" src="{{asset('pic/Sponsered-removebg-preview.png')}}" width="100%" height="10rem">
         </p>
      </div>
      <div class="product-text d-flex mt-2">
@@ -404,7 +392,7 @@
 <div class="container-fluid">
    <div class="img-c">
        <div class="cl2">
-        <img src="{{asset('pic/cta-bg.jpg')}}" class="">
+        <img loading="lazy" src="{{asset('pic/cta-bg.jpg')}}" class="">
        </div>
      <div class="middle2">
          <p class="add-txt">Fashion</p>
@@ -439,7 +427,7 @@
     <div class="item">
      <div class="product-image">
       <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
-         <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
+         <img  loading="lazy" src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
         @endforeach
       </a>
 
@@ -452,7 +440,7 @@
        @if($pro['sponser'])
         <a> 
         <p class="overlay5 ">
-        <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
+        <img loading="lazy" src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
         </p>
        </a>
        @endif
@@ -499,7 +487,7 @@
    <div class="item">
      <div class="product-image">
       <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
-         <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
+         <img  loading="lazy" src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
         @endforeach
       </a>
 
@@ -512,7 +500,7 @@
        @if($pro['sponser'])
         <a> 
         <p class="overlay5 ">
-        <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
+        <img loading="lazy" src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
         </p>
        </a>
        @endif
@@ -559,7 +547,7 @@
    <div class="item">
      <div class="product-image">
       <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
-         <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
+         <img  loading="lazy" src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
         @endforeach
       </a>
 
@@ -572,7 +560,7 @@
        @if($pro['sponser'])
         <a> 
         <p class="overlay5 ">
-        <img src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
+        <img loading="lazy" src="{{asset('pic/Sponsered__1_-removebg-preview.png')}}" width="100%">
         </p>
        </a>
        @endif

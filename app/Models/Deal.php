@@ -10,9 +10,9 @@ class Deal extends Model
     use HasFactory;
     protected $fillable=[
     'deal_name',
-    'deal_detail',
     'deal_image',
     'deal_end_date',
-    'deal_vendor_id'
+    'deal_vendor_id',
+    'deal_id'
     ];
 }

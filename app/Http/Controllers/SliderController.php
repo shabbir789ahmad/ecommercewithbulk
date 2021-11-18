@@ -36,42 +36,24 @@ class SliderController extends Controller
     $product= Vendor::
      join('stocks','vendors.id','=','stocks.vendor_id')
      ->join('stock2s','stocks.id','=','stock2s.stock_id')
+     ->leftjoin('sales','stocks.id','=','sales.sale_id')
      ->leftjoin('sponsers','stocks.id','=','sponsers.sponser_id')
      ->leftjoin('reviews','stocks.id','=','reviews.review_id')
      ->select('review_id', \DB::raw('avg(rating) as rating')
-     ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stock2s.sell_price','stock2s.discount','stock2s.stock_status','sponsers.sponser','stocks.cat_id','sponsers.sponser_status','sponsers.sponser_end')
-     ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','sponsers.sponser','stock2s.sell_price','stock2s.discount','stock2s.stock_status','stocks.cat_id','sponsers.sponser_status','sponsers.sponser_end')->orderBy('rating','DESC')
+     ,'stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','stock2s.sell_price','stock2s.discount','stock2s.stock_status','sponsers.sponser','stocks.cat_id','sponsers.sponser_status','sponsers.sponser_end','sales.on_sale')
+     ->groupBy('review_id','stocks.drop_id','stocks.id','stocks.product','stocks.created_at','vendors.deleted_at','sponsers.sponser','stock2s.sell_price','stock2s.discount','stock2s.stock_status','stocks.cat_id','sponsers.sponser_status','sponsers.sponser_end','sales.on_sale')->orderBy('rating','DESC')
      ->whereNull('vendors.deleted_at')
-     ->where('product_status','1')->get()
-     ->shuffle();
- //dd($product);
+     ->where('product_status','1')
+     ->whereNull('deal')
+     ->get()->shuffle();
+
      foreach($product as $pro) 
      {
        $pro->image=Image::where('Image_id',$pro->id)->take('1')->get();
      }
    
-    
- 
-        
-    $product2= Vendor::
-      join('stocks','vendors.id','=','stocks.vendor_id')
-      ->join('stock2s','stocks.id','=','stock2s.stock_id')
-      ->leftjoin('sales','stocks.id','=','sales.sale_id')
-      ->leftjoin('reviews','stocks.id','=','reviews.review_id')
-      ->select('review_id', \DB::raw('avg(rating) as rating')
-       ,'stocks.drop_id','stocks.id','stocks.product'    ,'reviews.review_id','stocks.created_at','vendors.deleted_at','stocks.cat_id','stock2s.stock_status','sales.new_price','sales.discounts','sales.on_sale','sales.sell_id')
-      ->groupBy('review_id','stocks.drop_id','stocks.cat_id','stocks.id','stocks.product','reviews.review_id','stocks.created_at','vendors.deleted_at','stock2s.stock_status','sales.new_price','sales.discounts','sales.on_sale','sales.sell_id')->orderBy('rating','DESC')
-      ->where('product_status','1')
-      ->where('on_sale','1')
-      ->whereNull('vendors.deleted_at')
-      ->get()->shuffle();
-      
-       foreach($product2 as $pro)
-       {
-        $pro->image=Image::where('Image_id',$pro->id)->get();
-       }
    //dd($product);
-      return view('home',compact('slider','product','product2','front','dropdown','time','sells','sell','store'));
+      return view('home',compact('slider','product','front','dropdown','time','sells','sell','store'));
   }
 
   function uploadSlider(Request $req)

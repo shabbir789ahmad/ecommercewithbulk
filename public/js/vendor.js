@@ -116,6 +116,29 @@ $(document).ready(function(){
     
  });
 
+  $('.deal').click(function(e){
+    e.preventDefault();
+    $('#exampleModal').modal('show')
+    let id=$(this).data('id')
+    $('#ids').val(id)
+    let discount=$(this).data('discount')
+    $('#disc').val(discount)
+    let price=$(this).data('price')
+    $('#prices').val(price)
+    
+  });
+  $('.detail').click(function(e){
+    e.preventDefault();
+    $('#exampleModal').modal('show')
+    let id=$(this).data('id')
+    $('#detail_id').val(id)
+    let discount=$(this).data('discount')
+    $('#disc').val(discount)
+    let sell=$(this).data('sell')
+    $('#price').val(sell)
+    
+  });
+/*
 $('.maincat').on('change',function(){
       let id=$(this).val()
       if(id)
@@ -140,6 +163,8 @@ $('.maincat').on('change',function(){
       }
    
    });
+
+  
 $('.deal').on('change',function(){
        var id = $(this).val();
    
@@ -154,12 +179,11 @@ $('.deal').on('change',function(){
              success:function(data)
              {
              
-             
-             var trHTML = '';
-        $.each(data, function (i, item) {
-            trHTML += '<tr><td><input type="checkbox" name="product_id[]" value="'+item.id+'"> </td><td>' + item.product + '</td><td>' + item.sell_price + '</td><td><input type="text" name="product_discount[]" value="'+item.discount+'">  </td></tr>';
-        });
-        $('.records_table').append(trHTML);
+             var html = '';
+              $.each(data, function (i, item) {
+              html += '<tr><td><input type="checkbox" name="product_id[]" value="'+item.id+'"></td><td>' + item.product + '</td><td><input type="text" name="product_price[]" value="'+item.sell_price+'"  class="w-75">  </td><td><input type="text" class="w-75" name="deal_discount[]" value="'+item.discount+'">  </td></tr>';
+              });
+             $('.records_table').append(html);
             }
 
           });
@@ -169,4 +193,11 @@ $('.deal').on('change',function(){
 
 
 
+$('.deal_ceate').click(function(e){
+  e.preventDefault();
+  $('#dealmodel').modal('show');
+
+});
+
+*/
 });

@@ -51,6 +51,8 @@ Route::get('master',[SubCategoryController::class,'subCategory']);
 
 Route::get('productpage/{id}/{drop_id}',[ProductController::class,'productDetail'])->name('productpage/{id}/{drop_id}');
 Route::get('all-product-sale',[ProductController::class,'SaleProduct'])->name('all-product-sale');
+Route::get('all-deals',[DealController::class,'allDeal'])->name('all-deals');
+
 
 
 Route::get('cart',[CartController::class,'cart']);
@@ -74,10 +76,10 @@ Route::view('about','about_us');
 Route::view('contact','contact_us');
 Route::post('contact2',[ContactController::class,'contact'])->name('contact2');
 
-Route::view('mail','mail.order_mail');
-Route::view('bcd','bcd');
+ Route::view('mail','mail.order_mail');
+ Route::view('bcd','bcd');
 
-Route::view('checkout','checkout');
+ Route::view('checkout','checkout');
  Route::post('review',[ReviewController::class,'review']);
  Route::post('check-coupon',[CouponController::class,'checkCoupon']);
  Route::post('save-token',[CouponController::class,'saveCoupon']);
@@ -181,17 +183,20 @@ Route::get('deleted-order',[OrderController::class,'deletedOrder'])->name('vendo
 Route::get('restore-order/{id}',[OrderController::class,'restoreOrder'])->name('vendor/restore-order/{id}');
 Route::get('delivered',[OrderController::class,'delivered'])->name('vendor.delivered');
 
- //route for deals
-Route::get('new-deals',[DealController::class,'index'])->name('vendor.new-deals');
-Route::get('new-deals2/{id}',[DealController::class,'catOrder'])->name('vendor.new-deals2/{id}');
-Route::post('deals',[DealController::class,'create'])->name('vendor.deals');
-Route::get('get/{id}',[DealController::class,'get'])->name('vendor.get/{id}');
-Route::get('all-deals',[DealController::class,'show'])->name('vendor/all-deals');
-Route::get('deal-detail/{id}',[DealController::class,'detail'])->name('vendor.deal-detail2/{id}');
-Route::get('delete-deal-product/{id}/{deal_id}',[DealController::class,'destroy'])->name('vendor/delete-deal-product{id}/{deal_id}');
-Route::post('add-deal-product',[DealController::class,'update'])->name('vendor/add-deal-product');
-Route::post('update-deal',[DealController::class,'updateDeal'])->name('vendor/update-deal');
 
+Route::get('new-deals',[DealController::class,'index'])->name('vendor.new-deals');
+Route::post('deals',[DealController::class,'create'])->name('vendor.deals');
+Route::get('all-deals',[DealController::class,'show'])->name('vendor/all-deals');
+Route::get('deal-detail/{id}',[DealController::class,'detail'])->name('vendor.deal-detail/{id}');
+Route::post('update-deal',[DealController::class,'updateDeal'])->name('vendor/update-deal');
+Route::post('add-deal-product',[DealController::class,'update'])->name('vendor/add-deal-product');
+Route::get('delete-deal-product/{id}/{stock_id}',[DealController::class,'destory'])->name('vendor/delete-deal-product{id}/{stock_id}');
+/*
+Route::get('get/{id}',[DealController::class,'get'])->name('vendor.get/{id}');
+Route::get('new-deals2/{id}',[DealController::class,'catOrder'])->name('vendor.new-deals2/{id}');
+
+
+*/
 //route for brand upload, update and delete
 
 Route::view('brand','vendor.brand_upload')->name('vendor.brand');

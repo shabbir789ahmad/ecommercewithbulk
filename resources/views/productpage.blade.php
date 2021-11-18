@@ -66,11 +66,11 @@
           @endfor
             {{$detail['rating']}} Reviews
         </span>
-        <p class="product-detail2 mt-1 mt-md-2">Rs. {{$detail['sell_price']- $detail['discoupt']}}
-          <span class="product-detail text-danger">
+        <p class="product-detail2 mt-1 mt-md-2">Rs. {{$detail['sell_price']- $detail['discount']}}
+          <span class="product-detail text-danger"><del>
           @if($detail['discount'])
            {{$detail['sell_price']}}
-          @endif
+          @endif</del>
         </span></p>
         @if(!$coupon->isEmpty())
         <div class="dropdowns " style="float:left;">

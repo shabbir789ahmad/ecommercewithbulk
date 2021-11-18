@@ -99,7 +99,7 @@ class StockController extends Controller
            'product_status'=>'1',
            'drop_id'=>$req->drop_id,
            'cat_id'=>$req->cat_id,
-           'user_id'=>Auth::user()->id,
+           'vendor_id'=>Auth::user()->id,
         ]);
        
          Stock2::create([ 

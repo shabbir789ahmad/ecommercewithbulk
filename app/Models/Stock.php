@@ -15,7 +15,7 @@ class Stock extends Model
     'on_sale',
     'drop_id',
     'cat_id',
-    'user_id'
+    'vendor_id'
    
    ];
 }
