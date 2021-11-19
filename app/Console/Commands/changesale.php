@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Sell;
+use App\Models\Deal;
+use App\Models\Stock2;
 use Carbon\Carbon;
 class changesale extends Command
 {
@@ -39,6 +41,14 @@ class changesale extends Command
     public function handle()
     {
          $now=Carbon::now();
-        $user=Sell::where('end_time','<',$now)->delete();
+        $users=Sell::where('end_time','<',$now)->delete();
+        $deals=Deal::where('deal_end_date','<',$now)->get();
+        foreach ($deals as  $deal) {
+           $val=array('discount' => null,'deal'=> null);
+           $stock=Stock2::where('id',$deal['deal_id'])->update($val);
+           $deals2=$deal->delete();
+        }
+        
+         
     }
 }

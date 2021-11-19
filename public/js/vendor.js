@@ -116,17 +116,20 @@ $(document).ready(function(){
     
  });
 
-  $('.deal').click(function(e){
+ $('.deal').click(function(e){
     e.preventDefault();
     $('#exampleModal').modal('show')
-    let id=$(this).data('id')
+   let id=$(this).data('id')
     $('#ids').val(id)
     let discount=$(this).data('discount')
     $('#disc').val(discount)
-    let price=$(this).data('price')
-    $('#prices').val(price)
+    let sell=$(this).data('price')
+    $('#prices').val(sell)
     
   });
+
+
+
   $('.detail').click(function(e){
     e.preventDefault();
     $('#exampleModal').modal('show')

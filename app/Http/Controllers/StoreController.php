@@ -27,16 +27,17 @@ class StoreController extends Controller
     function showStore($id)
     {
        $usid='';
-      $products=$this->storeProduct2($id);
+       if(Auth::user())
+        {
+            $usid=Auth::user()->id;
+        }
+      $products=$this->storeProduct2($id,$usid);//from producttrait
       $sale=$this->sale();
       $banner=$this->banner();
       $date=$this->carbon();
       $vendorsale=$this->vendorSale();
       $coupon=Coupon::where('vendor_id',$id)->where('exp_date','>',$date)->where('coupon_status','1')->take(3)->get();
-      if(Auth::user())
-        {
-            $usid=Auth::user()->id;
-        }
+      
       foreach($coupon as $coupn)
         {
             

@@ -197,7 +197,9 @@
       <label class="font-weight-bold text-color" >Deal Name</label>
        <input type="text" name="deal_name"  class="form-control "   required>
       <span class="text-danger">@error('deal_name') {{$message}} @enderror</span>
-
+      <label class="font-weight-bold text-color">Deal Discription</label>
+       <input type="text" name="deal_detail"  class="form-control "  required="">
+         <span class="text-danger">@error('deal_detail') {{$message}} @enderror</span>
        <label class="font-weight-bold text-color">Deal End Date</label>
        <input type="datetime-local" name="deal_end_date" placeholder=" Deal End Date" class="form-control " value="{{old('deal_end_date')}}" required="">
          <span class="text-danger">@error('deal_end_date') {{$message}} @enderror</span>
@@ -209,8 +211,7 @@
         <label class="font-weight-bold text-color">Deal Price</label>
        <input type="text" name="sell_price"  class="form-control " id="prices" required="">
          <span class="text-danger">@error('sell_price') {{$message}} @enderror</span>
-
-        <label class="font-weight-bold text-color">Deal Discount</label>
+         <label class="font-weight-bold text-color">Deal Discount</label>
        <input type="text" name="discount"  class="form-control " id="disc" required="">
          <span class="text-danger">@error('discount') {{$message}} @enderror</span>
 

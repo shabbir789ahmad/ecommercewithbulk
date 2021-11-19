@@ -78,7 +78,7 @@ function storeProduct($id)
        return $product;
      }
      
-function storeProduct2($id)
+function storeProduct2($id,$uid)
    {    
        $time=Carbon::now();
         $req = app('request');
@@ -136,9 +136,14 @@ function storeProduct2($id)
        $product=$query->get();
         foreach($product as $st)
         {
+
          $st->image=Image::where('image_id',$st['id'])->take(1)->get();
          $st->follow=Follow::where('follow_id',$st['vendor_id'])->count();
-         $st->follows=Follow::where('follow_id',$st['vendor_id'])->where('user_id',Auth::user()->id)->first();
+         if($uid)
+         {
+            $st->follows=Follow::where('follow_id',$st['vendor_id'])->where('user_id',$uid)->first();
+         }
+         
         
        }
        return $product;

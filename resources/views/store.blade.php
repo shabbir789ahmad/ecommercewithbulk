@@ -19,7 +19,7 @@ $sub=Category::category();
      <p class="mr-4 "><i class="fas fa-sms fa-2x ml-3 "></i><br>Message</p>
        @if($pro->follows==null)
       @if($loop->first )
-     <p class=" follow ml-5" data-id="@if($pro->follows) $pro->follows->id @else 0 @endif" data-uid="{{Auth::user()->id}}"   data-follow="{{$pro['user_id']}}"><i class="far fa-user fa-2x ml-3" ></i><br>Follow</p>
+     <p class=" follow ml-5" data-id="@if($pro->follows) $pro->follows->id @else 0 @endif" data-uid="@if(Auth::user()) Auth::id() @endif"   data-follow="{{$pro['user_id']}}"><i class="far fa-user fa-2x ml-3" ></i><br>Follow</p>
      @endif
      @else
  

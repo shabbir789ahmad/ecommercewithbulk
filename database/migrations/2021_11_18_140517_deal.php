@@ -16,6 +16,7 @@ class Deal extends Migration
         Schema::create('deals',function(Blueprint $table){
             $table->id();
             $table->string('deal_name');
+            $table->string('deal_detail');
             $table->string('deal_image');
             $table->date('deal_end_date');
             $table->bigInteger('deal_vendor_id')->unsigned();

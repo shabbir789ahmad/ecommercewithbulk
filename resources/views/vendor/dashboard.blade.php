@@ -138,8 +138,8 @@
       <i class="fas fa-bold text-light"></i>
           <span>Make Deals</span>
         </a>
-        <div id="collapseBootstrap15" class="collapse @if(request()->is('vendor/show-supplier')) show
-         @elseif(request()->is('vendor/add-supplier'))
+        <div id="collapseBootstrap15" class="collapse @if(request()->is('vendor/all-deals')) show
+         @elseif(request()->is('vendor/new-deals'))
           show
          @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">

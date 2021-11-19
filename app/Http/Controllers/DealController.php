@@ -42,6 +42,7 @@ class DealController extends Controller
            Deal::updateOrCreate([
             'deal_id' => $req->id,
             'deal_name' => $req->deal_name,
+            'deal_detail' => $req->deal_detail,
              'deal_end_date' => $req->deal_end_date,
              
              'deal_vendor_id' => Auth::id(),
