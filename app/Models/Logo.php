@@ -9,4 +9,11 @@ class Logo extends Model
 {
     use HasFactory;
     protected $fillable=['logo'];
+
+
+public static function logo()
+{
+    return Logo::select('logo','id')->latest()->get();
+}
+   
 }

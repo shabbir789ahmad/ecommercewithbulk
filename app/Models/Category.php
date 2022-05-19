@@ -8,22 +8,37 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-     protected $fillable=['category'];
+     protected $fillable=['category','category_image'];
+
 
    public static function category()
     {
-        $sub=Category::with('subcat')->with('drop')->get();
+        $sub=Category::with('categories.subcategory')->get();
         $sub=json_decode(json_encode($sub),true);
-        //echo "<pre>"; print_r($sub);die;
+        // dd($sub);
         return $sub;
     }
 
-    public  function subcat()
+    // public  function subcat()
+    // {
+    //    return $this->hasMany('\App\Models\MiddleCategory','category_id');
+    // }
+    //   public  function drop()
+    // {
+    //    return $this->hasMany('\App\Models\Subcategory','category_id');
+    // }
+
+    // public function categories2()
+    // {
+    //       return $this->hasManyThrough(
+    //         subcategory::class,
+    //         MiddleCategory::class,
+            
+            
+    //     );
+    // }
+    public function categories()
     {
-       return $this->hasMany('\App\Models\Submenue','menue_id');
-    }
-      public  function drop()
-    {
-       return $this->hasMany('\App\Models\Dropdown','category_id');
+         return $this->hasMany(MiddleCategory::class);
     }
 }

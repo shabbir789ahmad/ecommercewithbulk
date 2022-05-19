@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 trait ImageTrait{
 
-  function getimage()
+  function image()
   { 
      
   	 $req=app('request');

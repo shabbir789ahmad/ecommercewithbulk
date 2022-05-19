@@ -58,9 +58,9 @@
           " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">
 
-            <a class="collapse-item" href="{{url('admin/get-slider')}}">All Slider</a>
+            <a class="collapse-item" href="{{route('slider.index')}}">All Slider</a>
             <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/slider')}}">Upload Slider</a>
+            <a class="collapse-item" href="{{route('slider.create')}}">Upload Slider</a>
          </div>
         </div>
       </li>
@@ -71,18 +71,18 @@
           <span>Logo</span>
         </a>
         <div id="collapseBootstrap11" class="collapse
-         @if(request()->is('admin/get-logo'))
+         @if(request()->is('logo'))
           show
-         @elseif(request()->is('admin/logo'))
+         @elseif(request()->is('logo/create'))
           show
          @endif
 
         " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('admin/get-logo')}}">All Logos</a>
+            <a class="collapse-item" href="{{route('logo.index')}}">All Logos</a>
 
             <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/logo')}}">Upload Logos</a>
+            <a class="collapse-item" href="{{route('logo.create')}}">Upload Logos</a>
            
 
           </div>
@@ -106,6 +106,29 @@
            </div>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap18"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+         <i class="fas fa-window-maximize text-light"></i>
+          <span>Brand</span>
+        </a>
+        <div id="collapseBootstrap18" class="collapse
+         @if(request()->is('admin/brand')) show
+         @elseif(request()->is('admin/brand/create'))
+          show
+         @endif
+        " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class=" py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{route('brand.index')}}">All Brand </a>
+
+            <div class="dropdown-divider"></div>
+            <a class="collapse-item" href="{{route('brand.create')}}">Upload  Brand</a>
+           
+
+          </div>
+        </div>
+      </li>
+
        <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap12"
           aria-expanded="true" aria-controls="collapseBootstrap">
@@ -113,21 +136,22 @@
           <span>Main Category</span>
         </a>
         <div id="collapseBootstrap12" class="collapse
-         @if(request()->is('admin/get-main')) show
-         @elseif(request()->is('admin/main'))
+         @if(request()->is('admin/category')) show
+         @elseif(request()->is('admin/category/create'))
           show
          @endif
         " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('admin/get-main')}}">All Main Category</a>
+            <a class="collapse-item" href="{{route('category.index')}}">All Main Category</a>
 
             <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/main')}}">Upload Main Category</a>
+            <a class="collapse-item" href="{{route('category.create')}}">Upload Main Category</a>
            
 
           </div>
         </div>
       </li>
+      
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
           aria-expanded="true" aria-controls="collapseBootstrap">
@@ -135,17 +159,63 @@
           <span>Category</span>
         </a>
         <div id="collapseBootstrap4" class="collapse
-       @if(request()->is('admin/show-category')) show
-         @elseif(request()->is('admin/get-cat'))
+       @if(request()->is('admin/middlecategory')) show
+         @elseif(request()->is('admin/middlecategory/create'))
           show
          @endif
         " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">
 
-          <a class="collapse-item" href="{{url('admin/show-category')}}">All Category</a>
+          <a class="collapse-item" href="{{route('middlecategory.index')}}">All Middle Category</a>
 
              <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/get-cat')}}">Upload Category</a>
+            <a class="collapse-item" href="{{route('middlecategory.create')}}">Upload Category</a>
+          
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+         <i class="fas fa-bars text-light"></i>
+          <span>Category</span>
+        </a>
+        <div id="collapseBootstrap4" class="collapse
+       @if(request()->is('admin/middlecategory')) show
+         @elseif(request()->is('admin/middlecategory/create'))
+          show
+         @endif
+        " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class=" py-2 collapse-inner rounded">
+
+          <a class="collapse-item" href="{{route('middlecategory.index')}}">All Middle Category</a>
+
+             <div class="dropdown-divider"></div>
+            <a class="collapse-item" href="{{route('middlecategory.create')}}">Upload Category</a>
+          
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+         <i class="fas fa-bars text-light"></i>
+          <span>Category</span>
+        </a>
+        <div id="collapseBootstrap4" class="collapse
+       @if(request()->is('admin/middlecategory')) show
+         @elseif(request()->is('admin/middlecategory/create'))
+          show
+         @endif
+        " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class=" py-2 collapse-inner rounded">
+
+          <a class="collapse-item" href="{{route('middlecategory.index')}}">All Middle Category</a>
+
+             <div class="dropdown-divider"></div>
+            <a class="collapse-item" href="{{route('middlecategory.create')}}">Upload Category</a>
           
           </div>
         </div>
@@ -157,16 +227,16 @@
           <i class="fab fa-wpforms text-light"></i>
           <span>Sub Category</span>
         </a>
-        <div id="collapseForm" class="collapse @if(request()->is('admin/show-sub-category')) show
-         @elseif(request()->is('admin/get-sub-category'))
+        <div id="collapseForm" class="collapse @if(request()->is('admin/sub')) show
+         @elseif(request()->is('admin/sub/create'))
           show
          @endif" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class=" py-2 collapse-inner rounded">
-           <a class="collapse-item" href="{{url('admin/show-sub-category')}}">All Sub category</a>
+           <a class="collapse-item" href="{{route('sub.index')}}">All Sub category</a>
             
 
              <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/get-sub-category')}}">Upload Sub category</a>
+            <a class="collapse-item" href="{{route('sub.create')}}">Upload Sub category</a>
          
             
           </div>

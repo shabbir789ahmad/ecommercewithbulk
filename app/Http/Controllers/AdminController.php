@@ -9,20 +9,16 @@ class AdminController extends Controller
     function adminLogin(Request $req)
     {
      
-       $messages = [
-    'email.required' => 'Email is required!',
-    'password.required' => 'Password is required!'
-      ];
-
-      $validatedData = $req->validate([
-    'email' => 'required|email',
-    'password' => 'required|string',
-       ], $messages);
+     $req->validate([
+          'email' => 'required|email',
+         'password' => 'required|string',
+       ]);
 
         $data=$req->only('email','password');
-
+      
        if( Auth::guard('admin')->attempt($data,  $req->remember))
        {
+        
         return redirect(route('admin.dashboard'));
        }else
        {

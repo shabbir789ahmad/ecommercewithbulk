@@ -20,42 +20,10 @@ use Illuminate\Support\Facades\DB;
 class StockController extends Controller
 {
  use StoreTrait;
-    function Add(Request $req)
-    {
-        $req->validate([
-          
-          'supplier_name' => 'required',
-          'address' => 'required',
-          'phone' => 'required|numeric',
-         
-        ]);
-         $supply= Supply::create([ 
-           'supplier_name'=> $req->supplier_name,
-           'address'=> $req->address,
-           'phone'=> $req->phone,       
-           
-           ]);
-           return  redirect()->back()->with('success','New Supplier Added');
-
-    }
-    function showSupplier()
-    {
-        $supply=Supply::paginate(10);
-         return view('vendor.supplier_show',compact('supply'));
-    }
-    function deleteSupplier($id)
-    {
-        $supply=Supply::findorfail($id);
-        $supply->delete();
-        return  redirect()->back()->with('success','Supplier Deleted');
-    }
-    function getSupplier()
-    {
-        $main = DB::table("categories")->pluck("category","id");
-     $brand = Brand::all();
-        $supply=Supply::all();
-         return view('vendor.stock',compact('supply','main','brand'));
-    }
+   
+    
+    
+   
      function getSupplier2()
     {
         $main = DB::table("categories")->pluck("category","id");
@@ -64,234 +32,127 @@ class StockController extends Controller
          return view('vendor.stock_bulk',compact('main','brand','supply'));
     }
 
-    function newStock(Request $req)
-    {
-        $req->validate([
-          
-          'product' => 'required',
-          'detail' => 'required',
-          'drop_id' => 'required',
-          'cat_id' => 'required',
-          'stock' => 'required|numeric',
-          'price' => 'required|numeric',
-          'sell_price' => 'required|numeric',
-          'ship' => 'required|numeric',
-          'color' => 'required',
-          'size' => 'required',
-          
-          ]);
+   
 
-   DB::transaction(function() use($req){
-         
-         $filename='';
-      if ($req->hasfile('size_image')) {
-          $file=$req->file('size_image');
-          $ext=$file->getClientOriginalExtension();
-          $filename= time().rand(1,100).'.'.$ext;
-          $file->move('uploads/img/',$filename);
-        }
-       
+ // function bulkStock(Request $req)
+ //   {
+
+ //     DB::transaction(function() use($req){
+           
+ //           foreach($req->file('size_image') as $file)
+ //           {
+ //            $ext=$file->getClientOriginalExtension();
+ //           $filename= time().rand(1,100).'.'.$ext;
+ //           $file->move('uploads/img/',$filename);
+ //           }
+           
+ //           $name=$req->product;
+ //          for ($i=0; $i <count($name) ; $i++) 
+ //          { 
+ //            $stock[]= Stock::create([ 
+ //            'product'=> $req->product[$i],
+ //            'detail'=>$req->detail[$i],
+ //            'size_image'=>$filename,
+ //            'product_status'=>'1',
+ //            'drop_id'=>$req->drop_id[$i],
+ //           ]);
+ //          }
+
+ //          $items = array();
+ //          foreach($stock as $st)
+ //          {
+ //           $items[] = $st;
+ //          }
+          
+ //          $detail=$req->stock;
+ //          for ($i=0; $i <sizeof($detail) ; $i++) {
+ //          foreach($items as $st)
+ //           {  
+ //           $is[]=$st['id'];
+ //           }
+ //          Stock2::create([ 
+ //            'stock'=> $req->stock[$i],
+ //            'price'=>$req->price[$i],
+ //            'sell_price'=>$req->sell_price[$i],
+ //            'stock_status'=>'1',
+ //            'ship'=>$req->ship[$i],
+ //            'supply_id'=>$req->supply_id[$i],
+ //            'stock_id'=>$is[$i],
+              
+ //           ]);
+ //         }
+ //         $color=$req->color;
+ //         for ($i=0; $i <sizeof($color) ; $i++) {
+ //         foreach($items as $st)
+ //          {  
+ //           $is[]=$st['id'];
+ //          }
+ //         Color::create([ 
+ //            'color'=> $req->color[$i],
+ //            'color_status'=> '1',
+ //            'filter_id'=>$is[$i],
+              
+ //           ]);
+ //         }
      
-       $stock= Stock::create([ 
-           'product'=> $req->product,
-           'detail'=>$req->detail,
-           'size_image'=>$filename,
-           'product_status'=>'1',
-           'drop_id'=>$req->drop_id,
-           'cat_id'=>$req->cat_id,
-           'vendor_id'=>Auth::user()->id,
-        ]);
-       
-         Stock2::create([ 
-           'stock'=> $req->stock,
-           'price'=>$req->price,
-           'sell_price'=>$req->sell_price,
-           'ship'=>$req->ship,
-           'stock_status'=>'1',
-           'supply_id'=>$req->supply_id,
-           'stock_id'=>$stock->id,
-        ]);
-       
-        $n = sizeof($req->color);
-         for($i = 0; $i < $n; $i++) 
-         {
-            $color= Color::create([
-            'color' => $req->color[$i],
-            'color_status' =>'1',
-            'filter_id' =>$stock->id,
-             ]);
-           }
-           
-           
-          $n2 = sizeof($req->size);
-          for($i = 0;  $i < $n2; $i++)
-           { 
+ //         $size=$req->size;
+ //         for ($i=0; $i <sizeof($size) ; $i++) {
+ //         foreach($items as $st)
+ //          {  
+ //           $is[]=$st['id'];
+ //          }
+ //         Size::create([ 
+ //            'size'=> $req->size[$i],
+ //            'size_status'=> '1',
+ //            'size_id'=>$is[$i],
+              
+ //           ]);
+ //         }
+
+ //       $brand=$req->brand;
+ //     // dd(sizeof($brand));
+ //         for ($j=0; $j <sizeof($brand) ; $j++) {
+     
+ //         foreach($items as $st)
+ //          {  
+ //           $is[]=$st['id'];
             
-            $brand= Size::create([
-           'size' =>$req->size[$i],
-           'size_status' =>'1',
-            'size_id' =>$stock->id,
-            ]);
-           }
-     
-         if($req->brand)
-         {
-            $n3 = sizeof($req->brand);
-          for($i = 0;  $i < $n3; $i++)
-           {
-            $brand= Store::create([
-             'brand' =>$req->brand[$i],
-             'brand_status' =>'1',
-             'brand_id' =>$stock->id,
-            ]);
-           }
-         }
+ //          }
           
-        foreach($req->file('rimage') as $file)
-           {
-              $ext=$file->getClientOriginalExtension();
-              $filename= time().rand(1,100).'.'.$ext;
-              $file->move('uploads/img/',$filename);
-             Image::create([
-              'rimage'=>$filename,
-              'image_id'=> $stock->id,
-              ]);
-      
-           }
-
-       });
-
- return redirect()->back()->with('success','New Stock Added');
-    }
-
- function bulkStock(Request $req)
-   {
-
-     DB::transaction(function() use($req){
-           
-           foreach($req->file('size_image') as $file)
-           {
-            $ext=$file->getClientOriginalExtension();
-           $filename= time().rand(1,100).'.'.$ext;
-           $file->move('uploads/img/',$filename);
-           }
-           
-           $name=$req->product;
-          for ($i=0; $i <count($name) ; $i++) 
-          { 
-            $stock[]= Stock::create([ 
-            'product'=> $req->product[$i],
-            'detail'=>$req->detail[$i],
-            'size_image'=>$filename,
-            'product_status'=>'1',
-            'drop_id'=>$req->drop_id[$i],
-           ]);
-          }
-
-          $items = array();
-          foreach($stock as $st)
-          {
-           $items[] = $st;
-          }
-          
-          $detail=$req->stock;
-          for ($i=0; $i <sizeof($detail) ; $i++) {
-          foreach($items as $st)
-           {  
-           $is[]=$st['id'];
-           }
-          Stock2::create([ 
-            'stock'=> $req->stock[$i],
-            'price'=>$req->price[$i],
-            'sell_price'=>$req->sell_price[$i],
-            'stock_status'=>'1',
-            'ship'=>$req->ship[$i],
-            'supply_id'=>$req->supply_id[$i],
-            'stock_id'=>$is[$i],
+ //          Store::create([ 
+ //            'brand'=> $req->brand[$j],
+ //            'brand_status'=> '1',
+ //            'brand_id'=>$is[$j],
               
-           ]);
-         }
-         $color=$req->color;
-         for ($i=0; $i <sizeof($color) ; $i++) {
-         foreach($items as $st)
-          {  
-           $is[]=$st['id'];
-          }
-         Color::create([ 
-            'color'=> $req->color[$i],
-            'color_status'=> '1',
-            'filter_id'=>$is[$i],
-              
-           ]);
-         }
-     
-         $size=$req->size;
-         for ($i=0; $i <sizeof($size) ; $i++) {
-         foreach($items as $st)
-          {  
-           $is[]=$st['id'];
-          }
-         Size::create([ 
-            'size'=> $req->size[$i],
-            'size_status'=> '1',
-            'size_id'=>$is[$i],
-              
-           ]);
-         }
-
-       $brand=$req->brand;
-     // dd(sizeof($brand));
-         for ($j=0; $j <sizeof($brand) ; $j++) {
-     
-         foreach($items as $st)
-          {  
-           $is[]=$st['id'];
-            
-          }
-          
-          Store::create([ 
-            'brand'=> $req->brand[$j],
-            'brand_status'=> '1',
-            'brand_id'=>$is[$j],
-              
-           ]);
+ //           ]);
        
-        }
-        //dd($req->file('rimage'));
-        foreach($req->file('rimage') as $file)
-         {
-           $ext=$file->getClientOriginalExtension();
-           $filename= time().rand(1,1000).'.'.$ext;
-           $file->move('uploads/img/',$filename);
-             foreach($items as $it)
-               {  
-                $is[]=$it['id'];
-                Image::create([
-            'rimage'=>$filename,
-            'image_id'=> $is[$i],
-            ]);
-               }
+ //        }
+ //        //dd($req->file('rimage'));
+ //        foreach($req->file('rimage') as $file)
+ //         {
+ //           $ext=$file->getClientOriginalExtension();
+ //           $filename= time().rand(1,1000).'.'.$ext;
+ //           $file->move('uploads/img/',$filename);
+ //             foreach($items as $it)
+ //               {  
+ //                $is[]=$it['id'];
+ //                Image::create([
+ //            'rimage'=>$filename,
+ //            'image_id'=> $is[$i],
+ //            ]);
+ //               }
           
             
 
-          }
+ //          }
          
         
 
-        });
-    }
+ //        });
+ //    }
 
 
-    public function getStock(Request $req)
-    {
-        $id=Auth::user()->id;
-        $main = $this->category();
-        $supply=$this->supply();
-        $stock=$this->products($id);
- 
-       
-        return view('vendor.stock_show',compact('stock','supply','main'));
-    }
+    
    
     function sponserStatus(Request $req)
     {
@@ -350,6 +211,7 @@ class StockController extends Controller
       return redirect()->back()->with('message',' Problem Updating price');
     }
     }
+    
     function updateDiscount(Request $req)
     {
       $stock=Stock2::findorfail($req->id);

@@ -21,8 +21,8 @@ class CreateVendorsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('store_name');
-            $table->string('vendor_status');
-            $table->string('image');
+            $table->string('vendor_status')->nullable();
+            $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->datetime('deleted_at')->nullable();

@@ -15,7 +15,9 @@ $sub=Category::category();
     <h4 class="">Store Name</h4>
     <p class="best"><span class="p-1 ">{{$pro->follow}}</span> Follower</p>
    
-    <div class="message-follow  d-flex justify-content-center">
+    <div class="message-follow  d-flex justify-content-center" id="foll">
+
+
      <p class="mr-4 "><i class="fas fa-sms fa-2x ml-3 "></i><br>Message</p>
        @if($pro->follows==null)
       @if($loop->first )

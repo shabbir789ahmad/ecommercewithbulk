@@ -149,7 +149,7 @@ class UserController extends Controller
          ]);
         
        $user = About::updateOrCreate(['user_id' => Auth::id()], [ 
-       'about' => req()->about],
+       'about' => req()->about,
         ]);
           
         return back()->with('cover','Your Account updated');

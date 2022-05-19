@@ -6,8 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
- 
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  
+ <!-- fontawseom -->
+<script src="https://kit.fontawesome.com/53bfee5bd7.js" crossorigin="anonymous"></script>
+
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
@@ -111,7 +114,7 @@
 
  <script type="text/javascript">
  $('.owl-carousel').owlCarousel({
-    loop:false,
+    loop:true,
     margin:20,
     nav:true,
     stagePadding: 2,
@@ -119,10 +122,13 @@
         0:{
             items:1
         },
-        430:{
+        600:{
             items:2
         },
-        1000:{
+        900:{
+            items:3
+        },
+        1100:{
             items:5
         },
          1500:{

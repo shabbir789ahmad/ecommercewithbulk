@@ -1,7 +1,9 @@
 <?php 
 use App\Models\Category;
-$sub=Category::category();
-//echo "<pre>"; print_r($sub);die;
+use App\Models\Logo;
+$category=Category::category();
+$logo=Logo::logo();
+
 ?>
 
  <header >
@@ -9,7 +11,9 @@ $sub=Category::category();
      <input type="checkbox" name="" id="check">
      <div class="logo-container">
      @foreach($logo as $log)
+     @if($loop->first)
          <a href="{{url('/')}}"> <img src="{{asset('uploads/img/' .$log['logo'])}}" width="100%"></a>
+         @endif
      @endforeach
      </div>
 
@@ -20,23 +24,23 @@ $sub=Category::category();
     <a href="javascript:void(0)">Category<i class="fas fa-caret-down"></i></a>
      <div class="dropdown">
       <ul>
-        @foreach($sub as $cat)
+        @foreach($category as $cat)
         <li class="dropdown-link">
          <a href="javascript:void(0)">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
           <div class="dropdown second">
           <ul>
-            @foreach($cat['subcat'] as $subc)
+            @foreach($cat['categories'] as $middle)
             <li class="dropdown-link">
-              <a href="{{url('product/' .$subc['id'])}}">{{ucwords($subc['smenue'])}}<i class="fas fa-caret-down"></i></a>
+              <a href="{{url('product/' .$middle['id'])}}">{{ucwords($middle['middlecategory_name'])}}<i class="fas fa-caret-down"></i></a>
                <div class="dropdown second">
           <ul>
 
-            @foreach($cat['drop'] as $drp)
-              @if($subc['id']==$drp['dropdown_id'])
+            @foreach($middle['subcategory'] as $drp)
+              
             <li class="dropdown-link">
-              <a href="{{url('product/' .$drp['id'])}}">{{ucwords($drp['name'])}}</a>
+              <a href="{{url('product/' .$drp['id'])}}">{{ucwords($drp['subcategory_name'])}}</a>
             </li>
-            @endif
+           
             @endforeach
             <div class="arrow"></div>
           </ul>
@@ -57,14 +61,7 @@ $sub=Category::category();
   </ul>
 </div>
        
-  <form class="form-inline mb-3" action="{{url('search')}}" method="GET" class="">
-   <div class="input-group form-header">
-    <input type="text" name="search" class="form-control " placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2" >
-     <div class="input-group-append">
-      <button class="btn bh text-light rounded" type="submit">Search</button>
-     </div>
-   </div>
-  </form>
+ 
    <a href="{{url('vendor/login')}}" class="ml-sm-0 ml-md-auto mt-3 rounded">
     <button class="btn btn-sm text-light btn-color mt-1">vendor</button></a> 
    <a href="{{url('affiliate')}}" class=" mt-3 ml-1">

@@ -4,16 +4,12 @@
   cursor: pointer;
 }
 .btn-color{
-  background-color: #166387;
+  background-color: #F5A106;
+ color: #000;
+ font-weight: 700;
+}
 
-}
-.text-color{
-  color: #1A8E76;
 
-}
-.a{
-  font-size: 1.1vw;
-}
 .switchery>small{
   height: 20px;
   float: right;
@@ -34,57 +30,17 @@
 
 .inp{
     width: .5rem 7rem;
-    
-  
-    color: #fff;
-
- 
-     }
+     color: #fff;
+  }
 
 
 .input2 {
     display: none;
 }
-.admin-text{
-  font-size: 2vw;
-  font-weight: 500;
 
 
-}
-.admin-text2{
-  
-  font-weight: 500;
-  color: #1A8E76;
-  
-}
-.btn-color2{
-  background-color: #166387;
-  width: 20%;
-  height: 5%;
-  color: white;
-}
-.btn-color3{
-  background-color: #166387;
-  width: 20%;
-  height: 5%;
-  color: white;
-}
 
-.boxx
-{
-  height: 40rem;
-  overflow-y:auto ;
 
-    width: 100;
-  
-}
-.box2
-{
-  height: 36rem;
-  overflow-y:auto ;
-  width: 100%;
-  
-}
 .a{
   position: relative;
 }
@@ -233,3 +189,23 @@
 {
   background-color: #1A8E76 !important;
 }
+
+
+/*/*//*/fdsf*/
+.backgorund{  
+
+   background-color:#222E3C;
+   font-weight: 700;
+   font-size: 1.8vw;
+   color: #F5A100;
+ }
+ .input_border_color{
+  border: 1px solid #222E3C;
+  padding-top: .7rem;
+  padding-bottom: 2.5rem;
+ }
+ .label_font_size{
+  font-size: 1.2vw;
+  font-weight: 600;
+  color:#222E3C ;
+ }

@@ -20,8 +20,12 @@ $('.follow').click(function(e){
          },
         success:function(data)
          {
+            document.getElementById('foll')=''
+           var b =`
+            <button>followig</button>
+           `
+           document.getElementById('foll').value(b)
            
-           alert(data['success']);
              location.reload();
          }
       });

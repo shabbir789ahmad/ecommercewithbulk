@@ -8,11 +8,8 @@
  
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
-<link rel="stylesheet" type="text/css" href=" {{url('css/home.css')}}	">
-<link rel="stylesheet" type="text/css" href=" {{url('css/responsive.css')}} ">
-<link rel="stylesheet" type="text/css" href=" {{url('css/homeproductround.css')}} ">
-<link rel="stylesheet" type="text/css" href=" {{url('css/contact.css')}} ">
-<link rel="stylesheet" type="text/css" href=" {{url('css/header.css')}} ">
+<link rel="stylesheet" type="text/css" href=" {{url('css/login.css')}}	">
+
 
 <style type="text/css">
     .h4{
