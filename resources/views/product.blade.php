@@ -1,10 +1,6 @@
 @extends('master.master')
 @section('content')
-<?php 
-use App\Models\Category;
-$sub=Category::category();
-//echo "<pre>"; print_r($sub);die;
-?>
+
 <title>Product</title>
 <div class="wrapper3">
       
@@ -79,7 +75,7 @@ $sub=Category::category();
       <p class="  filter3 ml-3">Color <span class="float-right mr-2">See All</span></p>
       <div class="top_cat">
       <ul class="list-unstyled fl ml-3">
-        @foreach($color as $pro)  
+        @foreach($colors as $pro)  
         @if($pro)   
       <li>
       <a href="javascript:void(0)" onclick="setcolor('{{$pro['color']}}') " class="filter2">
@@ -101,7 +97,7 @@ $sub=Category::category();
       <p class=" ml-4 filter3">Size <span class="float-right mr-2">See All</span></p>
 
        <div class=" top_cat ml-4">
-         @foreach($size as $pro)  
+         @foreach($sizes as $pro)  
         @if($pro)  
          <a href="javascript:void(0)" onclick="setsize('{{$pro['size']}}')">
           <button class="btn btn-sm rounded  btn-secondary border text-light">{{$pro['size']}}</button>
@@ -194,12 +190,14 @@ $sub=Category::category();
 
        
 <div id="content" style="overflow:hidden">
-  <h4 class=" pro mt-3">All Products</h4>
-  <div class=" d-flex store-nav-color" >
-<button class="btn-store ml-1" id="sale-new" value="new">New Product</button>
-<button class="btn-store ml-1" id="sale-rated" value="top">Top Rated</button>
-<button class="btn-store ml-1" value="sale">ON Sale</button>
 
+  <div class=" store_nav_color mt-4" >
+     <h4 class="text-light text-center mt-3 ml-4">All Products</h4>
+ <select class="form-control w-25 mt-3  " name="sort_by">
+   <option>On sale</option>
+   <option>New Arrival</option>
+   <option>Top Rated</option>
+ </select>
 </div>
  
  
@@ -214,51 +212,15 @@ $sub=Category::category();
     </div>
   </nav>
 
- <div class="row mr-2">
-   @foreach($product as $pro)
-   @if(!$pro['on_sale'])
-   <div class="col-sm-4 col-12 col-md-3 col-lg-3 ml-2  mt-2">
-     <div class="item">
-     <div class="product-image">
-      <a href="{{'productpage/'.$pro['id']. '/'.$pro['drop_id']}}">  @foreach($pro->image as $img)
-         <img  src="{{asset('uploads/img/' .$img['rimage'])}}" class="card-img-top" alt="...">
-        @endforeach
-      </a>
-
-      <a href="{{url('wishlist/' .$pro['id'])}}">  <p class="overlay3 justify-content-center "><i class="far fa-heart text-danger  m-2 fa-lg "></i></p></a>
-       @if($pro['discount'])
-        <a > <p class="overlay2 text-danger">{{ceil( ($pro['discount']/$pro['sell_price'])*100)
-       }}%</p></a>
-       @else
-       @endif
-       @if($pro['rating']>4)
-       <p class="overlay5 ">
-        <img src="{{asset('pic/Sponsered-removebg-preview.png')}}" width="100%" height="10rem">
-        </p>
-        @else
-
-        @endif
-     </div>
-     <div class="product-text d-flex mt-2">
-      <p class="product-name2">{{ucwords($pro['product'])}}</p>
-      <p class="ml-auto product-name2">Rs. {{$pro['sell_price']-$pro['discount']}}</p>
-     </div>
-     <div class="text-center">
-        @for($i=0; $i<5; $i++)
-        @if($i<$pro['rating'])
-        <span class="fa fa-star checked "></span>
-        @else
-        <span class="fa fa-star"></span> 
-        @endif
-         @endfor
-       </div>
+ <div class="row ml-1">
+   @foreach($products as $product)
+   <div class="col-md-3">
+    <x-card.card :product="$product" />
     </div>
-   </div>
-   @endif
    @endforeach
  </div>
 
-  {{ $product->links() }}
+ 
 
 
            

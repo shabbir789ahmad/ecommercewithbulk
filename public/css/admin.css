@@ -125,6 +125,9 @@
 }
  .card-header{
   background-color: #1A8E76 ;
+  color: #fff;
+  font-size: 2vw;
+  font-weight: 700;
 }
 .card-border:hover{
   
@@ -195,7 +198,7 @@
 .backgorund{  
 
    background-color:#222E3C;
-   font-weight: 700;
+   font-weight: 600 !important;
    font-size: 1.8vw;
    color: #F5A100;
  }

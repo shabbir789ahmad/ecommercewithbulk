@@ -32,6 +32,6 @@ class ProductImages extends Migration
      */
     public function down()
     {
-        //
+         Schema::dropIfExists('images');
     }
 }

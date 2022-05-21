@@ -38,9 +38,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function($view)
         {
              
-           // $link=Social::latest()->take(1)->get();
-            // $logo=Logo::select('logo','id')->latest()->get();
-            // $view->with('logo', $logo);
+          
         });
 
       

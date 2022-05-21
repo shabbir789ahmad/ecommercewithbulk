@@ -18,12 +18,9 @@ class Product extends Model
         'subcategory_id',
 
     ];
+     
 
-
-    function stocks()
-    {
-        return $this->hasOne(Stock::class)->where('stock','>',0);
-    }
+   
     function image()
     {
         return $this->hasOne(Image::class);
@@ -31,5 +28,13 @@ class Product extends Model
     function images()
     {
         return $this->hasMany(Image::class);
+    }
+    function colors()
+    {
+        return $this->hasMany(ProductColor::class);
+    }
+    function sizes()
+    {
+        return $this->hasMany(ProductSize::class);
     }
 }

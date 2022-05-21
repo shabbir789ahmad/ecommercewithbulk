@@ -1,9 +1,11 @@
 @extends('master.master')
 @section('content')
 
-<section class="container-fluid justify-content-center d-flex" >
-  <div class="row" style="width: 95%;">
-   <div class="col-md-4">
+<section class="container-fluid justify-content-center d-flex " >
+  <div class="card" style="width: 95%;">
+  <div class="card-body">
+  <div class="row" >
+   <div class="col-md-5 p-0 p-md-2">
     <div class="main_image">
       @foreach($product_detail->images as $image)
       @if($loop->first)
@@ -24,7 +26,7 @@
      <div class="product_titpe mt-4">
        <h4>{{$product_detail['product_name']}}</h4>
      </div>
-     <div class="rating_adn_share">
+     <div class="rating_adn_share mt-3">
        <div class="stars">
          <span class="fa fa-star checked"></span>
          <span class="fa fa-star checked"></span>
@@ -40,22 +42,121 @@
        </div>
      </div>
 
-     <p class="mt-3">Brand <span class="text-danger ">No Brand</span></p>
-     <h5 class="mt-5">RS.{{$product_detail['price']}} </h5>
-     <p class="mt-1"><s>RS{{$product_detail['price']}} </s> </p>
-     <p class="mt-3">Color <span class="text-danger ">No Brand</span></p>
-     <p class="mt-3">Size <span class="text-danger ">No Brand</span></p>
-     <p class="mt-3">Quentity <span class="text-danger ">No Brand</span></p>
-      
-     <div class="like_share_icon align-bottom">
-        <button class="btn btn-block btn-info py-3">Buy Now</button> 
-        <button class="btn btn-block btn-danger py-3">Buy Now</button> 
+     <p class="text-secondary mt-3">{{$product_detail['detail']}}</p>
+     <h4 class="mt-5 text-danger font-weight-bold">Rs.{{$product_detail['price']}} </h4>
+     <p class="mt-1 discount "><s>Rs.{{$product_detail['price']}} </s> 90%</p>
+
+     <div class="product_quentity">
+      <h4 class="mt-3 mr-4 ">Quantity:</h4>
+       <button class="quantity_minus" type="button">-</button>
+
+       <input type="number" name="quentity" class=" " value="1" id="input">
+
+       <button class="quantity_plus" type="button">+</button>
+     </div>
+       
+
+     <div class="like_share_icon2 align-bottom mt-3">
+      <div class="color">
+        <p class="mb-0 discount">Color</p>
+        <select >
+          @foreach($product_detail->colors as $color)
+          <option>{{$color['color']}}</option>
+          @endforeach
+        </select> 
+      </div>
+      <div class="color">
+        <p class="mb-0 discount">Size</p>
+        <select >
+          @foreach($product_detail->sizes as $size)
+          <option>{{$size['size']}}</option>
+          @endforeach
+        </select>
+      </div>
+     </div>  
+
+
+     <div class=" align-bottom mt-5">
+      <button class="btn btn-block mb-2 py-3 add_to_cart" data-id="{{$product_detail['id']}}">Add To Cart</button>
+        <button class="btn btn-block buy_now mt-5 py-3">Buy Now</button> 
+         
      </div>
    </div>   
-   <div class="col-md-2">
-    dsf
+   <div class="col-md-2  ">
+    
+
   </div>
- </section>  
+</div>
+</div>
+</div>
+ </section> 
+
+<section class="container-fluid justify-content-center d-flex " >
+ <div class="row border " style="width: 95%;">
+  <div class="col-md-8">
+    <div class="card">
+     <div class="card-body">
+      <p class="font-weight-bold">Product Details Of {{$product_detail['product_name']}}</p>
+       <ul class="ml-3 product_detail_list" >
+         <li class="text-secondary">Wired Hands-Free,</li>
+         <li class="text-secondary">Wired Headset</li>
+         <li class="text-secondary">Hands-Free,</li>
+         <li class="text-secondary">Headset,Noise-Cancellation,</li>
+         <li class="text-secondary">Wired Hands-Free,</li>
+         <li class="text-secondary">Wired Headset</li>
+         <li class="text-secondary">Hands-Free,</li>
+         <li class="text-secondary">Headset,Noise-Cancellation,</li>
+       </ul>
+
+       <p class="font-weight-bold">Product Details Of {{$product_detail['product_name']}}</p>
+       <ul class="ml-3 product_detail_list" >
+         <li class="text-secondary">Wired Hands-Free,</li>
+         <li class="text-secondary">Wired Headset</li>
+         <li class="text-secondary">Hands-Free,</li>
+         <li class="text-secondary">Headset,Noise-Cancellation,</li>
+         <li class="text-secondary">Wired Hands-Free,</li>
+         <li class="text-secondary">Wired Headset</li>
+         <li class="text-secondary">Hands-Free,</li>
+         <li class="text-secondary">Headset,Noise-Cancellation,</li>
+       </ul>
+
+       <p class="font-weight-bold">Product Details Of {{$product_detail['product_name']}}</p>
+       <ul class="ml-3 product_detail_list" >
+         <li class="text-secondary">Wired Hands-Free,</li>
+         <li class="text-secondary">Wired Headset</li>
+         <li class="text-secondary">Hands-Free,</li>
+         <li class="text-secondary">Headset,Noise-Cancellation,</li>
+         <li class="text-secondary">Wired Hands-Free,</li>
+         <li class="text-secondary">Wired Headset</li>
+         <li class="text-secondary">Hands-Free,</li>
+         <li class="text-secondary">Headset,Noise-Cancellation,</li>
+       </ul>
+
+
+     </div>
+    </div>
+  </div>
+  <!-- user store -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body" style="background-color:#09192C">
+        <p class="mt-4 mb-1 text-secondary font-weight-bold ">Sold By</p>
+    <h5 class="d-flex font-weight-bold text-light">{{$product_detail['name']}} <a href="{{route('visit.store',['id'=>$product_detail['vendor_id']])}}" class="btn  btn-xs ml-auto">Visit Store</a></h5>
+    <img src="{{asset('uploads/img/' .$product_detail['image'])}}" width="100%" height="200rem">
+
+    <p class="mt-4 mb-1 text-light ">Service</p>
+     <h6 class="d-flex mb-0 text-light"><i class="fa-brands fa-usps fa-2x"></i><span class="ml-3 mt-2">7 Days Return</span></h6>
+     <p class=" mb-1 text-secondary ">Change Of Mind Not Available</p>
+
+    
+     <h6 class="d-flex mt-3 mb-0 text-light"><i class="fa-solid fa-shield-halved fa-2x"></i><span class="ml-3 mt-2">Warenty Not Available</span></h6>
+     <p class=" mb-1 text-secondary ">Change Of Mind Not Available</p>
+      </div>
+    </div>
+  </div>
+
+ </div>
+</section> 
 
 <div class="populer_text text-center mt-5">
   <h2 class="browser ">Hot Product</h2>
@@ -180,16 +281,84 @@ function show()
    }
  
 }
-document.addEventListener('mouseup',function(e){
+// document.addEventListener('mouseup',function(e){
  
-  let show=document.getElementById('sh')
-  if(!show.contains(e.target)){
-    show.style.display="none"
-  }
+//   let show=document.getElementById('sh')
+//   if(!show.contains(e.target)){
+//     show.style.display="none"
+//   }
 
-});
+// });
+
 
 
 </script>
  
+@endsection
+@section('script')
+<script type="text/javascript">
+
+
+  $('.quantity_minus').click(function(){
+    
+    let value=$('#input').val();
+    value--;
+    if(value <1)
+    {
+      value=1;
+    }
+    $('#input').val(value)
+  });
+
+  $('.quantity_plus').click(function(){
+    
+    let value=$('#input').val();
+    value++;
+    
+    $('#input').val(value)
+  });
+
+  $('#input').change(function(){
+    
+    let value=$('#input').val();
+     
+     if(value<1)
+     {
+      value=1
+     }
+    
+    $('#input').val(value)
+  });
+</script>
+
+
+<!-- //cart  functaionaly ajax code -->
+<script type="text/javascript">
+  $(".add_to_cart").click(function (e) {
+        e.preventDefault();
+  
+         var id=$(this).data('id');
+        
+        $.ajax({
+            url : '/add-to-cart/' +id,
+            method: "GET",
+            data: {
+                _token: '{{ csrf_token() }}', 
+                
+                quantity: $('#input').val(),
+            },
+           
+            success: function (response , data) {
+              
+              
+            }
+        });
+    // }
+    });
+
+  
+
+  
+</script>
+
 @endsection

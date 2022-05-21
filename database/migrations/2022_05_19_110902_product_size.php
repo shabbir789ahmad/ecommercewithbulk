@@ -15,10 +15,7 @@ class ProductSize extends Migration
     {
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
-            $table->string('size'); 
-            $table->string('size_status'); 
-            $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('size');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class ProductSize extends Migration
      */
     public function down()
     {
-        //
+         Schema::dropIfExists('sizes');
     }
 }

@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Traits\StoreTrait;
 use App\Http\Traits\ProductTrait;
-use App\Models\ProductBrand;
 use App\Models\Supplier;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Stock;
-use App\Models\Color;
-use App\Models\Size;
+use App\Models\ProductBrand;
+use App\Models\ProductColor;
+use App\Models\ProductSize;
 use App\Models\Image;
 
 use Auth,DB;
@@ -24,7 +24,7 @@ class ProductController extends Controller
 
     public function index(Request $req)
     {
-       $products=$this->products(Auth::id());
+       $products=$this->products(Auth::id(),$subcategory_id='');
  
         return view('vendor.product.index',compact('products'));
     }
@@ -77,7 +77,7 @@ class ProductController extends Controller
         $n = sizeof($req->color);
          for($i = 0; $i < $n; $i++) 
          {
-            $color= Color::create([
+            $color= ProductColor::create([
             'color' => $req->color[$i],
             'color_status' =>'1',
             'product_id' =>$product->id,
@@ -89,7 +89,7 @@ class ProductController extends Controller
           for($i = 0;  $i < $n2; $i++)
            { 
             
-            Size::create([
+            ProductSize::create([
            'size' =>$req->size[$i],
            'size_status' =>'1',
             'product_id' =>$product->id,

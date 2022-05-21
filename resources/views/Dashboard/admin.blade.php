@@ -152,51 +152,6 @@
         </div>
       </li>
       
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
-          aria-expanded="true" aria-controls="collapseBootstrap">
-         <i class="fas fa-bars text-light"></i>
-          <span>Category</span>
-        </a>
-        <div id="collapseBootstrap4" class="collapse
-       @if(request()->is('admin/middlecategory')) show
-         @elseif(request()->is('admin/middlecategory/create'))
-          show
-         @endif
-        " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class=" py-2 collapse-inner rounded">
-
-          <a class="collapse-item" href="{{route('middlecategory.index')}}">All Middle Category</a>
-
-             <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{route('middlecategory.create')}}">Upload Category</a>
-          
-          </div>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
-          aria-expanded="true" aria-controls="collapseBootstrap">
-         <i class="fas fa-bars text-light"></i>
-          <span>Category</span>
-        </a>
-        <div id="collapseBootstrap4" class="collapse
-       @if(request()->is('admin/middlecategory')) show
-         @elseif(request()->is('admin/middlecategory/create'))
-          show
-         @endif
-        " aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class=" py-2 collapse-inner rounded">
-
-          <a class="collapse-item" href="{{route('middlecategory.index')}}">All Middle Category</a>
-
-             <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{route('middlecategory.create')}}">Upload Category</a>
-          
-          </div>
-        </div>
-      </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
@@ -244,22 +199,70 @@
         
       </li>
     
+
+    <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm19" aria-expanded="true" aria-controls="collapseForm">
+       <i class="fab fa-wpforms text-light"></i>
+       <span>Sizes</span>
+     </a>
+     <div id="collapseForm19" class="collapse
+       @if(request()->is('admin/size')) show
+        @endif"
+         aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class=" py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{route('size.index')}}">All Sizes</a>
+         <a class="collapse-item" href="{{route('size.create')}}">Create Sizes</a>
+       </div>
+      </div>
+    </li>
+
+    <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm20" aria-expanded="true" aria-controls="collapseForm">
+       <i class="fab fa-wpforms text-light"></i>
+       <span>Color</span>
+     </a>
+     <div id="collapseForm20" class="collapse
+       @if(request()->is('admin/color')) show
+        @endif"
+         aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class=" py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{route('color.index')}}">All colors</a>
+         <a class="collapse-item" href="{{route('color.create')}}">Create colors</a>
+       </div>
+      </div>
+    </li>
+    <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm21" aria-expanded="true" aria-controls="collapseForm">
+       <i class="fab fa-wpforms text-light"></i>
+       <span>Sale</span>
+     </a>
+     <div id="collapseForm21" class="collapse
+       @if(request()->is('admin/sale')) show
+        @endif"
+         aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class=" py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{route('sale.index')}}">All Sales</a>
+         <a class="collapse-item" href="{{route('sale.create')}}">Create Sale</a>
+       </div>
+      </div>
+    </li>
+
     <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm2" aria-expanded="true" aria-controls="collapseForm">
        <i class="fab fa-wpforms text-light"></i>
        <span>Vendor</span>
      </a>
      <div id="collapseForm2" class="collapse
-       @if(request()->is('admin/show-vendor')) show
+       @if(request()->is('admin/vendor')) show
         @endif"
          aria-labelledby="headingForm" data-parent="#accordionSidebar">
       <div class=" py-2 collapse-inner rounded">
-        <a class="collapse-item" href="{{url('admin/show-vendor')}}">All Vendors</a>
-         <a class="collapse-item" href="{{url('admin/block-vendor')}}">Blocked Vendors</a>
+        <a class="collapse-item" href="{{route('all.vendor')}}">All Vendors</a>
+         <a class="collapse-item" href="{{route('block.vendor')}}">Blocked Vendors</a>
        </div>
       </div>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm3" aria-expanded="true" aria-controls="collapseForm">
        <i class="fab fa-wpforms text-light"></i>
        <span>Users</span>
@@ -273,48 +276,8 @@
         <a class="collapse-item" href="{{url('admin/block-user')}}">Blocked Users</a>
        </div>
       </div>
-    </li>
+    </li> -->
 
- 
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap8"
-          aria-expanded="true" aria-controls="collapseBootstrap">
-        <i class="fas fa-heading text-light"></i>
-          <span>Front Heading</span>
-        </a>
-        <div id="collapseBootstrap8" class="collapse @if(request()->is('admin/get-front')) show
-         @elseif(request()->is('admin/categories'))
-          show
-         @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class=" py-2 collapse-inner rounded">
-            
-          <a class="collapse-item" href="{{url('admin/get-front')}}">All Headning</a>
-           <div class="dropdown-divider"></div>
-           <a class="collapse-item" href="{{url('admin/categories')}}">Upload Headning</a>
-          
-          </div>
-        </div>
-      </li>
-
-         <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap6"
-          aria-expanded="true" aria-controls="collapseBootstrap">
-        <i class="fas fa-users text-light"></i>
-          <span>Social Links</span>
-        </a>
-        <div id="collapseBootstrap6" class="collapse @if(request()->is('admin/social-link')) show
-         @elseif(request()->is('admin/show-link'))
-          show
-         @endif" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class=" py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{url('admin/show-link')}}">All Link</a>
-           
-           <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="{{url('admin/social-link')}}">Upload Link</a>
-          </div>
-        </div>
-      </li>
       
      
     
@@ -465,6 +428,7 @@
   <script src="{{asset('js/adminfilter.js')}}"></script>  
   <script src="{{asset('js/colorpicker.js')}}"></script>  
   <script src="{{asset('js/show.js')}}"></script>  
+  <script src="{{asset('js/getAllCategory.js')}}"></script>  
 <script src="{{asset('js/jquery.multifield.min.js')}}"></script>
    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  @if(Session()->has('success'))

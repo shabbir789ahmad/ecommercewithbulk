@@ -32,6 +32,6 @@ class ProductStock extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('stocks');
     }
 }

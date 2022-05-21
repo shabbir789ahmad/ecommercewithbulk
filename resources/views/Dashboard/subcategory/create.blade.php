@@ -18,22 +18,20 @@
         
 
           <label for="" class="fw-bold mb-1 label_font_size">
-              Select Category <span class="text-danger">*</span>
+              Select Main Category <span class="text-danger">*</span>
             </label>
-             <select class="form-control " name="category_id">
+             <select class="form-control category_id" name="category_id">
 
                @foreach($categories as $category)
                <option value="{{$category['id']}}">{{$category['category']}}</option>
                @endforeach
              </select>
-             <label for="" class="fw-bold mb-1 label_font_size">
+
+             <label for="" class="fw-bold mb-1 label_font_size mt-3">
               Select Category <span class="text-danger">*</span>
             </label>
-             <select class="form-control " name="middlecategory_id">
-
-               @foreach($middlecategories as $category)
-               <option value="{{$category['id']}}">{{$category['middlecategory_name']}}</option>
-               @endforeach
+             <select class="form-control middel_id" name="middlecategory_id">
+              
              </select>
              
              <x-form.input name="subcategory_name" label="Sub Category Name" type="text"></x-forms.input>

@@ -196,14 +196,7 @@ class OrderController extends Controller
       return view('vendor.order_detail',compact('order','drop'));
     }
 
-    function statusUp(Request $req)
-    {
-      $order=Detail::findorfail($req->order_id);
-      $order->order_status=$req->order_status;
-
-      $order->save();
-      return redirect()->back()->with('success','Status Updated');
-    }
+  
 
     function deletedOrder()
     {

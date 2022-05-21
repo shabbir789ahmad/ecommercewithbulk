@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Contact;
 class ContactController extends Controller
 {
-    function contact(Request $req)
+    function store(Request $req)
     {
         $req->validate([
           'name' =>'required',

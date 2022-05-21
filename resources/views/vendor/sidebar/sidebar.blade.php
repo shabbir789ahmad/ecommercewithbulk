@@ -15,8 +15,8 @@
        </a>
 	   </li>
     
-    <li class="sidebar-item @if(request()->is('admin/quiz')) active  @endif">
-		   <a class="sidebar-link" href="">
+    <li class="sidebar-item @if(request()->is('vendor/banner')) active  @endif">
+		   <a class="sidebar-link" href="{{route('banner.index')}}">
               <i class="align-middle me-2" data-feather="film"></i> <span class="align-middle">Create Banner</span>
             </a>
 		</li>
@@ -58,9 +58,9 @@
        </a>
 		</li>
 		<li class="sidebar-item">
-		   <a class="sidebar-link" href="">
+		   <a class="sidebar-link" href="{{route('coupon.index')}}">
 		   	
-         <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle">Create Coupons </span>
+         <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle"> Coupons </span>
        </a>
 		</li>
 		<li class="sidebar-item">

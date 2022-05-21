@@ -30,6 +30,7 @@ $('.follow').click(function(e){
          }
       });
    });
+
 $('.unfollow').click(function(e){
     e.preventDefault()
    let id=$(this).data('id');
@@ -56,40 +57,40 @@ $('.unfollow').click(function(e){
    });
 
 
-$('#cop').click(function(e){
-    e.preventDefault();
-    let ids=[];
+// $('#cop').click(function(e){
+//     e.preventDefault();
+//     let ids=[];
 
-    $('.check:checked').each(function()
-     {
-      ids.push($(this).val())
-     });
+//     $('.check:checked').each(function()
+//      {
+//       ids.push($(this).val())
+//      });
   
-    if(ids.length<=0)
-    {
-        alert ('Please select row...')
-    }else{
-        let check=confirm('Are sure you want to delete These')
-        if(check==true)
-        {
-          $.ajax({
+//     if(ids.length<=0)
+//     {
+//         alert ('Please select row...')
+//     }else{
+//         let check=confirm('Are sure you want to delete These')
+//         if(check==true)
+//         {
+//           $.ajax({
      
-                 url : "/vendor/coupon-deletea",
-                 dataType : "json",
-                 type : 'GET',
-                 data : {'id':ids},
-                 success: function (response) 
-                 {
-                    if(data['success'])
-                    {
-                      window.location.reload(); 
-                     }
-                  }
-               });
-         }
-       }
+//                  url : "/vendor/coupon-deletea",
+//                  dataType : "json",
+//                  type : 'GET',
+//                  data : {'id':ids},
+//                  success: function (response) 
+//                  {
+//                     if(data['success'])
+//                     {
+//                       window.location.reload(); 
+//                      }
+//                   }
+//                });
+//          }
+//        }
   
-    });
+//     });
 
  
  

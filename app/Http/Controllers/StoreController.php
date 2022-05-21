@@ -26,99 +26,22 @@ class StoreController extends Controller
     
     function showStore($id)
     {
-       $usid='';
-       if(Auth::user())
-        {
-            $usid=Auth::user()->id;
-        }
-      $products=$this->storeProduct2($id,$usid);//from producttrait
-      $sale=$this->sale();
-      $banner=$this->banner();
+       
+      $products=$this->products($id,$subcategory_id='');
+      $sale=[];
+      $banners=Banner::banners();
       $date=$this->carbon();
-      $vendorsale=$this->vendorSale();
+      $vendorsale=[];
       $coupon=Coupon::where('vendor_id',$id)->where('exp_date','>',$date)->where('coupon_status','1')->take(3)->get();
       
-      foreach($coupon as $coupn)
-        {
-            
-            $coupn->save=CouponSave::where('vendor_id',$coupn['vendor_id'])->where('coupon_id',$coupn['id'])->where('user_id',$usid)->first();
-        }
-      //dd($products);
-      return view('store',compact('products','sale','date','banner','vendorsale','coupon','usid'));
-     }
-
-    function getStore(Request $req)
-    {
-        $id=Auth::user()->id;
-      $products=$this->storeProduct($id);
-      $sale=$this->sale();
-      $sale2=$this->sale2();
-      $banner=$this->banner();
-      $date=$this->carbon();
-      $vendorsale=$this->vendorSale();
-      $vendorsale2=$this->vendorSale2();
-      //dd($products);
-      return view('vendor.sale_product',compact('products','sale','date','banner','sale2','vendorsale','vendorsale2'));
-       
-
-    }
-
-     function upoloadBanner(Request $req)
-     {
-      $req->validate([
-        'banner'=>'required',
-        'heading1'=>'required',
-        'heading2'=>'required',
-
-      ]);
-      $store=New Banner;
-      if($req->hasfile('banner'))
-      {
-         $file=$req->file('banner');
-         $ext=$file->getClientOriginalExtension();
-         $filename=time().rand(1,1000).'.'.$ext;
-         $file->move('uploads/img/' ,$filename);
-         $store->banner=$filename;
-      }
-      $store->heading1=$req->heading1;
-      $store->heading2=$req->heading2;
-          //dd($store);
-      $store->save();
-
-      return redirect()->back()->with('success','Store Banner Uploaded');
-     }
-     function getbanner()
-     {
-      $banner=Banner::all();
-      return view('vendor.get_banner',compact('banner'));
-     }
-     function deletebanner($id)
-     {
-      $banner=Banner::findorfail($id);
-     $banner->delete();
-     return redirect()->back()->with('success','banner Deleted');
-     }
-
-     function updatebanner(Request $req)
-     {
-      $banner=Banner::findorfail($req->id);
-
-      if($req->hasfile('banner'))
-      {
-         $file=$req->file('banner');
-         $ext=$file->getClientOriginalExtension();
-         $filename=time().rand(1,1000).'.'.$ext;
-         $file->move('uploads/img/' ,$filename);
-         $banner->banner=$filename;
-      }
-      $banner->heading1=$req->heading1;
-      $banner->heading2=$req->heading2;
-
-      //dd($banner);
-      $banner->save();
       
-      return redirect()->back()->with('success','Store Banner Updated');
+      //dd($products);
+      return view('store',compact('products','sale','date','banners','vendorsale','coupon'));
      }
+
+    
+
+    
 
      function onSale(Request $req)
      {

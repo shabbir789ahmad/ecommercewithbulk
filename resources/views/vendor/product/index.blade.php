@@ -39,9 +39,9 @@
 		   
 			<td class="col-1"><img src="{{asset('uploads/img/'. $product->image['product_image'])}}" width="100%" height="60rem" class="rounded"></td>
 			<td>{{ $product->product_name }}</td>
-			<td>{{ $product->stocks['price'] }}</td>
-			<td>{{ $product->stocks['discount_price'] }}</td>
-			<td>{{ $product->stocks['stock'] }}</td>
+			<td>{{ $product['price'] }}</td>
+			<td>{{ $product['discount_price'] }}</td>
+			<td>{{ $product['stock'] }}</td>
 
 			<td class="col-2">
 				<a href="#" class="btn btn-xs btn-danger">Edit</a>

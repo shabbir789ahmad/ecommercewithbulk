@@ -133,23 +133,15 @@ section{
 .btn{
     display: inline-block;
     padding: .5rem 1.3rem;
-    font-size: .8rem;
-    border: 2px solid #fff;
+    /* outline: 1px solid #09192C;*/
     line-height: 1;
    justify-content: right;
-    transition: .3s;
-    text-transform: uppercase;
-}
-
-.btn.solid, .btn.transparent:hover{
-    background-color: #fff;
-    color: #69bde7;
-}
-
-.btn.transparent, .btn.solid:hover{
-    background-color: transparent;
+    background-color: #E86209;
     color: #fff;
 }
+
+
+
 
 .nav-links > ul{
     display: flex;

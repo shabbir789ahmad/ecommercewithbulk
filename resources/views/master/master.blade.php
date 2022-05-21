@@ -142,29 +142,29 @@
     </script>
 
  <script>
-      var swiper = new Swiper(".mySwiper", {
+  //     var swiper = new Swiper(".mySwiper", {
        
-        centeredSlides: false,
-        spaceBetween: 1,
-        grabCursor: true,
+  //       centeredSlides: false,
+  //       spaceBetween: 1,
+  //       grabCursor: true,
        
-         breakpoints: {  
-        '480': {
-            slidesPerView: 2,
-             spaceBetween: 40,},
-          '640': {
-             slidesPerView: 3,
-             spaceBetween: 10, },
-             '1000': {
-             slidesPerView: 10,
-             spaceBetween: 10, },
-  },
-        navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-              clickable: true,
-        },
-      });
+  //        breakpoints: {  
+  //       '480': {
+  //           slidesPerView: 2,
+  //            spaceBetween: 40,},
+  //         '640': {
+  //            slidesPerView: 3,
+  //            spaceBetween: 10, },
+  //            '1000': {
+  //            slidesPerView: 10,
+  //            spaceBetween: 10, },
+  // },
+  //       navigation: {
+  //             nextEl: '.swiper-button-next',
+  //             prevEl: '.swiper-button-prev',
+  //             clickable: true,
+  //       },
+  //     });
     </script>
    
  
@@ -229,89 +229,17 @@
 
     <script type="text/javascript">
   
-    $(".add-to-cart").click(function (e) {
-        e.preventDefault();
-  
-         var id=$(this).data('id');
-         var colors=$(this).data('color');
-         var sizes=$(this).data('size');
-          if(colors=='Null' || colors=='' && sizes=='Null' || sizes=='')
-          {
-            $('#message').html('please Select Size and Color')
-             $('.carts').prop('disabled', true);
-          }else{
-
-
-          
-        $.ajax({
-            url : '/add-to-cart/' +id,
-            method: "GET",
-            data: {
-                _token: '{{ csrf_token() }}', 
-                
-                color: colors,
-                size: sizes,
-            },
-           
-            success: function (response , data) {
-                if(!data )
-                {
-                    alert ('choose color')
-                }else{
-                     window.location.reload();
-                }
-              
-            }
-        });
-    }
-    });
-
-
-    $(".update-cart").change(function (e) {
-        e.preventDefault();
-  
-        var ele = $(this);
-  
-        $.ajax({
-            url: '{{ route('update.cart') }}',
-            method: "patch",
-            data: {
-                _token: '{{ csrf_token() }}', 
-                id: ele.parents(".tr").attr("data-id"), 
-                quantity: ele.parents(".tr").find(".quan").val()
-            },
-            success: function (response) {
-               window.location.reload();
-            }
-        });
-    });
-  
-    $(".remove-from-cart").click(function (e) {
-        e.preventDefault();
-  
-        var ele = $(this);
-  
-        if(confirm("Are you sure want to remove?")) {
-            $.ajax({
-                url: '{{ route('remove.from.cart') }}',
-                method: "delete",
-                data: {
-                    _token: '{{ csrf_token() }}', 
-                    id: ele.parents(".actions").attr("data-id")
-                },
-                success: function (response) {
-                    window.location.reload();
-                }
-            });
-        }
-    });
-  
   $('body').click(function(e) {
   if ($('.menu').hasClass('nav-btn')) {
     $(".menu").toggleClass('bar')
   }
-})
-</script>
+});
 
+
+
+
+</script>
+@section('script')
+@show
 </body>
 </html>

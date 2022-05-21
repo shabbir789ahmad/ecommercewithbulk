@@ -14,16 +14,17 @@ class CategorySeeder extends Seeder
     public function run()
     {
             DB::table('categories')->insert([
-         'category' => 'men',
+          'category' => 'men',
+          'category_image' => 'mffgffgfen',
            
         ]);
           DB::table('categories')->insert([
          'category' => 'Women',
-           
+           'category_image' => 'mffgffgfen'
         ]);
              DB::table('categories')->insert([
          'category' => 'Kids',
-           
+           'category_image' => 'mffgffgfen'
         ]);
     }
 }

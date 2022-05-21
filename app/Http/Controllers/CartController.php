@@ -6,13 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\User;
 use session;
+use App\Http\Traits\ProductTrait;
 class CartController extends Controller
 {
-
+    
+    use ProductTrait;
     public function cart()
     {
       return view('cart');
     }
+
+
     public function getwishlist()
     {
         return view('wishlist');
@@ -20,38 +24,35 @@ class CartController extends Controller
   
    
 
-    public function addToCart($id,Request $req)
+    public function addToCart($id,Request $request)
     {
+   
+        $product = $this->detail($id);
       
-         $color="";
-        if($req->get('cartcolor'))
-        {
-            $color=$req->get('cartcolor');
-        }
-        //echo $color;
-        $product = Stock::
-        join('stock2s','stocks.id','=','stock2s.stock_id')
-       ->join('images','stocks.id','=','images.image_id')
-        ->select('stocks.product','stock2s.sell_price','stock2s.discount','stocks.detail','stock2s.id','images.rimage','stocks.drop_id','stock2s.ship','stocks.user_id')
-        ->findorfail($id);
-          //dd($product);
         $cart = session()->get('cart', []);
        
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
+        if(isset($cart[$id]))
+         {
+            $quentity=$cart[$id]['quantity']++;
+            $cart[$id]['sub_total']=$cart[$id]['sub_total']*$quentity;
+        
+        }else {
+            foreach($product->images as $image)
+            {
+                
+                $image=$image['product_image'];
+            }
             $cart[$id] = [
-                'pid' => $product['id'],
-                "drop_id" => $product['drop_id'],
-                "name" => $product['product'],
-                "detail" => $product['detail'],
-                "ship" => $product['ship'],
-                "vendor_id" => $product['user_id'],
-                "quantity" => 1,
-                "price" => $product->sell_price -$product->discount,
-                "image" => $product->rimage,
-                "color" => $req->color,
-                "size" => $req->size,
+                'id' => $product['id'],
+                "cat_id" => $product['subcategory_id'],
+                "name" => $product['product_name'],
+                "shipping_cost" => $product['shipping_cost'],
+                "vendor_id" => $product['vendor_id'],
+                "quantity" => $request->quantity,
+                "price" => $product['discount_price'],
+                "sub_total" => $product['discount_price'],
+                "image" => $image,
+                
 
             ];
             
@@ -67,6 +68,7 @@ class CartController extends Controller
         if($request->id && $request->quantity){
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
+            $cart[$request->id]["sub_total"] = $request->quantity*$cart[$request->id]["price"];
             session()->put('cart', $cart);
             session()->flash('successs', 'Cart updated successfully');
         }

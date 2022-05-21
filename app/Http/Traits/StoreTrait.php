@@ -60,11 +60,12 @@ use Auth;
       $vendorsale2=VendorSell::where('sale_status','1')->where('sale_end','>',$time)->orwhere('sale_start','>=',$time)->latest()->get();
       return $vendorsale2;
      }
-     function banner()
-     {
-      $banner=Banner::latest()->take(1)->get();
-      return $banner;
-     }
+     
+     // function banner()
+     // {
+     //  $banner=Banner::latest()->take(1)->get();
+     //  return $banner;
+     // }
 
      public function stockNew()
       {

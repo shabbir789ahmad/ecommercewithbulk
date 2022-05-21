@@ -13,10 +13,10 @@
     <div class="col-md-2 col-sm-1">
     </div>
     <div class="col-md-8 card col-sm-10  mt-5 p-5">
-     <form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data">
+     <form action="{{route('category.update',['category'=>$category['id']])}}" method="POST" enctype="multipart/form-data">
         @csrf
-        
-        <x-form.input name="category" label="Category Name" type="text"></x-forms.input>
+        @method('PUT')
+        <x-form.input name="category" label="Category Name" type="text" value="{{$category['category']}}"></x-forms.input>
 
           <label for="" class="fw-bold mb-1 label_font_size">
               Category Image <span class="text-danger">*</span>

@@ -26,6 +26,7 @@ class UserController extends Controller
         //dd($order);
         return view('User.user_board',compact('order'));
     }
+
     function track($id)
     {
      $order=Order::join('details','orders.id','=','details.order_id')
@@ -34,35 +35,11 @@ class UserController extends Controller
          return view('User.order_tracking',compact('order'));
     }
 
-    function getvendor()
-    {
-        $vendor=Vendor::all();
-        return view('Dashboard.all_vendor',compact('vendor'));
-    }
-    function blockvendor()
-    {
-        $vendor=Vendor::onlyTrashed()->get();
-        return view('Dashboard.all_bock_vendor',compact('vendor'));
-    }
-      function deletevendor($id)
-    {
-        $vendor=Vendor::findorfail($id);
-        $vendor->delete();
-        return redirect()->back()->with('success','This vendor is Blocked');
-    }
-     function restorevendor($id)
-    {
-        $vendor=Vendor::withTrashed()->findorfail($id);
-        $vendor->restore();
-        return redirect()->back()->with('success','This vendor is Restored');
-    }
-    function vendorStatus(Request $req)
-    {
-         $status=Vendor::findorfail($req->id);
-         $status->vendor_status=$req->vendor_status;
-         $status->save();
-
-    }
+   
+    
+     
+     
+    
      function getUser()
     {
         
@@ -131,14 +108,14 @@ class UserController extends Controller
         return back()->with('success','Your Account updated');
     }
 
-    function coverImage()
-    {
-        $cover=new Cover;
-        $cover->cover_image=$this->getimage();
-        $cover->user_id=Auth::id();
-        $cover->save();
-        return back()->with('cover','cover Photo Changed');
-    }
+    // function coverImage()
+    // {
+    //     $cover=new Cover;
+    //     $cover->cover_image=$this->getimage();
+    //     $cover->user_id=Auth::id();
+    //     $cover->save();
+    //     return back()->with('cover','cover Photo Changed');
+    // }
 
     //user about 
     function aboutUser(Request $req)

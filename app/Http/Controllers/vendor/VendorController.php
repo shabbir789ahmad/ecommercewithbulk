@@ -4,7 +4,8 @@ namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
+use Auth,Hash;
+use App\Models\Vendor;
 class VendorController extends Controller
 {
      function index()

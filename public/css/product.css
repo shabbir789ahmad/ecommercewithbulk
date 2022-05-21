@@ -12,18 +12,98 @@
 .stars .total_rating{
   color: red;
 }
-.rating_adn_share,.like_share_icon{
+.rating_adn_share ,.like_share_icon2,.like_share_icon2{
   display: flex;
   justify-content: space-between;
 }
 
+.product_quentity{
+  display:  flex;
+  justify-content: flex-start;
+
+}
+
+.product_quentity button{
+    background-color: #09192C; /* Green */
+  border: none;
+  color: white;
+  padding: .8rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  margin: 1%;
+  margin-top: 0;
+}
+.product_quentity input{
+     
+     width: 50%;
+    border-radius: 1%;
+    outline: none;
+    height: 3rem;
+    color: #000;
+   border: 1px solid #000;
+  text-align: center;
+
+}
+
+.add_to_cart{
+
+    background-color: #09192C !important;
+    color: #fff !important;
+    border-radius: 1%;
+}
+.buy_now{
+    border-radius: 1%;
+}
+.add_to_cart:hover,.buy_now:hover{
+     background-color: #09192C !important;
+     color: #fff !important;
+}
+.color
+{
+    width: 100%;
+}
+.color select{
+    width: 99%;
+    border-radius: 1%;
+    outline: none;
+    height: 3rem;
+}
+
+.product_detail_list{
+    columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;list-style-type: circle !important
+}
 @media  (max-width: 600px)
 {
  
  .imgs{
-  height: 40rem;
+  height: 30rem;
+}
+.product_price span ,.discount{
+   color: #09192C;
+   font-size: 3vw;
+}
+
+.product_quentity h4{
+      color: #09192C;
+    font-size: 3vw;
+}
+.like_share_icon2{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.product_detail_list{
+    columns: 1;
+  -webkit-columns: 1;
+  -moz-columns: 1;
+  list-style-type: circle !important
 }
 }
+
+
 
 @media  (min-width: 601px) and (max-width: 900px)
 {
@@ -31,6 +111,21 @@
  .imgs{
      height: 40rem;
    }
+  
+.product_price span ,.discount{
+   color: #09192C;
+   font-size: 3vw;
+}
+
+.product_quentity h4{
+      color: #09192C;
+    font-size: 3vw;
+}
+.like_share_icon2{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
 }
 
 @media  (min-width: 901px) and (max-width: 1500px)

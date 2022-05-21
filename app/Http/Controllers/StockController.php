@@ -154,16 +154,7 @@ class StockController extends Controller
 
     
    
-    function sponserStatus(Request $req)
-    {
-        $sponser= Sponser::findorfail($req->id);
-        $sponser->sponser_status=$req->sponser_status;
-        
-       // dd($sponser);
-        $sponser->save();
-      
     
-    }
     function sponserProduct2(Request $req)
     {
         $req->validate([
@@ -186,15 +177,7 @@ class StockController extends Controller
         
     }
 
-    function adminProduct($id)
-    {
-        $main = $this->category();
-        $supply=$this->supply();
-        $stock=$this->products($id);
-        $time=$this->carbon();
-        //dd($stock);
-      return view('Dashboard.vendor_product',compact('stock','supply','main','time'));
-    }
+   
 
     function updateSell(Request $req)
     {

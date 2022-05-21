@@ -16,9 +16,7 @@ class ProductColors extends Migration
         Schema::create('colors', function (Blueprint $table) {
             $table->id();
             $table->string('color');
-            $table->string('color_status');
-            $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+           
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class ProductColors extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('colors');
     }
 }

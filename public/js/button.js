@@ -26,46 +26,32 @@ $(document).ready(function() {
 
 
   
-        $(function() {
-        // Multiple images preview with JavaScript
-        var multiImgPreview = function(input, imgPreviewPlaceholder) {
+        // $(function() {
+        // // Multiple images preview with JavaScript
+        // var multiImgPreview = function(input, imgPreviewPlaceholder) {
 
-            if (input.files) {
-                var filesAmount = input.files.length;
+        //     if (input.files) {
+        //         var filesAmount = input.files.length;
 
-                for (i = 0; i < filesAmount; i++) {
-                    var reader = new FileReader();
+        //         for (i = 0; i < filesAmount; i++) {
+        //             var reader = new FileReader();
 
-                    reader.onload = function(event) {
-                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
+        //             reader.onload = function(event) {
+        //                 $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
                      
-                    }
+        //             }
 
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
+        //             reader.readAsDataURL(input.files[i]);
+        //         }
+        //     }
 
-        };
+        // };
 
-        $('#images').on('change', function() {
-            multiImgPreview(this, 'div.imgPreview');
-        });
-        });    
-   
+        // $('#images').on('change', function() {
+        //     multiImgPreview(this, 'div.imgPreview');
+        // });
+        // });    
 
-$('#random').click(function(e){
-  
-   var randomString = function(length) {
-var text = "";
-var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-for(var i = 0; i < length; i++) {
-text += possible.charAt(Math.floor(Math.random() * possible.length));
-}
-return text;
-}
-var random = randomString(6);
-$('#coupon-code').val(random)
-});
 
     
  });

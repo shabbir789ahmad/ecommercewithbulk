@@ -550,3 +550,31 @@ document.getElementById("s").innerHTML= ("0" + sc).slice(-2) +
 </script>
 
   @endsection 
+
+
+
+
+
+
+
+
+  <!-- <div class="populer_text text-center mt-4">
+  <h2 class="browser ">Top Rated Stores</h2>
+  <p class="br2">Properties In Most Populer Category</p>
+</div>
+
+<div class="container-fluid backgorund_color pb-5 pt-5">
+ <div class="row">
+  @foreach($stores as $store)
+  <div class="col-md-3 mt-3">
+    <div class="card">
+      <div class="card-body pb-1">
+        <a href=""><img src="{{asset('uploads/img/'.$store['image'])}}" width="100%" height="200rem"></a>
+
+       <h4 class="browser mt-2 mb-2">{{ucfirst($store['name'])}}</h4>
+      </div>
+    </div>
+  </div>
+  @endforeach
+ </div>
+</div> -->

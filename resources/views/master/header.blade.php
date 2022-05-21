@@ -1,7 +1,7 @@
 <?php 
 use App\Models\Category;
 use App\Models\Logo;
-$category=Category::category();
+$cat=Category::category();
 $logo=Logo::logo();
 
 ?>
@@ -24,30 +24,30 @@ $logo=Logo::logo();
     <a href="javascript:void(0)">Category<i class="fas fa-caret-down"></i></a>
      <div class="dropdown">
       <ul>
-        @foreach($category as $cat)
+        @foreach($cat as $categ)
         <li class="dropdown-link">
-         <a href="javascript:void(0)">{{ucwords($cat['category'])}}<i class="fas fa-caret-down"></i></a>
+         <a href="javascript:void(0)">{{ucwords($categ['category'])}}<i class="fas fa-caret-down"></i></a>
           <div class="dropdown second">
           <ul>
-            @foreach($cat['categories'] as $middle)
+          @foreach($categ['categories'] as $middel)
             <li class="dropdown-link">
-              <a href="{{url('product/' .$middle['id'])}}">{{ucwords($middle['middlecategory_name'])}}<i class="fas fa-caret-down"></i></a>
+              <a href="{{url('product/' .$middel['id'])}}">{{ucwords($middel['middlecategory_name'])}}<i class="fas fa-caret-down"></i></a>
                <div class="dropdown second">
           <ul>
 
-            @foreach($middle['subcategory'] as $drp)
-              
-            <li class="dropdown-link">
-              <a href="{{url('product/' .$drp['id'])}}">{{ucwords($drp['subcategory_name'])}}</a>
-            </li>
            
+               @foreach($middel['subcategory'] as $sub)
+            <li class="dropdown-link">
+              <a href="{{url('product/' .$sub['id'])}}">{{ucwords($sub['subcategory_name'])}}</a>
+            </li>
             @endforeach
+            
             <div class="arrow"></div>
           </ul>
           </div>
             </li>
-           
             @endforeach
+            
              <div class="arrow"></div>
           </ul>
           </div>

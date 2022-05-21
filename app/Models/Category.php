@@ -19,26 +19,17 @@ class Category extends Model
         return $sub;
     }
 
-    // public  function subcat()
-    // {
-    //    return $this->hasMany('\App\Models\MiddleCategory','category_id');
-    // }
-    //   public  function drop()
-    // {
-    //    return $this->hasMany('\App\Models\Subcategory','category_id');
-    // }
+  
 
-    // public function categories2()
-    // {
-    //       return $this->hasManyThrough(
-    //         subcategory::class,
-    //         MiddleCategory::class,
-            
-            
-    //     );
-    // }
+   
     public function categories()
     {
          return $this->hasMany(MiddleCategory::class);
     }
+    // public static function category()
+    // {
+    //     return Category::join('middle_categories','categories.id','=','middle_categories.category_id')
+    //     ->join('subcategories','middle_categories.id','=','subcategories.middle_category_id')
+    //     ->select('categories.category','middle_categories.middlecategory_name','subcategories.subcategory_name','subcategories.id')->get();
+    // }
 }

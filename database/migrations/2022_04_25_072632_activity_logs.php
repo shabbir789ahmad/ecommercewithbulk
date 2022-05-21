@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('controller')->nullable();
             $table->string('method')->nullable();
-            $table->string('success')->nullable();
+            $table->longtext('success')->nullable();
             $table->datetime('created_at')->nullable();
 
         });

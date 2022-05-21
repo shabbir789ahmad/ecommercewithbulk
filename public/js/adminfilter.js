@@ -60,25 +60,8 @@ $('#shedule').change(function(){
 
 });
 
-$('#new').click(function(){
-  var news=$(this).val();
- $('#newpro').val(news)
- $('#new-form').submit();
 
-});
-$('#top-rated').click(function(){
-  var news=$(this).val();
- $('#topr').val(news)
- $('#new-form').submit();
 
-});
-
-$('.store-drop').click(function(){
-  var drop=$(this).val();
-  $('#drop_search').val(drop)
-  $('#new-form').submit();
-
-});
 
 });
 	
