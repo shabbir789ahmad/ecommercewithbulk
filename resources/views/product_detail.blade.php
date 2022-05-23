@@ -5,7 +5,7 @@
   <div class="card" style="width: 95%;">
   <div class="card-body">
   <div class="row" >
-   <div class="col-md-5 p-0 p-md-2">
+   <div class="col-md-4 p-0 p-md-2">
     <div class="main_image">
       @foreach($product_detail->images as $image)
       @if($loop->first)
@@ -17,7 +17,7 @@
     <div class="small_images">
       @foreach($product_detail->images as $image)
     
-      <img id="mimg" src="{{asset('uploads/img/' .$image['product_image'])}}" class="  mt-1 rounded " width="100%" >
+      <img  src="{{asset('uploads/img/' .$image['product_image'])}}" class="small_image  mt-1 rounded " width="100%" >
    
      @endforeach
     </div>
@@ -42,12 +42,14 @@
        </div>
      </div>
 
-     <p class="text-secondary mt-3">{{$product_detail['detail']}}</p>
+     
      <h4 class="mt-5 text-danger font-weight-bold">Rs.{{$product_detail['price']}} </h4>
      <p class="mt-1 discount "><s>Rs.{{$product_detail['price']}} </s> 90%</p>
+    
+    <p class="font-weight-bold"><i class="fa-solid fa-boxes-stacked fa-lg"></i> In Stock</p> 
 
      <div class="product_quentity">
-      <h4 class="mt-3 mr-4 ">Quantity:</h4>
+      <h4 class="mt-3 mr-4 "></h4>
        <button class="quantity_minus" type="button">-</button>
 
        <input type="number" name="quentity" class=" " value="1" id="input">
@@ -55,8 +57,9 @@
        <button class="quantity_plus" type="button">+</button>
      </div>
        
+       
 
-     <div class="like_share_icon2 align-bottom mt-3">
+     <div class="like_share_icon2 mt-5" >
       <div class="color">
         <p class="mb-0 discount">Color</p>
         <select >
@@ -76,15 +79,36 @@
      </div>  
 
 
-     <div class=" align-bottom mt-5">
+     <div class=" mt-5 " >
       <button class="btn btn-block mb-2 py-3 add_to_cart" data-id="{{$product_detail['id']}}">Add To Cart</button>
         <button class="btn btn-block buy_now mt-5 py-3">Buy Now</button> 
          
      </div>
    </div>   
-   <div class="col-md-2  ">
-    
+   <div class="col-md-3  ">
+     <div class="delivery mt-4">
+       <p class="discount">Delivery <span class="float-right"><i class="fa-solid fa-circle-exclamation"></i></span></p>
+       <hr>
+       <p class="mb-0"><i class="fa-solid fa-location-dot fa-lg"></i> <span>lahore Punjab Pakistan</span><span class="float-right"><a href="#" class="text-primary">Change</a></span></p>
+       <span class="discount ml-4">1-10 Days</span>
+       <hr>
+       <p class="mb-0 mt-4"><i class="fa-solid fa-truck fa-lg"></i> <span>Home Delivery</span><span class="float-right">Rs.120</span></p>
+       <span class="discount ml-4">1-10 Days</span>
+       
+       <p class="mb-0 mt-3"><i class="fa-solid fa-sack-dollar fa-lg"></i> <span>Cash on Delivery Available</span></p>
+       <hr>
 
+       <p class="discount mt-3">Services <span class="float-right"><i class="fa-solid fa-circle-exclamation"></i></span></p>
+       <hr>
+        <p class="mb-0 mt-3"><i class="fa-solid fa-right-left fa-lg"></i> <span>7 Day Return</span></p>
+        <span class="discount ml-4">Change of mind available</span>
+
+        <p class="mb-3 mt-3"><i class="fa-solid fa-shield-halved fa-lg"></i> <span>Warranty not available</span></p>
+        
+       <hr>
+        
+
+     </div>
   </div>
 </div>
 </div>
@@ -96,7 +120,13 @@
   <div class="col-md-8">
     <div class="card">
      <div class="card-body">
-      <p class="font-weight-bold">Product Details Of {{$product_detail['product_name']}}</p>
+      <p class="font-weight-bold">Product Detail:</p>
+         <p class="text-secondary mt-3">{{$product_detail['detail']}}</p>
+
+
+
+
+       <p class="font-weight-bold mt-5">Product Details Of {{$product_detail['product_name']}}</p>
        <ul class="ml-3 product_detail_list" >
          <li class="text-secondary">Wired Hands-Free,</li>
          <li class="text-secondary">Wired Headset</li>
@@ -108,31 +138,7 @@
          <li class="text-secondary">Headset,Noise-Cancellation,</li>
        </ul>
 
-       <p class="font-weight-bold">Product Details Of {{$product_detail['product_name']}}</p>
-       <ul class="ml-3 product_detail_list" >
-         <li class="text-secondary">Wired Hands-Free,</li>
-         <li class="text-secondary">Wired Headset</li>
-         <li class="text-secondary">Hands-Free,</li>
-         <li class="text-secondary">Headset,Noise-Cancellation,</li>
-         <li class="text-secondary">Wired Hands-Free,</li>
-         <li class="text-secondary">Wired Headset</li>
-         <li class="text-secondary">Hands-Free,</li>
-         <li class="text-secondary">Headset,Noise-Cancellation,</li>
-       </ul>
-
-       <p class="font-weight-bold">Product Details Of {{$product_detail['product_name']}}</p>
-       <ul class="ml-3 product_detail_list" >
-         <li class="text-secondary">Wired Hands-Free,</li>
-         <li class="text-secondary">Wired Headset</li>
-         <li class="text-secondary">Hands-Free,</li>
-         <li class="text-secondary">Headset,Noise-Cancellation,</li>
-         <li class="text-secondary">Wired Hands-Free,</li>
-         <li class="text-secondary">Wired Headset</li>
-         <li class="text-secondary">Hands-Free,</li>
-         <li class="text-secondary">Headset,Noise-Cancellation,</li>
-       </ul>
-
-
+       
      </div>
     </div>
   </div>
@@ -296,6 +302,17 @@ function show()
  
 @endsection
 @section('script')
+
+<script type="text/javascript">
+  $('.small_image').click(function(){
+
+   let ar=$(this).attr('src')
+   $('#mimg').attr('src',ar)
+   $(this).css('border','1px solid #09192C')
+   $(this).siblings('.small_image').css('border','none');
+  })
+</script>
+
 <script type="text/javascript">
 
 

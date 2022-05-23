@@ -4,9 +4,11 @@ namespace App\Http\Controllers\panel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\AdminSale;
+use App\Http\Requests\SaleRequest;
+use App\Models\Sale;
 use App\Http\Traits\ImageTrait;
 use App\classes\NewSale;
+use Auth;
 class SaleController extends Controller
 {
 
@@ -15,7 +17,7 @@ class SaleController extends Controller
     function index()
     {    
         $sale=new NewSale;
-        $sales=$sale->get();
+        $sales=$sale->get($vendor_id='',Auth::id());
 
         return view('Dashboard.sale.index',compact('sales'));
     }
@@ -27,78 +29,64 @@ class SaleController extends Controller
         return view('Dashboard.sale.create');
     }
 
-    function store(Request $request)
+    function store(SaleRequest $request)
     {
-        $request->validate([
-         
-           'sell_name'=>'required',
-           'start_time'=>'required',
-           'end_time'=>'required',
-           'image'=>'',
-          ]);
-
-        $data=[
+        $dtas=[
           
-          'sell_name'=>$request->sell_name,
-          'start_time'=>$request->start_time,
-          'end_time'=>$request->end_time,
-          'sell_status'=>1,
-          'sale_image'=>$this->image(),
+          'sale_status'=>1,
+          'admin_id'=>Auth::id(),
         ];
-      
-        return \App\Helpers\Form::createEloquent(new AdminSale,$data);
+
+       $data=array_merge($request->validated(),$dtas);
+        
+        if($request->hasfile('image'))
+        {
+            $data=array_merge($data,['sale_image'=>$this->image()]);
+        }
+     
+        return \App\Helpers\Form::createEloquent(new Sale,$data);
     }
 
 
 
-    function edit(AdminSale $sale)
+    function edit(Sale $sale)
     {
         
         return view('Dashboard.sale.edit',compact('sale'));
     }
 
 
-    function update(Request $request,$id)
-    {
-        $request->validate([
-         
-           'sell_name'=>'required',
-           'start_time'=>'required',
-           'end_time'=>'required',
-           'sell_status'=>'',
-           'image'=>'',
-
-        ]);
-        
-
-        $data=[
+    function update(SaleRequest $request,$id)
+    {  
+         $datas=[
           
-          'sell_name'=>$request->sell_name,
-          'start_time'=>$request->start_time,
-          'end_time'=>$request->end_time,
-          'sell_status'=>$request->sell_status,
-          
+          'sale_status'=>1,
+          'admin_id'=>Auth::id(),
         ];
+
+        $data=array_merge($request->validated(),$datas);
         if($request->hasfile('image'))
         {
-           $data= array_merge($data,$this->image());
+            $data=array_merge($data,['sale_image'=>$this->image()]);
         }
-        return \App\Helpers\Form::updateEloquent(new AdminSale,$id,$data);
+
+        
+        return \App\Helpers\Form::updateEloquent(new Sale,$id,$data);
     }
 
     function destroy($id)
     {
         
-      return \App\Helpers\Form::deleteEloquent(new AdminSale,$id,);
+      return \App\Helpers\Form::deleteEloquent(new Sale,$id,);
     }
 
 
     function Status(Request $request)
     {
-      $status=AdminSale::where('id',$id)
+      $status=Sale::where('id',$id)
         ->update([
 
-         'sell_status'=$request->sell_status,
+         'sell_status'=>$request->sell_status,
        ]);
     }
 

@@ -25,15 +25,16 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\StockController;
+// use App\Http\Controllers\StockController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\VendorSaleController;
-use App\Http\Controllers\CouponController;
+// use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\WishController;
 
 
 
@@ -42,6 +43,11 @@ use App\Http\Controllers\HomeController;
 Auth::routes();
 Route::get('/',[HomeController::class,'index']);
 Route::get('search',[HomeController::class,'search']);
+Route::get('product/{id}/detail',[HomeController::class,'productDetail'])->name('product.detail');
+
+Route::get('product/{id}',[HomeController::class,'allProductBySubCategory'])->name('product/{id}');
+
+Route::get('all/product',[HomeController::class,'allProduct'])->name('all.product');
 
 
 // Route::get('mail',[RegisterController::class,'welcome']);
@@ -53,14 +59,11 @@ Route::view('shopping','shopping');
 
 
 //all store with voucher
-Route::get('/voucher',[CouponController::class,'AllStore']);
+// Route::get('/voucher',[CouponController::class,'AllStore']);
 Route::get('/bcd',[UserController::class,'user']);
 
 
 
-Route::get('product/{id}/detail',[HomeController::class,'productDetail'])->name('product.detail');
-
-Route::get('product/{id}',[HomeController::class,'allProductBySubCategory'])->name('product/{id}');
 
 
 Route::get('master',[SubCategoryController::class,'subCategory']);
@@ -76,10 +79,12 @@ Route::get('send',[CartController::class,'send'])->name('send');
 Route::patch('update-cart',[CartController::class,'update'])->name('update.cart');
 Route::delete('remove-from-cart',[CartController::class,'remove'])->name('remove.from.cart');
 
-Route::get('get-wishlist',[CartController::class,'getwishlist']);
-Route::get('wishlist/{id}',[CartController::class,'wishlist']);
-Route::patch('update-wishlist',[CartController::class,'updateWishlist'])->name('update.wishlist');
-Route::delete('remove-from-wish',[CartController::class,'removeWish'])->name('remove.from.wish');
+
+Route::resource('wishlist',WishController::class);
+
+// Route::get('wishlist',[CartController::class,'wishlist'])->name('add.to.wishlist');
+// Route::patch('update-wishlist',[CartController::class,'updateWishlist'])->name('update.wishlist');
+// Route::delete('remove-from-wish',[CartController::class,'removeWish'])->name('remove.from.wish');
 
 
 
@@ -90,22 +95,21 @@ Route::get('visit/store/{id}',[StoreController::class,'showStore'])->name('visit
 Route::view('about','about_us');
 
 // user contact to admin by message
-Route::view('contact','contact_us');
 Route::resource('contact',ContactController::class);
 
- Route::view('mail','mail.order_mail');
+
  Route::view('bcd','bcd');
 
  Route::view('checkout','checkout');
  Route::post('review',[ReviewController::class,'review']);
- Route::post('check-coupon',[CouponController::class,'checkCoupon']);
- Route::post('save-token',[CouponController::class,'saveCoupon']);
- Route::post('follow-this',[FollowController::class,'follow']);
- Route::post('unfollow-this',[FollowController::class,'unfollow']);
+ // Route::post('check-coupon',[CouponController::class,'checkCoupon']);
+ // Route::post('save-token',[CouponController::class,'saveCoupon']);
+ // Route::post('follow-this',[FollowController::class,'follow']);
+ // Route::post('unfollow-this',[FollowController::class,'unfollow']);
  
 
 //global ajax route to
-// get category amiddle and sub category
+// get category middle and sub category
 Route::get('/middl/category/ajax',[MiddleCategoryController::class,'middleCategory']);
 Route::get('/sub/category/ajax',[SubCategoryController::class,'subCategory']);
 
@@ -157,7 +161,7 @@ Route::resource('size',SizeController::class);
 //color route
 Route::resource('color',ColorController::class);
 
-Route::get('search-product',[StockController::class,'searchStock'])->name('admin/search-product');
+// Route::get('search-product',[StockController::class,'searchStock'])->name('admin/search-product');
 // Route::view('test','Dashboard.test')->name('admin.test');
 
 // Route::post('status-up',[OrderController::class,'statusUp'])->name('admin.status-up');

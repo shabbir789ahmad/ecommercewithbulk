@@ -37,7 +37,7 @@
    <span id="m">0</span>
    <span id="s">0</span>
   </div>
-  <button class="btn btn-md see_all">See All</button>
+  <a href="{{route('all.product')}}" class="btn btn-lg see_all">See All</a>
 
  </div>
 <div class="container-fluid pb-5 pt-5 backgorund_color"  >
@@ -58,7 +58,7 @@
 </div>
 <div class="sale_counter  mb-1">
   <div class="counter"></div>
-  <button class="btn btn-md see_all mr-3">See All</button>
+    <a href="{{route('all.product')}}" class="btn btn-lg see_all">See All</a>
 </div>
  <div class="container-fluid pb-5 pt-5 backgorund_color">
  <div class="owl-carousel owl-theme m-1"  >
@@ -78,8 +78,8 @@
 </div>
 <div class="sale_counter  mb-1">
   <div class="counter"></div>
-  <button class="btn btn-md see_all mr-3">See All</button>
-</div>
+   <a href="{{route('all.product')}}" class="btn btn-lg see_all">See All</a>
+ </div>
 <div class="container-fluid pb-5 pt-5 backgorund_color ">
   <div class="row m-1">
     <x-categorycomponent :subcategories="$subcategories" />
@@ -95,8 +95,8 @@
 </div>
 <div class="sale_counter  mb-1">
   <div class="counter"></div>
-  <button class="btn btn-md see_all mr-3">See All</button>
-</div>
+   <a href="{{route('all.product')}}" class="btn btn-lg see_all">See All</a>
+  </div>
 <div class="container-fluid pb-5 pt-5 backgorund_color">
  
  <div class="owl-carousel owl-theme m-1"  >
@@ -115,8 +115,8 @@
 </div>
 <div class="sale_counter  mb-1">
   <div class="counter"></div>
-  <button class="btn btn-md see_all mr-3">See All</button>
-</div>
+    <a href="{{route('all.product')}}" class="btn btn-lg see_all">See All</a>
+  </div>
 <div class="container-fluid pb-5 pt-5 backgorund_color">
 <div class="owl-carousel owl-theme m-1"  >
      @foreach($products as $product)
@@ -134,7 +134,7 @@
 </div>
 <div class="sale_counter  mb-1">
   <div class="counter"></div>
-  <button class="btn btn-md see_all mr-3">See All</button>
+  <a href="{{route('all.product')}}" class="btn btn-lg see_all">See All</a>
 </div>
 <div class="container-fluid pb-5 pt-5 backgorund_color">
  

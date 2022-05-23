@@ -47,7 +47,7 @@ class CountController extends Controller
         $msg=Contact::whereDay('created_at', date('d'))->count();
          if($msg)
         {
-        $ms=User::count();
+        $ms=Contact::count();
         $msg2=$msg/$ms * 100;
         }else{
             $msg2=0;

@@ -246,6 +246,22 @@
        </div>
       </div>
     </li>
+    
+    <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm22" aria-expanded="true" aria-controls="collapseForm">
+       <i class="fab fa-wpforms text-light"></i>
+       <span>Shipping Cost</span>
+     </a>
+     <div id="collapseForm22" class="collapse
+       @if(request()->is('admin/shipping')) show
+        @endif"
+         aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class=" py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{route('shipping.index')}}">All Shipping Cost</a>
+         <a class="collapse-item" href="{{route('shipping.create')}}">Create Shipping Cost</a>
+       </div>
+      </div>
+    </li>
 
     <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm2" aria-expanded="true" aria-controls="collapseForm">
@@ -426,7 +442,7 @@
   <script src="{{asset('js/status.js')}}"></script>  
   <script src="{{asset('js/delete.js')}}"></script>  
   <script src="{{asset('js/adminfilter.js')}}"></script>  
-  <script src="{{asset('js/colorpicker.js')}}"></script>  
+  <!-- <script src="{{asset('js/colorpicker.js')}}"></script>   -->
   <script src="{{asset('js/show.js')}}"></script>  
   <script src="{{asset('js/getAllCategory.js')}}"></script>  
 <script src="{{asset('js/jquery.multifield.min.js')}}"></script>

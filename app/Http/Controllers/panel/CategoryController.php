@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\panel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Dropdown;
 use App\Models\Submenue;
@@ -27,19 +28,20 @@ class CategoryController extends Controller
     }
 
    
-    function store(Request $request)
+    function store(CategoryRequest $request)
     {
-        $request->validate([
-         'category'=>'required',
+        
+         $images=[ 'category_image'=>$this->image()];
+       
+         if($images != null)
+         {
+            $data=array_merge($request->validated(),$images);
+         }else{
+            $data=$request->validated();
+         }
+        
+        
          
-        ]);
-
-        $data=[
-           
-            'category'=>$request->category,
-            'category_image'=>$this->image(),
-        ];
-
          return \App\Helpers\Form::createEloquent(new Category, $data);
         
     }
@@ -53,26 +55,23 @@ class CategoryController extends Controller
     }
 
 
-    function update(Request $request,$id)
+    function update(CategoryRequest $request,$id)
     {
-      $request->validate([
-         'category'=>'required',
-         
-        ]);
-
+      $images='';
        if($request->hasfile('image'))
+       {
+         $images=[ 'category_image'=>$this->image()];
+       }
+        
+       
+         if($images )
          {
-            $data=[
-           
-            'category'=>$request->category,
-            'category_image'=>$this->image(),
-         ];
+            $data=array_merge($request->validated(),$images);
          }else{
-            $data=[
-           
-            'category'=>$request->category,
-         ];
+            $data=$request->validated();
          }
+
+
 
          return \App\Helpers\Form::updateEloquent(new Category,$id, $data);
     }

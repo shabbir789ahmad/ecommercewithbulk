@@ -64,9 +64,9 @@
        </a>
 		</li>
 		<li class="sidebar-item">
-		   <a class="sidebar-link" href="{{route('supplier.index')}}">
+		   <a class="sidebar-link" href="{{route('sales.index')}}">
 		   	
-         <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle">Supplier </span>
+         <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle">Sales </span>
        </a>
 		</li>
 		

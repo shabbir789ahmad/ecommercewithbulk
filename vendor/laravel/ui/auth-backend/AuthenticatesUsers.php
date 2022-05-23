@@ -44,6 +44,10 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
+            if ($request->hasSession()) {
+                $request->session()->put('auth.password_confirmed_at', time());
+            }
+
             return $this->sendLoginResponse($request);
         }
 
@@ -105,7 +109,7 @@ trait AuthenticatesUsers
     {
         $request->session()->regenerate();
 
-       $this->clearLoginAttempts($request);
+        $this->clearLoginAttempts($request);
 
         if ($response = $this->authenticated($request, $this->guard()->user())) {
             return $response;
@@ -163,9 +167,9 @@ trait AuthenticatesUsers
     {
         $this->guard()->logout();
 
-        //$request->session()->invalidate();
+        $request->session()->invalidate();
 
-        //$request->session()->regenerateToken();
+        $request->session()->regenerateToken();
 
         if ($response = $this->loggedOut($request)) {
             return $response;

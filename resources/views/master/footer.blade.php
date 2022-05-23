@@ -15,8 +15,8 @@
       </div>
       <ul class="p-0 footer_list">
       <li><a href="{{url('/')}}"><i class="fa-solid fa-arrow-right ml-2 d-inline-block d-sm-block d-md-none"></i>Home</a></li>
-      <li><a href="#"><i class="fa-solid fa-arrow-right ml-2 d-inline-block d-sm-block d-md-none"></i>About</a></li>
-      <li><a href="#"><i class="fa-solid fa-arrow-right ml-2 d-inline-block d-sm-block d-md-none"></i>Contact</a></li>
+      <li><a href="{{url('about')}}"><i class="fa-solid fa-arrow-right ml-2 d-inline-block d-sm-block d-md-none"></i>About</a></li>
+      <li><a href="{{route('contact.index')}}"><i class="fa-solid fa-arrow-right ml-2 d-inline-block d-sm-block d-md-none"></i>Contact</a></li>
       <li><a href="#"><i class="fa-solid fa-arrow-right ml-2 d-inline-block d-sm-block d-md-none"></i>Feedback</a></li>
      </ul>
     </div>

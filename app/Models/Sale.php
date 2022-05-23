@@ -9,10 +9,20 @@ class Sale extends Model
 {
     use HasFactory;
     protected $fillable=[
-     'sell_id',
-     'sale_id',
-     'new_price',
-     'discounts',
-     'on_sale'
+       'sale_name',
+       'start_time',
+       'end_time',
+       'sale_status',
+       'sale_image',
+       'admin_id',
+       'vendor_id',
     ];
+
+    
+    protected function saleName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+        );
+    }
 }

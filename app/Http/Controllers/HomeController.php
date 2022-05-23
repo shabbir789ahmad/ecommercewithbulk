@@ -59,6 +59,19 @@ function allProductBySubCategory($id, Request $req)
   }
 
 
+  function allProduct( Request $req)
+  {
+   
+    $products=$this->products($vendor_id='',$id='');
+    $brand=[];
+    $colors=Color::all();
+    $sizes=Size::all();
+  
+      // dd($products);
+    return view('product',compact('products','brand','colors','sizes'));
+  }
+
+
 
 
 

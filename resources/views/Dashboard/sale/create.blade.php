@@ -16,7 +16,7 @@
      <form action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         
-        <x-form.input name="sell_name" label="Sale Name" type="text"></x-forms.input>
+        <x-form.input name="sale_name" label="Sale Name" type="text"></x-forms.input>
         
         <x-form.input name="start_time" label="Sale Start Date Time" type="datetime-local"></x-forms.input>
        

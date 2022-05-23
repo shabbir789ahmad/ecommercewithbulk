@@ -24,7 +24,7 @@
 <link rel="stylesheet" type="text/css" href=" {{asset('css/home.css')}}	">
 <link rel="icon" href="{!! asset('pic/logo2.png') !!} " >
 
-<link rel="stylesheet" type="text/css" href=" {{asset('css/homeproductround.css')}} ">
+
 <link rel="stylesheet" type="text/css" href=" {{asset('css/about.css')}} ">
 <link rel="stylesheet" type="text/css" href=" {{asset('css/user.css')}} ">
 <link rel="stylesheet" type="text/css" href=" {{asset('css/store.css')}} ">
@@ -80,7 +80,7 @@
  <script  src="{{asset('js/filter.js')}}"></script>
  <script src="{{asset('js/button.js')}}"></script> 
  <script src="{{asset('js/zoomsl.js')}}"></script> 
- <script src="{{asset('js/script.js')}}"></script> 
+ <script src="{{asset('js/wishlist.js')}}"></script> 
  <script src="{{asset('js/ajaxdata.js')}}"></script> 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -141,31 +141,6 @@
 
     </script>
 
- <script>
-  //     var swiper = new Swiper(".mySwiper", {
-       
-  //       centeredSlides: false,
-  //       spaceBetween: 1,
-  //       grabCursor: true,
-       
-  //        breakpoints: {  
-  //       '480': {
-  //           slidesPerView: 2,
-  //            spaceBetween: 40,},
-  //         '640': {
-  //            slidesPerView: 3,
-  //            spaceBetween: 10, },
-  //            '1000': {
-  //            slidesPerView: 10,
-  //            spaceBetween: 10, },
-  // },
-  //       navigation: {
-  //             nextEl: '.swiper-button-next',
-  //             prevEl: '.swiper-button-prev',
-  //             clickable: true,
-  //       },
-  //     });
-    </script>
    
  
 
@@ -186,46 +161,7 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $(".update-wish").change(function (e) {
-        e.preventDefault();
-  
-        var ele = $(this);
-  
-        $.ajax({
-            url: '{{ route('update.wishlist') }}',
-            method: "patch",
-            data: {
-                _token: '{{ csrf_token() }}', 
-                id: ele.parents(".ts").attr("data-id"), 
-                quantity: ele.parents(".ts").find(".quan").val()
-            },
-            success: function (response) {
-               window.location.reload();
-            }
-        });
-    });
-
-  $(".remove-from-wish").click(function (e) {
-        e.preventDefault();
-  
-        var wish = $(this);
-  
-        if(confirm("Are you sure want to remove?")) {
-            $.ajax({
-                url: '{{ route('remove.from.wish') }}',
-                method: "delete",
-                data: {
-                    _token: '{{ csrf_token() }}', 
-                    id: wish.parents(".action").attr("data-id")
-                },
-                success: function (response) {
-                    window.location.reload();
-                }
-            });
-        }
-    });
-    </script>
+   
 
     <script type="text/javascript">
   
@@ -237,8 +173,54 @@
 
 
 
-
 </script>
+
+<script type="text/javascript">
+   
+    $(document).on('click','.like_by_customer',function(){
+       
+       let id=$(this).data('id');
+      $(this).replaceWith('<i class="fas fa-heart heart_style text-danger remove_from_wish " data-id='+id+' data-count="4b" ></i>')
+       
+       $.ajax({
+            url: '{{ route('wishlist.store') }}',
+            method: "POST",
+            dataType : 'json',
+            data: {
+                _token: '{{ csrf_token() }}', 
+                id: id, 
+                
+             
+            },
+           
+        }).done(function(res){
+            countcart()
+        });
+    });
+
+
+    $(document).on('click','.remove_from_wish',function(){
+      
+       let wishlist=$(this).data('id');
+      $(this).replaceWith('<i class="fa-regular fa-heart heart_style  like_by_customer " data-id='+wishlist+'  ></i>')
+       
+       $.ajax({
+            url: '/wishlist/'+wishlist,
+            method: "DELETE",
+            dataType : 'json',
+            data: {
+                _token: '{{ csrf_token() }}', 
+                id: wishlist, 
+                
+             
+            },
+           
+        }).done(function(res){
+            countcart()
+        });
+    });
+</script>
+
 @section('script')
 @show
 </body>

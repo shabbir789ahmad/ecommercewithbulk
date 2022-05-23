@@ -46,7 +46,7 @@
               <tr>
                 
                 <td class="col-2 align-middle"><img src="{{asset('uploads/img/'.$sale['sale_image'])}}" width="90%" height="80rem"></td>
-                <td class="text-dark  align-middle">{{ ucfirst($sale->sell_name) }}</td>
+                <td class="text-dark  align-middle">{{ ucfirst($sale->sale_name) }}</td>
                 <td class="text-dark  align-middle">{{ ucfirst($sale->start_time) }}</td>
                 <td class="text-dark  align-middle">{{ ucfirst($sale->end_time) }}</td>
                 <td class="text-dark  align-middle">{{ ucfirst($sale->sell_status) }}</td>

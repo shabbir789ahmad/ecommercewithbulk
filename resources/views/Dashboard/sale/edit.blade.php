@@ -17,7 +17,7 @@
         @csrf
         @method('PUT')
         <input  type="hidden" name="sell_status" value="{{$sale['sell_status']}}" />
-        <x-form.input name="sell_name" label="Sale Name" type="text" value="{{$sale['sell_name']}}"></x-forms.input>
+        <x-form.input name="sale_name" label="Sale Name" type="text" value="{{$sale['sale_name']}}"></x-forms.input>
         
         <x-form.input name="start_time" label="Sale Start Date Time" type="datetime-local" ></x-forms.input>
        

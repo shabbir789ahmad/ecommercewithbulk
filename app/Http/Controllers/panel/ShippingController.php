@@ -13,8 +13,9 @@ class ShippingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $shippings=ShippingCost::shippings();
+    {  
+
+         $shippings=ShippingCost::shippings();
         return view('Dashboard.shipping.index',compact('shippings'));
     }
 
@@ -44,8 +45,9 @@ class ShippingController extends Controller
         $data=[
           
           'city'=>$request->city,
-          'shipping_cost'=>$request->shipping_cost,
-        ]
+          'shipping_costs'=>$request->shipping_cost,
+        ];
+       
         return \App\Helpers\Form::createEloquent(new ShippingCost,$data);
     }
 
@@ -66,9 +68,9 @@ class ShippingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ShippingCost $shippings)
+    public function edit(ShippingCost $shipping)
     {
-        return view('Dashboard.shipping.index',compact('shippings'));
+        return view('Dashboard.shipping.edit',compact('shipping'));
     }
 
     /**
@@ -83,13 +85,13 @@ class ShippingController extends Controller
         $request->validate([
            
             'city'=>'required',
-            'shipping_cost'=>'required',
+            'shipping_costs'=>'required',
         ]);
         $data=[
           
           'city'=>$request->city,
-          'shipping_cost'=>$request->shipping_cost,
-        ]
+          'shipping_costs'=>$request->shipping_costs,
+        ];
         return \App\Helpers\Form::updateEloquent(new ShippingCost,$id,$data);
     }
 
@@ -101,8 +103,6 @@ class ShippingController extends Controller
      */
     public function destroy($id)
     {
-         'shipping_cost'=>$request->shipping_cost,
-        ]
         return \App\Helpers\Form::deleteEloquent(new ShippingCost,$id);
     }
 }
