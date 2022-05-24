@@ -44,7 +44,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'password' => ['required', 'string', 'min:8'],
          'image' => '',
         ]);
     }
@@ -57,26 +57,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-         $request = app('request');
+        
+        $request = app('request');
+
       if($request->hasfile('image'))
 
           {
              $file=$request->file('image');
             $ext=$file->getClientOriginalExtension();
-            $name= time(). '.' . $ext;
-            $file->move('uploads/img/',$name);
+            $img= time(). '.' . $ext;
+            $file->move('uploads/img/',$img);
           
           }
-        $user= User::create([
+
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'image' => $name,
+            'image' => $img,
+            'user_status' => 1,
             'password' => Hash::make($data['password']),
           ]);
 
-         $this->job($user->email);
-        return $user;
+         // $this->job($user->email);
+        // return $user;
      }
     public function job($mail)
     {

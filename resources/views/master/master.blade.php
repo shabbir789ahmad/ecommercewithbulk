@@ -7,6 +7,9 @@
   <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
+  <!-- //csrf token -->
+  <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}"> 
+
  <!-- fontawseom -->
 <script src="https://kit.fontawesome.com/53bfee5bd7.js" crossorigin="anonymous"></script>
 
@@ -82,6 +85,7 @@
  <script src="{{asset('js/zoomsl.js')}}"></script> 
  <script src="{{asset('js/wishlist.js')}}"></script> 
  <script src="{{asset('js/ajaxdata.js')}}"></script> 
+ <script src="{{asset('js/user.js')}}"></script> 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 

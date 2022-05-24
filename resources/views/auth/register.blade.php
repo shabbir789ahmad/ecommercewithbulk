@@ -1,55 +1,86 @@
-@extends('master.master')
+@extends('admin.master')
 
 @section('content')
-<div class="container  w-50 mt-5 border p-5 shadow mb-4">
-    
-  <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                        @csrf
 
 
-  <input id="name" type="text" class="form-control mt-3 py-3 @error('name') is-invalid @enderror" name="name" placeholder="Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-        @error('name')
-        <span class="invalid-feedback" role="alert">
-         <strong>{{ $message }}</strong>
-              </span>
-                 @enderror
-                
+<div class="grid">
+ <div class="container">
+      
+  @if(session()->has('message'))
+    <div class="alert alert-danger">
+       <strong>Error!</strong>{{session()->get('message')}}
+    </div>
+   @endif
 
-    <input id="email" type="email" class="form-control mt-3 py-3 @error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
-  @error('email')
-   <span class="invalid-feedback" role="alert">
-     <strong>{{ $message }}</strong>
-                </span>
-                                @enderror
-          
-    <input id="phone" type="number" class="form-control mt-3 py-3 @error('phone') is-invalid @enderror" name="phone" placeholder="Phone" value="{{ old('phone') }}" required autocomplete="phone">
-  @error('phone')
-   <span class="invalid-feedback" role="alert">
-     <strong>{{ $message }}</strong>
-                </span>
-                                @enderror
-                        
-                  
-          <input id="password" type="password" placeholder="Password" class="form-control mt-3 py-3 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-           @error('password')
+<form method="POST" action="{{route('register')}}" enctype="multipart/form-data">
+      @csrf
+        <div class="title">Register</div>
+         
+         <div class="input-box underline">
+          <input  id="name" type="name" class="@error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocu placeholder="Enter Your Name" >
+          <div class="underline"></div>
+          @error('name')
             <span class="invalid-feedback" role="alert">
-             <strong>{{ $message }}</strong>
+                 <strong>{{ $message }}</strong>
+             </span>
+         @enderror
+        </div>
+
+        <div class="input-box underline">
+          <input  id="email" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocu placeholder="Enter Your Email" >
+          <div class="underline"></div>
+          @error('email')
+            <span class="invalid-feedback" role="alert">
+                 <strong>{{ $message }}</strong>
+             </span>
+         @enderror
+        </div>
+
+         
+
+        <div class="input-box">
+          <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+          <div class="underline"></div>
+        </div>
+
+         @error('password')
+            <span class="invalid-feedback" role="alert">
+                 <strong>{{ $message }}</strong>
             </span>
-          @enderror
-                     
+         @enderror
 
- <input id="password-confirm" type="password" placeholder="Conform Password" class="form-control mt-3 py-3" name="password_confirmation" required autocomplete="new-password">
+        <div class="input-box underline">
+          <input  id="phone" type="number" class="@error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocu placeholder="Enter Your Phone" >
+          <div class="underline"></div>
+          @error('phone')
+            <span class="invalid-feedback" role="alert">
+                 <strong>{{ $message }}</strong>
+             </span>
+         @enderror
+        </div>
+
+        <div class="input-box underline">
+          <input  id="image" type="file" class="@error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" autofocu  >
+          <div class="underline"></div>
+          @error('image')
+            <span class="invalid-feedback" role="alert">
+                 <strong>{{ $message }}</strong>
+             </span>
+         @enderror
+        </div>
+
+        <div class="input-box button">
+          <input type="submit" name="" value="Continue">
+        </div>
+      </form>
+
+
+
+        
      
-     <input id="image" type="file" placeholder="Choose Image" class="form-control mt-3 " name="image" required autocomplete="profile">                     
+    </div>
+ </div>
 
-                       
-    <button type="submit" class="btn btn-check py-3 text-light btn-block rounded mt-3">
-                                    {{ __('Register') }}
-                                </button>
-                          
-                    </form>
-               
-</div>
+
 @endsection

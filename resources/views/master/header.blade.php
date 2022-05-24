@@ -38,7 +38,7 @@ $logo=Logo::logo();
            
                @foreach($middel['subcategory'] as $sub)
             <li class="dropdown-link">
-              <a href="{{url('product/' .$sub['id'])}}">{{ucwords($sub['subcategory_name'])}}</a>
+              <a href="{{route('product.by.subcategory',['id'=>$sub['id']])}}">{{ucwords($sub['subcategory_name'])}}</a>
             </li>
             @endforeach
             
@@ -84,7 +84,7 @@ $logo=Logo::logo();
           <div class="dropdownlog float-right pb-3" >
   <button class="dropbtnlog ">{{ucfirst(substr(Auth::user()->name,0,1))}}</button>
   <div class="dropdown-contentlog">
-  <a href="{{url('account')}}">Dashboard</a>
+  <a href="{{route('user.index')}}">Dashboard</a>
   <a href="{{ route('logout') }}"
  onclick="event.preventDefault();
  document.getElementById('logout-form').submit();">Log out

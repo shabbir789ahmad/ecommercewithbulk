@@ -5,6 +5,7 @@ namespace App\classes;
  * 
  */
 use App\Models\Sale;
+use Carbon\Carbon;
 class NewSale 
 {
 	
@@ -29,7 +30,8 @@ class NewSale
      */
 	function singlesale()
 	{
-		return AdminSale::select('sell_name','start_time','end_time','sell_status','image')->where('start_time','>=')->first();
+		
+		return Sale::select('sale_name','start_time','end_time','sale_status','sale_image')->where('start_time','<=',Carbon::now())->where('admin_id','=',1)->first();
 
 	}
 

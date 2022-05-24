@@ -13,26 +13,30 @@ use App\Models\ProductBrand;
 // use App\Models\ProductColor;
 use App\Http\Traits\ProductTrait;
 use App\Http\Traits\CouponTrait;
+use App\classes\NewSale;
 class HomeController extends Controller
 {
 
     use ProductTrait;
     function index()
-    {
-        $slider=Slider::latest()->take('3')->get();
-        $sells=[];
-        $sell=[];
-        $subcategories=SubCategory::all();
-        $dropdown=[];
+    {   
+        //  class for sale function
+        $sales=new NewSale;
+        $sale=$sales->singlesale();
+        // from slider model
+        $sliders=Slider::sliders();
+        // from subcategory Model
+        $subcategories=SubCategory::subcategories();
+        // from product traits
         $products=$this->products($id='',$subcategory_id='');
        
-       return view('home',compact('slider','sells','products','sell','subcategories','dropdown'));
+       return view('home',compact('sliders','sale','products','subcategories'));
     }
 
 
    function productDetail($id)
   {
-    
+    // from product trait
     $product_detail=$this->detail($id);
 
     $products=$this->products($vendor_id='',$product_detail['subcategory_id']);

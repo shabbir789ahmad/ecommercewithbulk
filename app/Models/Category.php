@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Cache;
 class Category extends Model
 {
     use HasFactory;
@@ -13,9 +13,13 @@ class Category extends Model
 
    public static function category()
     {
-        $sub=Category::with('categories.subcategory')->get();
+       $sub=  Cache::remember('sub',14,function(){
+       return Category::with('categories.subcategory')->get();
+
+        });
+       
         $sub=json_decode(json_encode($sub),true);
-        // dd($sub);
+        
         return $sub;
     }
 

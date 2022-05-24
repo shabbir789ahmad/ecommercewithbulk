@@ -2,13 +2,13 @@
 @section('content')
  
 <div class="container">
-  <p class="product-name mt-5 text-center">Login And Securty</p>
+  <h4 class="product-name mt-5 text-center font-weight-bold">Login And Securty</h4>
    <div class="row">
    	<div class="col-md-2"></div>
    	<div class="col-md-8">
      <div class="card border shadow">
       <div class="card-body">
-        <form action="{{url('update-user')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('user.update',['user'=>Auth::id()])}}" method="POST" enctype="multipart/form-data">
         	@csrf
           <input type="hidden" name="id" value="{{$user->id}}">
         	<label class="">Name:</label>
@@ -18,7 +18,7 @@
         	<label class="mt-1">Phone:</label>
         	<input type="text" name="phone" value="{{$user->phone}}" class="form-control">
         	<label class="mt-1">Password:</label>
-        	<input type="text" name="password" value="{{$user->password}}" class="form-control">
+        	<input type="text" name="password" value="" class="form-control">
         	<label class="mt-1">Image:</label>
         	<input type="file" name="image" value="{{$user->image}}" class="form-control">
             <img src="{{asset('uploads/img/' .$user->image)}}" alt="profile image" width="20%" height="150rem"><br>

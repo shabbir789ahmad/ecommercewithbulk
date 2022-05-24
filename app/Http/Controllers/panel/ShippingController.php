@@ -105,4 +105,11 @@ class ShippingController extends Controller
     {
         return \App\Helpers\Form::deleteEloquent(new ShippingCost,$id);
     }
+
+    public function cities(Request $request)
+    {  
+
+         $shippings=ShippingCost::where('state_id',$request->id)->get();
+         return response()->json($shippings);
+    }
 }

@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class State extends Model
 {
     use HasFactory;
-    protected $fillable=[
-     
-     'address',
-     'country',
-     'city',
-     'zip',
-     'user_id'
-    ];
+
+    protected $fillable=['states'];
+
+    public static function states()
+    {
+      return State::all();
+    }
 }

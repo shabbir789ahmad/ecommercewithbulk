@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="container">
+<div class="container mb-5">
    <p class="product-name mt-5">Your Acount</p>
    <div class="row">
     <div class="col-md-4 col-12">
@@ -20,7 +20,7 @@
      </a>
     </div>
     <div class="col-md-4 col-12">
-    <a href="{{url('/login-and-securty')}}"style="text-decoration:none;">	<div class="card shadow user-card-hover">
+    <a href="{{route('user.edit',['user'=>Auth::id()])}}"style="text-decoration:none;">	<div class="card shadow user-card-hover">
       <div class="card-body">
         <div class="d-flex">
           <img src="{{asset('pic/security._CB659600413_.png')}}" width="25%">
@@ -34,7 +34,7 @@
      </a>
     </div>
     <div class="col-md-4 col-12">
-   <a href="{{url('user_profile')}}"style="text-decoration:none;">
+   <a href="{{route('user.create')}}"style="text-decoration:none;">
      <div class="card shadow user-card-hover">
       <div class="card-body">
         <div class="d-flex">

@@ -1,130 +1,217 @@
 @extends('master.master')
 @section('content')
-<title>Check Out</title>
-<div class="fy mb-5 "  style="background-color:#F5F5F5">
-<p class=" checkout text-dark pt-3"> Checkout</p>
-<div class="contr mt-1 ml-2 mr-2 " >
-  <form action="{{url('chechout2')}}" method="POST" enctype="multipart/form-data">
-        @csrf
- <div class="row  rounded ">
- 	<div class="col-md-8 col-12 col-sm-12 bg-light mb-3 mb-md-0 chechout-shadow" >
-    <div class="row">
-     <div class="col-md-6 ">
-      	 <div class="ml-0 mlsm-0 ml-md-2 mt-3 paymnt">
-           <h3>Shipping And Billing </h3>
-      		<label><i class="fas fa-user mt-4"></i>Full Name</label>
-          <input type="text" name="name" class="form-control" value="{{Auth::user()->name}}" required>
-          <span class="text-danger">@error ('name') {{$message}} @enderror</span>
-          <label class="mt-2"><i class="fas fa-envelope"></i> Email</label>
-          <input type="text" name="email" value="{{Auth::user()->email}}" class="form-control" required>
-          <span class="text-danger">@error ('email') {{$message}} @enderror</span>
 
-          <label class="mt-4"><i class="fas fa-building"></i> Phone</label>
-          <input type="text" name="phone" value="{{Auth::user()->phone}}" class="form-control" required>
-          <span class="text-danger">@error ('phone') {{$message}} @enderror</span>
 
-          <label class="mt-2"><i class="fas fa-map-marker-alt"></i> Address</label>
-          <input type="text" name="address" class="form-control" required>
-          <span class="text-danger">@error ('address') {{$message}} @enderror</span>
-       
-         </div>
-       </div>
-       <div class="col-md-6">
-        <div class="paymnt mt-0 mt-sm-0 mt-md-5 ml-0 ml-sm-0 ml-md-5">
-         
-        <label class="mt-4"><i class="fas fa-globe"></i> Country</label>
-         <select class="form-control" class="country" name="country" required>
-             <option selected hidden disabled >Choose Country
-             </option>
-             <option>Pakistan</option>
-             <option>Qatar</option>
-             <option>UAE</option>
-             <option>KSA</option>
-         </select>
-         <span class="text-danger">@error ('country') {{$message}} @enderror</span>
-         <label class="mt-3"><i class="fas fa-building"></i> City</label>
-          <select class="form-control" name="city" required>
-            <option selected hidden disabled >Choose City</option>
-             <option>Lahore</option>
-             <option>Karachi</option>
-             <option>Dubai</option>
-             <option>Multan</option>
-         </select>
-          <span class="text-danger">@error ('city') {{$message}} @enderror</span>
-         <label class="mt-3"><i class="fas fa-file-archive"></i> Post Code</label>
-          <input type="text" name="post_code" class="form-control" required>
-            <span class="text-danger">@error ('post_code') {{$message}} @enderror</span>
+<div class="container-fluid  mb-5  d-flex justify-content-center bg-light" >
 
-          <input type="checkbox" name="payment" value="cash on delivery"  class="mt-3 mt-sm-3 mt-md-5 mb-5 mb-sm-5 mb-sm-0" required>
+  
+  <div class="row mt-2" style="width:95%">
 
-          <span>Payment On Delivery</span>
-           <span class="text-danger">@error ('payment') {{$message}} @enderror</span>
+   <div class="col-md-8   ">
+    <div class="row py-3 text-light" style="background-color: #09192C;">
+      <div class="col-md-2">
+        Image
+      </div>
+      <div class="col-md-6">
+        Detail
+      </div>
+      <div class="col-md-2 text-center">
+        Price
+      </div>
+      <div class="col-md-2 text-center">
+         Operation
+      </div>
+    </div>
+    <?php $sum2=''; ?>
+ 
+    @forelse(session('cart') as $id => $item)
+     @php  $sum[]=$item['sub_total'] @endphp
+      @php $sum2 = array_sum($sum) @endphp
+    <div class="row   border-bottom" style="height: 10rem; background: #fff;">
+      <div class="col-md-2  ">
+        <img src="{{asset('uploads/img/'.$item['image'])}}" width="100%" height="150rem" class="rounded mt-1">
+      </div>
+      <div class="col-md-6">
+       <h5 class="mt-3">{{ucfirst($item['name'])}}</h5>
+        <p><span class="text-danger">Color:</span> <span>Red</span> <span class="text-danger">Size: </span><span>12</span></p>
+      </div>
+      <div class="col-md-3 ">
+       <h5 class="mt-5 font-weight-bold text-center"><span class="text-danger">Rs.</span > <span id="price">{{$item['price']}}</span></h5>
+       </div>   
+       <div class="col-md-1">
+        <p class="remove_from_cart text-center mt-3" data-id="{{$item['id']}}"><i class="fa-solid fa-trash-can text-light bg-danger p-2"></i></p>
 
-           
-       </div>
+      </div>
      </div>
-    </div>
-        
-    </div>
+     @empty
+     <a href="{{url('/')}}" class="btn btn-info btn-lg mt-5 border-0 ">Continue Shopping</a>
+     @endforelse
+    
+    
+      </div> 
+  
 
- 	 <div class="col-md-4 col-12 col-sm-12  mb-3" >
-    <div class="">
-      <div class="chechout-shadow">
-         <p class=" checkout2 ml-3"> Cart<span class="float-right"><i class="fa fa-shopping-cart fa-lg mr-3 text-danger mt-2" ></i></span></p>
-      @php $total = 0 @endphp
-       @if(session('cart'))
-        @foreach(session('cart') as $id => $details)
-           @php $total += $details['price'] * $details['quantity'] @endphp
-           @php  $sum[]=$details['ship'] @endphp
-            @php $sum2 = array_sum($sum) @endphp
-      
-         
-          <p class="ml-3 text-danger"><img src="{{asset('uploads/img/'.$details['image'])}}" width="10%" class="border"><span class="ml-2">{{$details['name']}}</span><span class="float-right mr-3 text-dark">Rs. {{$details['price']}}
-          </span></p>
-        
-         <hr>
-             
-      
-        <input type="hidden" name="product[]" value="{{$details['name']}}">
-        <input type="hidden" name="pid[]" value="{{$details['pid']}}">
-        <input type="hidden" name="ship[]" value="{{$details['ship']}}">
-        <input type="hidden" name="quentity[]" value="{{$details['quantity']}}">
-       <input type="hidden" name="price[]" value="{{$details['price']}}">
-        <input type="hidden" name="image[]" value="{{ $details['image']}}">
-        <input type="hidden" name="drop_id[]" value="{{ $details['drop_id']}}">
-        <input type="hidden" name="detail[]" value="{{ $details['detail']}}">
-        <input type="hidden" name="color[]" value="{{ $details['color']}}">
-        <input type="hidden" name="vendor_id[]" value="{{ $details['vendor_id']}}">
-        <input type="hidden" name="size[]" value="{{ $details['size']}}">
-         @endforeach
-        @endif
-        @if(session('coupon'))
-        <input type="hidden" name="total" value="{{$sum2 + $total - session('coupon')['value']}}">
-        @else
-        <input type="text" name="total" value="{{$sum2 + $total}}">
-        @endif
-       <p class="ml-3 ">Order Summary<span class="float-right mr-3"></span></p>
-      <p class="ml-3 "> Subtotal<span class="float-right mr-3">Rs. {{$total}}</span></p>
-      <p class="ml-3 text-dark"> Shipping<span class="float-right mr-3">Rs. {{$sum2}}</span></p>
-      @if(session('coupon'))
-        <p class=" mt-2 ml-3">Coupon:<span class="float-right mr-3"> 
-          Rs. {{session('coupon')['value']}} </span></p>
-        @endif
-      
-      @if(session('coupon'))
-      <p class=" checkout2 mt-1 py-3 px-2">Total <span class="float-right ">RS. {{$sum2 + $total - session('coupon')['value']}}</span></p>
-      @else
-      <p class=" checkout2 mt-1 py-3 px-2">Total <span class="float-right ">RS. {{$sum2 + $total }}</span></p>
-      @endif
-      <button class=" btn btn-check btn-block mb-3  rounded py-3 text-light mb-1">Order Now</button>
-       </div> 
- 	 </div>
-      
+    <div class="col-md-4 pr-0">
+      <div class="card">
+        <h4 class="card-header text-light"  style="background-color: #09192C;">Shipping And Billing</h4>
+        <div class="card-body">
+          
+          <p class="mb-0"><i class="fa-solid fa-location-dot text-info"></i>  {{ucfirst(Auth::user()->name)}}  <span class="float-right text-info get_states" data-toggle="modal" data-target="#exampleModal">Edit</span></span></p>
+          <p class="discount">{{$address['state']}},{{$address['city']}},{{$address['address']}}</p>
+          
+          <p class="discount"><i class="fa-solid fa-address-book text-info"></i> Bill To The Same Address  <span class="float-right text-info">Edit</span></span></p>
+
+          <p class="discount"><i class="fa-solid fa-phone text-info"></i><span id="phone_number">{{Auth::user()->phone}}</span> <span class="float-right text-info show_input_number">Edit</span></span></p>
+           
+           <div class="update_phone_number" style="display:none;">
+           <input type="text" name="phone" value="{{Auth::user()->phone}}" class="form-control" id="user_phone">
+           <button class="btn btn-md phone_update" data-id="{{Auth::id()}}">Save</button>
+           </div>
+
+          <p class="discount"><i class="fa-solid fa-envelope text-info"></i><span id="email"> {{Auth::user()->email}}</span> <span class="float-right text-info show_user_email">Edit</span></span></p>
+          
+          <div class="update_email" style="display:none;">
+           <input type="text" name="email" value="{{Auth::user()->email}}" class="form-control" id="user_email">
+           <button class="btn btn-md email_user_update" data-id="{{Auth::id()}}">Save</button>
+           </div>
+          
+           <p>Order Summary </p>
+
+           <p class="discount">SubTotal <span class="float-right ">Rs.<span class="ship font-weight-bold text-dark">434</span></span></p>
+           <p class="discount">Shipping Fee <span class="float-right ">Rs.<span class="ship text-dark font-weight-bold">434</span></span></p>
+           
+
+           <p class="mb-0 mt-3 d-flex">Coupon Code</p>
+           <div class="d-flex">
+           <input type="text" name="coupon" class="form-control">
+           <button class="btn btn-md ">APPLY</button>
+           </div> 
+           <hr>
+           <p>Final Total <span class="float-right">Rs.<span class="final_total">{{$sum2}}</span>.00</span></p>
+           
+           <a href="{{route('checkout')}}" class="btn btn-md btn-block mt-3">Proceed To Pay</a>
+        </div>
+      </div>
+    </div>
   </div>
-
-</form>
 </div>
 
-</div>
-</div>
+
+<x-addresscomponent />
+
+
+
+@endsection
+@section('script')
+<script type="text/javascript">
+  
+   $("#quantity").change(function (e) {
+        e.preventDefault();
+       
+        let quentity=$(this).val()
+        if(quentity<1)
+        {
+          quentity=1
+        }
+        let id=$(this).data('id')
+      
+         updateCart(quentity,id)
+    });
+
+   $(".plus").click(function (e) {
+        e.preventDefault();
+       
+       let data=$(this).siblings('input').val();
+       let a=parseInt(data);
+       a++
+       $(this).siblings('input').val(a)
+       let id=$(this).siblings('input').data('id')
+
+         updateCart(a,id);
+    });
+
+   $(".minus").click(function (e) {
+        e.preventDefault();
+       
+       let data=$(this).siblings('input').val();
+       let a=parseInt(data);
+       a--;
+       if(a<1)
+       {
+        a=1;
+       }
+       $(this).siblings('input').val(a)
+         
+      let id=$(this).siblings('input').data('id')
+      
+      updateCart(a,id);
+
+    });
+
+    function updateCart(quentity,id)
+    {   let shipping=$('#shipping_cost').val();
+      $.ajax({
+            url: '{{ route('update.cart') }}',
+            method: "patch",
+            data: {
+                _token: '{{ csrf_token() }}', 
+                id: id, 
+                quantity: quentity,
+                shipping: shipping,
+            },
+            success: function (response) {
+               
+               calulatePrice(quentity);
+               }
+        });
+    }
+
+
+
+ function calulatePrice(quentity)
+ {  
+    let price=$('#price').text();
+    let shipping=$('#shipping_cost').val();
+    let sub_total=parseInt(price)*parseInt(quentity);
+
+    sub_total=sub_total + parseInt(shipping);
+    $('.sub_total').text(sub_total)
+    $('.final_total').text(sub_total)
+  };
+  $(function(){
+    let shipping=$('#shipping_cost').val();
+    $('.ship').text(shipping)
+  })
+
+  $('#shipping_cost').change(function()
+  {
+    
+    let quentity=$('#quantity').val();
+    calulatePrice(quentity)
+     let shipping=$('#shipping_cost').val();
+     $('.ship').text(shipping)
+  });
+
+  $(".remove_from_cart").click(function (e) {
+        e.preventDefault();
+  
+        var ele = $(this);
+  
+        if(confirm("Are you sure want to remove?")) {
+            $.ajax({
+                url: '{{ route('remove.from.cart') }}',
+                method: "delete",
+                data: {
+                    _token: '{{ csrf_token() }}', 
+                    id: $(this).data("id")
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+
+
+</script>
 @endsection

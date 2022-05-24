@@ -45,7 +45,7 @@ function products($id,$subcategory_id)
         $query=$query->where('discount_price','>=',$request->price);
       }
 
-       $product=$query->get();
+       $product=$query->inRandomOrder()->get();
         // dd($product);
        return $product;
      }

@@ -28,17 +28,19 @@
      </div>
      <div class="rating_adn_share mt-3">
        <div class="stars">
+        @for($i=0;$i<5;$i++)
+        @if($i<$product_detail['rating'])
          <span class="fa fa-star checked"></span>
-         <span class="fa fa-star checked"></span>
-         <span class="fa fa-star checked"></span>
-         <span class="fa fa-star"></span>
-         <span class="fa fa-star"></span> 
-         <span class="total_rating"> 8 Rating</span>
+         @else
+         <span class="fa fa-star "></span>
+         @endif
+         @endfor
+         <span class="total_rating">{{$product_detail['rating']}} Rating</span>
        </div>
 
        <div class="like_share_icon">
-         <i class="fa-regular fa-heart  heart_style like_by_customer2" ></i>
-         <i class="fa-solid fa-share-nodes heart_style ml-2"></i>
+         <i class="fa-regular fa-heart   heart_style like_by_customer" ></i>
+         <i class="fa-solid fa-share-nodes  heart_style ml-2"></i>
        </div>
      </div>
 
@@ -49,10 +51,10 @@
     <p class="font-weight-bold"><i class="fa-solid fa-boxes-stacked fa-lg"></i> In Stock</p> 
 
      <div class="product_quentity">
-      <h4 class="mt-3 mr-4 "></h4>
+      <h4 class="mt-3  "></h4>
        <button class="quantity_minus" type="button">-</button>
 
-       <input type="number" name="quentity" class=" " value="1" id="input">
+       <input type="number" name="quentity" value="1" id="input">
 
        <button class="quantity_plus" type="button">+</button>
      </div>
@@ -62,7 +64,7 @@
      <div class="like_share_icon2 mt-5" >
       <div class="color">
         <p class="mb-0 discount">Color</p>
-        <select >
+        <select  id="product_colors">
           @foreach($product_detail->colors as $color)
           <option>{{$color['color']}}</option>
           @endforeach
@@ -70,7 +72,7 @@
       </div>
       <div class="color">
         <p class="mb-0 discount">Size</p>
-        <select >
+        <select id="product_size">
           @foreach($product_detail->sizes as $size)
           <option>{{$size['size']}}</option>
           @endforeach
@@ -255,50 +257,7 @@
 </div>
 
 
-<script type="text/javascript">
-    
-    function changepic(a)
-    {
-      document.querySelector(".imgs").src=a.children[0].src;
-       
-    }
-    function incr()
-    {
-      let a=document.getElementById('val');
-       a.value++;
-    }
-function decr()
-{
-  let a=document.getElementById('val');
-       a.value--;
-    if (a.value<1) {
-      a.value=1;
-    }
-}
- 
-function show()
-{
-  let show=document.getElementById('sh');
-  if(show)
-  {
-     show.style.display="block";
-   }else{
-     show.style.display="none";
-   }
- 
-}
-// document.addEventListener('mouseup',function(e){
- 
-//   let show=document.getElementById('sh')
-//   if(!show.contains(e.target)){
-//     show.style.display="none"
-//   }
 
-// });
-
-
-
-</script>
  
 @endsection
 @section('script')
@@ -355,7 +314,8 @@ function show()
         e.preventDefault();
   
          var id=$(this).data('id');
-        
+         let color=$('#product_colors').val();
+         let size=$('#product_size').val();
         $.ajax({
             url : '/add-to-cart/' +id,
             method: "GET",
@@ -363,6 +323,8 @@ function show()
                 _token: '{{ csrf_token() }}', 
                 
                 quantity: $('#input').val(),
+                color: color,
+                size: size,
             },
            
             success: function (response , data) {

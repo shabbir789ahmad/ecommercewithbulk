@@ -5,15 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class UserAddress extends Model
 {
     use HasFactory;
-    protected $fillable=[
-     
-     'address',
-     'country',
-     'city',
-     'zip',
-     'user_id'
-    ];
+    protected $fillable=['state','city','address','user_id'];
 }

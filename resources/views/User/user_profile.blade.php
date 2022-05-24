@@ -6,11 +6,9 @@
   	<div class="col-md-1"></div>
   	<div class="col-md-10 border">
   	 <div class="banner-user">
-       @forelse($cover as $cov)
-         <img src="{{asset('uploads/img/' .$cov['cover_image'])}}" alt="profile image" width="100%" class="round-image2">
-       @empty
-  	   <img src="{{asset('pic/default.png')}}" alt="profile image" width="100%" class="round-image2">
-       @endforelse
+   
+         <img src="{{asset('uploads/img/' .$cover['image'])}}" alt="profile image" width="100%" class="round-image2">
+      
        @if(!auth::user()->image)
   	   <img src="{{asset('pic/default._CR0,0,1024,1024_SX460_.jpg')}}" alt="profile image" width="15%" class="round-image">
        @else
@@ -22,7 +20,7 @@
        <p class="user-name">{{ucwords($user->name)}}</p>
        <p class="user-country">Pakistan</p>
   	 </div>
-     <button class="user-edit mb-3 btn btn-check btn-lg float-right"><a href="{{url('login-and-securty')}}" class="text-light">Edit Your Profile</a></button>
+     <button class="user-edit mb-3 btn btn-check btn-lg float-right"><a href="{{route('user.edit',['user'=>Auth::id()])}}" class="text-light">Edit Your Profile</a></button>
     </div>
     <div class="col-md-1"></div>
   </div>
@@ -38,7 +36,7 @@
      <div class="card user-card-hover shadow">
       <div class="card-body">
        <p class="about-user1">About <span class="float-right"><button class="btn btn-check text-light" data-toggle="modal" data-target="#aboutModal">add</button></span></p>
-       <p class="about-user">{{$about->about}}</p>
+       <p class="about-user">{{ucfirst(Auth::user()->about)}}</p>
       </div>
      </div>
      <div class="card mt-2 user-card-hover shadow">
@@ -50,7 +48,7 @@
      <div class="card mt-2 user-card-hover shadow">
       <div class="card-body">
        <p class="about-user1">Account</p>
-       <a href="{{url('account')}}"><p class="about-user">Check orders, add payments options, manage your password and more</p></a>
+       <a href="{{route('user.index')}}"><p class="about-user">Check orders, add payments options, manage your password and more</p></a>
 
       </div>
      </div>
@@ -99,8 +97,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{url('cover-image')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('cover.store')}}" method="POST" enctype="multipart/form-data">
           @csrf
+          fgfg
           <input type="file" name="image" class="form-control" accept="image/*">
           <button  class="btn btn-check text-light float-right mt-4">Save</button>
         </form>
@@ -122,8 +121,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{url('about-user')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('cover.update',['cover'=>Auth::id()])}}" method="POST" enctype="multipart/form-data">
           @csrf
+          @method('PUT')
           <textarea class="form-control" name="about" rows="4" cols="12" placeholder="something about yourself....."></textarea>
           <button  class="btn btn-check text-light float-right mt-4">Save</button>
         </form>

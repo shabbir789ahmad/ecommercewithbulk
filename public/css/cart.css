@@ -3,12 +3,12 @@
   justify-content: space-betweens;
   margin-top: 2%;
 }
-.cart_quantity input
+#quantity 
 {
   width: 60%;
   text-align: center;
 }
-.cart_quantity button{
+.minus ,.plus{
   background-color: #09192C;
   padding: .2rem .8rem;
   color: #fff;

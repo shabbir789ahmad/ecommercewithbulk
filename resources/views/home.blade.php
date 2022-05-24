@@ -4,10 +4,10 @@
 <!-- slider text-->
 <div id="carouselslider" class="carousel slide " data-ride="carousel">
   <div class="carousel-inner">
-    @foreach($slider as $slide)
+    @foreach($sliders->slice(0,3) as $slider)
     <div class="carousel-item  @if($loop->first) active @endif " >
      <div class="slider">
-      <img class="d-block w-100" loading="lazy" src="{{asset('uploads/img/' .$slide['image'])}}" alt="Firstlide" style="">
+      <img class="d-block w-100" loading="lazy" src="{{asset('uploads/img/' .$slider['image'])}}" alt="Firstlide" style="">
      </div>
     </div>
     @endforeach
@@ -82,7 +82,20 @@
  </div>
 <div class="container-fluid pb-5 pt-5 backgorund_color ">
   <div class="row m-1">
-    <x-categorycomponent :subcategories="$subcategories" />
+      @foreach($subcategories as $category)
+      <a href="{{route('product.by.subcategory',['id'=>$category['id']])}}" class="text-dark">
+   <div class=" p-0 ml-1 mt-3" style="width:10rem;" >
+    <div class="card" style="height:10rem">
+     <div class="card-body p-0 text-center">
+      <figure>
+        <img src="{{asset('pic/ac004375cda78507dc50f594e5cea1dd.png')}}" width="60%">
+        <p>{{$category['subcategory_name']}}</p>
+      </figure>
+     </div>
+    </div>
+   </div>
+   </a>
+   @endforeach
   </div>
 </div>
 
@@ -153,20 +166,19 @@
 
 <script>
  @php
- //dd($sells);
+
  $en='';
  $strt='';
-foreach($sells as $sal)
-{
-  $en = strtotime($sal->end_time)*1000 ;
-  $strt= strtotime($sal->start_time)*1000 ;
+ if($sale)
+ { $en = strtotime($sale->end_time)*1000 ;
+  $strt= strtotime($sale->start_time)*1000 ;
 }
 @endphp
 
-// let endtime={{ $en}};
-let endtime= new Date("Jan 5, 2023 15:37:25").getTime();
-let strttime= new Date("may 5, 2022 15:37:25").getTime();
-// let strttime={{ $strt}};
+ let endtime={{ $en}};
+//let endtime= new Date("Jan 5, 2023 15:37:25").getTime();
+//let strttime= new Date("may 5, 2022 15:37:25").getTime();
+let strttime={{ $strt}};
 
 
   var timer=setInterval(function(){

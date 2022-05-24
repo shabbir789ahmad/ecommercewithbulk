@@ -85,6 +85,17 @@ body,.container-fluid,.bg{
   -webkit-line-clamp: 1;
 }
 
+/*.sunbcategory_card{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+.sunbcategory_card .card{
+  flex: 1;
+  width: 10;
+}*/
+
 @media  (max-width: 600px)
 {
  

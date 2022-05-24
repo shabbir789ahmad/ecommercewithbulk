@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\User;
+use App\Models\ShippingCost;
 use session;
 use App\Http\Traits\ProductTrait;
 class CartController extends Controller
 {
     
     use ProductTrait;
+   
+
     public function cart()
     {
-      return view('cart');
+        $shippings=ShippingCost::all();
+      return view('cart',compact('shippings'));
     }
 
-
-   
-   
 
     public function addToCart($id,Request $request)
     {
@@ -48,7 +49,8 @@ class CartController extends Controller
                 "price" => $product['discount_price'],
                 "sub_total" => $product['discount_price'],
                 "image" => $image,
-                
+                'size'=>$request->size,
+                'color'=>$request->color,
 
             ];
             
