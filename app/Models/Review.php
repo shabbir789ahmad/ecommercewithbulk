@@ -17,4 +17,10 @@ class Review extends Model
      'user_id',
      'product_id',
     ];
+
+
+      public function getuserNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
 }

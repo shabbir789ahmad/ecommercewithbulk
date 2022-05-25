@@ -21,7 +21,7 @@ class CreateOrderDetailsTable extends Migration
             $table->bigInteger('order_status')->nullable();
             $table->string('color')->nullable();
             $table->string('size')->nullable();
-            $table->bigInteger('product_id')->unsigned();
+            $table->bigInteger('product_id')->nullable()->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('vendor_id')->unsigned();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade')->onUpdate('cascade');

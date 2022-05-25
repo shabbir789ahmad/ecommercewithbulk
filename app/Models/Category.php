@@ -22,7 +22,12 @@ class Category extends Model
         
         return $sub;
     }
+   
 
+      public function getcategoryAttribute($value)
+    {
+        return ucfirst($value);
+    }
   
 
    

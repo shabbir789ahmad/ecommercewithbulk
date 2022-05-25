@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('state');
             $table->string('city');
             $table->string('zip')->nullable();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->nullable()->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

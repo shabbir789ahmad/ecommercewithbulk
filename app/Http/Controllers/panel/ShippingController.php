@@ -5,6 +5,8 @@ namespace App\Http\Controllers\panel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ShippingCost;
+use App\Models\State;
+use App\Http\Requests\CityRequest;
 class ShippingController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class ShippingController extends Controller
     public function index()
     {  
 
-         $shippings=ShippingCost::shippings();
+         $shippings=State::with('cities')->get();
         return view('Dashboard.shipping.index',compact('shippings'));
     }
 
@@ -26,7 +28,8 @@ class ShippingController extends Controller
      */
     public function create()
     {
-        return view('Dashboard.shipping.create');
+        $states=State::states();
+        return view('Dashboard.shipping.create',compact('states'));
     }
 
     /**
@@ -35,20 +38,12 @@ class ShippingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CityRequest $request)
     {
-        $request->validate([
-           
-            'city'=>'required',
-            'shipping_cost'=>'required',
-        ]);
-        $data=[
-          
-          'city'=>$request->city,
-          'shipping_costs'=>$request->shipping_cost,
-        ];
        
-        return \App\Helpers\Form::createEloquent(new ShippingCost,$data);
+        
+       
+        return \App\Helpers\Form::createEloquent(new ShippingCost,$request->validated());
     }
 
     /**
@@ -70,7 +65,8 @@ class ShippingController extends Controller
      */
     public function edit(ShippingCost $shipping)
     {
-        return view('Dashboard.shipping.edit',compact('shipping'));
+        $states=State::states();
+        return view('Dashboard.shipping.edit',compact('shipping','states'));
     }
 
     /**
@@ -80,19 +76,10 @@ class ShippingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CityRequest $request, $id)
     {
-        $request->validate([
-           
-            'city'=>'required',
-            'shipping_costs'=>'required',
-        ]);
-        $data=[
-          
-          'city'=>$request->city,
-          'shipping_costs'=>$request->shipping_costs,
-        ];
-        return \App\Helpers\Form::updateEloquent(new ShippingCost,$id,$data);
+
+        return \App\Helpers\Form::updateEloquent(new ShippingCost,$id,$request->validated());
     }
 
     /**

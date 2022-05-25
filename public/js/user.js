@@ -127,7 +127,7 @@ $('.show_user_email').click(function(){
           
           $('#city').append(`
 
-           <option value="${value.id}">${value.city}</option>
+           <option >${value.city}</option>
       		`);
 
       	})

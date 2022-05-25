@@ -9,4 +9,9 @@ class ProductBrand extends Model
 {
     use HasFactory;
     protected $fillable=['product_brand','brand_status','product_id'];
+
+      public function getproductBrandAttribute($value)
+    {
+        return ucfirst($value);
+    }
 }

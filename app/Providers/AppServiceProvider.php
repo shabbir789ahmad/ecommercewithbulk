@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
-use App\Models\Social;
+use App\Models\Category;
 use App\Models\Logo;
 use App\Http\Traits\StoreTrait;
 use View;
@@ -35,10 +35,12 @@ class AppServiceProvider extends ServiceProvider
     {
         
         Paginator::useBootstrap();
-        View::composer('*', function($view)
+        View::composer('master.header' , function($view)
         {
              
-          
+          $logo=Logo::logo();
+           $cat=Category::category();
+          $view->with('cat', $cat)->with('logo', $logo);
         });
 
       

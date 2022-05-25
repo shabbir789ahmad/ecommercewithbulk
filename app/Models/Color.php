@@ -14,5 +14,6 @@ class Color extends Model
     {
         return Color::select('color','id')->get();
     }
+    
    
 }

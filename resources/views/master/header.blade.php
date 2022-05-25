@@ -1,10 +1,3 @@
-<?php 
-use App\Models\Category;
-use App\Models\Logo;
-$cat=Category::category();
-$logo=Logo::logo();
-
-?>
 
  <header >
    <div class="container con2">

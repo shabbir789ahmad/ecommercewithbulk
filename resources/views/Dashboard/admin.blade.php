@@ -246,7 +246,23 @@
        </div>
       </div>
     </li>
-    
+     
+    <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm23" aria-expanded="true" aria-controls="collapseForm">
+       <i class="fab fa-wpforms text-light"></i>
+       <span>All States</span>
+     </a>
+     <div id="collapseForm23" class="collapse
+       @if(request()->is('admin/state')) show
+        @endif"
+         aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class=" py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{route('state.index')}}">All State</a>
+         <a class="collapse-item" href="{{route('state.create')}}">Create State</a>
+       </div>
+      </div>
+    </li>
+     
     <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm22" aria-expanded="true" aria-controls="collapseForm">
        <i class="fab fa-wpforms text-light"></i>

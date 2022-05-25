@@ -19,7 +19,11 @@ class Product extends Model
 
     ];
      
-
+   
+      public function getproductNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
    
     function image()
     {

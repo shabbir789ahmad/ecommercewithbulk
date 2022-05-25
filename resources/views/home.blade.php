@@ -31,7 +31,7 @@
 </div>
  <div class="sale_counter  mb-1">
   <div class="counter">
-    <p class="mt-3 ml-5">Sale:</p>  
+    <h3 class="mt-2 ml-3">Sale:</h3>  
    <span id="d">0</span>
    <span id="h">0</span>
    <span id="m">0</span>
@@ -42,10 +42,12 @@
  </div>
 <div class="container-fluid pb-5 pt-5 backgorund_color"  >
  <div   class="owl-carousel owl-theme m-1"  >
-     @foreach($products as $product)
+     @foreach($products->chunk(1) as $pro)
+     @foreach($pro as $product)
      
     <x-card.card   :product="$product" />  
    
+    @endforeach
     @endforeach
   
  </div>
@@ -62,10 +64,12 @@
 </div>
  <div class="container-fluid pb-5 pt-5 backgorund_color">
  <div class="owl-carousel owl-theme m-1"  >
-     @foreach($products as $product)
+     @foreach($products->chunk(1) as $pro)
+     @foreach($pro as $product)
      
     <x-card.card   :product="$product" />  
    
+    @endforeach
     @endforeach
   
  </div>
@@ -113,10 +117,12 @@
 <div class="container-fluid pb-5 pt-5 backgorund_color">
  
  <div class="owl-carousel owl-theme m-1"  >
-     @foreach($products as $product)
+     @foreach($products->chunk(1) as $pro)
+     @foreach($pro as $product)
      
     <x-card.card   :product="$product" />  
    
+    @endforeach
     @endforeach
   
  </div>
@@ -132,10 +138,12 @@
   </div>
 <div class="container-fluid pb-5 pt-5 backgorund_color">
 <div class="owl-carousel owl-theme m-1"  >
-     @foreach($products as $product)
+     @foreach($products->chunk(1) as $pro)
+     @foreach($pro as $product)
      
     <x-card.card   :product="$product" />  
    
+    @endforeach
     @endforeach
   
  </div>
@@ -152,10 +160,12 @@
 <div class="container-fluid pb-5 pt-5 backgorund_color">
  
  <div class="owl-carousel owl-theme m-1"  >
-     @foreach($products as $product)
+     @foreach($products->chunk(1) as $pro)
+     @foreach($pro as $product)
      
     <x-card.card   :product="$product" />  
    
+    @endforeach
     @endforeach
   
  </div>

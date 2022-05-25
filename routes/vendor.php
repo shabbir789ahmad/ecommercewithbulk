@@ -9,6 +9,7 @@ use App\Http\Controllers\vendor\SupplierController;
 use App\Http\Controllers\vendor\BannerController;
 use App\Http\Controllers\vendor\CouponController;
 use App\Http\Controllers\vendor\SaleController;
+use App\Http\Controllers\vendor\OrderController;
 
 //route for vendor
 
@@ -38,6 +39,13 @@ Route::get('dashboard',[VendorDataController::class,'count'])->name('vendor.dash
 
 Route::resource('product',ProductController::class);
 Route::resource('sales',SaleController::class);
+
+//vendor orders
+Route::get('orders/for/vendor',[OrderController::class,'index'])->name('orders.for.vendor');
+
+Route::get('orders/detail/{id}/vendor',[OrderController::class,'orderDetail'])->name('orders.detail.vendor');
+
+Route::get('orders/delete/{id}/vendor',[OrderController::class,'index'])->name('orders.delete.vendor');
 
 // Route::get('stock-detail/{id}',[StockController::class,'stockDetail'])->name('vendor/stock-detail/{id}');
 

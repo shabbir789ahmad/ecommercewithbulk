@@ -49,8 +49,8 @@ class CartController extends Controller
                 "price" => $product['discount_price'],
                 "sub_total" => $product['discount_price'],
                 "image" => $image,
-                'size'=>$request->size,
-                'color'=>$request->color,
+                'size'=>$request->size??null,
+                'color'=>$request->color??null,
 
             ];
             

@@ -38,8 +38,20 @@
          <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle">Create Product </span>
        </a>
 		</li>
+
+		<li class="sidebar-item">
+		   <a class="sidebar-link" href="{{route('product.create')}}">
+		   	
+         <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle"> Product Stock</span>
+       </a>
+		</li>
+
+		<li class="sidebar-header">
+						 Orders
+					</li>
+
     <li class="sidebar-item">
-		   <a class="sidebar-link" href="">
+		   <a class="sidebar-link" href="{{route('orders.for.vendor')}}">
 		   	
          <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle">All Order </span>
        </a>

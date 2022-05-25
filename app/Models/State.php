@@ -9,8 +9,20 @@ class State extends Model
 {
     use HasFactory;
 
-    protected $fillable=['states'];
+    protected $fillable=['state'];
 
+    
+     public function getstateAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    function cities()
+    {
+        return $this->hasMany(ShippingCost::class );
+    }
+
+   
     public static function states()
     {
       return State::all();

@@ -19,10 +19,8 @@ class Sale extends Model
     ];
 
     
-    protected function saleName(): Attribute
+    public function getsaleNameAttribute($value)
     {
-        return Attribute::make(
-            get: fn ($value) => ucfirst($value),
-        );
+        return ucfirst($value);
     }
 }

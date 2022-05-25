@@ -13,7 +13,7 @@
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 40%;
+  width: 50%;
 margin: 0 auto;
   border-radius: 5px;
 }
@@ -29,22 +29,27 @@ img {
 .container {
   padding: 2px 16px;
 }
+h4{
+    font-size: 2vw;
+    text-align: center;
+    margin-top: 3%;
+}
 .denrobe{
     font-family:  Montserrat,  Arial, sans-serif;
    font-size: 2.5vw;
    font-weight: 600;
-   color: #55C0A9;
+   color: #E86209;
  }
  .summ{
     font-family:  Montserrat,  Arial, sans-serif;
    font-size: 1.2vw;
-   font-weight: 600;color: #55C0A9;
+   font-weight: 600;color: #E86209;
  }
  .summ2{
     font-family:  Montserrat,  Arial, sans-serif;
    font-size: 1vw;
    font-weight: 600;
-   color: #55C0A9;
+   color: #E86209;
  }
  .span{
     color: #000000;
@@ -54,11 +59,11 @@ img {
     margin: 25px 0;
     font-size: 1em;
     font-family: sans-serif;
-    min-width: 400px;
+    min-width: 100%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 .styled-table thead tr {
-    background-color: #009879;
+    background-color: #E86209;
     color: #ffffff;
     text-align: left;
 }
@@ -75,15 +80,15 @@ img {
 }
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+    border-bottom: 2px solid #E86209;
 }
 .styled-table tbody tr.active-row {
     font-weight: bold;
-    color: #009879;
+    color: #E86209;
 }
 .btn{
     color: #ffffff;
-    background-color:#55C0A9;
+    background-color:#E86209;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -101,22 +106,24 @@ img {
 
 
 <div class="card">
-  <img src="https://img.icons8.com/ios-filled/100/000000/create-order--v2.png"/>
+  <img src="https://images.unsplash.com/photo-1586810165616-94c631fc2f79?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870" width="100%" height="300rem" />
   <div class="container">
-    <h4><b>Your Order is On Its Way</b></h4> 
-      <a href="{{url('user_dashborad')}}"><button class="btn">Track Your Order</button></a>
+    <h4>Your Order is On Its Way</h4> 
+      
 
       <div class="row">
       <div class="col-md-6">
          <p class="summ text=left">SUMMARY</p>
          <p class="summ2">Order #: <span class="ml-4 span"></span></p> 
-         <p class="summ2">Order Date: <span class="ml-4 span">{{$order->created_at}}</span></p> 
-         <p class="summ2">Order Payment: <span class="ml-4 span">{{$order->payment}}</span></p> 
-         <p class="summ2">Order Total: <span class="ml-4 span">{{$detail['total']}}</span></p> 
+         <p class="summ2">Order Date: <span class="ml-4 span">{{date("Y/m/d, H:m:s A")}}</span></p> 
+        
+         <p class="summ2">Order Total: <span class="ml-4 span">{{$data['final_total']}}</span></p> 
       </div>
       <div class="col-md-6">
-       <p class="summ ">SHIPPING ADDRESS :<span class="text-dark">{{$order->address}}</span></p> 
-         
+       <p class="summ ">SHIPPING Detail :<span class="text-dark"></span></p> 
+         <p class="summ2"> Name: <span class="ml-4 span">{{$data['name']}}</span></p> 
+         <p class="summ2">email: <span class="ml-4 span">{{$data['email']}}</span></p>
+         <p class="summ2">Address: <span class="ml-4 span">{{$data['address']}}</span></p>
       </div>
     </div>
     <table class="styled-table">
@@ -124,22 +131,24 @@ img {
         <tr>
             <th>image</th>
             <th>Name</th>
-            <th>Detail</th>
             <th>Price</th>
+            <th>Sub Total</th>
         </tr>
     </thead>
     <tbody>
-       
-        <tr>
-            <td><img src="{{asset('uploads/img/' .$detail['image'])}}"></td>
-            <td>{{$detail['product']}}</td>
-            <td>{{$detail['detail']}}</td>
-            <td>{{$detail['price']}}</td>
-        </tr>
      
+        <tr>
+
+            <td><img src="{{asset('uploads/img/'.$product['image'])}}"></td>
+            <td>{{ucfirst($product['name'])}}</td>
+            <td>{{$product['price']}}</td>
+            <td>{{$product['sub_total']}}</td>
+        </tr>
+       
        
     </tbody>
 </table>
+<a href="{{url('user_dashborad')}}"><button class="btn">Track Your Order</button></a>
   </div>
 </div>
 

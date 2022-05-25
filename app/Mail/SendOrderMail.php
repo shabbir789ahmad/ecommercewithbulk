@@ -7,18 +7,21 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class CouponMail extends Mailable
+class SendOrderMail extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $coupon;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($coupon)
+    protected $data;
+    protected $product;
+    public function __construct($data,$product)
     {
-        $this->coupon=$coupon;
+        $this->data=$data;
+        $this->product=$product;
     }
 
     /**
@@ -28,6 +31,6 @@ class CouponMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.coupon')->with('coupon',$this->coupon);
+        return $this->subject('Order Conformation')->view('mail.order_mail',['data'=>$this->data,'product'=>$this->product]);
     }
 }

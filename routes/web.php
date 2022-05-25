@@ -55,8 +55,9 @@ Route::get('all/product',[HomeController::class,'allProduct'])->name('all.produc
 // Route::get('mail',[RegisterController::class,'welcome']);
 
 
+Route::view('order_email','mail.order_mail');
 Route::view('affiliate','affiliate');
-Route::view('shopping','shopping');
+Route::view('shopping','shopping')->name('shopping');
 
 
 
@@ -112,15 +113,20 @@ Route::group(['middleware'=>'auth'],function(){
 
 Route::resource('user',Usercontroller::class);
 
- Route::view('order-track','User.order_tracking');
- Route::get('user_dashborad',[Usercontroller::class,'order']);
- Route::get('order-track/{id}',[Usercontroller::class,'track']);
+
+
  Route::get('checkout',[OrderController::class,'index'])->name('checkout');
  Route::post('user/order',[OrderController::class,'order'])->name('user.order');
 
+ Route::view('order-track','User.order_tracking');
+ Route::get('user_dashborad',[OrderController::class,'userOrder']);
+ Route::get('order-track/{id}',[OrderController::class,'track']);
+
+
+
 Route::resource('cover',CoverPhotoController::class);
 
- Route::view('user_message','User.user_message');
+Route::view('user_message','User.user_message');
  
 
  //about route user
@@ -182,6 +188,9 @@ Route::resource('shipping',ShippingController::class);
 
 //route for logo upload
 Route::resource('sale',SaleController::class);
+
+//route for state upload
+Route::resource('state',StateController::class);
 
 // Route::get('sale-status',[SellController::class,'Status'])->name('admin.sale-status');
 

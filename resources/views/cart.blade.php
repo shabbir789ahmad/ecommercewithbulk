@@ -22,8 +22,12 @@
 <div class="container-fluid mt-5 mb-5  d-flex justify-content-center">
 
   
-  <div class="row" style="width:95%">
+  <div class="row " style="width:95%;">
    <div class="col-md-8   ">
+    <div class=" py-2 text-light" style="background-color: #09192C;">
+      <h4 class=" ml-3 mt-1">Orders Details</h4>
+      
+    </div>
     <?php $sum2=''; ?>
  
     @forelse(session('cart') as $id => $item)
@@ -59,8 +63,9 @@
 
     <div class="col-md-4 pr-0">
       <div class="card">
+        <h4 class="card-header text-light" style="background-color:#09192C">Order Summary</h4>
         <div class="card-body">
-          <h4>Order Summary</h4>
+          
            <hr>
            <p>Item {{count(session('cart'))}} <span class="float-right ">Rs.<span class="sub_total">{{$sum2}}</span>.00</span></p>
            <p>Shipping  <span class="float-right ">Rs.<span class="ship"></span></span></p>

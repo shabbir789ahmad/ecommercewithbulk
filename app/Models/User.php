@@ -27,6 +27,12 @@ class User extends Authenticatable
         'about',
     ];
 
+
+      public function getnameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -36,6 +36,12 @@ class Vendor extends Authenticatable
         'remember_token',
     ];
 
+
+      public function getnameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

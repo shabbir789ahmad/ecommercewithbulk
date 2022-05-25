@@ -24,6 +24,12 @@ class Admin extends Authenticatable
         'password',
     ];
 
+
+      public function getnameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

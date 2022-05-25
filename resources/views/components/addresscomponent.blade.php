@@ -22,7 +22,7 @@
 
     <label class="mt-3">Complete Address</label>
     <input type="text" id="address" class="form-control">
-</form>
+  </form>
          
       </div>
       <div class="modal-footer">

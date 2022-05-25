@@ -45,19 +45,19 @@
      </div>
 
      
-     <h4 class="mt-5 text-danger font-weight-bold">Rs.{{$product_detail['price']}} </h4>
+     <h4 class="mt-5 text-danger font-weight-bold">Rs.{{$product_detail['discount_price']}} </h4>
      <p class="mt-1 discount "><s>Rs.{{$product_detail['price']}} </s> 90%</p>
     
     <p class="font-weight-bold"><i class="fa-solid fa-boxes-stacked fa-lg"></i> In Stock</p> 
 
-     <div class="product_quentity">
+     <!-- <div class="product_quentity">
       <h4 class="mt-3  "></h4>
        <button class="quantity_minus" type="button">-</button>
 
        <input type="number" name="quentity" value="1" id="input">
 
        <button class="quantity_plus" type="button">+</button>
-     </div>
+     </div> -->
        
        
 
