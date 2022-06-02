@@ -46,7 +46,7 @@ function products($id,$subcategory_id)
       }
 
        $product=$query->inRandomOrder()->get();
-        // dd($product);
+    // dd($product);
        return $product;
      }
      

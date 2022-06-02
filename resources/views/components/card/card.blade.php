@@ -21,7 +21,7 @@
          </div>
          <div class="star_rating float-right">
           @for($i=0; $i<5; $i++)
-            @if($i<=$product['rating'])
+            @if($i<$product['rating'])
                <span class="fa fa-star checked"></span>
             @else
               <span class="fa fa-star text-dark"></span>

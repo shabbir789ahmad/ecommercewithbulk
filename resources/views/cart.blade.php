@@ -179,7 +179,7 @@
                     id: $(this).data("id")
                 },
                 success: function (response) {
-                    // window.location.reload();
+                     window.location.reload();
                     cart();
                 }
             });

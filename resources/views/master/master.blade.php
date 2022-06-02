@@ -81,10 +81,10 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
  <script  src="{{asset('js/filter.js')}}"></script>
- <script src="{{asset('js/button.js')}}"></script> 
+ <script src="{{asset('js/follow.js')}}"></script> 
  <script src="{{asset('js/zoomsl.js')}}"></script> 
  <script src="{{asset('js/wishlist.js')}}"></script> 
- <script src="{{asset('js/ajaxdata.js')}}"></script> 
+ <!-- <script src="{{asset('js/ajaxdata.js')}}"></script>  -->
  <script src="{{asset('js/user.js')}}"></script> 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -251,6 +251,27 @@
    
 </script>
 
+<script type="text/javascript">
+    function followers(id)
+  {
+    $.ajax({
+            url: '/followers/vendor',
+            method: "GET",
+            dataType : 'json',
+            data: {
+                 
+                vendor_id: id, 
+                
+             
+            },
+           
+        }).done(function(res){
+          $('#follower').text(res.followers_count)
+          $('#store_name').text(res.name)
+          $('.message2').attr('data-id',res.id)
+        });
+  }
+</script>
 @section('script')
 @show
 </body>

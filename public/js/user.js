@@ -119,13 +119,13 @@ $('.show_user_email').click(function(){
       
       }).done(function(response){
 
-      	$('#city').empty();
-      	$('#city').append(`
+      	$('.city').empty();
+      	$('.city').append(`
             <option option selected disabled>Select City</option>
       		`);
       	$.each(response,function(index,value){
           
-          $('#city').append(`
+          $('.city').append(`
 
            <option >${value.city}</option>
       		`);
@@ -159,8 +159,8 @@ $(document).on('click','.update_address',function(e){
          },
         success:function(data)
          {
-            
-         
+            $('#exampleModal').modal('hide')
+         $('.userAddress').text(data.address+','+data.city+','+data.state)
             
          }
       });

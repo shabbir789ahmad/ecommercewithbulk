@@ -18,7 +18,7 @@ class CreateProductBrandsTable extends Migration
               $table->string('product_brand'); 
             $table->string('brand_status'); 
             $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('stocks')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

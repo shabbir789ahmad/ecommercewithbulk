@@ -13,8 +13,12 @@ class Category extends Model
 
    public static function category()
     {
-       $sub=  Cache::remember('sub',14,function(){
-       return Category::with('categories.subcategory')->get();
+       $sub=  Cache::remember('sub',14,function()
+       {
+            
+            return Category::
+                   with('categories.subcategory')
+                 ->get();
 
         });
        
@@ -35,10 +39,5 @@ class Category extends Model
     {
          return $this->hasMany(MiddleCategory::class);
     }
-    // public static function category()
-    // {
-    //     return Category::join('middle_categories','categories.id','=','middle_categories.category_id')
-    //     ->join('subcategories','middle_categories.id','=','subcategories.middle_category_id')
-    //     ->select('categories.category','middle_categories.middlecategory_name','subcategories.subcategory_name','subcategories.id')->get();
-    // }
+   
 }

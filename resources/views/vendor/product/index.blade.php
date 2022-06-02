@@ -36,8 +36,9 @@
 		  <tbody>
 		 @foreach($products as $product)
 		 <tr>
-		   
+		   @if($product->image)
 			<td class="col-1"><img src="{{asset('uploads/img/'. $product->image['product_image'])}}" width="100%" height="60rem" class="rounded"></td>
+			@endif
 			<td>{{ $product->product_name }}</td>
 			<td>{{ $product['price'] }}</td>
 			<td>{{ $product['discount_price'] }}</td>

@@ -132,7 +132,7 @@
         
         
 
-<div id="snackbar"></div>
+<div id="snackbar" style="color:#fff; " ></div>
 
 
 
@@ -153,6 +153,7 @@
    <!-- //admin panel js -->
 	<script src="{{asset('js/app.js')}}"></script>
 	<script src="{{asset('js/getAllCategory.js')}}"></script>
+	<script src="{{asset('js/user.js')}}"></script>
 
 
 <!-- switch js cdn -->

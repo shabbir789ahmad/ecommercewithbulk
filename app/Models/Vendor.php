@@ -50,4 +50,15 @@ class Vendor extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    function followers()
+    {
+        return $this->hasMany(Follower::class);
+    }
 }

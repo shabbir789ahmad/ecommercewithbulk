@@ -22,17 +22,17 @@
 </div>
 
 <div class="store_detail">
-  <h4>Shabbir Ahmad</h4>
-  <p >12 <span>Fllower</span></p>
+  <h4 id="store_name"></h4>
+  <p ><span id="follower"></span><span>Follower</span></p>
   <div class="follow_message">
    <div class="message">
     <i class="fa-solid fa-message fa-3x"></i>
-    <span>Message</span>
+    <span class="text-center">Message</span>
    </div>
 
-   <div class="message">
-    <i class="fa-solid fa-house-user fa-3x"></i>
-    <span>Message</span>
+   <div class="message message2" @if($follower) id="unfollow" @else id="follow" @endif data-id="" >
+    <i class="fa-solid fa-house-user fa-3x "></i>
+    <span class="text-center">@if($follower)  Following @else Follow @endif</span>
    </div>
 
   </div>
@@ -143,6 +143,7 @@
  </div>
 </div>
 
+<p id="vendor_id" data-id="{{$id}}"></p>
 
 
 <script>
@@ -180,4 +181,12 @@ document.getElementById("s").innerHTML= ("0" + sc).slice(-2);
   },1000);
 </script>
 
+@endsection
+@section('script')
+<script type="text/javascript">
+  $( window ).on('load',function() {
+  
+    followers($('#vendor_id').data('id'));
+});
+</script>
 @endsection

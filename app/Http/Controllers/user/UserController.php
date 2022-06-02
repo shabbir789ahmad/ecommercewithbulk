@@ -135,8 +135,7 @@ class UserController extends Controller
     function addressUpdate(Request $request)
     {
         $state=State::findorfail($request->state);
-        UserAddress::
-          updateOrCreate(
+       $address= UserAddress::updateOrCreate(
             [
               'user_id'=>$request->id,
             ],
@@ -146,6 +145,6 @@ class UserController extends Controller
             'address'=>$request->address,
             'user_id'=>$request->id,
         ]);
-        return response()->json($request->address);
+        return response()->json($address);
     }
 }

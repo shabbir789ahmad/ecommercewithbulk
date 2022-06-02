@@ -15,6 +15,7 @@ use App\Http\Controllers\panel\AdminVendorController;
 use App\Http\Controllers\panel\SaleController;
 use App\Http\Controllers\panel\ShippingController;
 use App\Http\Controllers\panel\StateController;
+use App\Http\Controllers\panel\LocationController;
 
 
 use App\Http\Controllers\AdminController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\user\CoverPhotoController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\OrderController;
+use App\Http\Controllers\user\FollowerController;
 
 
 Auth::routes();
@@ -46,10 +48,14 @@ Route::get('all/product',[HomeController::class,'allProduct'])->name('all.produc
 // all store routes
 Route::get('all/product',[StoreController::class,'allProduct'])->name('all.product');
 Route::get('all/store',[StoreController::class,'allStore'])->name('all.store');
+Route::get('visit/{id}/store',[StoreController::class,'showStore'])->name('visit.store');
 // Route::get('mail',[RegisterController::class,'welcome']);
 
+// follow unfollow routes
+Route::post('/user/follow/vendor',[FollowerController::class,'follow']);
+Route::delete('/user/unfollow/vendor',[FollowerController::class,'unFollow']);
+Route::get('/followers/vendor',[FollowerController::class,'followers']);
 
-Route::view('order_email','mail.order_mail');
 Route::view('affiliate','affiliate');
 Route::view('shopping','shopping')->name('shopping');
 
@@ -74,24 +80,23 @@ Route::resource('wishlist',WishController::class);
 
 
 
-//about use Page route
-Route::view('about','about_us');
+ //about use Page route
+ Route::view('about','about_us');
 
-// user contact to admin by message
-Route::resource('contact',ContactController::class);
-
-//checkout view
- // Route::view('checkout','checkout')->name('checkout');
+ // user contact to admin by message
+ Route::resource('contact',ContactController::class);
 
  //review route
  Route::post('review',[ReviewController::class,'review']);
 
 
-//global ajax route to
+//global ajax route 
 // get category middle and sub category
 Route::get('/middl/category/ajax',[MiddleCategoryController::class,'middleCategory']);
 Route::get('/sub/category/ajax',[SubCategoryController::class,'subCategory']);
 
+//get cities by states
+Route::get('/cities',[ShippingController::class,'cities']);
 
 
 
@@ -122,7 +127,7 @@ Route::view('user_message','User.user_message');
   Route::patch('/update/email',[UserController::class,'emailUpdate']);
   Route::post('/update/address',[UserController::class,'addressUpdate']);
   Route::get('/states',[StateController::class,'states']);
-  Route::get('/cities',[ShippingController::class,'cities']);
+  
 });
 
 
@@ -176,6 +181,8 @@ Route::resource('sale',SaleController::class);
 //route for state upload
 Route::resource('state',StateController::class);
 
+//route for state upload
+Route::resource('location',LocationController::class);
 // Route::get('sale-status',[SellController::class,'Status'])->name('admin.sale-status');
 
 

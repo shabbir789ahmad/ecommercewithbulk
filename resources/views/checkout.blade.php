@@ -87,7 +87,9 @@
        <input type="hidden" name="city" value="{{$address['city']}}">
        <input type="hidden" name="payment_status" id="payment_status">
        @endif
+       @if(session('cart'))
        <input type="hidden" name="final_total" value="{{$shipping + $sub_total}}">
+       @endif
         <div id="order_payment_option"></div>
         
        </form>
@@ -104,7 +106,7 @@
           
           <p class="mb-0"><i class="fa-solid fa-location-dot text-info"></i>  {{ucfirst(Auth::user()->name)}}  <span class="float-right text-info get_states" data-toggle="modal" data-target="#exampleModal">Edit</span></span></p>
           @if($address)
-          <p class="discount">{{$address['state']}},{{$address['city']}},{{$address['address']}}</p>
+          <p class="discount userAddress">{{$address['state']}},{{$address['city']}},{{$address['address']}}</p>
           @endif
           <p class="discount"><i class="fa-solid fa-address-book text-info"></i> Bill To The Same Address  <span class="float-right text-info">Edit</span></span></p>
 
@@ -134,7 +136,7 @@
            <button class="btn btn-md ">APPLY</button>
            </div> 
            <hr>
-           <p>Final Total <span class="float-right"  style="font-size:2vw;color: #E86209;">Rs. {{$shipping + $sub_total}}</span></p>
+           <p>Final Total <span class="float-right"  style="font-size:2vw;color: #E86209;">Rs. @if(session('cart')) {{$shipping + $sub_total}} @else 0 @endif</span></p>
            
         </div>
       </div>
@@ -169,7 +171,7 @@
 
         $('#order_payment_option').append(`
 
-         <p class=" mt-5">Orther Coming Soon.</p>
+         <p class=" mt-5">Other Coming Soon.</p>
         
         `);
 

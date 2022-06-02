@@ -10,6 +10,8 @@ use App\Http\Controllers\vendor\BannerController;
 use App\Http\Controllers\vendor\CouponController;
 use App\Http\Controllers\vendor\SaleController;
 use App\Http\Controllers\vendor\OrderController;
+use App\Http\Controllers\vendor\ProfileController;
+use App\Http\Controllers\vendor\VendorAddressController;
 
 //route for vendor
 
@@ -59,6 +61,10 @@ Route::group(['middleware'=>'vendor.auth'],function(){
     Route::resource('banner',BannerController::class);
    //route for coupon 
     Route::resource('coupon',CouponController::class);
+
+    //route vendor Profile Update
+    Route::resource('profile',ProfileController::class);
+    Route::resource('addresess',VendorAddressController::class);
 
   });
 });

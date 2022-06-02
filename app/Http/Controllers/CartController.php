@@ -89,8 +89,12 @@ class CartController extends Controller
 
     function cartData()
     {
-        $data=count(session()->get('cart'));
-        return response()->json($data);
+        $data=session()->get('cart');
+        if($data == null)
+        {
+            $data=[];
+        }
+        return response()->json(count($data));
     }
 
     

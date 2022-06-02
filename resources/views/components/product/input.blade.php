@@ -1,4 +1,4 @@
-<div class="form-group ">
+<div class="form-group mt-3">
     <label for="" class="fw-bold  label_font_size">
                   {{$attributes->get('label')}} <span class="text-danger">*</span>
              </label>

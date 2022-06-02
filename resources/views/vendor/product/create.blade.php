@@ -46,44 +46,59 @@
 			<x-product.input name="product_name" label="Product Name" type="text"></x-product.input>
 		 </div>
 		 <div class="col-sm-6 mt-3">
-		 	<x-product.input name="price" label="Product Price" type="text"></x-product.input>
+		 	<x-product.input name="stock" label="Product stock" type="text"></x-product.input>
 			
 		 </div>
+
 		 <div class="col-sm-12 mt-3">
 			<label class="label_font_size fw-bold">Product Detail</label>
 			<textarea class="form-group input_border_color form-control" name="detail"></textarea>
 		 </div>
+		 <div class="col-sm-6 mt-3">
+		 	<x-product.input name="price" label="Product Price" type="text"></x-product.input>
+			
+		 </div>
           
-          <div class="col-sm-6 mt-3">
-		    <label class="label_font_size fw-bold">Select Brand</label>
-			<select class="form-control input_border_color py-3 " name="brand[]">
-			   <option disabled selected hidden>Select Brand  </option>
-			   @foreach($brands as $brand)
-				  <option >{{$brand['bname']}}</option>
+       <div class="col-sm-6 mt-3">
+			   <x-product.input name="discount_price" label="Product Discounted Price" type="text"></x-product.input>
+		   </div>
+
+		    <div class="col-sm-6 mt-3">
+		       <label class="label_font_size fw-bold">Select Brand</label>
+			     <select class="form-control input_border_color py-3 " name="brand[]">
+			      <option disabled selected hidden>Select Brand  </option>
+			      @foreach($brands as $brand)
+				     <option >{{$brand['bname']}}</option>
+			      @endforeach
+					 </select>
+		    </div>
+		 <!-- <div class="col-sm-6 mt-3">
+		 	<x-product.input name="shipping_cost" label="Product shipping Cost" type="text"></x-product.input>
+			
+		 </div> -->
+		 
+		 <div class="col-sm-6 mt-3">
+		    <label class="label_font_size fw-bold">Select Size</label>
+			<select class="form-control input_border_color py-3 " name="size[]">
+			   <option disabled selected hidden>Select Size  </option>
+			   @foreach($sizes as $size)
+				  <option >{{$size['size']}}</option>
 			   @endforeach
 						 
 			</select>
 		  </div>
+
+		 
 		 <div class="col-sm-6 mt-3">
-			
-			<x-product.input name="discount_price" label="Product Discounted Price" type="text"></x-product.input>
-		 </div>
-		 <div class="col-sm-6 mt-3">
-		 	<x-product.input name="shipping_cost" label="Product shipping Cost" type="text"></x-product.input>
-			
-		 </div>
-		 <div class="col-sm-6 mt-3">
-		 	<x-product.input name="size[]" label="Product Size" type="text"></x-product.input>
-			
-		 </div>
-		 <div class="col-sm-6 mt-3">
-		 	<x-product.input name="stock" label="Product stock" type="text"></x-product.input>
-			
-		 </div>
-		 <div class="col-sm-6 mt-3">
-		 	<x-product.input name="color[]" label="Product Color" type="text"></x-product.input>
-			
-		 </div>
+		    <label class="label_font_size fw-bold">Select Color</label>
+			<select class="form-control input_border_color py-3 " name="color[]">
+			   <option disabled selected hidden>Select Color  </option>
+			   @foreach($colors as $color)
+				  <option >{{$color['color']}}</option>
+			   @endforeach
+						 
+			</select>
+		  </div>
           
           
              

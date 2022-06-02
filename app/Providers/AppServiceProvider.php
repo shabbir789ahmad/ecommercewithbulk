@@ -9,11 +9,11 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use App\Models\Category;
 use App\Models\Logo;
-use App\Http\Traits\StoreTrait;
+
 use View;
 class AppServiceProvider extends ServiceProvider
 {
-    use StoreTrait;
+   
     /**
      * Register any application services.
      *

@@ -29,6 +29,8 @@ class OrderController extends Controller
           'address'=>'required',
       ]);
       
+      if(session()->get('cart'))
+     {
       $order=Order::create([
 
        'state'=>$request->state,
@@ -39,8 +41,7 @@ class OrderController extends Controller
        'user_id'=>Auth::id(),
       ]);
 
-     if(session()->get('cart'))
-     {
+     
       foreach(session()->get('cart') as $cart)
       {
         OrderDetail::create([

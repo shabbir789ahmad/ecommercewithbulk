@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Coupon;
 use App\Models\Vendor;
-
+use App\Models\Follower;
 
 use App\Models\Banner;
 use App\Http\Traits\StoreTrait;
@@ -24,21 +24,28 @@ class StoreController extends Controller
 
        
       $products=$this->products($id,$subcategory_id='');
-      $sale=[];
+      
       $banners=Banner::banners();
       $date=$this->carbon();
       $vendorsale=[];
+      // dd($vendor);
       $coupon=Coupon::where('vendor_id',$id)->where('exp_date','>',$date)->where('coupon_status','1')->take(3)->get();
       
-      
+      if(Auth::id())
+      {
+        $follower=Follower::where('user_id',Auth::id())->where('vendor_id',$id)->first();
+      }else{
+        $follower=0;
+      }
       //dd($products);
-      return view('store',compact('products','sale','date','banners','vendorsale','coupon'));
+      return view('store',compact('products','follower','date','banners','vendorsale','coupon','id'));
      }
 
     
    function allStore()
    {
-      $stores=Vendor::all();
+      $stores=Vendor::withCount('products')->withCount('followers')->limit(100)->get()->toArray();
+
       return view('all_store',compact('stores'));
 
    }

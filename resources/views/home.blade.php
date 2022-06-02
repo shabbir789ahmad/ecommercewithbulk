@@ -149,6 +149,7 @@
  </div>
 </div>
 
+@if(session('products'))
 <div class="populer_text text-center mt-5">
   <h2 class="browser ">Recently Viewed Product</h2>
   <p class="br2">Properties In Most Populer Category</p>
@@ -160,17 +161,21 @@
 <div class="container-fluid pb-5 pt-5 backgorund_color">
  
  <div class="owl-carousel owl-theme m-1"  >
-     @foreach($products->chunk(1) as $pro)
-     @foreach($pro as $product)
-     
-    <x-card.card   :product="$product" />  
-   
-    @endforeach
-    @endforeach
+
+  
+    
+     @foreach($products as $product)
+     @foreach(session('products') as $data)
+       @if($product['id']==$data['product_id'])
+        <x-card.card   :product="$product" />  
+       @endif
+      @endforeach
+      @endforeach
+    
   
  </div>
 </div>
-
+  @endif
 
 
 

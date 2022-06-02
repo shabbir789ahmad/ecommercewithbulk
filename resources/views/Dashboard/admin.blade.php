@@ -280,6 +280,22 @@
     </li>
 
     <li class="nav-item">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm23" aria-expanded="true" aria-controls="collapseForm">
+       <i class="fab fa-wpforms text-light"></i>
+       <span>Locations </span>
+     </a>
+     <div id="collapseForm23" class="collapse
+       @if(request()->is('admin/location')) show
+        @endif"
+         aria-labelledby="headingForm" data-parent="#accordionSidebar">
+      <div class=" py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{route('location.index')}}">All Locations</a>
+         <a class="collapse-item" href="{{route('location.create')}}">Create Location Cost</a>
+       </div>
+      </div>
+    </li>
+
+    <li class="nav-item">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm2" aria-expanded="true" aria-controls="collapseForm">
        <i class="fab fa-wpforms text-light"></i>
        <span>Vendor</span>

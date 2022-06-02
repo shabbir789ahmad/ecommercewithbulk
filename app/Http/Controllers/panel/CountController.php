@@ -15,13 +15,13 @@ use App\Models\Sell;
 use App\Models\Stock2;
 use App\Notifications\ProductStock;
 use Notification;
-use App\Http\Traits\StoreTrait;
+
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\DB;
 class CountController extends Controller
 {
-    use StoreTrait;
+ 
     
 
     function count2()

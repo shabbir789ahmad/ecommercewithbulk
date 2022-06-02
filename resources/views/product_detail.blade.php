@@ -82,16 +82,16 @@
 
 
      <div class=" mt-5 " >
-      <button class="btn btn-block mb-2 py-3 add_to_cart" data-id="{{$product_detail['id']}}">Add To Cart</button>
-        <button class="btn btn-block buy_now mt-5 py-3">Buy Now</button> 
-         
+      <button class="btn btn-block mb-2 py-3 add_to_cart" data-redirect="0" data-id="{{$product_detail['id']}}">Add To Cart</button>
+        <button class="btn btn-block buy_now  mt-5 py-3" data-redirect="1" data-id="{{$product_detail['id']}}" > Buy Now</button> 
+       
      </div>
    </div>   
    <div class="col-md-3  ">
      <div class="delivery mt-4">
        <p class="discount">Delivery <span class="float-right"><i class="fa-solid fa-circle-exclamation"></i></span></p>
        <hr>
-       <p class="mb-0"><i class="fa-solid fa-location-dot fa-lg"></i> <span>lahore Punjab Pakistan</span><span class="float-right"><a href="#" class="text-primary">Change</a></span></p>
+       <p class="mb-0"><i class="fa-solid fa-location-dot fa-lg"></i> <span class="userAddress">{{$address['address']}},{{$address['city']}},{{$address['state']}}</span><span class="float-right"><a href="#" class="text-primary get_states" data-toggle="modal" data-target="#exampleModal">Change</a></span></p>
        <span class="discount ml-4">1-10 Days</span>
        <hr>
        <p class="mb-0 mt-4"><i class="fa-solid fa-truck fa-lg"></i> <span>Home Delivery</span><span class="float-right">Rs.120</span></p>
@@ -119,9 +119,9 @@
 
 <section class="container-fluid justify-content-center d-flex " >
  <div class="row border " style="width: 95%;">
-  <div class="col-md-8">
+  <div class="col-md-8 pl-0">
     <div class="card">
-     <div class="card-body">
+     <div class="card-body ">
       <p class="font-weight-bold">Product Detail:</p>
          <p class="text-secondary mt-3">{{$product_detail['detail']}}</p>
 
@@ -185,44 +185,7 @@
 
 
             
-       
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header form-review ">
-        <p class=" text-light mt-3">Review This Product</p>
-        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <form class="" action="{{url('review')}}" method="Post">
-    @csrf
-    
-     <input type="text" name="uname" placeholder="Name" class="form-control mt-2">
-     <span class="text-danger">@error ('uname') User name Required @enderror</span>
-      <fieldset class="rating">
-          <input type="radio" id="star5" name="rating" value="5" /><label for="star5" >5 stars</label>
-          <input type="radio" id="star4" name="rating" value="4" /><label for="star4" >4 stars</label>
-          <input type="radio" id="star3" name="rating" value="3" /><label for="star3" >3 stars</label>
-          <input type="radio" id="star2" name="rating" value="2" /><label for="star2" >2 stars</label>
-          <input type="radio" id="star1" name="rating" value="1" /><label for="star1">1 star</label>
-      </fieldset>
-     <input type="hidden" name="review_id" value="{{$product_detail['id']}}" class="form-control mt-2">
-     <textarea class="form-control mt-2 " name="message" rows="5" placeholder="Your Message"></textarea>
-     <span class="text-danger">@error ('message') {{$message}}@enderror</span><br>
-     <button  class="btn btn-pro py-3 rounded btn-block text-light mt-4">Send </button>
-   </form>
-      </div>
-    
-    </div>
-  </div>
-</div>
-
+<x-addresscomponent />
 
 
 <div class="modal fade imgpop" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -310,12 +273,13 @@
 
 <!-- //cart  functaionaly ajax code -->
 <script type="text/javascript">
-  $(".add_to_cart").click(function (e) {
+  $(document).on('click','.add_to_cart ,.buy_now',function (e) {
         e.preventDefault();
   
          var id=$(this).data('id');
-         let color=$('#product_colors').val();
-         let size=$('#product_size').val();
+         var redirect=$(this).data('redirect');
+         
+         
         $.ajax({
             url : '/add-to-cart/' +id,
             method: "GET",
@@ -323,16 +287,20 @@
                 _token: '{{ csrf_token() }}', 
                 
                 quantity: 1,
-                color: color,
-                size: size,
+                color: $('#product_colors').val(),
+                size: $('#product_size').val(),
             },
            
             success: function (response , data) {
               cart();
-              
+              if(redirect==1)
+              {
+
+                location.replace('/checkout')
+              }
             }
         });
-    // }
+    
     });
 
   
