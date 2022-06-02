@@ -68,8 +68,8 @@
     @else
 
     @endif
-    <h4  class="text-danger">Payment Status: <span class="fw-bold text-success">@if($order['payment_status']==5)UnPaid @else Paid @endif</span></h4>
-    <h4 class="text-danger" >Payment Mode: <span class="fw-bold text-success">Cash On Delivery</span></h4>
+    <h4  class="text-danger">Payment <span class="fw-bold text-success">@if($order['payment_status']==5) Cash On Delivery @else Paid @endif</span></h4>
+    <h4 class="text-danger" >Payment Mode: <span class="fw-bold text-success">@if($order['payment_status']==5)Cash On Delivery @else Paid @endif</span></h4>
     <h4  class="text-danger">Final Total: <span class="fw-bold text-success">{{$total+$shipping}}</span></h4>
 
     

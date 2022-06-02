@@ -1,23 +1,6 @@
 @extends('master.master')
 @section('content')
-<!-- <div class="container-fluid mt-5 d-flex justify-content-center">
-  <div class="card" style="width:95%">
-    <div class="card-body table_header">
-  <div class="row" >
-    <div class="col-md-7">
-      <h4>Cart Preview</h4>
-    </div>
-    <div class="col-md-2">
-      <h4>{{count(session('cart'))}} Items</h4>
-    </div>
-    <div class="col-md-3 text-center">
-      <h4> Summary</h4>
-    </div>
-  </div>
-</div>
 
-</div>
-</div> -->
 
 <div class="container-fluid mt-5 mb-5  d-flex justify-content-center">
 
@@ -109,10 +92,11 @@
 
    $(".plus").click(function (e) {
         e.preventDefault();
-       
+     
        let data=$(this).siblings('input').val();
        let a=parseInt(data);
-       a++
+       a++;
+         alert(a)
        $(this).siblings('input').val(a)
        let id=$(this).siblings('input').data('id')
 
@@ -149,7 +133,7 @@
                 shipping: shipping,
             },
             success: function (response) {
-               
+               cart();
                calulatePrice(quentity);
                }
         });
@@ -195,7 +179,8 @@
                     id: $(this).data("id")
                 },
                 success: function (response) {
-                    window.location.reload();
+                    // window.location.reload();
+                    cart();
                 }
             });
         }

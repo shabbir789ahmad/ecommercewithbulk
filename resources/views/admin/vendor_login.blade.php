@@ -15,7 +15,7 @@
   <?php $route=route('vendor.login'); ?>
 <x-form.logincomponent :route="$route" />
 
-
+<a href="{{route('vendor.register')}}" class="text-dark text-center font-weight-bold float-right">Or,Signup</a>
 
         
      

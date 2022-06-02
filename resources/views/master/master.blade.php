@@ -198,7 +198,7 @@
             },
            
         }).done(function(res){
-            countcart()
+        
         });
     });
 
@@ -220,9 +220,35 @@
             },
            
         }).done(function(res){
-            countcart()
+         
         });
     });
+
+
+
+   /*
+    * get user cart data count
+    */
+     cart();
+    function cart()
+    {
+      $.ajax({
+            url: '{{ route('cart.order.count') }}',
+            method: "GET",
+            dataType : 'json',
+            data: {
+         
+           
+                
+             
+            },
+           
+        }).done(function(res){
+           $('.carts').attr('data-count',res)
+        });
+
+    }
+   
 </script>
 
 @section('script')

@@ -5,155 +5,91 @@ namespace App\Http\Controllers\vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Product;
 use App\Models\Order;
-use App\Models\Detail;
-use App\Models\Stock;
-use App\Models\Sell;
-use App\Models\Stock2;
-use App\Notifications\ProductStock;
-use Notification;
-use App\Http\Traits\StoreTrait;
+use App\Models\OrderDetail;
+
+
 use Carbon\Carbon;
-use Auth;
-use Illuminate\Support\Facades\DB;
+use Auth,DB,DateTime;
+use App\classes\OrderClass;
 class VendorDataController extends Controller
 {
-    use StoreTrait;
-    function count(Request $req)
+
+    function count(Request $req,OrderClass $orders)
     {    
-        // $now=Carbon::now();
-        // $from='';
-        // $tos='';
-        // $counter='';
-        // if($req->get('from') !== Null)
-        // { 
-        //     $from=$req->get('from');
-        // }
-        // if($req->get('to') !== Null)
-        // { 
-        //     $tos=$req->get('to');
-        // }
-        // echo $tos;
-        // $query=Order::join('details','orders.id','=','details.order_id')->whereMonth('orders.created_at',date('m'))->where('details.order_status','delivered')->where('user_id',Auth::user()->id);
-        
-        // if($from && $tos)
-        // {
-         
-        //   $query=$query->whereBetween('details.updated_at',[$from,$tos]);
-        // }
-        
-
-        // $comp=$query->count();
-        // //dd($comp);
-        // if($comp)
-        // {
-        // $comp2=Order::where('user_id',Auth::user()->id)->count();
-        // $com=$comp/$comp2 * 100;
-        // }else{
-        //     $com=0;
-        // }
-        
-        
-      // $query=Order::whereMonth('created_at', date('m'))->where('user_id',Auth::user()->id);
        
-      //   if($from && $tos)
-      //   {
-         
-      //     $query=$query->whereBetween('orders.created_at',[$from,$tos]);
-      //   }
-      // $order=$query->count();
-      //  //dd($order);
-      //   if($order)
-      //   {
-      //   $order2=Order::where('user_id',Auth::user()->id)->count();
-      //   $or=$order/$order2 * 100;
-      //   }else{
-      //       $or=0;
-      //   }
-
-        // $query=Order::
-        // join('details','orders.id','=','details.order_id')
-        // ->where('order_status','pending')
-        // ->whereMonth('orders.created_at', date('m'))->where('user_id',Auth::user()->id);
-        // if($from && $tos)
-        // {
-         
-        //   $query=$query->whereBetween('orders.created_at',[$from,$tos]);
-        // }
-        // $sale=$query->count();
-        // // dd($sale);
-        // if($sale)
-        // {
-        // $sale2=Order::
-        // join('details','orders.id','=','details.order_id')
-        // ->where('user_id',Auth::user()->id)->count();
-        // $sl=$sale/$sale2 * 100;
-        // }else{
-        //     $sl=0;
-        // }
         
-        // $query=Order::
-        // join('details','orders.id','=','details.order_id')
-        // ->where('order_status','delivered')
-        // ->whereMonth('orders.created_at', date('m'))->where('user_id',Auth::user()->id);
-         
-        //   if($from && $tos)
-        // {
-         
-        //   $query=$query->whereBetween('details.updated_at',[$from,$tos]);
-        // }
+        $query=Product::Vendor();
 
-        // $earn=$query->sum('price');
+        $product=$query->count();
+        $product_by_month=$query->whereMonth('created_at', date('m'))->count();
+     
+      if($product==0)
+      {
+        $product=1;
+      }
+     $product_by_month= $product_by_month/$product * 100;
+   
+     $order=OrderDetail::Vendor()->count();
+      $order_by_month=OrderDetail::Vendor()->whereMonth('created_at', date('m'))->count();
+     
+      if($order==0)
+      {
+        $order=1;
+      }
+     $order_by_month= $order_by_month/$order * 100;
+       
+      $orders=$orders->orders($user_id='',Auth::id());
 
        
-      // $earn3= Order::
-      //   join('details','orders.id','=','details.order_id')
-      //   ->whereMonth('orders.created_at', date('m'))->where('user_id',Auth::user()->id)->count();
+            
+         $chart=DB::select(DB::raw("select sum(sub_total) as sub_total, product_id from order_details group by product_id"));
+      
+          $chartdata="";
+          foreach($chart as $char){
+            $chartdata.="".$char->sub_total.",";
+            }
+            $arr['chartdata']=rtrim($chartdata,",");
+        
+
+        $chart2=DB::select(DB::raw("select count(*) as total_product, product_name from order_details group by product_name"));
          
-      //    if($earn)
-      //   {
-      //   $earn2=Order::
-      //   join('details','orders.id','=','details.order_id')
-      //   ->where('order_status','delivered')->where('user_id',Auth::user()->id)->count();
-      //   $en=$earn2/$earn3 * 100;
-      //   }else{
-      //       $en=0;
-      //   }
-        //dd($earn);
-        // $message=Contact::whereDay('created_at', date('d'))->take(10)->get();
-        // $today=Order::
-        // join('details','orders.id','=','details.order_id')
-        // ->whereDay('orders.created_at', date('d'))->take(5)->get();
-         
-       //   $chart=DB::select(DB::raw("select count(*) as total_product, product from details group by product"));
-         
-       //    $chartdata="";
-       //    foreach($chart as $char){
-       //      $chartdata.="['".$char->product."',     ".$char->total_product."],";
-       //      }
-       //      $arr['chartdata']=rtrim($chartdata,",");
+          $chartdata2="";
+          $chartdata3=[];
+          foreach($chart2 as $char){
+            $chartdata2.="[".$char->total_product."],";
+            $chartdata3[]=$char->product_name;
+            }
+            $arr2['chartdata2']=rtrim($chartdata2,",");
+            $arr3['chartdata3']=$chartdata3;
+       
+      $sales=$this->monthalySale();
+
+      $saleData="";
+              foreach($sales as $sale)
+              {
+                $saleData.="[".$sale->sub_total."], '". date('F', mktime(0, 0, 0, $sale->month, 10))."',";
+               }
           
-       //    $product =Stock2::where('stock','<',10)->get();
-       
-       // $items = array();
-    // foreach($product as $pro) {
-    //     $items[] = $pro;
-    //    //dd($items);
-     
-    // $details = [
-    //         'greeting' => 'data',
-    //         'body' => 'product data',
-    //         'alert' => 'Product Stock is Too low!',
-    //     ];
-    //   Notification::send($items,new ProductStock($details));
+         $arr4['saleData']=rtrim($saleData,",");
+    // dd($arr4);
+    return view('vendor.dashboard',$arr,compact('product','product_by_month','order','order_by_month','orders','sales'))->with($arr2)->with($arr3)->with($arr4);
+    }
 
-     
-    //   }
-     
-    // $date=Carbon::now();
-    //  $sells=$this->sale();
-        
-    return view('vendor.dashboard');
+
+
+    function monthalySale()
+    {
+       return OrderDetail::select(
+    
+               DB::raw('month(created_at) as month'),
+               DB::raw('sum(sub_total) as sub_total'),
+              )
+              ->groupBy('month')
+              ->get();
+
+              
     }
 
    

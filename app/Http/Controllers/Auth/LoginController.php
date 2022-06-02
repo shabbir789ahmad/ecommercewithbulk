@@ -32,7 +32,7 @@ class LoginController extends Controller
     {
           $redirectTo = RouteServiceProvider::HOME; 
           return redirect($redirectTo);
-           }
+    }
 
  protected function authenticated(Request $request, $user)
     {

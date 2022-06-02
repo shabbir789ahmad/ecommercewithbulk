@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
+//admin controller
 use App\Http\Controllers\panel\SliderController;
 use App\Http\Controllers\panel\LogoController;
 use App\Http\Controllers\panel\CategoryController;
@@ -17,30 +17,21 @@ use App\Http\Controllers\panel\ShippingController;
 use App\Http\Controllers\panel\StateController;
 
 
-
-
+use App\Http\Controllers\AdminController;
+//universal controller
 use App\Http\Controllers\CartController;
-// use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ReviewController;
-
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\VendorController;
-use App\Http\Controllers\StoreController;
-use App\Http\Controllers\SellController;
-use App\Http\Controllers\DropdownController;
-use App\Http\Controllers\VendorSaleController;
-use App\Http\Controllers\FollowController;
-use App\Http\Controllers\DealController;
 use App\Http\Controllers\WishController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\HomeController;
 
 
+//user controller
 use App\Http\Controllers\user\CoverPhotoController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\OrderController;
 
-
-use App\Http\Controllers\HomeController;
 
 Auth::routes();
 Route::get('/',[HomeController::class,'index']);
@@ -52,6 +43,9 @@ Route::get('product/{id}',[HomeController::class,'allProductBySubCategory'])->na
 Route::get('all/product',[HomeController::class,'allProduct'])->name('all.product');
 
 
+// all store routes
+Route::get('all/product',[StoreController::class,'allProduct'])->name('all.product');
+Route::get('all/store',[StoreController::class,'allStore'])->name('all.store');
 // Route::get('mail',[RegisterController::class,'welcome']);
 
 
@@ -61,15 +55,6 @@ Route::view('shopping','shopping')->name('shopping');
 
 
 
-//all store with voucher
-// Route::get('/voucher',[CouponController::class,'AllStore']);
-
-
-
-
-// Route::get('master',[SubCategoryController::class,'subCategory']);
-
-// Route::get('all-deals',[DealController::class,'allDeal'])->name('all-deals');
 
 
 //cart route
@@ -79,13 +64,15 @@ Route::get('add-to-cart/{id}',[CartController::class,'addToCart'])->name('add-to
 Route::patch('update-cart',[CartController::class,'update'])->name('update.cart');
 Route::delete('remove-from-cart',[CartController::class,'remove'])->name('remove.from.cart');
 
+Route::get('cart/order/count',[CartController::class,'cartData'])->name('cart.order.count');
+
 
 //wishlist crud route
 Route::resource('wishlist',WishController::class);
 
 
 
-Route::get('visit/store/{id}',[StoreController::class,'showStore'])->name('visit.store');
+
 
 //about use Page route
 Route::view('about','about_us');
@@ -166,10 +153,7 @@ Route::resource('size',SizeController::class);
 //color route
 Route::resource('color',ColorController::class);
 
-// Route::get('search-product',[StockController::class,'searchStock'])->name('admin/search-product');
-// Route::view('test','Dashboard.test')->name('admin.test');
 
-// Route::post('status-up',[OrderController::class,'statusUp'])->name('admin.status-up');
 
 
 //route for category

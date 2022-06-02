@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 class OrderDetail extends Model
 {
     use HasFactory;
@@ -24,4 +24,10 @@ class OrderDetail extends Model
      'vendor_id',
      'order_id'
     ];
+
+    public function scopeVendor( $query) {
+
+       return $query->where('order_details.vendor_id',Auth::id());
+        
+    }
 }

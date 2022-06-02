@@ -4,25 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+
+use App\Http\Requests\AdminRequest;
 class AdminController extends Controller
 {
-    function adminLogin(Request $req)
+    function adminLogin(AdminRequest $request)
     {
      
-     $req->validate([
-          'email' => 'required|email',
-         'password' => 'required|string',
-       ]);
-
-        $data=$req->only('email','password');
       
-       if( Auth::guard('admin')->attempt($data,  $req->remember))
+       if( Auth::guard('admin')->attempt($request->validated(),$request->remember))
        {
         
         return redirect(route('admin.dashboard'));
+       
        }else
        {
-              return redirect(route('admin.login'))->with('message','These Data does not Match Our Record');
+          return redirect()
+               ->route('admin.login')
+               ->with('message','These Data does not Match Our Record');
        }
     }
 
@@ -30,17 +29,21 @@ class AdminController extends Controller
 
     public function logout()
     {
-    if(Auth::guard('admin')->logout())
-    {
-        return redirect(route('admin.login'));
-    }
-}
+       if(Auth::guard('admin')->check())
+       {
+          Auth::guard('admin')->logout();
+          return redirect()->route('admin.login');
+       }
+   }
+
     public function __construct()
     {
         $this->middleware('admin.guest')->except('logout');
     }
-     protected function guard()
+
+    protected function guard()
     {
         return Auth::guard('admin');
     }
+
 }

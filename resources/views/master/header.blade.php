@@ -56,11 +56,11 @@
        
  
    <a href="{{url('vendor/login')}}" class="ml-sm-0 ml-md-auto mt-3 rounded">
-    <button class="btn btn-sm text-light btn-color mt-1">vendor</button></a> 
+    <button class="btn btn-sm text-light btn-color mt-1">Vendor</button></a> 
    <a href="{{url('affiliate')}}" class=" mt-3 ml-1">
     <button class="btn btn-sm text-light btn-color mt-1">Affiliate</button> </a>
-    <a href="{{url('/voucher')}}" class=" mt-3 ml-1">
-    <button class="btn btn-sm text-light btn-color mt-1">Vouchers</button> </a>
+    <a href="{{route('all.store')}}" class=" mt-3 ml-1">
+    <button class="btn btn-sm text-light btn-color mt-1">Stores</button> </a>
 </div>
 
       <div class="icn mt-3 float-right mr-3 mr-md-0">
@@ -102,7 +102,7 @@
 
           <a href="{{url('cart')}}">
              <div id="ex4" class="float-right ">
-          <span class="p1 fa-stack fa-lg text-light has-badge" data-count="{{ count((array) session('cart')) }}">
+          <span class="p1 fa-stack fa-lg text-light carts has-badge" data-count="">
          <i class=" fa fa-shopping-cart fa-stack-1x xfa-inverse " data-count="4b"></i>
        </span>
        </div>

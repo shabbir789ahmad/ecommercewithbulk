@@ -8,7 +8,7 @@ class WishController extends Controller
 {
      use ProductTrait;
     
-   public function index()
+    public function index()
     {
         return view('wishlist');
     }

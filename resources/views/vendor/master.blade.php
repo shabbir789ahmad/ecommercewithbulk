@@ -118,10 +118,10 @@
 								<div class="dropdown-divider"></div>
 
 							
-								<a class="dropdown-item" href="{{ route('admin.logout') }}"
+								<a class="dropdown-item" href="{{ route('vendor.logout') }}"
     onclick="event.preventDefault();
       document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-       <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-hidden">
+       <form id="logout-form" action="{{ route('vendor.logout') }}" method="POST" class="d-hidden">
                                         @csrf
                                     </form>
 							</div>
@@ -153,6 +153,11 @@
    <!-- //admin panel js -->
 	<script src="{{asset('js/app.js')}}"></script>
 	<script src="{{asset('js/getAllCategory.js')}}"></script>
+
+
+<!-- switch js cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+
 
 	<!-- custome developer script -->
     <script type="text/javascript">
@@ -201,5 +206,18 @@
 		
 	})
 </script>
+
+<!-- switch product status with switch js -->
+<script type="text/javascript">
+	let elems2 = Array.prototype.slice.call(document.querySelectorAll('.js-switchv'));
+
+elems2.forEach(function(html) {
+    let switchery = new Switchery(html,  { size: ' small' });
+});
+</script>
+
+
+@section('script')
+@show
 </body>
 </html>

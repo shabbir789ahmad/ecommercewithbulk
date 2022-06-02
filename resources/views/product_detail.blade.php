@@ -275,24 +275,24 @@
 <script type="text/javascript">
 
 
-  $('.quantity_minus').click(function(){
+  // $('.quantity_minus').click(function(){
     
-    let value=$('#input').val();
-    value--;
-    if(value <1)
-    {
-      value=1;
-    }
-    $('#input').val(value)
-  });
+  //   let value=$('#input').val();
+  //   value--;
+  //   if(value <1)
+  //   {
+  //     value=1;
+  //   }
+  //   $('#input').val(value)
+  // });
 
-  $('.quantity_plus').click(function(){
+  // $('.quantity_plus').click(function(){
     
-    let value=$('#input').val();
-    value++;
+  //   let value=$('#input').val();
+  //   value++;
     
-    $('#input').val(value)
-  });
+  //   $('#input').val(value)
+  // });
 
   $('#input').change(function(){
     
@@ -322,13 +322,13 @@
             data: {
                 _token: '{{ csrf_token() }}', 
                 
-                quantity: $('#input').val(),
+                quantity: 1,
                 color: color,
                 size: size,
             },
            
             success: function (response , data) {
-              
+              cart();
               
             }
         });

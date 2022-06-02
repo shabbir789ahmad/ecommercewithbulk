@@ -15,7 +15,8 @@ class Order extends Model
      'city',
      'zip',
      'payment_status',
-     'user_id'
+     'user_id',
+     'order_status',
     ];
 
 
@@ -23,4 +24,11 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    public function getorderStatusAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    
 }

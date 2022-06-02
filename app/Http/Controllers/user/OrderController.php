@@ -35,6 +35,7 @@ class OrderController extends Controller
        'city'=>$request->city,
        'address'=>$request->address,
        'payment_status'=>$request->payment_status,
+       'order_status'=>'recieved',
        'user_id'=>Auth::id(),
       ]);
 

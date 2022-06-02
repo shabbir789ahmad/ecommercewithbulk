@@ -41,9 +41,7 @@ class HomeController extends Controller
 
     $products=$this->products($vendor_id='',$product_detail['subcategory_id']);
    
-    //$brand= ProductBrand::where('product_id',$id)->get();
-    //$review= Review::where('product_id',$id)->get();
-    // $coupon=Coupon::where('vendor_id',$detail->user_id)->latest()->take('2')->get();
+    
     $coupon=[];
     
     return view('product_detail',compact('product_detail','products','coupon'));

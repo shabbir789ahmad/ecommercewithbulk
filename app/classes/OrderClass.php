@@ -3,15 +3,21 @@ namespace App\classes;
 
 use App\Models\Order;
 use App\Models\User;
+use DB;
 class OrderClass{
 
 
   function orders($user_id,$vendor_id)
   {
   	$query=Order::
-        join('order_details','orders.id','=','order_details.order_id')
-        
-        ->select('order_details.product_name','orders.id','orders.state','orders.city','orders.address','order_details.quentity','order_details.sub_total','order_details.ship','order_details.color','order_details.size','order_details.image');
+           join('order_details','orders.id','=','order_details.order_id')
+          ->join('users','users.id','=','orders.user_id')
+          ->select('order_details.order_id',\DB::raw('SUM(quentity) as quentity'),\DB::raw('SUM(sub_total) as total' ),'users.name','orders.order_status','users.image','orders.updated_at','users.phone','users.email')
+          ->groupBy('order_details.order_id','users.name','orders.order_status','users.image','orders.updated_at','users.phone','users.email')
+          ->where('orders.order_status','!=','Delivered');
+
+
+              
 
       if($user_id)
       {
@@ -38,6 +44,19 @@ class OrderClass{
         ->where('orders.id',$id)
         ->first();
   }
+
+
+  function delete($id)
+  {
+        Order::destroy($id);
+        
+  }
+
+   function find($id)
+   {
+        return Order::findorfail($id);
+        
+   }
 
 
 

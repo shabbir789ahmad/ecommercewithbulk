@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 class Product extends Model
 {
     use HasFactory;
@@ -24,6 +24,13 @@ class Product extends Model
     {
         return ucfirst($value);
     }
+
+     public function scopeVendor( $query) {
+
+       return $query->where('products.vendor_id',Auth::id());
+        
+    }
+
    
     function image()
     {

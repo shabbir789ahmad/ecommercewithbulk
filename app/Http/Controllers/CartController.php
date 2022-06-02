@@ -85,6 +85,14 @@ class CartController extends Controller
         }
     }
 
+
+
+    function cartData()
+    {
+        $data=count(session()->get('cart'));
+        return response()->json($data);
+    }
+
     
 
    

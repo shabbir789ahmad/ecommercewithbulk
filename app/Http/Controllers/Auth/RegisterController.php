@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Jobs\WelcomeJob;
+
 class RegisterController extends Controller
 {
  
@@ -70,7 +70,7 @@ class RegisterController extends Controller
           
           }
 
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
@@ -78,14 +78,8 @@ class RegisterController extends Controller
             'user_status' => 1,
             'password' => Hash::make($data['password']),
           ]);
-
-         // $this->job($user->email);
-        // return $user;
+       
+        return $user;
      }
-    public function job($mail)
-    {
-        
-         dispatch(new WelcomeJob($mail));
-        
-    }
+    
 }

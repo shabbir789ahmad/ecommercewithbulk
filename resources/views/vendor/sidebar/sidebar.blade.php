@@ -56,6 +56,19 @@
          <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle">All Order </span>
        </a>
 		</li>
+		<li class="sidebar-item">
+		   <a class="sidebar-link" href="{{route('orders.delivered.vendor')}}">
+		   	
+         <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle">Delivered Order </span>
+       </a>
+		</li>
+		<li class="sidebar-item">
+		   <a class="sidebar-link" href="{{route('orders.for.vendor')}}">
+		   	
+         <i class="align-middle me-2" data-feather="copy"></i> <span class="align-middle">Canceled Order </span>
+       </a>
+		</li>
+		
 
 
 

@@ -450,30 +450,25 @@
   <script src="{{asset('js/jquery.easing.min.js')}}"></script>
   <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('js/ruang-admin.min.js')}}"></script>
-   
-  <script src="{{asset('js/select2.min.js')}}"></script>
-  <script src="{{asset('js/button.js')}}"></script>  
-  <script src="{{asset('js/dropdown.js')}}"></script>  
-  <script src="{{asset('js/product.js')}}"></script>  
-  <script src="{{asset('js/status.js')}}"></script>  
-  <script src="{{asset('js/delete.js')}}"></script>  
-  <script src="{{asset('js/adminfilter.js')}}"></script>  
-  <!-- <script src="{{asset('js/colorpicker.js')}}"></script>   -->
-  <script src="{{asset('js/show.js')}}"></script>  
-  <script src="{{asset('js/getAllCategory.js')}}"></script>  
-<script src="{{asset('js/jquery.multifield.min.js')}}"></script>
-   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- @if(Session()->has('success'))
-<script>
-   swal.fire({
-  title: ' {{ Session('success') }}',
-  text: "Upload More",
-  icon: "success",
-  
-}); 
+  <script src="{{asset('js/select2.min.js')}}"></script> 
+  <script src="{{asset('js/jquery.multifield.min.js')}}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-</script>
-{{Session::forget('success')}}
+  <script src="{{asset('js/adminfilter.js')}}"></script>  
+  <script src="{{asset('js/getAllCategory.js')}}"></script>
+
+
+  
+ @if(Session()->has('success'))
+   <script>
+     swal.fire({
+        title: ' {{ Session('success') }}',
+        text: "Upload More",
+        icon: "success",
+  
+    }); 
+   </script>
+  {{Session::forget('success')}}
   @endif
  
 

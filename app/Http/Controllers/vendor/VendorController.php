@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth,Hash;
 use App\Models\Vendor;
+use App\Http\Requests\VendorRequest;
 class VendorController extends Controller
 {
      function index()
@@ -30,52 +31,45 @@ class VendorController extends Controller
 
 
 
-     function vendorSign(Request $req)
+     function vendorSign(VendorRequest $request)
      {
-        $req->validate([
-         
-          'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
-         'image' => '',
-         'store_name' => 'required',
-        ]);
-
-
-        $request = app('request');
+      
+    
       if($request->hasfile('image'))
-
-          {
+       {
              $file=$request->file('image');
             $ext=$file->getClientOriginalExtension();
             $name= time(). '.' . $ext;
             $file->move('uploads/img/',$name);
           
-          }
-       Vendor::create([
-            'name' => $req->name,
-            'email' => $req->email,
-            'phone' => $req->phone,
-            'store_name' => $req->store_name,
-            'image' => $name,
-            'password' => Hash::make($req->password),
-
-        ]);
-       return redirect('vendor/dashboard');
+        }
+          $data=array_merge($request->validated(),['password' => Hash::make($request->password)]);
+          $data=array_merge($data,['image' => $name]);
+         
+          Vendor::create($data);
+          
+       
+          return redirect('vendor/dashboard');
+     
+    
      }
     
-       public function logout()
+    public function logout()
     {
-    if(Auth::guard('vendor')->logout())
-    {
-        return redirect(route('vendor.login'));
+      if(Auth::guard('vendor')->check())
+      {
+         Auth::guard('vendor')->logout();
+         return redirect(route('vendor.login'));
+      }
     }
-    }
+
+
     public function __construct()
     {
         $this->middleware('vendor.guest')->except('logout');
     }
+
+
      protected function guard()
     {
         return Auth::guard('vendor');
